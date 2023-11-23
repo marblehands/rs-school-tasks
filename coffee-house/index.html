@@ -37,14 +37,16 @@
   </head>
   <body class="body">
     <header class="header">
-      <a href=""><img src="" alt="Coffee House Logo" class="logo" /></a>
+      <a href="index.html"
+        ><img src="" alt="Coffee House Logo" class="logo"
+      /></a>
       <nav class="main-nav">
         <ul class="nav-list">
-          <li class="nav-item">Favorite coffee</li>
-          <li class="nav-item">About</li>
-          <li class="nav-item">Mobile app</li>
-          <li class="nav-item">Contact us</li>
-          <li class="nav-item">Menu</li>
+          <li class="nav-item"><a href="#favourite">Favorite coffee</a></li>
+          <li class="nav-item"><a href="#about">About</a></li>
+          <li class="nav-item"><a href="#app">Mobile app</a></li>
+          <li class="nav-item"><a href="#contact">Contact us</a></li>
+          <li class="nav-item"><a href="menu.html">Menu</a></li>
         </ul>
       </nav>
     </header>
@@ -59,9 +61,9 @@
           House Resource is a popular destination for coffee lovers and those
           seeking a warm and inviting space to enjoy their favorite beverage.
         </p>
-        <button class="btn-primary">Menu</button>
+        <a href="menu.html"><button class="btn-primary">Menu</button></a>
       </section>
-      <section class="section section-favourite-coffee">
+      <section id="favourite" class="section section-favourite-coffee">
         <h2 class="title-m">
           Choose your <span class="title-m-accent">favorite</span> coffee
         </h2>
@@ -90,7 +92,7 @@
           </div>
         </div>
       </section>
-      <section class="section section-about">
+      <section id="about" class="section section-about">
         <h2 class="title-m">
           Resource is
           <span class="title-m-accent">the perfect and cozy place</span> where
@@ -120,7 +122,7 @@
           />
         </div>
       </section>
-      <section class="section section-mobile-app">
+      <section id="app" class="section section-mobile-app">
         <h2 class="title-m">
           <span class="title-m-accent">Download</span> our apps to start
           ordering
@@ -150,22 +152,33 @@
         />
       </section>
     </main>
-    <footer class="footer">
+    <footer id="contact" class="footer">
       <div class="footer-content-left">
         <h2 class="title-m">
           Sip, Savor, Smile. <span class="title-m-accent">’s coffee time!</span>
         </h2>
         <div class="social-wrapper">
-          <button class="btn-social"></button>
-          <button class="btn-social"></button>
+          <a href="https://twitter.com/SourceCoffeeBR" target="_blank"
+            ><button class="btn-social"></button
+          ></a>
+          <a href="https://www.instagram.com/sourcecoffeehouse/" target="_blank"
+            ><button class="btn-social"></button
+          ></a>
+          <a href="https://www.facebook.com/sourcecoffeebr" target="_blank"></a>
           <button class="btn-social"></button>
         </div>
       </div>
       <div class="footer-content-right">
         <h3 class="title-s">Contact us</h3>
         <ul class="contact-list">
-          <li class="contact-item text-link">8558 Green Rd., LA</li>
-          <li class="contact-item text-link">+1 (603) 555-0123</li>
+          <li class="contact-item text-link">
+            <a href="https://maps.app.goo.gl/9bYwAyceCeo8ZV4U8" target="_blank"
+              >8558 Green Rd., LA</a
+            >
+          </li>
+          <li class="contact-item text-link">
+            <a href="tel:+16035550123">+1 (603) 555-0123</a>
+          </li>
           <li class="contact-item text-link">Mon-Sat: 9:00 AM – 23:00 PM</li>
         </ul>
       </div>
