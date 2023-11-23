@@ -1,0 +1,98 @@
+@import url("variables.css");
+
+/* SVG Icons styles */
+
+.svg-arrow {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: var(--text-default);
+  &:hover {
+    fill: var(--text-inverse);
+  }
+}
+
+.svg-coffee-cup {
+  width: 24px;
+  height: 24px;
+  fill: var(--text-default);
+}
+
+.svg-pin-alt {
+  width: 20px;
+  height: 20px;
+  fill: var(--text-inverse);
+}
+
+.svg-phone {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: var(--text-inverse);
+}
+
+.svg-clock {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: var(--text-inverse);
+}
+
+.svg-info {
+  width: 16px;
+  height: 16px;
+  fill: var(--text-default);
+}
+
+.svg-app-store {
+  width: 36px;
+  height: 36px;
+  fill: var(--text-default);
+  transition: fill 0.5s ease;
+  &:hover {
+    fill: var(--text-inverse);
+  }
+}
+
+.svg-gplay {
+  width: 36px;
+  height: 36px;
+  fill: var(--text-default);
+  transition: stroke 0.5s ease;
+  &:hover {
+    fill: var(--text-inverse);
+  }
+}
+
+.svg-social-fb {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: var(--text-inverse);
+  transition: stroke 0.5s ease;
+  &:hover {
+    stroke: var(--text-default);
+  }
+}
+
+.svg-social-inst {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: var(--text-inverse);
+  transition: stroke 0.5s ease;
+  &:hover {
+    stroke: var(--text-default);
+  }
+}
+
+.svg-social-tw {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: var(--text-inverse);
+  transition: stroke 0.5s ease;
+  &:hover {
+    stroke: var(--text-default);
+  }
+}
