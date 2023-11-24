@@ -1,0 +1,48 @@
+/* Headlines */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+  text-wrap: balance;
+}
+
+.title-l {
+  font: var(--title-l);
+}
+
+.title-m {
+  font: var(--title-m);
+}
+
+.title-s {
+  font: var(--title-s);
+}
+
+.accent {
+  font-style: italic;
+  color: var(--text-accent);
+}
+
+/* Body */
+
+body {
+  font-family: var(--main-font);
+  font: var(--body-default);
+}
+
+.caption {
+  font: var(--body-caption);
+}
+
+/* Links */
+
+.link {
+  font: var(--link-default);
+  text-decoration: none;
+  color: var(--body-default);
+}

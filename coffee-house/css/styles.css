@@ -84,3 +84,26 @@ div.nav-item {
   justify-content: space-between;
   align-items: center;
 }
+
+/* Section Enjoy */
+
+.section-enjoy {
+  margin-top: 20px;
+  padding: 100px;
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  background: url(../assets/img/img-hero.jpg) center/cover no-repeat;
+  color: var(--text-inverse);
+}
+
+.section-enjoy > :nth-child(-n + 2) {
+  max-width: 530px;
+}
+
+.section-enjoy > .title-l {
+}
+
+.italic {
+}

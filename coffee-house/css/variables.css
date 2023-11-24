@@ -21,9 +21,7 @@
   --border-inverse: #c1b6ad;
   --main-font: "Inter", sans-serif;
   --title-l: 600 72px/105% var(--main-font);
-  --title-l-accent: var(--title-l) italic;
   --title-m: 600 60px/125% var(--main-font);
-  --title-m-accent: var(--title-m) italic;
   --title-s: 600 24px/125% var(--main-font);
   --body-default: 400 16px/150% var(--main-font);
   --body-caption: 600 10px/140% var(--main-font);
