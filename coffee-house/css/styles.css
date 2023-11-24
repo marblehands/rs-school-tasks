@@ -76,7 +76,7 @@ footer {
     position: absolute;
     bottom: -20%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     opacity: 0;
     transition: width 0.5s ease, opacity 0.5s ease;
   }
@@ -110,4 +110,73 @@ div.nav-item {
 
 .section-enjoy > :nth-child(-n + 2) {
   max-width: 530px;
+}
+
+/* Section Favourite coffee */
+
+.section-fv-coffee {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.section-fv-coffee .title-m {
+  text-align: center;
+}
+
+/* Slider layout */
+
+.slider-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.slider-content-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+}
+
+.slider-content {
+  flex-basis: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.text-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: center;
+}
+
+.slider-arrow-left {
+  transform: rotate(180deg);
+  margin-left: 4px;
+}
+
+.slider-arrow-right {
+  margin-right: 4px;
+}
+
+/* Slider Pagination */
+
+.slider-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.slider-pagination-item {
+  width: 40px;
+  height: 4px;
+  border-radius: 100px;
+  background-color: var(--border-inverse);
+}
+
+.slider-pagination-item.active {
+  background-color: var(--border-default);
 }
