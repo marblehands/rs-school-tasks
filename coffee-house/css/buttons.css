@@ -1,0 +1,117 @@
+@import url("variables.css");
+
+button {
+  background-color: transparent;
+  border: none;
+  font: var(--link-default);
+}
+
+.btn {
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  display: flex;
+  justify-self: center;
+  gap: 8px;
+  width: 200px;
+  padding: 20px 0;
+  background: var(--back-body);
+  position: relative;
+
+  & svg {
+    position: absolute;
+    right: 64px;
+    opacity: 0;
+    user-select: none;
+    transition: opacity 0.5s ease;
+  }
+
+  & p {
+    flex: 1 1 auto;
+    transition: margin-right 0.5s ease;
+  }
+
+  &:hover {
+    & svg {
+      opacity: 1;
+    }
+    & p {
+      margin-right: 32px;
+    }
+  }
+}
+
+.btn-secondary {
+  padding: 10px 78px;
+  border: 1px solid var(--border-default);
+  color: var(--text-default);
+  transition: background-color 0.5s ease, color 0.5s ease;
+
+  &:hover {
+    background-color: var(--back-container);
+    color: var(--text-inverse);
+  }
+}
+
+.btn-tretiary {
+  display: flex;
+  gap: 8px;
+  width: 200px;
+  padding: 12px 20px;
+  border: 1px solid var(--border-default);
+  color: var(--text-default);
+  transition: background-color 0.5s ease, color 0.5s ease;
+
+  & svg {
+    transition: fill 0.5s ease;
+  }
+
+  &:hover {
+    background-color: var(--back-container);
+    color: var(--text-inverse);
+
+    & svg {
+      fill: var(--text-inverse);
+    }
+  }
+}
+
+.btn-icon {
+  display: flex;
+  width: 60px;
+  height: 60px;
+  border-radius: 100px;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.5s ease;
+
+  & svg {
+    transition: stroke 0.5s ease;
+  }
+}
+
+.btn-icon-dark {
+  border: 1px solid var(--border-default);
+
+  &:hover {
+    background-color: var(--back-container);
+
+    & svg {
+      stroke: var(--text-inverse);
+    }
+  }
+}
+
+.btn-icon-light {
+  border: 1px solid var(--border-inverse);
+
+  &:hover {
+    background-color: var(--back-body);
+
+    & svg {
+      stroke: var(--text-default);
+    }
+  }
+}
