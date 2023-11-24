@@ -1,1 +1,86 @@
 @import url("variables.css");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: var(--back-body);
+}
+
+.body-wrapper {
+  width: 1440px;
+  margin: 0 auto;
+  padding: 20px 40px 40px;
+}
+
+/* Header */
+
+.header {
+  display: flex;
+}
+
+/* Logo */
+
+.logo {
+  display: block;
+  width: 100px;
+  height: 60px;
+}
+
+/* Navigation */
+
+.main-nav {
+  flex: 1 1 auto;
+  display: flex;
+}
+
+.nav-list {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.nav-item {
+  list-style: none;
+  position: relative;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background-color: var(--text-default);
+    position: absolute;
+    bottom: -20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: width 0.5s ease, opacity 0.5s ease;
+  }
+
+  &:hover::before {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+div.nav-item {
+  display: flex;
+  width: 72px;
+  height: 32px;
+  justify-content: space-between;
+  align-items: center;
+}

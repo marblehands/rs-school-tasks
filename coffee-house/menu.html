@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/variables.css" />
     <link rel="stylesheet" href="css/svg-icons.css" />
-    <link rel="icon" href="../favicon.ico" />
+    <link rel="icon" href="favicon.ico" />
+    <link rel="icon" href="assets/favicons/favicon.svg" type="image/svg+xml" />
+    <link href="https://fonts.cdnfonts.com/css/inter?styles=29139,29140,29141" rel="stylesheet">
     <link
       rel="icon"
       href="../assets/favicons/favicon.svg"
@@ -43,6 +45,7 @@
     <meta name="theme-color" content="#e1d4c9" />
   </head>
   <body class="body">
+    <div class="body-wrapper">
     <header class="header">
       <a href="index.html"
         ><img
@@ -54,14 +57,19 @@
       /></a>
       <nav class="main-nav">
         <ul class="nav-list">
-          <li class="nav-item">
-            <a href="index.html#favourite">Favorite coffee</a>
-          </li>
-          <li class="nav-item"><a href="index.html#about">About</a></li>
-          <li class="nav-item"><a href="index.html#app">Mobile app</a></li>
+          <li class="nav-item"><a href="#favourite">Favorite coffee</a></li>
+          <li class="nav-item"><a href="#about">About</a></li>
+          <li class="nav-item"><a href="#app">Mobile app</a></li>
           <li class="nav-item"><a href="#contact">Contact us</a></li>
-          <li class="nav-item"><a href="menu.html">Menu</a></li>
         </ul>
+        <div class="nav-item">
+          <a href="menu.html"
+            >Menu
+            <svg class="svg-coffee-cup">
+              <use href="assets/svg/svg-sprite.svg#svg-coffee-cup">
+            </svg>
+          </a>
+        </div>
       </nav>
     </header>
     <main class="main">
@@ -125,5 +133,6 @@
         </ul>
       </div>
     </footer>
+  </div>
   </body>
 </html>
