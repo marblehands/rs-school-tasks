@@ -24,6 +24,16 @@ body {
   padding: 20px 40px 40px;
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+}
+
+footer {
+  margin-top: 100px;
+}
+
 /* Header */
 
 .header {
