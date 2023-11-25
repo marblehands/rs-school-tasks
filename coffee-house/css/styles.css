@@ -180,3 +180,46 @@ div.nav-item {
 .slider-pagination-item.active {
   background-color: var(--border-default);
 }
+
+/* Section About */
+
+.section-about {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.section-about h2.title-m {
+  letter-spacing: -5%;
+}
+
+/* Gallery */
+
+.gallery-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 430px auto 430px;
+  gap: 40px;
+  background-color: #dd8f8f;
+  height: 1060px;
+}
+
+.gallery-item {
+  border-radius: 20px;
+}
+
+.gallery-item:nth-child(1) {
+  background: url(../assets/img/about/about-1.jpg) center/cover no-repeat;
+}
+
+.gallery-item:nth-child(2) {
+  background: url(../assets/img/about/about-3.jpg) center/cover no-repeat;
+}
+
+.gallery-item:nth-child(3) {
+  background: url(../assets/img/about/about-4.jpg) center/cover no-repeat;
+}
+
+.gallery-item:nth-child(4) {
+  background: url(../assets/img/about/about-2.jpg) center/cover no-repeat;
+}

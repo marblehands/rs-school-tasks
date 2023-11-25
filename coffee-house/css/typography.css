@@ -10,7 +10,7 @@ h5,
 h6 {
   margin: 0;
   padding: 0;
-  text-wrap: balance;
+  /*  text-wrap: balance;*/
 }
 
 .title-l {
