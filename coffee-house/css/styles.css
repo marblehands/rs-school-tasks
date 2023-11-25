@@ -34,6 +34,14 @@ footer {
   margin-top: 100px;
 }
 
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
 /* Header */
 
 .header {
@@ -63,8 +71,7 @@ footer {
   gap: 40px;
 }
 
-.nav-item {
-  list-style: none;
+/* .nav-item {
   position: relative;
 
   &::before {
@@ -78,14 +85,15 @@ footer {
     left: 50%;
     transform: translateX(-50%);
     opacity: 0;
-    transition: width 0.5s ease, opacity 0.5s ease;
+    transition: width 
+    0.5s ease, opacity 0.5s ease;
   }
 
   &:hover::before {
     width: 100%;
     opacity: 1;
   }
-}
+} */
 
 div.nav-item {
   display: flex;
@@ -120,7 +128,7 @@ div.nav-item {
   gap: 40px;
 }
 
-.section-fv-coffee .title-m {
+.section-fv-coffee > .title-m {
   text-align: center;
 }
 
@@ -146,7 +154,7 @@ div.nav-item {
   gap: 20px;
 }
 
-.text-wrapper {
+.slider-text-wrapper {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -222,4 +230,78 @@ div.nav-item {
 
 .gallery-item:nth-child(4) {
   background: url(../assets/img/about/about-2.jpg) center/cover no-repeat;
+}
+
+/* Mobile App Section */
+
+.section-mobile-app {
+  display: flex;
+  gap: 100px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.leftbar {
+  flex-basis: 630px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.btn-wrapper {
+  display: flex;
+  gap: 20px;
+}
+
+/* Footer */
+
+.footer {
+  display: flex;
+  align-items: center;
+  gap: 100px;
+  padding: 100px;
+  border-radius: 40px;
+  background-color: var(--back-container);
+  color: var(--text-inverse);
+}
+
+.footer-content-left {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  flex-basis: 530px;
+}
+
+.social-wrapper {
+  display: flex;
+  gap: 12px;
+}
+
+.footer-content-right,
+.contact-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-content-right {
+  gap: 40px;
+}
+
+.contact-list {
+  gap: 20px;
+}
+
+.contact-item {
+  width: fit-content;
+  display: flex;
+  gap: 8px;
+  padding-right: 4px;
+}
+
+.contact-item a {
+  color: var(--text-inverse);
+}
+
+.contact-item:last-child {
+  font: var(--link-default);
 }
