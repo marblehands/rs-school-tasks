@@ -130,7 +130,7 @@ a:visited {
   }
 }
 
-.link {
+.link-animated {
   position: relative;
 
   &::before {
