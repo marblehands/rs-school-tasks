@@ -82,20 +82,14 @@
           Behind each of our cups hides an
           <span class="accent">amazing surprise</span>
         </h1>
-        <ul class="tab-list">
-          <li class="tab-item">
-            <div class="tab-icon"></div>
-            Coffee
-          </li>
-          <li class="tab-item">
-            <div class="tab-icon"></div>
-            Tea
-          </li>
-          <li class="tab-item">
-            <div class="tab-icon"></div>
-            Dessert
-          </li>
-        </ul>
+        <input type="radio" id="coffee" name="menu-category" value="coffee" checked>
+        <input type="radio" id="tea" name="menu-category" value="tea">
+        <input type="radio" id="dessert" name="menu-category" value="desserts">
+        <div class="tab-wrapper">
+          <label for="coffee" class="link chips chips-checked"><span class="chips-icon"></span>Coffee</label>
+          <label for="tea" class="link chips"><span class="chips-icon"></span>Tea</label>
+          <label for="dessert" class="link chips"><span class="chips-icon"></span>Dessert</label>
+        </div>
         <article class="product-item">
           <img src="" alt="" class="product-img" />
           <h3 class="title-s">Irish coffee</h3>

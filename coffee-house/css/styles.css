@@ -11,14 +11,14 @@ html {
 }
 
 body {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-  justify-content: flex-start;
   background-color: var(--back-body);
 }
 
 .body-wrapper {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: flex-start;
   width: 1440px;
   margin: 0 auto;
   padding: 20px 40px 40px;
@@ -26,6 +26,7 @@ body {
 
 main {
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
   gap: 100px;
 }
@@ -36,6 +37,10 @@ footer {
 
 li {
   list-style: none;
+}
+
+body section:first-child {
+  margin-top: 20px;
 }
 
 /* Header */
@@ -84,7 +89,6 @@ div.nav-item .svg-coffee-cup {
 /* Section Enjoy */
 
 .section-enjoy {
-  margin-top: 20px;
   padding: 100px;
   border-radius: 40px;
   display: flex;
@@ -106,7 +110,8 @@ div.nav-item .svg-coffee-cup {
   gap: 40px;
 }
 
-.section-fv-coffee > .title-m {
+.section-fv-coffee > .title-m,
+.section-menu > .title-m {
   text-align: center;
 }
 
@@ -293,4 +298,86 @@ div.nav-item .svg-coffee-cup {
 
 .contact-item a {
   color: var(--text-inverse);
+}
+
+/* Menu Section */
+
+.section-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.section-menu > h1.title-m {
+  max-width: 800px;
+}
+
+/* Tabs */
+
+input[type="radio"] {
+  display: none;
+}
+
+.tab-wrapper {
+  display: flex;
+  gap: 16px;
+}
+
+.chips-icon {
+  background-color: var(--border-inverse);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 60%;
+}
+
+.chips {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 16px 8px 8px;
+  border-radius: 100px;
+  border: 1px solid var(--border-inverse);
+  cursor: pointer;
+  transition: border 0.5s ease, background-color 0.5s ease, color 0.5s ease;
+
+  &:hover {
+    border: 1px solid var(--border-default);
+    background-color: var(--border-default);
+    color: var(--text-inverse);
+
+    & span.chips-icon {
+      background-color: var(--back-body);
+    }
+  }
+}
+
+.chips-icon {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border-radius: 100px;
+  transition: background-color 0.5s ease;
+}
+
+.tab-wrapper .chips:nth-child(1) .chips-icon {
+  background-image: url(../assets/img/chips/chips-icon-1.png);
+}
+
+.tab-wrapper .chips:nth-child(2) .chips-icon {
+  background-image: url(../assets/img/chips/chips-icon-2.png);
+}
+
+.tab-wrapper .chips:nth-child(3) .chips-icon {
+  background-image: url(../assets/img/chips/chips-icon3.png);
+}
+
+.chips-checked {
+  border: 1px solid var(--border-default);
+  background-color: var(--border-default);
+  color: var(--text-inverse);
+
+  & span.chips-icon {
+    background-color: var(--back-body);
+  }
 }

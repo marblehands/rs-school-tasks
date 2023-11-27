@@ -45,5 +45,4 @@ body {
 .link {
   font: var(--link-default);
   text-decoration: none;
-  color: var(--body-default);
 }
