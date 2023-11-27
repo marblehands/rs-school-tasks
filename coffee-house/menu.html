@@ -48,52 +48,54 @@
   </head>
   <body class="body">
     <div class="body-wrapper">
-    <header class="header">
-      <a href="index.html"
-        ><img
-          src="assets/svg/logo.svg"
-          width="100"
-          height="60"
-          alt="Coffee House Logo"
-          class="logo"
-      /></a>
-      <nav class="main-nav">
-        <ul class="nav-list">
-          <li class="nav-item"><a href="#favourite">Favorite coffee</a></li>
-          <li class="nav-item"><a href="#about">About</a></li>
-          <li class="nav-item"><a href="#app">Mobile app</a></li>
-          <li class="nav-item"><a href="#contact">Contact us</a></li>
-        </ul>
-        <div class="nav-item">
-          <a href="menu.html"
-            >Menu
-            <svg class="svg-coffee-cup">
-              <use href="assets/svg/svg-sprite.svg#svg-coffee-cup">
-            </svg>
-          </a>
-        </div>
-      </nav>
-    </header>
+      <header class="header">
+        <a href="index.html"
+          ><img
+            src="assets/svg/logo.svg"
+            width="100"
+            height="60"
+            alt="Coffee House Logo"
+            class="logo"
+        /></a>
+        <nav class="main-nav">
+          <ul class="nav-list link">
+            <li class="nav-item link-animated"><a href="#favourite">Favorite coffee</a></li>
+            <li class="nav-item link-animated"><a href="#about">About</a></li>
+            <li class="nav-item link-animated"><a href="#app">Mobile app</a></li>
+            <li class="nav-item link-animated"><a href="#contact">Contact us</a></li>
+          </ul>
+          <a href="menu.html">
+          <div class="nav-item link link-animated">
+            
+              <p>Menu</p>
+              <svg class="svg-coffee-cup">
+                <use href="assets/svg/svg-sprite.svg#svg-coffee-cup">
+              </svg>
+            
+          </div>
+        </a>
+        </nav>
+      </header>
     <main class="main">
-      <h1 class="title-m">
-        Behind each of our cups hides an
-        <span class="accent">amazing surprise</span>
-      </h1>
-      <ul class="tab-list">
-        <li class="tab-item">
-          <div class="tab-icon"></div>
-          Coffee
-        </li>
-        <li class="tab-item">
-          <div class="tab-icon"></div>
-          Tea
-        </li>
-        <li class="tab-item">
-          <div class="tab-icon"></div>
-          Dessert
-        </li>
-      </ul>
       <section class="section section-menu">
+        <h1 class="title-m">
+          Behind each of our cups hides an
+          <span class="accent">amazing surprise</span>
+        </h1>
+        <ul class="tab-list">
+          <li class="tab-item">
+            <div class="tab-icon"></div>
+            Coffee
+          </li>
+          <li class="tab-item">
+            <div class="tab-icon"></div>
+            Tea
+          </li>
+          <li class="tab-item">
+            <div class="tab-icon"></div>
+            Dessert
+          </li>
+        </ul>
         <article class="product-item">
           <img src="" alt="" class="product-img" />
           <h3 class="title-s">Irish coffee</h3>
@@ -107,31 +109,54 @@
     <footer id="contact" class="footer">
       <div class="footer-content-left">
         <h2 class="title-m">
-          Sip, Savor, Smile. <span class="title-m-accent">’s coffee time!</span>
+          Sip, Savor, Smile. <span class="accent">It’s coffee time!</span>
         </h2>
         <div class="social-wrapper">
           <a href="https://twitter.com/SourceCoffeeBR" target="_blank"
-            ><button class="btn-social"></button
+            ><button class="btn btn-icon btn-icon-light">
+              <svg class="svg-social-tw">
+                <use href="assets/svg/svg-sprite.svg#svg-social-tw">
+              </svg>
+              </button
           ></a>
           <a href="https://www.instagram.com/sourcecoffeehouse/" target="_blank"
-            ><button class="btn-social"></button
+            ><button class="btn btn-icon btn-icon-light">
+              <svg class="svg-social-inst">
+                <use href="assets/svg/svg-sprite.svg#svg-social-inst">
+              </svg></button
           ></a>
-          <a href="https://www.facebook.com/sourcecoffeebr" target="_blank"></a>
-          <button class="btn-social"></button>
+          <a href="https://www.facebook.com/sourcecoffeebr" target="_blank">
+          <button class="btn btn-icon btn-icon-light">
+            <svg class="svg-social-fb">
+              <use href="assets/svg/svg-sprite.svg#svg-social-fb">
+            </svg>
+          </button>
+        </a>
         </div>
       </div>
       <div class="footer-content-right">
         <h3 class="title-s">Contact us</h3>
         <ul class="contact-list">
-          <li class="contact-item text-link">
+          <li class="contact-item link link-animated">
+            <svg class="svg-pin-alt">
+              <use href="assets/svg/svg-sprite.svg#svg-pin-alt">
+            </svg>
             <a href="https://maps.app.goo.gl/9bYwAyceCeo8ZV4U8" target="_blank"
-              >8558 Green Rd., LA</a
+              >8558 Green Rd., &nbsp;LA</a
             >
           </li>
-          <li class="contact-item text-link">
+          <li class="contact-item link link-animated">
+            <svg class="svg-phone">
+              <use href="assets/svg/svg-sprite.svg#svg-phone">
+            </svg>
             <a href="tel:+16035550123">+1 (603) 555-0123</a>
           </li>
-          <li class="contact-item text-link">Mon-Sat: 9:00 AM – 23:00 PM</li>
+          <li class="contact-item link">
+            <svg class="svg-clock">
+              <use href="assets/svg/svg-sprite.svg#svg-clock">
+            </svg>
+            <p>Mon-Sat: 9:00 AM – 23:00 PM</p>
+          </li>
         </ul>
       </div>
     </footer>
