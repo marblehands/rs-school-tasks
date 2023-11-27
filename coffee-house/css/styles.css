@@ -306,7 +306,7 @@ div.nav-item .svg-coffee-cup {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 40px;
+  gap: 38px;
 }
 
 .section-menu > h1.title-m {
@@ -388,8 +388,14 @@ input[type="radio"] {
   display: flex;
   flex-direction: column;
   border-radius: 40px;
-  border: 1px solid var(--border-default);
+  border: 1px solid var(--border-inverse);
   max-width: 310px;
+
+  &:hover {
+    & .product-img {
+      scale: 0.95;
+    }
+  }
 }
 
 .product-img-wrapper {
@@ -399,12 +405,6 @@ input[type="radio"] {
   border-radius: 40px;
   overflow: hidden;
   flex-basis: 310px;
-
-  &:hover {
-    & .product-img {
-      scale: 0.9;
-    }
-  }
 }
 
 .product-img {

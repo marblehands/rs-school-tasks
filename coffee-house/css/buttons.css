@@ -153,6 +153,21 @@ a:visited {
   }
 }
 
+.link-active {
+  position: relative;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--text-default);
+    position: absolute;
+    bottom: -20%;
+    left: 0;
+  }
+}
+
 .contact-item {
   &::before {
     background-color: var(--text-inverse);
