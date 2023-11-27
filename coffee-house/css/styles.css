@@ -431,3 +431,8 @@ input[type="radio"] {
   gap: 40px;
   flex-wrap: wrap;
 }
+
+.non-active {
+  pointer-events: none;
+  cursor: default;
+}
