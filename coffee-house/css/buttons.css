@@ -134,6 +134,35 @@ a:visited {
   }
 }
 
+.btn-burger {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border-default);
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 16px;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 1.5px;
+    border-radius: 10px;
+    background-color: var(--text-default);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 16px;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 1.5px;
+    border-radius: 10px;
+    background-color: var(--text-default);
+  }
+}
+
 .link-animated {
   position: relative;
   cursor: pointer;

@@ -22,7 +22,7 @@ body {
   min-height: 100vh;
   flex-direction: column;
   justify-content: flex-start;
-  width: 1440px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 20px 40px 40px;
 }
@@ -50,6 +50,8 @@ body section:first-child {
 
 header {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 /* Logo */
@@ -89,6 +91,59 @@ div.nav-item .svg-coffee-cup {
   margin-bottom: 4px;
 }
 
+/* Burger */
+
+.btn-burger {
+  display: none;
+}
+
+@media (max-width: 768px) {
+
+  /* Burger */
+
+  .btn-burger {
+    display: block;
+  }
+
+  /* Navigation */
+
+  .main-nav {
+    position: fixed;
+    right: -100%;
+    top: 0;
+    width: calc(100% - 80px);
+    height: calc(100vh - 140px);
+    margin-top: 100px;
+    padding-top: 60px;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 100px;
+    --link-default: 600 32px/125% var(--main-font);
+    font: var(--link-default);
+  }
+
+  .nav-list {
+    flex-direction: column;
+    justify-content: flex-start;
+    max-height: 340px;
+    gap: 60px;
+  }
+
+  /* Link Menu in navigation */
+
+  div.nav-item {
+    width: auto;
+    height: auto;
+    gap: 16px;
+    flex-grow: 1;
+
+    & svg {
+      width: 40px;
+      height: 40px;
+    }
+  }
+}
+
 /* Section Enjoy */
 
 .section-enjoy {
@@ -103,6 +158,12 @@ div.nav-item .svg-coffee-cup {
 
 .section-enjoy > :nth-child(-n + 2) {
   max-width: 530px;
+}
+
+@media (max-width: 768px) {
+  .section-enjoy {
+    padding: 100px 60px;
+  }
 }
 
 /* Section Favourite coffee */
