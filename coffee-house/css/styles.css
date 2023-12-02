@@ -80,7 +80,7 @@ div.nav-item {
   display: flex;
   gap: 8px;
   width: 72px;
-  height: 24px;
+  height: 28px;
   justify-content: space-between;
   align-items: center;
 }
@@ -188,12 +188,6 @@ div.nav-item .svg-coffee-cup {
 .gallery-wrapper {
   display: flex;
   gap: 40px;
-  /* display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 430px auto 430px;
-  gap: 40px;
-  background-color: #dd8f8f;
-  height: 1060px; */
 }
 
 .gallery-column {
@@ -397,6 +391,7 @@ input[type="radio"] {
   max-width: 310px;
 
   &:hover {
+    cursor: pointer;
     & .product-img {
       scale: 0.95;
     }
