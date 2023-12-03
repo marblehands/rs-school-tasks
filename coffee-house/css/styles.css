@@ -22,9 +22,15 @@ body {
   min-height: 100vh;
   flex-direction: column;
   justify-content: flex-start;
-  width: 1440px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 20px 40px 40px;
+}
+
+@media (max-width: 767px) {
+  .body-wrapper {
+    padding: 20px 16px 40px;
+  }
 }
 
 main {
@@ -50,6 +56,8 @@ body section:first-child {
 
 header {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 /* Logo */
@@ -89,6 +97,59 @@ div.nav-item .svg-coffee-cup {
   margin-bottom: 4px;
 }
 
+/* Burger */
+
+.btn-burger {
+  display: none;
+}
+
+@media (max-width: 768px) {
+
+  /* Burger */
+
+  .btn-burger {
+    display: block;
+  }
+
+  /* Navigation */
+
+  .main-nav {
+    position: fixed;
+    right: -100%;
+    top: 0;
+    width: calc(100% - 80px);
+    height: calc(100vh - 140px);
+    margin-top: 100px;
+    padding-top: 60px;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 100px;
+    --link-default: 600 32px/125% var(--main-font);
+    font: var(--link-default);
+  }
+
+  .nav-list {
+    flex-direction: column;
+    justify-content: flex-start;
+    max-height: 340px;
+    gap: 60px;
+  }
+
+  /* Link Menu in navigation */
+
+  div.nav-item {
+    width: auto;
+    height: auto;
+    gap: 16px;
+    flex-grow: 1;
+
+    & svg {
+      width: 40px;
+      height: 40px;
+    }
+  }
+}
+
 /* Section Enjoy */
 
 .section-enjoy {
@@ -103,6 +164,18 @@ div.nav-item .svg-coffee-cup {
 
 .section-enjoy > :nth-child(-n + 2) {
   max-width: 530px;
+}
+
+@media (max-width: 1439px) {
+  .section-enjoy {
+    padding: 100px 60px;
+  }
+}
+
+@media (max-width: 767px) {
+  .section-enjoy {
+    padding: 60px 16px;
+  }
 }
 
 /* Section Favourite coffee */
@@ -140,6 +213,17 @@ div.nav-item .svg-coffee-cup {
   gap: 20px;
 }
 
+.slider-img-wrapper {
+  max-width: 480px;
+}
+
+.slider-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .slider-text-wrapper {
   display: flex;
   flex-direction: column;
@@ -154,6 +238,23 @@ div.nav-item .svg-coffee-cup {
 
 .slider-arrow-right {
   margin-right: 4px;
+}
+
+@media (max-width: 1439px) {
+  .slider-arrow-right,
+  .slider-arrow-left  {
+    margin: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .slider-arrow-right,
+  .slider-arrow-left {
+    display: none;
+  }
+  .slider-content-wrapper {
+    justify-content: center;
+  }
 }
 
 /* Slider Pagination */
@@ -188,12 +289,16 @@ div.nav-item .svg-coffee-cup {
 .gallery-wrapper {
   display: flex;
   gap: 40px;
+  width: 100%;
+  justify-content: space-between;
+  /* flex-wrap: wrap; */
 }
 
 .gallery-column {
   display: flex;
   flex-direction: column;
   gap: 40px;
+  width: 100%;
 }
 
 .gallery-item {
@@ -205,31 +310,60 @@ div.nav-item .svg-coffee-cup {
 }
 
 .gallery-img {
-  width: 726px;
-  height: 726px;
-  scale: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.1);
   transition: scale 0.5s ease;
+}
 
-  &:hover {
+@media (hover:hover) {
+  .gallery-img:hover {
     scale: 0.92;
   }
 }
 
+.gallery-item {
+  max-width: 660px;
+}
+
 .gallery-column:nth-child(1) .gallery-item:nth-child(1),
 .gallery-column:nth-child(2) .gallery-item:nth-child(2) {
-  width: 660px;
   height: 590px;
 }
 
 .gallery-column:nth-child(1) .gallery-item:nth-child(2),
 .gallery-column:nth-child(2) .gallery-item:nth-child(1) {
-  width: 660px;
   height: 430px;
 }
+
+@media (max-width: 768px) {
+  .gallery-wrapper {
+    flex-direction: column;
+  }
+  .gallery-item {
+    max-width: 688px;
+  }
+  .gallery-column:nth-child(1) .gallery-item:nth-child(2),
+  .gallery-column:nth-child(2) .gallery-item:nth-child(1) {
+    display: none;
+  }
+  .gallery-img {
+    transform: scale(1.06);
+  }
+}
+
+@media (max-width: 380px) {
+  .gallery-img {
+    transform: scale(1.23);
+  }
+}
+
 
 /* Mobile App Section */
 
 .section-mobile-app {
+  width: 100%;
   display: flex;
   gap: 100px;
   justify-content: space-between;
@@ -237,7 +371,7 @@ div.nav-item .svg-coffee-cup {
 }
 
 .leftbar {
-  flex-basis: 630px;
+  min-width: 630px;
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -246,6 +380,45 @@ div.nav-item .svg-coffee-cup {
 .btn-wrapper {
   display: flex;
   gap: 20px;
+}
+
+.rightbar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mobile-app-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 1100px) {
+  .section-mobile-app {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .mobile-app-img {
+    max-width: 630px;
+  }
+}
+
+@media (max-width: 768px) {
+  .leftbar {
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 520px) {
+  .btn-wrapper {
+    flex-direction: column;
+  }
+  .section-mobile-app {
+    gap: 40px;
+  }
 }
 
 /* Footer */
@@ -299,11 +472,30 @@ div.nav-item .svg-coffee-cup {
   gap: 8px;
 }
 
+@media (max-width: 768px) {
+  .footer {
+    padding: 100px 60px 104px 60px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .footer-content-left {
+    flex-basis: auto;
+  }
+}
+
+@media (max-width: 380px) {
+  .footer {
+    padding: 60px 16px 63px 16px;
+    gap: 40px;
+  }
+}
+
 /* Menu Section */
 
 .section-menu {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: 37px;
 }
@@ -339,8 +531,10 @@ input[type="radio"] {
   border: 1px solid var(--border-inverse);
   cursor: pointer;
   transition: border 0.5s ease, background-color 0.5s ease, color 0.5s ease;
+}
 
-  &:hover {
+@media (hover:hover) {
+  .chips:hover {
     border: 1px solid var(--border-default);
     background-color: var(--border-default);
     color: var(--text-inverse);
@@ -381,6 +575,12 @@ input[type="radio"] {
   }
 }
 
+@media (max-width: 380px) {
+  .tab-wrapper {
+    gap: 6px;
+  }
+}
+
 /* Product card */
 
 .product-item {
@@ -389,8 +589,11 @@ input[type="radio"] {
   border-radius: 40px;
   border: 1px solid var(--border-inverse);
   max-width: 310px;
+  height: 506px;
+}
 
-  &:hover {
+@media (hover:hover) {
+  .product-item:hover {
     cursor: pointer;
     & .product-img {
       scale: 0.95;
@@ -428,11 +631,28 @@ input[type="radio"] {
 
 .products-wrapper {
   display: flex;
+  justify-content: center;
   gap: 40px;
   flex-wrap: wrap;
+}
+
+.section-menu button {
+  display: none;
 }
 
 .non-active {
   pointer-events: none;
   cursor: default;
+}
+
+@media (max-width: 768px) {
+  .section-menu {
+    gap: 39px;
+  }
+  .products-wrapper article:nth-child(n+5) {
+    display:none;
+  }
+  .section-menu button {
+    display: flex;
+  }
 }
