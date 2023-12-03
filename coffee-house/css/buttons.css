@@ -207,3 +207,56 @@ a:visited {
     background-color: var(--text-inverse);
   }
 }
+
+@media (hover:none) {
+  .btn-primary {
+    & svg {
+      opacity: 1;
+    }
+    & span {
+      margin-right: 32px;
+    }
+  }
+  .btn-secondary {
+    &:hover {
+      background-color: var(--border-default);
+      color: var(--text-default);
+    }
+  }
+  .btn-tretiary {
+    &:hover {
+      background-color: transparent;
+      color: var(--text-default);
+  
+      & svg {
+        fill: var(--text-default);
+      }
+    }
+  }
+  .btn-icon-dark {
+    &:hover {
+      background-color: transparent;
+      border: 1px solid var(--border-inverse);
+  
+      & svg {
+        stroke: var(--text-default);
+      }
+    }
+  }
+  .btn-icon-light {
+    &:hover {
+      background-color: transparent;
+      border: 1px solid var(--border-inverse);
+  
+      & svg {
+        stroke: var(--text-inverse);
+      }
+    }
+  }
+  .link-animated {
+    &:hover::before {
+      width: 0;
+      opacity: 0;
+    }
+  }
+}

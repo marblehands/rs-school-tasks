@@ -315,8 +315,10 @@ div.nav-item .svg-coffee-cup {
   object-fit: cover;
   transform: scale(1.1);
   transition: scale 0.5s ease;
+}
 
-  &:hover {
+@media (hover:hover) {
+  .gallery-img:hover {
     scale: 0.92;
   }
 }
@@ -529,8 +531,10 @@ input[type="radio"] {
   border: 1px solid var(--border-inverse);
   cursor: pointer;
   transition: border 0.5s ease, background-color 0.5s ease, color 0.5s ease;
+}
 
-  &:hover {
+@media (hover:hover) {
+  .chips:hover {
     border: 1px solid var(--border-default);
     background-color: var(--border-default);
     color: var(--text-inverse);
@@ -586,8 +590,10 @@ input[type="radio"] {
   border: 1px solid var(--border-inverse);
   max-width: 310px;
   height: 506px;
+}
 
-  &:hover {
+@media (hover:hover) {
+  .product-item:hover {
     cursor: pointer;
     & .product-img {
       scale: 0.95;
