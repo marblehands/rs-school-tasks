@@ -351,6 +351,12 @@ div.nav-item .svg-coffee-cup {
   }
 }
 
+@media (max-width: 380px) {
+  .gallery-img {
+    transform: scale(1.23);
+  }
+}
+
 
 /* Mobile App Section */
 
@@ -401,6 +407,15 @@ div.nav-item .svg-coffee-cup {
 @media (max-width: 768px) {
   .leftbar {
     min-width: 100%;
+  }
+}
+
+@media (max-width: 520px) {
+  .btn-wrapper {
+    flex-direction: column;
+  }
+  .section-mobile-app {
+    gap: 40px;
   }
 }
 
@@ -463,6 +478,13 @@ div.nav-item .svg-coffee-cup {
   }
   .footer-content-left {
     flex-basis: auto;
+  }
+}
+
+@media (max-width: 380px) {
+  .footer {
+    padding: 60px 16px 63px 16px;
+    gap: 40px;
   }
 }
 
@@ -546,6 +568,12 @@ input[type="radio"] {
 
   & span.chips-icon {
     background-color: var(--back-body);
+  }
+}
+
+@media (max-width: 380px) {
+  .tab-wrapper {
+    gap: 6px;
   }
 }
 
