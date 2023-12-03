@@ -96,3 +96,14 @@
     stroke: var(--text-default);
   }
 }
+
+.svg-refresh {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: var(--text-default);
+  transition: stroke 0.5s ease;
+  &:hover {
+    stroke: var(--text-inverse);
+  }
+}

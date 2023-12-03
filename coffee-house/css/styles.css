@@ -521,6 +521,7 @@ input[type="radio"] {
   border-radius: 40px;
   border: 1px solid var(--border-inverse);
   max-width: 310px;
+  height: 506px;
 
   &:hover {
     cursor: pointer;
@@ -565,13 +566,23 @@ input[type="radio"] {
   flex-wrap: wrap;
 }
 
+.section-menu button {
+  display: none;
+}
+
 .non-active {
   pointer-events: none;
   cursor: default;
 }
 
 @media (max-width: 768px) {
+  .section-menu {
+    gap: 39px;
+  }
   .products-wrapper article:nth-child(n+5) {
     display:none;
+  }
+  .section-menu button {
+    display: flex;
   }
 }
