@@ -27,6 +27,12 @@ body {
   padding: 20px 40px 40px;
 }
 
+@media (max-width: 767px) {
+  .body-wrapper {
+    padding: 20px 16px 40px;
+  }
+}
+
 main {
   display: flex;
   flex-grow: 1;
@@ -160,9 +166,15 @@ div.nav-item .svg-coffee-cup {
   max-width: 530px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1439px) {
   .section-enjoy {
     padding: 100px 60px;
+  }
+}
+
+@media (max-width: 767px) {
+  .section-enjoy {
+    padding: 60px 16px;
   }
 }
 
@@ -201,6 +213,17 @@ div.nav-item .svg-coffee-cup {
   gap: 20px;
 }
 
+.slider-img-wrapper {
+  max-width: 480px;
+}
+
+.slider-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .slider-text-wrapper {
   display: flex;
   flex-direction: column;
@@ -217,10 +240,20 @@ div.nav-item .svg-coffee-cup {
   margin-right: 4px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1439px) {
   .slider-arrow-right,
   .slider-arrow-left  {
     margin: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .slider-arrow-right,
+  .slider-arrow-left {
+    display: none;
+  }
+  .slider-content-wrapper {
+    justify-content: center;
   }
 }
 
@@ -330,7 +363,7 @@ div.nav-item .svg-coffee-cup {
 }
 
 .leftbar {
-  max-width: 630px;
+  min-width: 630px;
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -354,17 +387,20 @@ div.nav-item .svg-coffee-cup {
   object-fit: cover;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1100px) {
   .section-mobile-app {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
   }
-  .leftbar {
-    max-width: 688px;
-  }
   .mobile-app-img {
     max-width: 630px;
+  }
+}
+
+@media (max-width: 768px) {
+  .leftbar {
+    min-width: 100%;
   }
 }
 
