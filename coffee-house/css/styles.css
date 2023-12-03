@@ -342,7 +342,7 @@ div.nav-item .svg-coffee-cup {
     flex-direction: column;
   }
   .gallery-item {
-    max-width: 688px;
+    max-width: 768px;
   }
   .gallery-column:nth-child(1) .gallery-item:nth-child(2),
   .gallery-column:nth-child(2) .gallery-item:nth-child(1) {
@@ -472,7 +472,7 @@ div.nav-item .svg-coffee-cup {
   gap: 8px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1439px) {
   .footer {
     padding: 100px 60px 104px 60px;
     flex-direction: column;
@@ -483,7 +483,7 @@ div.nav-item .svg-coffee-cup {
   }
 }
 
-@media (max-width: 380px) {
+@media (max-width: 767px) {
   .footer {
     padding: 60px 16px 63px 16px;
     gap: 40px;
@@ -644,6 +644,13 @@ input[type="radio"] {
   pointer-events: none;
   cursor: default;
 }
+
+@media only screen and (min-width: 1090px) and (max-width: 1439px) {
+  .products-wrapper {
+    width: 70%;
+  }
+}
+
 
 @media (max-width: 768px) {
   .section-menu {
