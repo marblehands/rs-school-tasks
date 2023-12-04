@@ -351,6 +351,11 @@ div.nav-item .svg-coffee-cup {
   .gallery-img {
     transform: scale(1.06);
   }
+  @media (hover:hover) {
+    .gallery-img:hover {
+      scale: 0.96;
+    }
+  }
 }
 
 @media (max-width: 380px) {

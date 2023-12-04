@@ -134,35 +134,38 @@ a:visited {
   }
 }
 
-.btn-burger {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 7px;
-  width: 44px;
-  height: 44px;
-  border: 1px solid var(--border-default);
-  transition: background-color 0.5s ease;
-}
+@media (max-width:768px) {
 
-@media (hover:hover) {
-  .btn-burger:hover {
-    background-color: var(--border-default);
-
-     & span {
-      background-color: var(--text-inverse);
-     }
+  .btn-burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--border-default);
+    transition: background-color 0.5s ease;
   }
-}
 
-.btn-burger-line {
-  display: block;
-  width: 16px;
-  height: 1.5px;
-  border-radius: 10px;
-  background-color: var(--text-default);
-  transition: background-color 0.5s ease;
+  @media (hover:hover) {
+    .btn-burger:hover {
+      background-color: var(--border-default);
+
+      & span {
+        background-color: var(--text-inverse);
+      }
+    }
+  }
+
+  .btn-burger-line {
+    display: block;
+    width: 16px;
+    height: 1.5px;
+    border-radius: 10px;
+    background-color: var(--text-default);
+    transition: background-color 0.5s ease;
+  }
 }
 
 .link-animated {
