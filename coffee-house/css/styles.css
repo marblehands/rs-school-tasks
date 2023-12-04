@@ -651,7 +651,6 @@ input[type="radio"] {
   }
 }
 
-
 @media (max-width: 768px) {
   .section-menu {
     gap: 39px;

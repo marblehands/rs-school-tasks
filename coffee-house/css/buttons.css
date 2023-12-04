@@ -135,32 +135,34 @@ a:visited {
 }
 
 .btn-burger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
   width: 44px;
   height: 44px;
   border: 1px solid var(--border-default);
-  position: relative;
+  transition: background-color 0.5s ease;
+}
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 16px;
-    transform: translate(-50%, -50%);
-    width: 16px;
-    height: 1.5px;
-    border-radius: 10px;
-    background-color: var(--text-default);
-  }
+@media (hover:hover) {
+  .btn-burger:hover {
+    background-color: var(--border-default);
 
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 16px;
-    transform: translate(-50%, -50%);
-    width: 16px;
-    height: 1.5px;
-    border-radius: 10px;
-    background-color: var(--text-default);
+     & span {
+      background-color: var(--text-inverse);
+     }
   }
+}
+
+.btn-burger-line {
+  display: block;
+  width: 16px;
+  height: 1.5px;
+  border-radius: 10px;
+  background-color: var(--text-default);
+  transition: background-color 0.5s ease;
 }
 
 .link-animated {
@@ -236,7 +238,7 @@ a:visited {
   .btn-icon-dark {
     &:hover {
       background-color: transparent;
-      border: 1px solid var(--border-inverse);
+      border: 1px solid var(--border-default);
   
       & svg {
         stroke: var(--text-default);
