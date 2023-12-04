@@ -351,6 +351,11 @@ div.nav-item .svg-coffee-cup {
   .gallery-img {
     transform: scale(1.06);
   }
+  @media (hover:hover) {
+    .gallery-img:hover {
+      scale: 0.96;
+    }
+  }
 }
 
 @media (max-width: 380px) {
@@ -371,7 +376,7 @@ div.nav-item .svg-coffee-cup {
 }
 
 .leftbar {
-  min-width: 630px;
+  flex-basis: 630px;
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -383,7 +388,7 @@ div.nav-item .svg-coffee-cup {
 }
 
 .rightbar {
-  width: 100%;
+  flex-basis: 630px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -398,10 +403,14 @@ div.nav-item .svg-coffee-cup {
 @media (max-width: 1100px) {
   .section-mobile-app {
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
   }
-  .mobile-app-img {
+  .leftbar {
+    flex-basis: auto;
+    max-width: 630px;
+    align-self: flex-start;
+  }
+  .rightbar {
+    flex-basis: auto;
     max-width: 630px;
   }
 }
@@ -497,7 +506,13 @@ div.nav-item .svg-coffee-cup {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 37px;
+  gap: 39px;
+}
+
+@media (max-width:768px) {
+  .section-menu {
+    gap: 37px;
+  }
 }
 
 .section-menu > h1.title-m {
@@ -650,7 +665,6 @@ input[type="radio"] {
     width: 70%;
   }
 }
-
 
 @media (max-width: 768px) {
   .section-menu {
