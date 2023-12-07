@@ -165,12 +165,24 @@ div.nav-item .svg-coffee-cup {
   display: flex;
   flex-direction: column;
   gap: 40px;
-  background: url(../assets/img/img-hero.jpg) center/cover no-repeat;
+  /* background: url(../assets/img/img-hero.jpg) center/cover no-repeat; */
   color: var(--text-inverse);
+  position: relative;
+  overflow: hidden;
 }
 
 .section-enjoy > :nth-child(-n + 2) {
   max-width: 530px;
+}
+
+#coffee-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
 }
 
 @media (max-width: 1439px) {
