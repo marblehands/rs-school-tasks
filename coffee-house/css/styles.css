@@ -117,8 +117,8 @@ div.nav-item .svg-coffee-cup {
     position: fixed;
     right: -100%;
     top: 0;
-    width: calc(100% - 80px);
-    height: calc(100vh - 140px);
+    width: calc(100%);
+    height: calc(100vh);
     margin-top: 100px;
     padding-top: 60px;
     flex-direction: column;
@@ -126,6 +126,13 @@ div.nav-item .svg-coffee-cup {
     gap: 100px;
     --link-default: 600 32px/125% var(--main-font);
     font: var(--link-default);
+    background-color: var(--back-body);
+    z-index: 1;
+    transition: right 0.7s ease;
+  }
+
+  .nav-open {
+    right: 0;
   }
 
   .nav-list {
@@ -287,11 +294,27 @@ div.nav-item .svg-coffee-cup {
   height: 4px;
   border-radius: 100px;
   background-color: var(--border-inverse);
+  position: relative;
+  overflow: hidden;
 }
 
-.slider-pagination-item.active {
+.progress-bar {
+  content: '';
+  position: absolute;
+  display: block;
   background-color: var(--border-default);
+  width: 0%;
+  height: 100%;
+  transition: width 3s ease;
 }
+
+.progress-bar-active {
+  width: 100%;
+}
+
+/* .slider-pagination-item.active {
+  background-color: var(--border-default);
+} */
 
 /* Section About */
 
