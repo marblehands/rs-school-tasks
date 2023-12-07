@@ -206,8 +206,22 @@ div.nav-item .svg-coffee-cup {
   gap: 40px;
 }
 
-.slider-content {
-  flex-basis: 480px;
+.slides-overflow {
+  max-width: 480px;
+  overflow: hidden;
+}
+
+.slides-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300%;
+  overflow: hidden;
+  transition: margin-left 0.7s ease;
+}
+
+.slider-item {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -215,6 +229,9 @@ div.nav-item .svg-coffee-cup {
 
 .slider-img-wrapper {
   max-width: 480px;
+  max-height: 480px;
+  overflow: hidden;
+  
 }
 
 .slider-img {
