@@ -86,155 +86,15 @@
             Behind each of our cups hides an
             <span class="accent">amazing surprise</span>
           </h1>
-          <input
-            type="radio"
-            id="coffee"
-            name="menu-category"
-            value="coffee"
-            checked>
-          <input
-            type="radio" 
-            id="tea" 
-            name="menu-category" 
-            value="tea">
-          <input
-            type="radio"
-            id="dessert"
-            name="menu-category"
-            value="desserts">
-          <div class="tab-wrapper">
-            <label for="coffee" class="link chips chips-checked non-active"
-              ><span class="chips-icon"></span>Coffee</label
-            >
-            <label for="tea" class="link chips"
-              ><span class="chips-icon"></span>Tea</label
-            >
-            <label for="dessert" class="link chips"
-              ><span class="chips-icon"></span>Dessert</label
-            >
-          </div>
+          <form action="" class="tab-wrapper">
+              <input type="radio" id="coffee" name="menu" value="coffee" checked>
+              <label for="coffee" class="link chips"><span class="chips-icon coffee"></span>Coffee</label>
+              <input type="radio" id="tea" name="menu" value="tea">
+              <label for="tea" class="link chips"><span class="chips-icon tea"></span>Tea</label>
+              <input type="radio" id="desserts" name="menu" value="dessert">
+              <label for="desserts" class="link chips"><span class="chips-icon desserts"></span>Desserts</label>
+          </form>
           <div class="products-wrapper">
-            <article class="product-item">
-              <div class="product-img-wrapper">
-                <img
-                  src="assets/img/products/coffee/coffee-1.jpg"
-                  alt="Irish coffee image"
-                  class="product-img">
-              </div>
-              <div class="product-info">
-                <h3 class="title-s">Irish coffee</h3>
-                <p class="text-m info">
-                  Fragrant black coffee with Jameson Irish whiskey and whipped
-                  milk
-                </p>
-                <p class="title-s product-price">$7.00</p>
-              </div>
-            </article>
-            <article class="product-item">
-              <div class="product-img-wrapper">
-                <img
-                  src="assets/img/products/coffee/coffee-2.jpg"
-                  alt="Irish coffee image"
-                  class="product-img">
-              </div>
-              <div class="product-info">
-                <h3 class="title-s">Kahlua coffee</h3>
-                <p class="text-m info">
-                  Classic coffee with milk and Kahlua liqueur under a cap of
-                  frothed milk
-                </p>
-                <p class="title-s product-price">$7.00</p>
-              </div>
-            </article>
-            <article class="product-item">
-              <div class="product-img-wrapper">
-                <img
-                  src="assets/img/products/coffee/coffee-3.jpg"
-                  alt="Irish coffee image"
-                  class="product-img">
-              </div>
-              <div class="product-info">
-                <h3 class="title-s">Honey raf</h3>
-                <p class="text-m info">
-                  Espresso with frothed milk, cream and aromatic honey
-                </p>
-                <p class="title-s product-price">$5.50</p>
-              </div>
-            </article>
-            <article class="product-item">
-              <div class="product-img-wrapper">
-                <img
-                  src="assets/img/products/coffee/coffee-4.jpg"
-                  alt="Irish coffee image"
-                  class="product-img">
-              </div>
-              <div class="product-info">
-                <h3 class="title-s">Ice cappuccino</h3>
-                <p class="text-m info">
-                  Cappuccino with soft thick foam in summer version with ice
-                </p>
-                <p class="title-s product-price">$5.00</p>
-              </div>
-            </article>
-            <article class="product-item">
-              <div class="product-img-wrapper">
-                <img
-                  src="assets/img/products/coffee/coffee-5.jpg"
-                  alt="Irish coffee image"
-                  class="product-img">
-              </div>
-              <div class="product-info">
-                <h3 class="title-s">Espresso</h3>
-                <p class="text-m info">Classic black coffee</p>
-                <p class="title-s product-price">$4.50</p>
-              </div>
-            </article>
-            <article class="product-item">
-              <div class="product-img-wrapper">
-                <img
-                  src="assets/img/products/coffee/coffee-6.jpg"
-                  alt="Irish coffee image"
-                  class="product-img">
-              </div>
-              <div class="product-info">
-                <h3 class="title-s">Latte</h3>
-                <p class="text-m info">
-                  Espresso coffee with the addition of steamed milk and dense
-                  milk foam
-                </p>
-                <p class="title-s product-price">$5.50</p>
-              </div>
-            </article>
-            <article class="product-item">
-              <div class="product-img-wrapper">
-                <img
-                  src="assets/img/products/coffee/coffee-7.jpg"
-                  alt="Irish coffee image"
-                  class="product-img">
-              </div>
-              <div class="product-info">
-                <h3 class="title-s">Latte macchiato</h3>
-                <p class="text-m info">
-                  Espresso with frothed milk and chocolate
-                </p>
-                <p class="title-s product-price">$5.50</p>
-              </div>
-            </article>
-            <article class="product-item">
-              <div class="product-img-wrapper">
-                <img
-                  src="assets/img/products/coffee/coffee-8.jpg"
-                  alt="Irish coffee image"
-                  class="product-img">
-              </div>
-              <div class="product-info">
-                <h3 class="title-s">Coffee with cognac</h3>
-                <p class="text-m info">
-                  Fragrant black coffee with cognac and whipped cream
-                </p>
-                <p class="title-s product-price">$6.50</p>
-              </div>
-            </article>
           </div>
           <button class="btn btn-icon btn-icon-dark">
             <svg class="svg-refresh">
@@ -307,7 +167,7 @@
       </footer>
     </div>
   </body>
-  <script type="module" src="js/slider.js"></script>
   <script type="module" src="js/burger.js"></script>
   <script type="module" src="js/video.js"></script>
+  <script type="module" src="js/menu.js"></script>
 </html>

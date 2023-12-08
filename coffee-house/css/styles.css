@@ -574,13 +574,15 @@ div.nav-item .svg-coffee-cup {
 /* Tabs */
 
 input[type="radio"] {
-  display: none;
+display: none;
 }
 
 .tab-wrapper {
   display: flex;
   gap: 16px;
 }
+
+
 
 .chips-icon {
   background-color: var(--border-inverse);
@@ -612,6 +614,17 @@ input[type="radio"] {
   }
 }
 
+.tab-wrapper input:checked + .chips {
+  border: 1px solid var(--border-default);
+  background-color: var(--border-default);
+  color: var(--text-inverse);
+
+  & span.chips-icon {
+    background-color: var(--back-body);
+}
+
+}
+
 .chips-icon {
   display: block;
   width: 30px;
@@ -620,15 +633,15 @@ input[type="radio"] {
   transition: background-color 0.5s ease;
 }
 
-.tab-wrapper .chips:nth-child(1) .chips-icon {
+.chips-icon.coffee {
   background-image: url(../assets/img/chips/chips-icon-1.png);
 }
 
-.tab-wrapper .chips:nth-child(2) .chips-icon {
+.chips-icon.tea {
   background-image: url(../assets/img/chips/chips-icon-2.png);
 }
 
-.tab-wrapper .chips:nth-child(3) .chips-icon {
+.chips-icon.desserts {
   background-image: url(../assets/img/chips/chips-icon3.png);
 }
 
