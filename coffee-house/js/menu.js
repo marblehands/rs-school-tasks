@@ -1,19 +1,32 @@
 import products from '../js/products.js';
 
-createProduct ('coffee');
+createProduct('coffee');
+hideProducts()
+window.addEventListener('resize', hideProducts);
 
 const chips = document.getElementsByName('menu');
 chips.forEach((item)=>{
   item.addEventListener('click', ()=>{
     createProduct(item.value);
+    hideProducts()
   })
-})
+});
 
-function filterProducts (category) {
+function getCategory() {
+  let category = '';
+  const chips = document.getElementsByName('menu');
+  chips.forEach((item)=>{
+    if (item.checked)
+    category = item.value;
+  })
+  return category;
+}
+
+function filterProducts(category) {
   return products.filter((item)=> item.category === category);
 }
 
-function createProduct (category) {
+function createProduct(category) {
   const productList = filterProducts(category);
   const productBox = document.querySelector('.products-wrapper');
   productBox.innerHTML = '';
@@ -57,4 +70,34 @@ function createProduct (category) {
 
     productBox.appendChild(productItem);
   })
+}
+
+function hideProducts() {
+  const width = window.innerWidth;
+  const category = getCategory();
+  createProduct(category);
+  const productList = document.querySelectorAll('.product-item');
+  const btn = document.querySelector('[data-btn]');
+  btn.style.display = 'none';
+  
+  if (width <= 768) {
+    
+    if (productList.length > 4) {
+      for (let i = 4; i < productList.length; i++) {
+        productList[i].style.display = 'none';
+      }
+      btn.style.display = 'flex';
+    }
+
+  if (width > 768) {
+    for (let i = 4; i < productList.length; i++) {
+      productList[i].style.display = 'flex';
+    }
+    btn.style.display = 'none';
+  }
+  }
+}
+
+function showProducts() {
+
 }

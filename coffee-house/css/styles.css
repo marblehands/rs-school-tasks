@@ -738,7 +738,8 @@ display: none;
   .products-wrapper article:nth-child(n+5) {
     display:none;
   }
-  .section-menu button {
-    display: flex;
-  }
+}
+
+.hidden {
+  display: none;
 }
