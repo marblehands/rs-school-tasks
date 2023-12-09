@@ -1,7 +1,9 @@
 import products from '../js/products.js';
 import { openModal } from '../js/modal.js';
 import { closeModal } from '../js/modal.js';
-import { generateModalData } from '../js/modal.js';
+import { addData } from '../js/modal.js';
+import { getData } from '../js/modal.js';
+import { filterMenu } from '../js/modal.js';
 
 createMenu();
 displayProducts();
@@ -81,7 +83,8 @@ export function createMenu() {
   productItems.forEach((item, index)=>{
     item.addEventListener('click', ()=>{
       openModal();
-      generateModalData(index);
+      const data = getData(index);
+      addData(data);
     })
   })
 }
