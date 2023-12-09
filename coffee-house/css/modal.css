@@ -5,7 +5,7 @@
   width: 100vw;
   height: 100vh;
   background-color: var(--back-overlay);
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
 }
@@ -33,6 +33,9 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+.modal-wrapper .tab-wrapper {
+  gap: 8px;
 }
 .product-size-title {
   margin-bottom: 8px;
