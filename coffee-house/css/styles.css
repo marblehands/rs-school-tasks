@@ -735,9 +735,6 @@ display: none;
   .section-menu {
     gap: 39px;
   }
-  .products-wrapper article:nth-child(n+5) {
-    display:none;
-  }
 }
 
 .hidden {

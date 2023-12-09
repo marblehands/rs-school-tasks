@@ -4,6 +4,13 @@ createMenu();
 displayProducts();
 window.addEventListener('resize', displayProducts);
 
+const btn = document.querySelector('[data-btn]');
+btn.addEventListener('click', ()=>{
+  console.log('test')
+  createMenu();
+  btn.style.display = 'none';
+})
+
 const chips = document.getElementsByName('menu');
 chips.forEach((item)=>{
   item.addEventListener('click', ()=>{
@@ -69,15 +76,10 @@ function createMenu() {
   })
 }
 
-function getProductList() {
-  createMenu();
-  const productList = document.querySelectorAll('.product-item');
-  return productList;
-}
-
 function displayProducts() {
   const width = window.innerWidth;
-  const productList = getProductList();
+  createMenu();
+  const productList = document.querySelectorAll('.product-item');
   const btn = document.querySelector('[data-btn]');
   btn.style.display = 'none';
   
@@ -95,8 +97,4 @@ function displayProducts() {
       btn.style.display = 'none';
     }
   }
-}
-
-function showProducts() {
-
 }
