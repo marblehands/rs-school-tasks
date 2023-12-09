@@ -311,22 +311,27 @@ div.nav-item .svg-coffee-cup {
 }
 
 .progress-bar {
-  content: '';
   position: absolute;
   display: block;
   background-color: var(--border-default);
   width: 0%;
   height: 100%;
-  transition: width 3s ease;
+  transform-origin: left center;
+  transition: transform 0.5s ease;
+  /* animation: fillBar 3s forwards; */
 }
 
-.progress-bar-active {
-  width: 100%;
+@keyframes fillBar {
+  to {
+    width: 100%;
+  }
 }
 
-/* .slider-pagination-item.active {
-  background-color: var(--border-default);
-} */
+@keyframes emptyBar {
+  to {
+    width: 0%;
+  }
+}
 
 /* Section About */
 

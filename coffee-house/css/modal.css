@@ -20,7 +20,6 @@
 .modal-product-img-wrapper {
   min-width: 310px;
   height: 310px;
-  background-color: #fff;
   border-radius: 40px;
   overflow: hidden;
   display: flex;
