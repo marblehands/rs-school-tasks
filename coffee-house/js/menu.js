@@ -1,4 +1,7 @@
 import products from '../js/products.js';
+import { openModal } from '../js/modal.js';
+import { closeModal } from '../js/modal.js';
+import { generateModalData } from '../js/modal.js';
 
 createMenu();
 displayProducts();
@@ -19,7 +22,7 @@ chips.forEach((item)=>{
   })
 });
 
-function getCategory() {
+export function getCategory() {
   let category = '';
   const chips = document.getElementsByName('menu');
   chips.forEach((item)=>{
@@ -29,7 +32,7 @@ function getCategory() {
   return category;
 }
 
-function createMenu() {
+export function createMenu() {
   let category = getCategory();
   const productList = products.filter((item)=> item.category === category);
   const productBox = document.querySelector('.products-wrapper');
@@ -74,25 +77,32 @@ function createMenu() {
 
     productBox.appendChild(productItem);
   })
+  const productItems = document.querySelectorAll('.product-item');
+  productItems.forEach((item, index)=>{
+    item.addEventListener('click', ()=>{
+      openModal();
+      generateModalData(index);
+    })
+  })
 }
 
-function displayProducts() {
+export function displayProducts() {
   const width = window.innerWidth;
   createMenu();
-  const productList = document.querySelectorAll('.product-item');
+  const productItems = document.querySelectorAll('.product-item');
   const btn = document.querySelector('[data-btn]');
   btn.style.display = 'none';
   
   if (width <= 768) {
     
-    if (productList.length > 4) {
-      for (let i = 4; i < productList.length; i++) {
-        productList[i].style.display = 'none';
+    if (productItems.length > 4) {
+      for (let i = 4; i < productItems.length; i++) {
+        productItems[i].style.display = 'none';
       }
       btn.style.display = 'flex';
     } else {
-      for (let i = 4; i < productList.length; i++) {
-        productList[i].style.display = 'flex';
+      for (let i = 4; i < productItems.length; i++) {
+        productItems[i].style.display = 'flex';
       }
       btn.style.display = 'none';
     }
