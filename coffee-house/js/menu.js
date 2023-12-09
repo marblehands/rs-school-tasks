@@ -1,14 +1,14 @@
 import products from '../js/products.js';
 
-createProduct('coffee');
-hideProducts()
-window.addEventListener('resize', hideProducts);
+createMenu();
+displayProducts();
+window.addEventListener('resize', displayProducts);
 
 const chips = document.getElementsByName('menu');
 chips.forEach((item)=>{
   item.addEventListener('click', ()=>{
-    createProduct(item.value);
-    hideProducts()
+    createMenu();
+    displayProducts();
   })
 });
 
@@ -22,12 +22,9 @@ function getCategory() {
   return category;
 }
 
-function filterProducts(category) {
-  return products.filter((item)=> item.category === category);
-}
-
-function createProduct(category) {
-  const productList = filterProducts(category);
+function createMenu() {
+  let category = getCategory();
+  const productList = products.filter((item)=> item.category === category);
   const productBox = document.querySelector('.products-wrapper');
   productBox.innerHTML = '';
 
@@ -72,11 +69,15 @@ function createProduct(category) {
   })
 }
 
-function hideProducts() {
-  const width = window.innerWidth;
-  const category = getCategory();
-  createProduct(category);
+function getProductList() {
+  createMenu();
   const productList = document.querySelectorAll('.product-item');
+  return productList;
+}
+
+function displayProducts() {
+  const width = window.innerWidth;
+  const productList = getProductList();
   const btn = document.querySelector('[data-btn]');
   btn.style.display = 'none';
   
@@ -87,14 +88,12 @@ function hideProducts() {
         productList[i].style.display = 'none';
       }
       btn.style.display = 'flex';
+    } else {
+      for (let i = 4; i < productList.length; i++) {
+        productList[i].style.display = 'flex';
+      }
+      btn.style.display = 'none';
     }
-
-  if (width > 768) {
-    for (let i = 4; i < productList.length; i++) {
-      productList[i].style.display = 'flex';
-    }
-    btn.style.display = 'none';
-  }
   }
 }
 
