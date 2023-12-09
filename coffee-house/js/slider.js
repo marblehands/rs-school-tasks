@@ -1,40 +1,53 @@
 let index = 0;
+let barState;
+let increase;
 
 const slidesBox = document.querySelector('.slides-wrapper');
 const progressbarsBox = document.querySelectorAll('.slider-pagination-item');
 const progressbars = document.querySelectorAll('.progress-bar');
+const slides = document.querySelectorAll('.slider-item');
 
-// progressbars[slideIndex].addEventListener('transitionend', () => {
-//   slideIndex === 0 ? progressbars[2].style.width = '0%' : progressbars[slideIndex - 1].style.width = '0%';
-//   moveSlides()
-// })
+slides.forEach((item) => {
+  item.addEventListener('mouseenter', () => {
+    clearInterval(increase);
+  })
+  item.addEventListener('mouseleave', () => {
+    fullBar(barState);
+  })
+});
 
 function moveSlides() {
-  slidesBox.style.marginLeft = (`-${index}00%`);
+  slidesBox.style.marginLeft = (`-${index + 1}00%`);
+  if (index === 2) {
+    slidesBox.style.marginLeft = (`-${index - 2}00%`);
+  }
   progressbars[index].style.transform = 'scaleX(0)';
   index++;
   index >= 3 ? (index = 0) : index;
-  fullBar();
+  fullBar(1);
 }
 
-function fullBar() {
-  let bar = progressbars[index];
+function fullBar(width) {
+  // let id;
+  // index !== 0 ? id = index : id = 2;
+  let bar = progressbars[index]
   bar.style.transform = 'scaleX(2)';
-  let width = 1;
-  const increase = setInterval(() => {
+  increase = setInterval(() => {
     bar.style.width = `${width}%`;
     width++;
-    console.log(width)
+    barState = width;
   if (width > 100) {
     clearInterval(increase);
     moveSlides();
   }
   }, 30);
-}
+  }
 
-fullBar();
-
-
+  fullBar(1);
+// progressbars[slideIndex].addEventListener('transitionend', () => {
+//   slideIndex === 0 ? progressbars[2].style.width = '0%' : progressbars[slideIndex - 1].style.width = '0%';
+//   moveSlides()
+// })
 
 // moveSlides();
 
