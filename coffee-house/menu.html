@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/svg-icons.css">
     <link rel="stylesheet" href="css/typography.css">
     <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/modal.css">
     <link rel="icon" href="favicon.ico">
     <link rel="icon" href="assets/favicons/favicon.svg" type="image/svg+xml">
     <link
@@ -166,8 +167,55 @@
         </div>
       </footer>
     </div>
+    <div class="modal-overlay">
+      <div class="modal-wrapper">
+        <div class="modal-product-img-wrapper">
+          <img src="" alt="" class="modal-product-img">
+        </div>
+        <div class="modal-content-wrapper">
+          <div class="modal-product-info">
+            <h3 class="title-s">Irish Coffee</h3>
+            <p class="modal-product-description"> Product description in two lines Product description in two lines</p>
+          </div>
+          <div class="modal-product-size">
+            <p class="product-size-title">Size</p>
+            <form action="" class="tab-wrapper">
+              <input type="radio" name="size" value="s" id="s" checked>
+              <label for="s" class="chips link"><span class="chips-icon">S</span>200ml</label>
+              <input type="radio" name="size" value="m" id="m">
+              <label for="m" class="chips link"><span class="chips-icon">M</span>300ml</label>
+              <input type="radio" name="size" value="m" id="l">
+              <label for="l" class="chips link"><span class="chips-icon">L</span>400ml</label>
+          </form>
+          </div>
+          <div class="modal-product-additives">
+            <p class="product-size-title">Additives</p>
+            <form action="" class="tab-wrapper">
+              <input type="radio" name="additives" value="sugar" id="sugar" checked>
+              <label for="sugar" class="chips link"><span class="chips-icon">1</span>Sugar</label>
+              <input type="radio" name="additives" value="cinnamon" id="cinnamon">
+              <label for="cinnamon" class="chips link"><span class="chips-icon">2</span>Cinnamon</label>
+              <input type="radio" name="additives" value="syrop" id="syrop">
+              <label for="syrop" class="chips link"><span class="chips-icon">3</span>Syrup</label>
+          </form>
+          </div>
+          <div class="modal-total-wrapper">
+            <p class="title-s">Total:</p>
+            <p class="title-s total-price">$7.00</p>
+          </div>
+          <div class="total-disclaimer">
+            <svg class="svg-info">
+              <use href="assets/svg/svg-sprite.svg#svg-info" />
+            </svg>
+            <p class="caption">The cost is not final. Download our mobile app to see the final price and place your order. Earn loyalty points and enjoy your favorite coffee with up to 20% discount.</p>
+          </div>
+          <button class="btn btn-secondary">Close</button>
+        </div>
+      </div>
+    </div>
   </body>
   <script type="module" src="js/burger.js"></script>
   <script type="module" src="js/video.js"></script>
   <script type="module" src="js/menu.js"></script>
+  <script type="module" src="js/modal.js"></script>
 </html>

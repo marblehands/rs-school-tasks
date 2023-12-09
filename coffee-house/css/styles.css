@@ -582,15 +582,6 @@ display: none;
   gap: 16px;
 }
 
-
-
-.chips-icon {
-  background-color: var(--border-inverse);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 60%;
-}
-
 .chips {
   display: flex;
   gap: 8px;
@@ -621,12 +612,18 @@ display: none;
 
   & span.chips-icon {
     background-color: var(--back-body);
-}
-
+  }
 }
 
 .chips-icon {
-  display: block;
+  background-color: var(--border-inverse);
+  color: var(--text-default);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 30px;
   height: 30px;
   border-radius: 100px;
@@ -643,16 +640,6 @@ display: none;
 
 .chips-icon.desserts {
   background-image: url(../assets/img/chips/chips-icon3.png);
-}
-
-.chips-checked {
-  border: 1px solid var(--border-default);
-  background-color: var(--border-default);
-  color: var(--text-inverse);
-
-  & span.chips-icon {
-    background-color: var(--back-body);
-  }
 }
 
 @media (max-width: 380px) {
