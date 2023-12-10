@@ -580,7 +580,8 @@ div.nav-item .svg-coffee-cup {
 
 /* Tabs */
 
-input[type="radio"] {
+input[type="radio"],
+input[type="checkbox"] {
 display: none;
 }
 

@@ -13,7 +13,9 @@ const title = document.querySelector('.modal-product-title');
 const description = document.querySelector('.modal-product-description');
 const img = document.querySelector('.modal-product-img');
 const sizes = document.querySelectorAll('.size');
+const sizeInputs = document.getElementsByName('size');
 const additives = document.querySelectorAll('.add');
+const addInputs = document.getElementsByName('additives');
 const price = document.querySelector('.total-price');
 
 productItems.forEach((item, index)=>{
@@ -36,6 +38,7 @@ export function filterMenu(category) {
 }
 
 export function openModal() {
+  clearData();
   modal.style.display = 'flex';
   document.getElementsByTagName('body')[0].style.overflow = 'hidden';
 }
@@ -66,4 +69,13 @@ export function addData(data) {
 
   price.innerHTML = `$${data.price}`;
   img.src = data.src; 
+}
+
+function clearData() {
+  sizeInputs.forEach((item, index) => {
+    index !== 0 ? item.checked = false : item.checked = true;
+  });
+  addInputs.forEach((item) => {
+    item.checked = false;
+  })
 }
