@@ -1,14 +1,18 @@
 let index = 0;
 let barState;
 let increase;
+let start;
+let end;
 
 const slidesBox = document.querySelector('.slides-wrapper');
+const slider = document.querySelector('.slides-overflow')
 const progressbarsBox = document.querySelectorAll('.slider-pagination-item');
 const progressbars = document.querySelectorAll('.progress-bar');
 const slides = document.querySelectorAll('.slider-item');
 const arrowLeft = document.querySelector('.slider-arrow-left');
 const arrowRight = document.querySelector('.slider-arrow-right');
 
+// Mouse events
 slides.forEach((item) => {
   item.addEventListener('mouseenter', () => {
     clearInterval(increase);
@@ -17,6 +21,33 @@ slides.forEach((item) => {
     fullBar(barState);
   })
 });
+console.log(slider)
+// Touch events
+slider.addEventListener('touchstart', (event) => {
+  event.preventDefault();
+    start = event.touches[0].clientX;
+    clearInterval(increase);
+});
+
+slider.addEventListener('touchmove', (event) => {
+  event.preventDefault();
+  end = event.touches[0].clientX;
+});
+
+slider.addEventListener('touchend', (event) => {
+  event.preventDefault();
+    const offset = end - start;
+    if (Math.abs(offset) > 40) {
+      if (offset > 0) {
+        moveSlides();
+      } else {
+        moveSlidesLeft();
+      }
+    } else {
+      fullBar(barState);
+    }
+});
+
 
 function moveSlides() {
   slidesBox.style.marginLeft = (`-${index + 1}00%`);
