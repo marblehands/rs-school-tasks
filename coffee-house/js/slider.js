@@ -38,7 +38,7 @@ slider.addEventListener('touchend', (event) => {
   event.preventDefault();
     const offset = end - start;
     if (Math.abs(offset) > 40) {
-      if (offset > 0) {
+      if (offset < 0) {
         moveSlides();
       } else {
         moveSlidesLeft();
