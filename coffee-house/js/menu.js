@@ -65,7 +65,7 @@ export function createMenu() {
 
     const price = document.createElement('p');
     price.className = 'title-s product-price';
-    price.textContent = item.price;
+    price.textContent = `$${item.price}`;
 
     productInfoBox.appendChild(title);
     productInfoBox.appendChild(description);
