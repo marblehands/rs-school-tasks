@@ -8,12 +8,13 @@
   display: none;
   justify-content: center;
   align-items: center;
+  padding: 40px;
 }
 .modal-wrapper {
   background-color: var(--back-body);
   border-radius: 40px;
   padding: 16px;
-  width: 800px;
+  max-width: 800px;
   display: flex;
   gap: 20px;
 }
@@ -60,4 +61,16 @@
 }
 .svg-info {
   min-width: 16px;
+}
+
+@media (max-width:767px) {
+  .modal-overlay {
+    padding: 19px;
+  }
+}
+
+@media (max-width:680px) {
+  .modal-product-img-wrapper {
+    display: none;
+  }
 }
