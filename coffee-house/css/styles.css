@@ -25,11 +25,26 @@ body {
   max-width: 1440px;
   margin: 0 auto;
   padding: 20px 40px 40px;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .fixed {
+    z-index: 1;
+    position: fixed;
+    height: 80px;
+    background-color: var(--back-body);
+    width: calc(100% - 40px);
+    padding-bottom: 20px 0;
+  }
 }
 
 @media (max-width: 767px) {
   .body-wrapper {
     padding: 20px 16px 40px;
+  }
+  .fixed {
+    width: calc(100% - 32px);
   }
 }
 

@@ -150,19 +150,6 @@ a:visited {
     border: 1px solid var(--border-default);
     transition: background-color 0.5s ease;
   }
-/* 
-  .btn-burger-open {
-    position: relative;
-
-    & span:first-child {
-      top: 50%;
-      transform: rotate(45deg);
-    }
-    & span:last-child {
-      top: 50%;
-      transform: rotate(-45deg);
-    }
-  } */
 
   @media (hover:hover) {
     .btn-burger:hover {
@@ -184,52 +171,24 @@ a:visited {
     transition: all 0.7s ease;
   }
 
-  .burger-line-animated-1 {
-    animation: burgerLine1 0.7s forwards;
-    animation-direction: normal;
-  }
-
-  .burger-line-animated-2 {
-    animation: burgerLine2 0.7s forwards;
-    animation-direction: normal;
-  }
-
-  @keyframes burgerLine1 {
-    0% {
-      top: 16px;;
-      transform: rotate(0deg);
-    }
-    50% {
-      top: 50%;
-      transform: rotate(0deg);
-    }
-    100% {
-      top: 50%;
-      transform: translate3d(0px, -1px, 0) rotate(45deg);
-    }
-  }
-
-  @keyframes burgerLine2 {
-    0% {
-      bottom: 16px;;
-      transform: rotate(0deg);
-    }
-    50% {
-      bottom: 50%;
-      transform: rotate(0deg);
-    }
-    100% {
-      bottom: 50%;
-      transform: translate3d(0px, 1px, 0) rotate(-45deg);
-    }
-  }
-
   .btn-burger-line:first-child {
     top: 16px;
   }
 
   .btn-burger-line:last-child {
     bottom: 16px;
+  }
+}
+
+.burger-open {
+  & .btn-burger-line:first-child {
+    transform: rotate(45deg);
+    top: 50%;
+  }
+
+  & .btn-burger-line:last-child {
+    transform: rotate(-45deg);
+    top: 50%;
   }
 }
 
