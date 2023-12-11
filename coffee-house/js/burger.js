@@ -1,4 +1,3 @@
-const body = document.getElementsByTagName('body');
 const burger = document.querySelector('.btn-burger');
 const burgerLines = document.querySelectorAll('.btn-burger-line');
 const navigation = document.querySelector('.main-nav');
@@ -6,6 +5,7 @@ const linkHome = document.querySelector('#menu');
 // const linkFavorite = document.querySelector('#favorite');
 // const linkAbout = document.querySelector('#about');
 // const linkmobile = document.querySelector('#mobile');
+const body = document.querySelector('.body-wrapper')
 const linksMenu = document.querySelectorAll('[data-link-menu]');
 const linkLogoMenu = document.querySelector('[data-link-logo="menu"]');
 const linkLogoHome = document.querySelector('[data-link-logo="home"]');
@@ -29,7 +29,7 @@ navigation.addEventListener('click', (event) => {
   closeBurger();
 });
 
-body[0].addEventListener('click', (event) => {
+body.addEventListener('click', (event) => {
   event.stopPropagation();
   if (burgerState && event.target !== burger) {
     closeBurger();
