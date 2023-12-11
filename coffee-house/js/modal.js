@@ -3,6 +3,7 @@ import { getCategory } from '../js/menu.js';
 import { createMenu } from '../js/menu.js';
 import { displayProducts } from '../js/menu.js';
 
+let currentProductData;
 
 const modal = document.querySelector('.modal-overlay');
 const modalWindow = document.querySelector('.modal-wrapper');
@@ -17,11 +18,12 @@ const sizeInputs = document.getElementsByName('size');
 const additives = document.querySelectorAll('.add');
 const addInputs = document.getElementsByName('additives');
 const price = document.querySelector('.total-price');
+let cost;
 
 productItems.forEach((item, index)=>{
   item.addEventListener('click', ()=>{
     openModal();
-    const data = getData(index);
+    data = getData(index);
     addData(data);
   })
 })
@@ -31,6 +33,22 @@ modal.addEventListener('click', (event)=>{
     closeModal();
   }
 });
+
+sizeInputs.forEach((item) => {
+  item.addEventListener('click', () => {
+    let extraPrice = Number(item.value);
+    const type = 'size';
+    updateTotal(item, type, extraPrice);
+  })
+})
+
+addInputs.forEach((item) => {
+  item.addEventListener('click', () => {
+    let extraPrice = Number(item.value);
+    const type = 'additive';
+    updateTotal(item, type, extraPrice);
+  })
+})
 
 export function filterMenu(category) {
   const menu = products.filter((item) => item.category === category);
@@ -52,6 +70,7 @@ export function getData(index) {
   const category = getCategory();
   const menu = filterMenu(category);
   const data = menu[index];
+  currentProductData = data;
   return data;
 }
 
@@ -68,6 +87,8 @@ export function addData(data) {
   additives.forEach((item, index) => item.innerHTML = arrAdd[index]);
 
   price.innerHTML = `$${data.price}`;
+  price.setAttribute('value', `${data.price}`);
+  cost = Number(price.getAttribute('value'));
   img.src = data.src; 
 }
 
@@ -78,4 +99,30 @@ function clearData() {
   addInputs.forEach((item) => {
     item.checked = false;
   })
+}
+
+function updateTotal(item, type, extraPrice) {
+  const price = document.querySelector('.total-price');
+  console.log(price)
+  console.log(cost)
+  let total = Number(price.getAttribute('value'));
+  if (type === 'size') {
+    const addInputs = document.getElementsByName('additives');
+    let count = 0;
+    addInputs.forEach((item) => {
+      if (item.checked) {
+        count++;
+      }
+    })
+    total = cost + extraPrice + count * 0.5;
+  }
+  if (type === 'additive') {
+    if (item.checked === false) {
+      extraPrice = -extraPrice;
+    }
+    total += extraPrice;
+  }
+  console.log(total)
+  price.innerHTML = `$${total}`;
+  price.setAttribute('value', `${total}`);
 }
