@@ -139,6 +139,7 @@ a:visited {
 @media (max-width:768px) {
 
   .btn-burger {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -161,12 +162,33 @@ a:visited {
   }
 
   .btn-burger-line {
+    position: absolute;
     display: block;
     width: 16px;
     height: 1.5px;
     border-radius: 10px;
     background-color: var(--text-default);
-    transition: background-color 0.5s ease;
+    transition: all 0.7s ease;
+  }
+
+  .btn-burger-line:first-child {
+    top: 16px;
+  }
+
+  .btn-burger-line:last-child {
+    top: 26px;
+  }
+}
+
+.burger-open {
+  & .btn-burger-line:first-child {
+    transform: rotate(45deg);
+    top: 50%;
+  }
+
+  & .btn-burger-line:last-child {
+    transform: rotate(-45deg);
+    top: 50%;
   }
 }
 
@@ -194,6 +216,8 @@ a:visited {
   }
 }
 
+@media (min-width: 769px) {
+
 .link-active {
   position: relative;
 
@@ -207,6 +231,7 @@ a:visited {
     bottom: 0;
     left: 0;
   }
+}
 }
 
 .contact-item {

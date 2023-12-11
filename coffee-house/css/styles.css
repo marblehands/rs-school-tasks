@@ -12,7 +12,7 @@ html {
 
 body {
   opacity: 0;
-  transition: opacity 1s ease;
+  transition: opacity 0.5s ease;
   background-color: var(--back-body);
   color: var(--text-default);
 }
@@ -25,11 +25,26 @@ body {
   max-width: 1440px;
   margin: 0 auto;
   padding: 20px 40px 40px;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .fixed {
+    z-index: 1;
+    position: fixed;
+    height: 80px;
+    background-color: var(--back-body);
+    width: calc(100% - 40px);
+    padding-bottom: 20px 0;
+  }
 }
 
 @media (max-width: 767px) {
   .body-wrapper {
     padding: 20px 16px 40px;
+  }
+  .fixed {
+    width: calc(100% - 32px);
   }
 }
 
@@ -117,8 +132,8 @@ div.nav-item .svg-coffee-cup {
     position: fixed;
     right: -100%;
     top: 0;
-    width: calc(100% - 80px);
-    height: calc(100vh - 140px);
+    width: calc(100%);
+    height: calc(100vh);
     margin-top: 100px;
     padding-top: 60px;
     flex-direction: column;
@@ -126,6 +141,15 @@ div.nav-item .svg-coffee-cup {
     gap: 100px;
     --link-default: 600 32px/125% var(--main-font);
     font: var(--link-default);
+    background-color: var(--back-body);
+    z-index: 1;
+    opacity: 0;
+    transition: right 0.7s ease, opacity 0.7s ease;
+  }
+
+  .nav-open {
+    right: 0;
+    opacity: 1;
   }
 
   .nav-list {
@@ -158,12 +182,24 @@ div.nav-item .svg-coffee-cup {
   display: flex;
   flex-direction: column;
   gap: 40px;
-  background: url(../assets/img/img-hero.jpg) center/cover no-repeat;
+  /* background: url(../assets/img/img-hero.jpg) center/cover no-repeat; */
   color: var(--text-inverse);
+  position: relative;
+  overflow: hidden;
 }
 
 .section-enjoy > :nth-child(-n + 2) {
   max-width: 530px;
+}
+
+#coffee-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
 }
 
 @media (max-width: 1439px) {
@@ -206,8 +242,22 @@ div.nav-item .svg-coffee-cup {
   gap: 40px;
 }
 
-.slider-content {
-  flex-basis: 480px;
+.slides-overflow {
+  max-width: 480px;
+  overflow: hidden;
+}
+
+.slides-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300%;
+  overflow: hidden;
+  transition: margin-left 0.7s ease;
+}
+
+.slider-item {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -215,6 +265,9 @@ div.nav-item .svg-coffee-cup {
 
 .slider-img-wrapper {
   max-width: 480px;
+  max-height: 480px;
+  overflow: hidden;
+  
 }
 
 .slider-img {
@@ -270,10 +323,33 @@ div.nav-item .svg-coffee-cup {
   height: 4px;
   border-radius: 100px;
   background-color: var(--border-inverse);
+  position: relative;
+  overflow: hidden;
 }
 
-.slider-pagination-item.active {
+.progress-bar {
+  position: absolute;
+  display: block;
   background-color: var(--border-default);
+  width: 0%;
+  height: 100%;
+  transform-origin: left center;
+  transition: transform 0.5s ease;
+  top: 0;
+  left: 0;
+  /* animation: fillBar 3s forwards; */
+}
+
+@keyframes fillBar {
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes emptyBar {
+  to {
+    width: 0%;
+  }
 }
 
 /* Section About */
@@ -521,20 +597,14 @@ div.nav-item .svg-coffee-cup {
 
 /* Tabs */
 
-input[type="radio"] {
-  display: none;
+input[type="radio"],
+input[type="checkbox"] {
+display: none;
 }
 
 .tab-wrapper {
   display: flex;
   gap: 16px;
-}
-
-.chips-icon {
-  background-color: var(--border-inverse);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 60%;
 }
 
 .chips {
@@ -560,27 +630,7 @@ input[type="radio"] {
   }
 }
 
-.chips-icon {
-  display: block;
-  width: 30px;
-  height: 30px;
-  border-radius: 100px;
-  transition: background-color 0.5s ease;
-}
-
-.tab-wrapper .chips:nth-child(1) .chips-icon {
-  background-image: url(../assets/img/chips/chips-icon-1.png);
-}
-
-.tab-wrapper .chips:nth-child(2) .chips-icon {
-  background-image: url(../assets/img/chips/chips-icon-2.png);
-}
-
-.tab-wrapper .chips:nth-child(3) .chips-icon {
-  background-image: url(../assets/img/chips/chips-icon3.png);
-}
-
-.chips-checked {
+.tab-wrapper input:checked + .chips {
   border: 1px solid var(--border-default);
   background-color: var(--border-default);
   color: var(--text-inverse);
@@ -588,6 +638,33 @@ input[type="radio"] {
   & span.chips-icon {
     background-color: var(--back-body);
   }
+}
+
+.chips-icon {
+  background-color: var(--border-inverse);
+  color: var(--text-default);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 100px;
+  transition: background-color 0.5s ease;
+}
+
+.chips-icon.coffee {
+  background-image: url(../assets/img/chips/chips-icon-1.png);
+}
+
+.chips-icon.tea {
+  background-image: url(../assets/img/chips/chips-icon-2.png);
+}
+
+.chips-icon.desserts {
+  background-image: url(../assets/img/chips/chips-icon3.png);
 }
 
 @media (max-width: 380px) {
@@ -670,10 +747,8 @@ input[type="radio"] {
   .section-menu {
     gap: 39px;
   }
-  .products-wrapper article:nth-child(n+5) {
-    display:none;
-  }
-  .section-menu button {
-    display: flex;
-  }
+}
+
+.hidden {
+  display: none;
 }
