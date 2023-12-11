@@ -143,11 +143,13 @@ div.nav-item .svg-coffee-cup {
     font: var(--link-default);
     background-color: var(--back-body);
     z-index: 1;
-    transition: right 0.7s ease;
+    opacity: 0;
+    transition: right 0.7s ease, opacity 0.7s ease;
   }
 
   .nav-open {
     right: 0;
+    opacity: 1;
   }
 
   .nav-list {

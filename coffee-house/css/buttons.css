@@ -176,7 +176,7 @@ a:visited {
   }
 
   .btn-burger-line:last-child {
-    bottom: 16px;
+    top: 26px;
   }
 }
 
@@ -216,6 +216,8 @@ a:visited {
   }
 }
 
+@media (min-width: 768px) {
+
 .link-active {
   position: relative;
 
@@ -229,6 +231,7 @@ a:visited {
     bottom: 0;
     left: 0;
   }
+}
 }
 
 .contact-item {
