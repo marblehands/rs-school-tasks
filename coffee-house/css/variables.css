@@ -16,7 +16,7 @@
   --text-accent: #b0907a;
   --back-body: #e1d4c9;
   --back-container: #665f55;
-  --back-overlay: #403f3d;
+  --back-overlay: rgba(64, 63, 61, 0.80);
   --border-default: #665f55;
   --border-inverse: #c1b6ad;
   --main-font: "Inter", sans-serif;
