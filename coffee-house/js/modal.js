@@ -123,6 +123,6 @@ function updateTotal(item, type, extraPrice) {
     total += extraPrice;
   }
   console.log(total)
-  price.innerHTML = `$${total}`;
+  price.innerHTML = `$${total.toFixed(2)}`;
   price.setAttribute('value', `${total}`);
 }
