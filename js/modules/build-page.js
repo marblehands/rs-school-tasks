@@ -1,18 +1,25 @@
+import { getRandomQuestion } from "./generate-quiz.js";
+
 const body = document.body;
 let question;
 let quiz;
 let word;
 let gameContent;
+let secretWordText;
+let questionText;
+
+
 
 drawHeader();
 drawGameContent();
-drawQuestion();
+getQuestion();
+drawQuestion(questionText);
 drawGallow();
-drawSecretWord('hello');
+drawSecretWord(secretWordText);
 drawKeyboard();
 drawGameFooter();
 drawFooter();
-
+console.log(word)
 export function createNode (parentNode, tagName, styles = '', content = '') {
   let node = document.createElement(tagName);
   if (styles) {
@@ -44,8 +51,15 @@ export function drawGameContent() {
   main.appendChild(gameContent);
 }
 
-export function drawQuestion() {
-  question = createNode(false, 'div', 'question-wrapper', 'What is your name?');
+function getQuestion() {
+  let content = getRandomQuestion();
+  questionText = content.question;
+  secretWordText = content.answer;
+  return [questionText, secretWordText];
+}
+
+export function drawQuestion(questionText) {
+  question = createNode(false, 'div', 'question-wrapper', questionText);
   gameContent.appendChild(question);
 }
 
