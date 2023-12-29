@@ -1,14 +1,13 @@
 import { getRandomQuestion } from "./generate-quiz.js";
 
 const body = document.body;
-let question;
+
 let quiz;
-let word;
-let gameContent;
-let secretWordText;
-let questionText;
-
-
+let gameContent; // контейнер в котором находятся все секции игры, node элемент объект, может быть это мне не надо
+let secretWordText; // секретное слово, строка
+let questionText; // вопрос, строка
+let buttons = []; //все клавиши клавиатуры, массив объектов
+let secretLetters = []; // все контейнеры где лежат буквы секретного слова, массив объектов
 
 drawHeader();
 drawGameContent();
@@ -19,7 +18,7 @@ drawSecretWord(secretWordText);
 drawKeyboard();
 drawGameFooter();
 drawFooter();
-console.log(word)
+
 export function createNode (parentNode, tagName, styles = '', content = '') {
   let node = document.createElement(tagName);
   if (styles) {
@@ -59,7 +58,7 @@ function getQuestion() {
 }
 
 export function drawQuestion(questionText) {
-  question = createNode(false, 'div', 'question-wrapper', questionText);
+  let question = createNode(false, 'div', 'question-wrapper', questionText);
   gameContent.appendChild(question);
 }
 
@@ -78,11 +77,12 @@ export function drawGallow() {
 
 export function drawSecretWord(secretWord) {
   quiz = createNode(false, 'div', 'quiz-wrapper');
-  word = createNode(quiz, 'div', 'word-wrapper');
+  let word = createNode(quiz, 'div', 'word-wrapper');
   const lettersArray = secretWord.split('');
 
   lettersArray.forEach((char) => {
-    let letter = createNode(word, 'div', 'letter', char);
+    let letter = createNode(word, 'div', 'letter letter-hidden', char);
+    secretLetters.push(letter);
     word.appendChild(letter);
   });
 
@@ -97,6 +97,9 @@ export function drawKeyboard() {
 
   charsArray.forEach((char) => {
     let btn = createNode(keyboard, 'div', 'key-char', char);
+    btn.setAttribute('data-code', `Key${char}`);
+    btn.setAttribute('data-value', char);
+    buttons.push(btn);
   });
 
   quiz.appendChild(keyboard);
@@ -126,3 +129,5 @@ export function drawFooter() {
   link.target = '_blank';
   body.append(footer);
 }
+
+export { buttons, secretLetters, secretWordText };
