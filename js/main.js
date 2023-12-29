@@ -6,5 +6,12 @@ import { drawSecretWord } from "./modules/build-page.js";
 import { drawKeyboard } from "./modules/build-page.js";
 import { drawGameFooter } from "./modules/build-page.js";
 import { drawFooter } from "./modules/build-page.js";
-import quiz from "./modules/quiz.js";
 import { getRandomQuestion } from "./modules/generate-quiz.js";
+import { test } from "./modules/keyboard.js";
+
+
+// letters.forEach((letter) => {
+//   letter.addEventListener('click', function () {
+//     console.log('test')
+//   })
+// })

@@ -25,5 +25,3 @@ export function getRandomQuestion() {
   const question = quiz.find((item) => item.id === id);
   return question;
 }
-
-console.log(getRandomQuestion())
