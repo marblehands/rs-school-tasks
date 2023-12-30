@@ -1,7 +1,8 @@
-import { buttons, secretLetters, secretLettersWrappers, secretWordText }  from "./build-page.js";
+import { buttons, secretLetters, secretLettersWrappers, secretWordText, guessesCount, head, manbody, leftHand, rightHand, leftFoot, rightFoot, lifes }  from "./build-page.js";
 import { generateModal } from "./build-page.js";
 
 let lettersCount = secretWordText.length;
+let incorrectGuesses = 0;
 
 buttons.forEach((btn) => {
   btn.addEventListener('click', function (event) {
@@ -37,14 +38,44 @@ function openLetters(indexes) {
     });
     lettersCount -= indexes.length;
     if (!lettersCount) {
-      setTimeout(gameOver, 500)
+      generateModal(secretWordText, true);
     }
   }
   if (!indexes.length) {
-
+    incorrectGuesses++;
+    guessesCount.textContent = incorrectGuesses;
+    if (incorrectGuesses === 6) {
+      generateModal(secretWordText, false);
+    }
+    switch (incorrectGuesses) {
+      case 1:
+        head.style.opacity = 1;
+        console.log(lifes[0])
+        lifes[0].style.opacity = 0;
+        break;
+      case 2:
+        manbody.style.opacity = 1;
+        lifes[1].style.opacity = 0;
+        break;
+      case 3:
+        leftHand.style.opacity = 1;
+        lifes[2].style.opacity = 0;
+        break;
+      case 4:
+        rightHand.style.opacity = 1;
+        lifes[3].style.opacity = 0;
+        break;
+      case 5:
+        leftFoot.style.opacity = 1;
+        lifes[4].style.opacity = 0;
+        break;
+      case 6:
+        rightFoot.style.opacity = 1;
+        lifes[5].style.opacity = 0;
+        break;
+      default:
+        break
+    }
+    
   }
-}
-
-function gameOver() {
-  generateModal(secretWordText, true)
 }

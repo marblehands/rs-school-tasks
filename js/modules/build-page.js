@@ -9,6 +9,16 @@ let questionText; // вопрос, строка
 let buttons = []; //все клавиши клавиатуры, массив объектов
 let secretLetters = []; // все контейнеры где лежат буквы секретного слова, массив объектов
 let secretLettersWrappers = [];
+let guessesCount;
+let lifes = [];
+
+// Hangman bodyparts
+let head;
+let manbody;
+let leftHand;
+let rightHand;
+let leftFoot;
+let rightFoot;
 
 drawHeader();
 drawGameContent();
@@ -66,12 +76,12 @@ export function drawQuestion(questionText) {
 export function drawGallow() {
   let gallow = createNode(false, 'div', 'gallow-wrapper');
   let hangman = createNode(gallow, 'div', 'hangman-wrapper');
-  let head = createNode(hangman, 'div', 'head');
-  let manbody = createNode(hangman, 'div', 'manbody');
-  let leftHand = createNode(hangman, 'div', 'left-hand');
-  let rightHand = createNode(hangman, 'div', 'right-hand');
-  let leftFoot = createNode(hangman, 'div', 'left-foot');
-  let rightFoot = createNode(hangman, 'div', 'right-foot');
+  head = createNode(hangman, 'div', 'head');
+  manbody = createNode(hangman, 'div', 'manbody');
+  leftHand = createNode(hangman, 'div', 'left-hand');
+  rightHand = createNode(hangman, 'div', 'right-hand');
+  leftFoot = createNode(hangman, 'div', 'left-foot');
+  rightFoot = createNode(hangman, 'div', 'right-foot');
   gallow.appendChild(hangman);
   gameContent.appendChild(gallow);
 }
@@ -114,16 +124,16 @@ export function drawGameFooter() {
   let info = createNode(gameContent, 'div', 'info-wrapper');
   let guesses = createNode(info, 'div', 'guesses-wrapper');
   let title = createNode(guesses, 'span', 'guesses-title', 'Incorrect Guesses ');
-  let guessesCount = createNode(guesses, 'span', 'guesses-count', '0');
+  guessesCount = createNode(guesses, 'span', 'guesses-count', '0');
   let guessesAll = createNode(guesses, 'span', 'gueses-all', ' / 6');
 
-  let lifes = createNode(info, 'div', 'lifes-wrapper');
+  let lives = createNode(info, 'div', 'lifes-wrapper');
   let count = 1;
   for (let i = 0; i < 6; i++) {
     if (count > 3) count = 1;
-    let life = createNode(lifes, 'div', `heart heart-${count}`);
+    let life = createNode(lives, 'div', `heart heart-${count}`);
+    lifes.push(life);
     count++;
-    lifes.appendChild(life);
   }
 
   gameContent.appendChild(info);
@@ -148,11 +158,11 @@ export function generateModal(word, isWin) {
     title.textContent = 'YOU WON ✨';
     subtitle.textContent = 'Well done! Your hard work and skill paid off.'
   } else {
-    title.textContent = 'Game Over ☔';
+    title.textContent = 'GAME OVER ☔';
     subtitle.textContent = 'Not your day, but great effort!';
   }
 
   let btn = createNode(modalWrapper, 'button', 'btn-play-again', 'PLAY AGAIN');
 }
 
-export { buttons, secretLetters, secretLettersWrappers, secretWordText };
+export { buttons, secretLetters, secretLettersWrappers, secretWordText, guessesCount, head, manbody, leftHand, rightHand, leftFoot, rightFoot, lifes };
