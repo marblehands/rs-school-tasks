@@ -16,7 +16,7 @@ const quiz = [
   },
   {
     id: 4,
-    question: "What term is used to describe a technique in CSS where a background image scrolls slower than the content in the foreground, creating a parallax effect?",
+    question: "What term is used to describe a technique in CSS where a background image moves at a different speed than the foreground content during scrolling?",
     answer: "Parallax"
   },
   {
