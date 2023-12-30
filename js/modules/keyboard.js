@@ -1,10 +1,12 @@
-import { buttons, secretLetters, secretWordText }  from "./build-page.js";
+import { buttons, secretLetters, secretLettersWrappers, secretWordText }  from "./build-page.js";
+
+let lettersCount = secretWordText.length;
 
 buttons.forEach((btn) => {
   btn.addEventListener('click', function (event) {
     const char = event.currentTarget.getAttribute('data-value');
     // console.log(char)
-    searchMatches(char);
+    openLetters(searchMatches(char));
   })
 })
 
@@ -23,4 +25,25 @@ function searchMatches(char) {
     return index;
   })
   return indexes;
+}
+
+function openLetters(indexes) {
+  if (indexes.length) {
+    indexes.forEach((index) => {
+      secretLetters[Number(index)].classList.remove('letter-hidden');
+      secretLettersWrappers[Number(index)].classList.remove('letter-default');
+      secretLettersWrappers[Number(index)].classList.add('letter-success');
+    });
+    lettersCount -= indexes.length;
+    if (!lettersCount) {
+      setTimeout(gameOver, 500)
+    }
+  }
+  if (!indexes.length) {
+
+  }
+}
+
+function gameOver() {
+  console.log('game over')
 }

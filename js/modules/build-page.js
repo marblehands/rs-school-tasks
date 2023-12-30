@@ -8,6 +8,7 @@ let secretWordText; // секретное слово, строка
 let questionText; // вопрос, строка
 let buttons = []; //все клавиши клавиатуры, массив объектов
 let secretLetters = []; // все контейнеры где лежат буквы секретного слова, массив объектов
+let secretLettersWrappers = [];
 
 drawHeader();
 drawGameContent();
@@ -82,8 +83,9 @@ export function drawSecretWord(secretWord) {
 
   lettersArray.forEach((char) => {
     let letter = createNode(word, 'div', 'letter letter-default');
-    let span = createNode(letter, 'span', 'letter-hidden', char)
-    secretLetters.push(letter);
+    let span = createNode(letter, 'span', 'letter-hidden', char);
+    secretLettersWrappers.push(letter);
+    secretLetters.push(span);
     word.appendChild(letter);
   });
 
@@ -136,4 +138,4 @@ export function drawFooter() {
   body.append(footer);
 }
 
-export { buttons, secretLetters, secretWordText };
+export { buttons, secretLetters, secretLettersWrappers, secretWordText };
