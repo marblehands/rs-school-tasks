@@ -138,4 +138,21 @@ export function drawFooter() {
   body.append(footer);
 }
 
+export function generateModal(word, isWin) {
+  let modalWrapper = createNode(quiz, 'div', 'modal-wrapper');
+  let gameInfo = createNode(modalWrapper, 'div', 'game-info');
+  let title = createNode(gameInfo, 'p', 'game-info-title');
+  let subtitle = createNode(gameInfo, 'p', 'game-info-subtitle');
+
+  if (isWin) {
+    title.textContent = 'YOU WON ✨';
+    subtitle.textContent = 'Well done! Your hard work and skill paid off.'
+  } else {
+    title.textContent = 'Game Over ☔';
+    subtitle.textContent = 'Not your day, but great effort!';
+  }
+
+  let btn = createNode(modalWrapper, 'button', 'btn-play-again', 'PLAY AGAIN');
+}
+
 export { buttons, secretLetters, secretLettersWrappers, secretWordText };
