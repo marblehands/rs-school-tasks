@@ -1,4 +1,5 @@
 import { buttons, secretLetters, secretLettersWrappers, secretWordText }  from "./build-page.js";
+import { generateModal } from "./build-page.js";
 
 let lettersCount = secretWordText.length;
 
@@ -45,5 +46,5 @@ function openLetters(indexes) {
 }
 
 function gameOver() {
-  console.log('game over')
+  generateModal(secretWordText, true)
 }
