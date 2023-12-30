@@ -81,7 +81,8 @@ export function drawSecretWord(secretWord) {
   const lettersArray = secretWord.split('');
 
   lettersArray.forEach((char) => {
-    let letter = createNode(word, 'div', 'letter letter-hidden', char);
+    let letter = createNode(word, 'div', 'letter');
+    let span = createNode(letter, 'span', 'letter-hidden', char)
     secretLetters.push(letter);
     word.appendChild(letter);
   });

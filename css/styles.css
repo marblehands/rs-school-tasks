@@ -1,0 +1,105 @@
+:root {
+  --bg-body: #19192F;
+  --bg-section: #322B50;
+  --text-color: #ECE8FB;
+  --text-success: #11D3A4;
+  --text-accent: #D391C5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.body {
+  background-color: var(--bg-body);
+  padding: 40px 0;
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+}
+
+.main {
+  flex-grow: 1;
+  justify-content: flex-start;
+}
+
+.header,
+.main,
+.footer {
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.global-wrapper {
+  display: grid;
+  grid-template-columns: 220px 450px;
+  grid-template-rows: auto auto auto;
+  gap: 10px;
+  align-self: start;
+}
+
+.question-wrapper,
+.info-wrapper {
+  grid-column: span 2;
+  max-height: 60px;
+}
+
+.global-wrapper > * {
+  border-radius: 8px;
+  background-color: var(--bg-section);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+}
+
+.quiz-wrapper {
+  flex-direction: column;
+  gap: 36px;
+}
+
+.word-wrapper {
+  display: flex;
+  gap: 4px;
+}
+
+.keyboard-wrapper {
+  max-width: 340px;
+  display: flex;
+  flex-wrap: wrap;
+}
+/* 
+Secret Word */
+
+.letter {
+  width: 30px;
+  height: 30px;
+  background-color: rgba(211, 145, 197, 0.2);
+  border-radius: 4px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.letter::after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  border-radius: 4px;
+  background-color: var(--text-accent);
+  left: 0;
+  bottom: -8px;
+}
+
+.letter-hidden {
+  opacity: 1;
+}
