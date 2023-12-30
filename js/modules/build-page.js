@@ -78,16 +78,18 @@ export function drawGallow() {
 export function drawSecretWord(secretWord) {
   quiz = createNode(false, 'div', 'quiz-wrapper');
   let word = createNode(quiz, 'div', 'word-wrapper');
-  const lettersArray = secretWord.split('');
+  const lettersArray = secretWord.toUpperCase().split('');
 
   lettersArray.forEach((char) => {
-    let letter = createNode(word, 'div', 'letter');
+    let letter = createNode(word, 'div', 'letter letter-default');
     let span = createNode(letter, 'span', 'letter-hidden', char)
     secretLetters.push(letter);
     word.appendChild(letter);
   });
 
   gameContent.appendChild(quiz);
+
+  console.log('Secret Word: ', secretWord)
 }
 
 export function drawKeyboard() {
@@ -109,13 +111,16 @@ export function drawKeyboard() {
 export function drawGameFooter() {
   let info = createNode(gameContent, 'div', 'info-wrapper');
   let guesses = createNode(info, 'div', 'guesses-wrapper');
-  let title = createNode(guesses, 'span', 'guesses-title', 'Incorrect Guesses');
+  let title = createNode(guesses, 'span', 'guesses-title', 'Incorrect Guesses ');
   let guessesCount = createNode(guesses, 'span', 'guesses-count', '0');
-  let guessesAll = createNode(guesses, 'span', 'gueses-all', '/ 6');
+  let guessesAll = createNode(guesses, 'span', 'gueses-all', ' / 6');
 
   let lifes = createNode(info, 'div', 'lifes-wrapper');
-  for (let i = 0; i < 7; i++) {
-    let life = createNode(lifes, 'div', 'heart');
+  let count = 1;
+  for (let i = 0; i < 6; i++) {
+    if (count > 3) count = 1;
+    let life = createNode(lifes, 'div', `heart heart-${count}`);
+    count++;
     lifes.appendChild(life);
   }
 
@@ -124,7 +129,7 @@ export function drawGameFooter() {
 
 export function drawFooter() {
   let footer = createNode(body, 'footer', 'footer');
-  let info = createNode(footer, 'span', '', '&copy; 2023 Anna Chebysheva');
+  let info = createNode(footer, 'span', '', '©2023 Anna Chebysheva');
   let link = createNode(footer, 'a', 'github-link', 'GitHub');
   link.href = 'https://github.com/marblehands';
   link.target = '_blank';
