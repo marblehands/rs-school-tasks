@@ -13,8 +13,18 @@ buttons.forEach((btn) => {
 })
 
 document.addEventListener('keydown', (event) => {
-  // console.log(event.code)
+  const char = getChar(event.code);
+  if (event.code.includes('Key')) {
+    openLetters(searchMatches(char));
+  }
 });
+
+function getChar(code) {
+  let eventCode = code;
+  let arr = eventCode.split('');
+  let char = arr[arr.length - 1];
+  return char;
+}
 
 export function test() {
   // console.log('test')
@@ -41,7 +51,7 @@ function openLetters(indexes) {
       generateModal(secretWordText, true);
     }
   }
-  if (!indexes.length) {
+  if (!indexes.length && incorrectGuesses < 6) {
     incorrectGuesses++;
     guessesCount.textContent = incorrectGuesses;
     if (incorrectGuesses === 6) {
@@ -50,7 +60,6 @@ function openLetters(indexes) {
     switch (incorrectGuesses) {
       case 1:
         head.style.opacity = 1;
-        console.log(lifes[0])
         lifes[0].style.opacity = 0;
         break;
       case 2:
