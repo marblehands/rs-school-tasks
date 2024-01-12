@@ -82,7 +82,6 @@ a:hover {
   justify-content: center;
   align-items: center;
   gap: 36px;
-  font: 20px/100% 'Mochiy Pop One', sans-serif;
 }
 
 .word-wrapper {
@@ -109,6 +108,7 @@ Secret Word */
   display: flex;
   justify-content: center;
   align-items: center;
+  font: 20px/100% 'Mochiy Pop One', sans-serif;
 }
 
 .letter::after {
@@ -153,6 +153,7 @@ Secret Word */
   display: flex;
   justify-content: center;
   align-items: center;
+  font: 20px/100% 'Mochiy Pop One', sans-serif;
 }
 
 .key-char:hover {
@@ -363,10 +364,25 @@ Btn Highlight Correct */
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 16px;
+  gap: 60px;
   background-color: var(--bg-section);
   border-radius: 16px;
-  padding: 60px;
+  padding: 40px 80px;
+}
+
+.text-btn-wrapper,
+.text-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.text-btn-wrapper {
+  gap: 40px;
+}
+
+.text-wrapper {
+  gap: 16px;
 }
 
 .game-info-title {
@@ -374,17 +390,22 @@ Btn Highlight Correct */
 }
 
 .btn-play-again {
+  width: fit-content;
   background-color: transparent;
   border: none;
   color: var(--text-color);
-  height: 36px;
-  font: 12px/120% 'Mochiy Pop One', sans-serif;
-  border-bottom: 3px dashed var(--text-accent);
+  /* height: 44px; */
+  padding: 14px 16px;
+  font: 16px/120% 'Mochiy Pop One', sans-serif;
+  border: 3px solid rgba(211, 145, 197, 0.3);
+  display: block;
+  border-radius: 8px;
+  transition: border 0.5s ease;
 
   &:hover {
     cursor: pointer;
-    color: #FBA347;
-    border-bottom: 3px dashed #FBA347;;
+    /* color: var(--text-accent); */
+    border: 3px solid var(--text-accent);
   }
 }
 

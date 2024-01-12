@@ -148,11 +148,14 @@ export function drawFooter() {
   body.append(footer);
 }
 
-export function generateModal(word, isWin) {
+export function generateModal(secretWordText, isWin) {
   let modalWrapper = createNode(body, 'div', 'modal-wrapper');
   let gameInfo = createNode(modalWrapper, 'div', 'game-info');
-  let title = createNode(gameInfo, 'p', 'game-info-title');
-  let subtitle = createNode(gameInfo, 'p', 'game-info-subtitle');
+  let btnTextWrapper = createNode(gameInfo, 'div', 'text-btn-wrapper');
+  let textWrapper = createNode(btnTextWrapper, 'div', 'text-wrapper');
+  let title = createNode(textWrapper, 'p', 'game-info-title');
+  let subtitle = createNode(textWrapper, 'p', 'game-info-subtitle');
+  
 
   if (isWin) {
     title.textContent = 'YOU WON ✨';
@@ -162,7 +165,17 @@ export function generateModal(word, isWin) {
     subtitle.textContent = 'Not your day, but great effort!';
   }
 
-  let btn = createNode(gameInfo, 'button', 'btn-play-again', 'PLAY AGAIN');
+  let btn = createNode(btnTextWrapper, 'button', 'btn-play-again', 'PLAY AGAIN');
+
+  let wordModal = createNode(modalWrapper, 'div', 'word-wrapper');
+  const lettersArray = secretWordText.toUpperCase().split('');
+  lettersArray.forEach((char) => {
+    let letter = createNode(wordModal, 'div', 'letter letter-default');
+    let span = createNode(letter, 'span', '', char);
+    wordModal.appendChild(letter);
+  });
+
+  gameInfo.prepend(wordModal);
 }
 
 export { buttons, secretLetters, secretLettersWrappers, secretWordText, guessesCount, head, manbody, leftHand, rightHand, leftFoot, rightFoot, lifes };
