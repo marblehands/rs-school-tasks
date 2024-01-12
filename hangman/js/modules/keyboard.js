@@ -5,19 +5,33 @@ let lettersCount = secretWordText.length;
 let incorrectGuesses = 0;
 
 buttons.forEach((btn) => {
-  btn.addEventListener('click', function (event) {
+  btn.addEventListener('click', function clickHandler(event) {
     const char = event.currentTarget.getAttribute('data-value');
-    // console.log(char)
-    openLetters(searchMatches(char));
-  })
+    openLetters(searchMatches(char, event.currentTarget));
+    btn.removeEventListener('click', clickHandler);
+    btn.classList.add('disabled');
+  });
 })
 
 document.addEventListener('keydown', (event) => {
   const char = getChar(event.code);
   if (event.code.includes('Key')) {
-    openLetters(searchMatches(char));
+    const btn = findTargetBtn(char);
+    console.log(char)
+    openLetters(searchMatches(char, btn));
   }
 });
+
+function findTargetBtn(char) {
+  let result;
+  buttons.forEach((btn) => {
+    const key = btn.getAttribute('data-value');
+    if (key === char) {
+      result = btn;
+    }
+  })
+  return result;
+}
 
 function getChar(code) {
   let eventCode = code;
@@ -30,13 +44,28 @@ export function test() {
   // console.log('test')
 }
 
-function searchMatches(char) {
+function searchMatches(char, btn) {
   let indexes = [];
-  secretWordText.toUpperCase().split('').map((letter, index) => {
-    if (letter === char) indexes.push(index);
-    return index;
-  })
-  return indexes;
+
+for (let i = 0; i < secretWordText.length; i++) {
+  const letter = secretWordText[i].toUpperCase();
+
+  if (letter === char) {
+    indexes.push(i);
+    console.log(btn);
+    console.log('hi');
+  }
+}
+if (!indexes.length) {
+    console.log('test');
+    btn.classList.add('btn-wrong');
+    btn.classList.add('btn-wrong-1');
+} else {
+  btn.classList.add('btn-correct');
+  btn.classList.add('btn-correct-1');
+}
+
+return indexes;
 }
 
 function openLetters(indexes) {
@@ -83,8 +112,7 @@ function openLetters(indexes) {
         lifes[5].style.opacity = 0;
         break;
       default:
-        break
+        break;
     }
-    
   }
 }
