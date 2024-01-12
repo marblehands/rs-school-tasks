@@ -149,7 +149,7 @@ export function drawFooter() {
 }
 
 export function generateModal(word, isWin) {
-  let modalWrapper = createNode(quiz, 'div', 'modal-wrapper');
+  let modalWrapper = createNode(body, 'div', 'modal-wrapper');
   let gameInfo = createNode(modalWrapper, 'div', 'game-info');
   let title = createNode(gameInfo, 'p', 'game-info-title');
   let subtitle = createNode(gameInfo, 'p', 'game-info-subtitle');
@@ -162,7 +162,7 @@ export function generateModal(word, isWin) {
     subtitle.textContent = 'Not your day, but great effort!';
   }
 
-  let btn = createNode(modalWrapper, 'button', 'btn-play-again', 'PLAY AGAIN');
+  let btn = createNode(gameInfo, 'button', 'btn-play-again', 'PLAY AGAIN');
 }
 
 export { buttons, secretLetters, secretLettersWrappers, secretWordText, guessesCount, head, manbody, leftHand, rightHand, leftFoot, rightFoot, lifes };

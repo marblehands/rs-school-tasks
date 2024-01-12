@@ -158,11 +158,20 @@ Secret Word */
 .key-char:hover {
   cursor: pointer;
 }
+
+.disabled {
+  user-select: none;
+}
+
+.disabled:hover {
+  cursor: default;
+}
 /* 
 Btn Highlight Correct */
 
 .btn-correct {
   position: relative;
+  /* color: #FBA347; */
 
   &::after {
     content: '';
@@ -177,19 +186,19 @@ Btn Highlight Correct */
 
 .btn-correct-1 {
   &::after {
-    background-image: url(/hangman/assets/svg/circle-1.svg);
+    background: url(/hangman/assets/svg/circle-1.svg) no-repeat center;
   }
 }
 
 .btn-correct-2 {
   &::after {
-    background-image: url(/hangman/assets/svg/circle-2.svg);
+    background: url(/hangman/assets/svg/circle-2.svg) no-repeat center;
   }
 }
 
 .btn-correct-3 {
   &::after {
-    background-image: url(/hangman/assets/svg/circle-3.svg);
+    background: url(/hangman/assets/svg/circle-3.svg) no-repeat center;
   }
 }
 
@@ -209,19 +218,19 @@ Btn Highlight Correct */
 
 .btn-wrong-1 {
   &::after {
-    background-image: url(/hangman/assets/svg/cross-1.svg);
+    background: url(/hangman/assets/svg/cross-1.svg) no-repeat center;
   }
 }
 
 .btn-wrong-2 {
   &::after {
-    background-image: url(/hangman/assets/svg/cross-2.svg);
+    background: url(/hangman/assets/svg/cross-2.svg) no-repeat center;
   }
 }
 
 .btn-wrong-3 {
   &::after {
-    background-image: url(/hangman/assets/svg/cross-3.svg);
+    background: url(/hangman/assets/svg/cross-3.svg) no-repeat center;
   }
 }
 
@@ -333,14 +342,14 @@ Btn Highlight Correct */
 /* Modal */
 
 .modal-wrapper {
-  text-align: center;
-  padding: 24px;
-  background-color: var(--bg-section);
   position: absolute;
   width: 100%;
-  height: 70%;
+  height: 100%;
+  text-align: center;
+  background-color: rgba(25, 25, 47, 0.9);
   z-index: 1;
-  top: 22%;
+  top: 0;
+  left: 0;
   font: 26px/100% 'Dongle', sans-serif;
   display: flex;
   flex-direction: column;
@@ -354,7 +363,10 @@ Btn Highlight Correct */
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
+  background-color: var(--bg-section);
+  border-radius: 16px;
+  padding: 60px;
 }
 
 .game-info-title {
