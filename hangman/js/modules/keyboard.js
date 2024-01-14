@@ -15,9 +15,10 @@ buttons.forEach((btn) => {
 
 document.addEventListener('keydown', (event) => {
   const char = getChar(event.code);
+  console.log(char)
   if (event.code.includes('Key')) {
     const btn = findTargetBtn(char);
-    console.log(char)
+    
     openLetters(searchMatches(char, btn));
   }
 });
