@@ -31,23 +31,23 @@ const quiz = [
   },
   {
     id: 7,
-    question: "Question 7?",
-    answer: "Answer7"
+    question: "What tool is commonly used in software development to analyze code for potential errors, style violations, and other issues to ensure code quality and consistency?",
+    answer: "Linter"
   },
   {
     id: 8,
-    question: "Question 8?",
-    answer: "Answer8"
+    question: "What is the JavaScript function that is automatically invoked when an object is created using the \"new\" keyword?",
+    answer: "Constructor"
   },
   {
     id: 9,
-    question: "Question 9?",
-    answer: "Answer9"
+    question: "What is the JavaScript feature that allows a function to remember the variables in its lexical scope even if the function is executed outside that scope?",
+    answer: "Closure"
   },
   {
     id: 10,
-    question: "Question 10?",
-    answer: "Answer10"
+    question: "What CSS layout model is designed to provide a more efficient and predictable way to arrange and align items within a container, offering a one-dimensional layout approach for improved responsiveness and flexibility?",
+    answer: "Flexbox"
   },
 ];
 
