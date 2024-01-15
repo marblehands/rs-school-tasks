@@ -27,7 +27,7 @@ a:hover {
 
 .body {
   background-color: var(--bg-body);
-  background-image: url(/hangman/assets/svg/lines.svg);
+  background-image: url(../assets/svg/lines.svg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -187,19 +187,19 @@ Btn Highlight Correct */
 
 .btn-correct-1 {
   &::after {
-    background: url(/hangman/assets/svg/circle-1.svg) no-repeat center;
+    background: url(../assets/svg/circle-1.svg) no-repeat center;
   }
 }
 
 .btn-correct-2 {
   &::after {
-    background: url(/hangman/assets/svg/circle-2.svg) no-repeat center;
+    background: url(../assets/svg/circle-2.svg) no-repeat center;
   }
 }
 
 .btn-correct-3 {
   &::after {
-    background: url(/hangman/assets/svg/circle-3.svg) no-repeat center;
+    background: url(../assets/svg/circle-3.svg) no-repeat center;
   }
 }
 
@@ -219,19 +219,19 @@ Btn Highlight Correct */
 
 .btn-wrong-1 {
   &::after {
-    background: url(/hangman/assets/svg/cross-1.svg) no-repeat center;
+    background: url(../assets/svg/cross-1.svg) no-repeat center;
   }
 }
 
 .btn-wrong-2 {
   &::after {
-    background: url(/hangman/assets/svg/cross-2.svg) no-repeat center;
+    background: url(../assets/svg/cross-2.svg) no-repeat center;
   }
 }
 
 .btn-wrong-3 {
   &::after {
-    background: url(/hangman/assets/svg/cross-3.svg) no-repeat center;
+    background: url(../assets/svg/cross-3.svg) no-repeat center;
   }
 }
 
@@ -247,7 +247,7 @@ Btn Highlight Correct */
 .hangman-wrapper {
   width: 100%;
   height: 100%;
-  background: url(/hangman/assets/svg/hangman-template.svg) center no-repeat;
+  background: url(../assets/svg/hangman-template.svg) center no-repeat;
   position: relative;
 }
 
@@ -265,7 +265,7 @@ Btn Highlight Correct */
 .head {
   width: 40px;
   height: 40px;
-  background: url(/hangman/assets/svg/head.svg) center no-repeat;
+  background: url(../assets/svg/head.svg) center no-repeat;
   top: 24%;
   right: 17%;
 }
@@ -273,7 +273,7 @@ Btn Highlight Correct */
 .manbody {
   width: 4px;
   height: 54px;
-  background: url(/hangman/assets/svg/manbody.svg) center no-repeat;
+  background: url(../assets/svg/manbody.svg) center no-repeat;
   top: 42%;
   right: 28%;
 }
@@ -281,7 +281,7 @@ Btn Highlight Correct */
 .left-hand {
   width: 30px;
   height: 30px;
-  background: url(/hangman/assets/svg/lefthand.svg) center no-repeat;
+  background: url(../assets/svg/lefthand.svg) center no-repeat;
   top: 38%;
   right: 31%;
 }
@@ -289,7 +289,7 @@ Btn Highlight Correct */
 .right-hand {
   width: 30px;
   height: 30px;
-  background: url(/hangman/assets/svg/righthand.svg) center no-repeat;
+  background: url(../assets/svg/righthand.svg) center no-repeat;
   top: 38%;
   right: 9%;
 }
@@ -297,7 +297,7 @@ Btn Highlight Correct */
 .left-foot {
   width: 30px;
   height: 44px;
-  background: url(/hangman/assets/svg/leftfoot.svg) center no-repeat;
+  background: url(../assets/svg/leftfoot.svg) center no-repeat;
   top: 63%;
   right: 28%;
 }
@@ -305,7 +305,7 @@ Btn Highlight Correct */
 .right-foot {
   width: 30px;
   height: 44px;
-  background: url(/hangman/assets/svg/rightfoot.svg) center no-repeat;
+  background: url(../assets/svg/rightfoot.svg) center no-repeat;
   top: 63%;
   right: 13%;
 }
@@ -329,15 +329,15 @@ Btn Highlight Correct */
 }
 
 .heart-1 {
-  background: url(/hangman/assets/svg/heart-1.svg);
+  background: url(../assets/svg/heart-1.svg);
 }
 
 .heart-2 {
-  background: url(/hangman/assets/svg/heart-2.svg);
+  background: url(../assets/svg/heart-2.svg);
 }
 
 .heart-3 {
-  background: url(/hangman/assets/svg/heart-3.svg);
+  background: url(../assets/svg/heart-3.svg);
 }
 
 /* Modal */
