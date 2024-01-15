@@ -224,7 +224,6 @@ buttons.forEach((btn) => {
 
 function clickHandler(event) {
   const btn = event.currentTarget;
-  console.log(btn);
   const char = btn.getAttribute("data-value");
   const isDisabled = btn.classList.contains("disabled");
   if (!isDisabled) {
