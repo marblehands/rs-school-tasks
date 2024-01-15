@@ -233,7 +233,6 @@ document.addEventListener("keydown", (event) => {
   if (event.code.includes("Key")) {
     const btn = findTargetBtn(char);
     if (btn) {
-      console.log(btn);
       btn.classList.add("disabled");
       openLetters(searchMatches(char, btn));
     }
