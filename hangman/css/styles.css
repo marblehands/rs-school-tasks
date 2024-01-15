@@ -469,8 +469,18 @@ Btn Highlight Correct */
   .global-wrapper > * {
     padding: 16px 24px;
   }
+  .quiz-wrapper {
+    gap: 16px;
+  }
   .question-wrapper {
     font: 20px/100% "Dongle", sans-serif;
+  }
+  .word-wrapper {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .letter {
+    margin-bottom: 16px;
   }
   .keyboard-wrapper {
     gap: 16px;
