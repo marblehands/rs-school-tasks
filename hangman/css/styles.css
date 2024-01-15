@@ -137,7 +137,7 @@ Secret Word */
   background-color: rgba(17, 211, 164, 0.2);
 
   &::after {
-    background-color: var(--text-success);
+    display: none;
   }
 }
 
