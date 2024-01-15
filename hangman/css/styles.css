@@ -357,6 +357,12 @@ Btn Highlight Correct */
   justify-content: center;
   align-items: center;
   gap: 36px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.modal-wrapper.show {
+  opacity: 1;
 }
 
 .game-info {
@@ -368,6 +374,14 @@ Btn Highlight Correct */
   background-color: var(--bg-section);
   border-radius: 16px;
   padding: 40px 80px;
+  opacity: 0;
+  transform: translateY(-100px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.game-info.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .text-btn-wrapper,

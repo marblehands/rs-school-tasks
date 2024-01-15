@@ -169,7 +169,11 @@ export function generateModal(secretWordText, isWin) {
   }
 
   let btn = createNode(btnTextWrapper, 'button', 'btn-play-again', 'PLAY AGAIN');
-  btn.addEventListener('click', startGame);
+  btn.addEventListener('click', function() {
+    modalWrapper.classList.remove('show');
+    gameInfo.classList.remove('show');
+    startGame();
+  });
 
   let wordModal = createNode(modalWrapper, 'div', 'word-wrapper');
   const lettersArray = secretWordText.toUpperCase().split('');
@@ -180,6 +184,11 @@ export function generateModal(secretWordText, isWin) {
   });
 
   gameInfo.prepend(wordModal);
+
+  setTimeout(() => {
+    modalWrapper.classList.add('show');
+    gameInfo.classList.add('show');
+  }, 100);
 }
 
 function getRandomNum () {
@@ -281,7 +290,8 @@ function openLetters(indexes) {
     incorrectGuesses++;
     guessesCount.textContent = incorrectGuesses;
     if (incorrectGuesses === 6) {
-      generateModal(secretWordText, false);
+
+        generateModal(secretWordText, false);
     }
     switch (incorrectGuesses) {
       case 1:
