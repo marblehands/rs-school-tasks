@@ -232,8 +232,9 @@ document.addEventListener("keydown", (event) => {
   // console.log(char)
   if (event.code.includes("Key")) {
     const btn = findTargetBtn(char);
-
-    openLetters(searchMatches(char, btn));
+    if (btn) {
+      openLetters(searchMatches(char, btn));
+    }
   }
 });
 
@@ -241,7 +242,8 @@ function findTargetBtn(char) {
   let result;
   buttons.forEach((btn) => {
     const key = btn.getAttribute("data-value");
-    if (key === char) {
+    const isDisabled = btn.classList.contains("disabled");
+    if (key === char && !isDisabled) {
       result = btn;
     }
   });
