@@ -239,8 +239,8 @@ document.addEventListener("keydown", (event) => {
   if (event.code.includes("Key")) {
     const btn = findTargetBtn(char);
     if (btn) {
-      btn.removeEventListener("click", clickHandler);
       btn.classList.add("disabled");
+      btn.removeEventListener("click", clickHandler);
       openLetters(searchMatches(char, btn));
     }
   }
@@ -369,12 +369,7 @@ export function startGame() {
   drawFooter();
 
   buttons.forEach((btn) => {
-    btn.addEventListener("click", function clickHandler(event) {
-      const char = event.currentTarget.getAttribute("data-value");
-      openLetters(searchMatches(char, event.currentTarget));
-      btn.removeEventListener("click", clickHandler);
-      btn.classList.add("disabled");
-    });
+    btn.addEventListener("click", clickHandler);
   });
 }
 
