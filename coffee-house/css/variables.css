@@ -1,0 +1,36 @@
+/* Variables
+   ========================================================================== */
+
+/**
+ * 1. --text-* text colours
+ * 2. --back-* background colours
+ * 3. --border-* borders colours
+ * 4. --title-* text styles for headlines h1-h6
+ * 5. --body-* body text styles
+ * 6. --link-* links and buttons' labels styles
+ */
+
+:root {
+  --text-default: #403f3d;
+  --text-inverse: #e1d4c9;
+  --text-accent: #b0907a;
+  --back-body: #e1d4c9;
+  --back-container: #665f55;
+  --back-overlay: rgba(64, 63, 61, 0.80);
+  --border-default: #665f55;
+  --border-inverse: #c1b6ad;
+  --main-font: "Inter", sans-serif;
+  --title-l: 600 72px/105% var(--main-font);
+  --title-m: 600 60px/125% var(--main-font);
+  --title-s: 600 24px/125% var(--main-font);
+  --body-default: 400 16px/150% var(--main-font);
+  --body-caption: 600 10px/140% var(--main-font);
+  --link-default: 600 16px/150% var(--main-font);
+}
+
+@media (max-width: 767px) {
+  :root {
+    --title-l: 600 42px/115% var(--main-font);
+    --title-m: 600 32px/125% var(--main-font);
+  }
+}

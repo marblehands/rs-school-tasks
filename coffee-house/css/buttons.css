@@ -1,0 +1,294 @@
+@import url("variables.css");
+
+button {
+  background-color: transparent;
+  border: none;
+  font: var(--link-default);
+}
+
+a:link,
+a:hover,
+a:focus,
+a:active,
+a:visited {
+  text-decoration: none;
+  color: var(--link-default);
+}
+
+.btn {
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  display: flex;
+  justify-self: center;
+  gap: 8px;
+  width: 200px;
+  padding: 20px 0;
+  background: var(--back-body);
+  position: relative;
+  color: var(--text-default);
+
+  & svg {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    right: 63px;
+    opacity: 0;
+    user-select: none;
+    transition: opacity 0.5s ease;
+  }
+
+  & span {
+    display: inline-block;
+    flex: 1 1 auto;
+    transition: margin-right 0.5s ease;
+  }
+
+  &:hover {
+    & svg {
+      opacity: 1;
+    }
+    & span {
+      margin-right: 28px;
+    }
+  }
+}
+
+.btn-secondary {
+  padding: 9px 78px;
+  border: 1px solid var(--border-default);
+  color: var(--text-default);
+  transition: background-color 0.5s ease, color 0.5s ease;
+
+  &:hover {
+    background-color: var(--back-container);
+    color: var(--text-inverse);
+  }
+}
+
+.btn-tretiary {
+  display: flex;
+  gap: 8px;
+  width: 200px;
+  height: 64px;
+  padding: 12px 19px;
+  border: 1px solid var(--border-default);
+  color: var(--text-default);
+  transition: background-color 0.5s ease, color 0.5s ease;
+
+  & svg {
+    transition: fill 0.5s ease;
+  }
+
+  &:hover {
+    background-color: var(--back-container);
+    color: var(--text-inverse);
+
+    & svg {
+      fill: var(--text-inverse);
+    }
+  }
+
+  & span {
+   display: block;
+   text-align: left;
+  }
+}
+
+.btn-icon {
+  display: flex;
+  width: 60px;
+  height: 60px;
+  border-radius: 100px;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.5s ease;
+
+  & svg {
+    transition: stroke 0.5s ease;
+  }
+}
+
+.btn-icon-dark {
+  border: 1px solid var(--border-default);
+
+  &:hover {
+    background-color: var(--back-container);
+
+    & svg {
+      stroke: var(--text-inverse);
+    }
+  }
+}
+
+.btn-icon-light {
+  border: 1px solid var(--border-inverse);
+
+  &:hover {
+    background-color: var(--back-body);
+    border: 1px solid var(--back-body);
+
+    & svg {
+      stroke: var(--text-default);
+    }
+  }
+}
+
+@media (max-width:768px) {
+
+  .btn-burger {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--border-default);
+    transition: background-color 0.5s ease;
+  }
+
+  @media (hover:hover) {
+    .btn-burger:hover {
+      background-color: var(--border-default);
+
+      & span {
+        background-color: var(--text-inverse);
+      }
+    }
+  }
+
+  .btn-burger-line {
+    position: absolute;
+    display: block;
+    width: 16px;
+    height: 1.5px;
+    border-radius: 10px;
+    background-color: var(--text-default);
+    transition: all 0.7s ease;
+  }
+
+  .btn-burger-line:first-child {
+    top: 16px;
+  }
+
+  .btn-burger-line:last-child {
+    top: 26px;
+  }
+}
+
+.burger-open {
+  & .btn-burger-line:first-child {
+    transform: rotate(45deg);
+    top: 50%;
+  }
+
+  & .btn-burger-line:last-child {
+    transform: rotate(-45deg);
+    top: 50%;
+  }
+}
+
+.link-animated {
+  position: relative;
+  cursor: pointer;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background-color: var(--text-default);
+    position: absolute;
+    bottom: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: width 0.5s ease, opacity 0.5s ease;
+  }
+
+  &:hover::before {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+@media (min-width: 769px) {
+
+.link-active {
+  position: relative;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--text-default);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+}
+}
+
+.contact-item {
+  &::before {
+    background-color: var(--text-inverse);
+  }
+}
+
+@media (hover:none) {
+  .btn-primary {
+    & svg {
+      opacity: 1;
+    }
+    & span {
+      margin-right: 28px;
+    }
+  }
+  .btn-secondary {
+    &:hover {
+      background-color: var(--border-default);
+      color: var(--text-default);
+    }
+  }
+  .btn-tretiary {
+    &:hover {
+      background-color: transparent;
+      color: var(--text-default);
+  
+      & svg {
+        fill: var(--text-default);
+      }
+    }
+  }
+  .btn-icon-dark {
+    &:hover {
+      background-color: transparent;
+      border: 1px solid var(--border-default);
+  
+      & svg {
+        stroke: var(--text-default);
+      }
+    }
+  }
+  .btn-icon-light {
+    &:hover {
+      background-color: transparent;
+      border: 1px solid var(--border-inverse);
+  
+      & svg {
+        stroke: var(--text-inverse);
+      }
+    }
+  }
+  .link-animated {
+    &:hover::before {
+      width: 0;
+      opacity: 0;
+    }
+  }
+}
