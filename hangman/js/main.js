@@ -219,13 +219,19 @@ export function getRandomQuestion() {
 }
 
 buttons.forEach((btn) => {
-  btn.addEventListener("click", function clickHandler(event) {
-    const char = event.currentTarget.getAttribute("data-value");
-    openLetters(searchMatches(char, event.currentTarget));
+  btn.addEventListener("click", clickHandler);
+});
+
+function clickHandler(event) {
+  const btn = event.currentTarget;
+  const char = btn.getAttribute("data-value");
+  const isDisabled = btn.classList.contains("disabled");
+  if (!isDisabled) {
+    openLetters(searchMatches(char, btn));
     btn.removeEventListener("click", clickHandler);
     btn.classList.add("disabled");
-  });
-});
+  }
+}
 
 document.addEventListener("keydown", (event) => {
   const char = getChar(event.code);
@@ -233,6 +239,7 @@ document.addEventListener("keydown", (event) => {
   if (event.code.includes("Key")) {
     const btn = findTargetBtn(char);
     if (btn) {
+      btn.removeEventListener("click", clickHandler);
       btn.classList.add("disabled");
       openLetters(searchMatches(char, btn));
     }
