@@ -1,5 +1,6 @@
-import quizList from "./quiz.js";
+import quizList from './quiz.js';
 
+// Variables
 const body = document.body;
 
 let quiz;
@@ -22,6 +23,7 @@ let rightHand;
 let leftFoot;
 let rightFoot;
 
+// Initializing the game
 drawHeader();
 drawGameContent();
 getQuestion();
@@ -32,7 +34,15 @@ drawKeyboard();
 drawGameFooter();
 drawFooter();
 
-export function createNode(parentNode, tagName, styles = "", content = "") {
+// Event Listeners
+document.addEventListener('keydown', keyboardHandler);
+
+buttons.forEach((btn) => {
+  btn.addEventListener('click', clickHandler);
+});
+
+// Functions
+function createNode(parentNode, tagName, styles = '', content = '') {
   let node = document.createElement(tagName);
   if (styles) {
     node.className = `${styles}`;
@@ -49,21 +59,21 @@ export function createNode(parentNode, tagName, styles = "", content = "") {
   return node;
 }
 
-export function drawHeader() {
-  let header = createNode(body, "header", "header");
-  let logo = createNode(header, "img", "img-logo");
-  logo.src = "assets/svg/logo-hangman.svg";
-  logo.alt = "Hangman Game Logotype";
+function drawHeader() {
+  let header = createNode(body, 'header', 'header');
+  let logo = createNode(header, 'img', 'img-logo');
+  logo.src = 'assets/svg/logo-hangman.svg';
+  logo.alt = 'Hangman Game Logotype';
   header.appendChild(logo);
 }
 
-export function drawGameContent() {
-  let main = createNode(body, "main", "main");
-  gameContent = createNode(main, "div", "global-wrapper");
+function drawGameContent() {
+  let main = createNode(body, 'main', 'main');
+  gameContent = createNode(main, 'div', 'global-wrapper');
   main.appendChild(gameContent);
 }
 
-export function getQuestion() {
+function getQuestion() {
   let content = getRandomQuestion();
   questionText = content.question;
   secretWordText = content.answer;
@@ -71,32 +81,32 @@ export function getQuestion() {
   return [questionText, secretWordText];
 }
 
-export function drawQuestion(questionText) {
-  let question = createNode(false, "div", "question-wrapper", questionText);
+function drawQuestion(questionText) {
+  let question = createNode(false, 'div', 'question-wrapper', questionText);
   gameContent.appendChild(question);
 }
 
-export function drawGallow() {
-  let gallow = createNode(false, "div", "gallow-wrapper");
-  let hangman = createNode(gallow, "div", "hangman-wrapper");
-  head = createNode(hangman, "div", "head");
-  manbody = createNode(hangman, "div", "manbody");
-  leftHand = createNode(hangman, "div", "left-hand");
-  rightHand = createNode(hangman, "div", "right-hand");
-  leftFoot = createNode(hangman, "div", "left-foot");
-  rightFoot = createNode(hangman, "div", "right-foot");
+function drawGallow() {
+  let gallow = createNode(false, 'div', 'gallow-wrapper');
+  let hangman = createNode(gallow, 'div', 'hangman-wrapper');
+  head = createNode(hangman, 'div', 'head');
+  manbody = createNode(hangman, 'div', 'manbody');
+  leftHand = createNode(hangman, 'div', 'left-hand');
+  rightHand = createNode(hangman, 'div', 'right-hand');
+  leftFoot = createNode(hangman, 'div', 'left-foot');
+  rightFoot = createNode(hangman, 'div', 'right-foot');
   gallow.appendChild(hangman);
   gameContent.appendChild(gallow);
 }
 
-export function drawSecretWord(secretWord) {
-  quiz = createNode(false, "div", "quiz-wrapper");
-  let word = createNode(quiz, "div", "word-wrapper");
-  const lettersArray = secretWord.toUpperCase().split("");
+function drawSecretWord(secretWord) {
+  quiz = createNode(false, 'div', 'quiz-wrapper');
+  let word = createNode(quiz, 'div', 'word-wrapper');
+  const lettersArray = secretWord.toUpperCase().split('');
 
   lettersArray.forEach((char) => {
-    let letter = createNode(word, "div", "letter letter-default");
-    let span = createNode(letter, "span", "letter-hidden", char);
+    let letter = createNode(word, 'div', 'letter letter-default');
+    let span = createNode(letter, 'span', 'letter-hidden', char);
     secretLettersWrappers.push(letter);
     secretLetters.push(span);
     word.appendChild(letter);
@@ -104,42 +114,42 @@ export function drawSecretWord(secretWord) {
 
   gameContent.appendChild(quiz);
 
-  console.log("Secret Word: ", secretWord);
+  console.log('Secret Word: ', secretWord);
 }
 
-export function drawKeyboard() {
-  const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  let keyboard = createNode(quiz, "div", "keyboard-wrapper");
+function drawKeyboard() {
+  const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  let keyboard = createNode(quiz, 'div', 'keyboard-wrapper');
 
-  let charsArray = ALPHABET.split("");
+  let charsArray = ALPHABET.split('');
 
   charsArray.forEach((char) => {
-    let btn = createNode(keyboard, "div", "key-char", char);
-    btn.setAttribute("data-code", `Key${char}`);
-    btn.setAttribute("data-value", char);
+    let btn = createNode(keyboard, 'div', 'key-char', char);
+    btn.setAttribute('data-code', `Key${char}`);
+    btn.setAttribute('data-value', char);
     buttons.push(btn);
   });
 
   quiz.appendChild(keyboard);
 }
 
-export function drawGameFooter() {
-  let info = createNode(gameContent, "div", "info-wrapper");
-  let guesses = createNode(info, "div", "guesses-wrapper");
+function drawGameFooter() {
+  let info = createNode(gameContent, 'div', 'info-wrapper');
+  let guesses = createNode(info, 'div', 'guesses-wrapper');
   let title = createNode(
     guesses,
-    "span",
-    "guesses-title",
-    "Incorrect Guesses "
+    'span',
+    'guesses-title',
+    'Incorrect Guesses '
   );
-  guessesCount = createNode(guesses, "span", "guesses-count", "0");
-  let guessesAll = createNode(guesses, "span", "gueses-all", " / 6");
+  guessesCount = createNode(guesses, 'span', 'guesses-count', '0');
+  let guessesAll = createNode(guesses, 'span', 'gueses-all', ' / 6');
 
-  let lives = createNode(info, "div", "lifes-wrapper");
+  let lives = createNode(info, 'div', 'lifes-wrapper');
   let count = 1;
   for (let i = 0; i < 6; i++) {
     if (count > 3) count = 1;
-    let life = createNode(lives, "div", `heart heart-${count}`);
+    let life = createNode(lives, 'div', `heart heart-${count}`);
     lifes.push(life);
     count++;
   }
@@ -147,56 +157,59 @@ export function drawGameFooter() {
   gameContent.appendChild(info);
 }
 
-export function drawFooter() {
-  let footer = createNode(body, "footer", "footer");
-  let info = createNode(footer, "span", "", "©2023 Anna Chebysheva");
-  let link = createNode(footer, "a", "github-link", "GitHub");
-  link.href = "https://github.com/marblehands";
-  link.target = "_blank";
+function drawFooter() {
+  let footer = createNode(body, 'footer', 'footer');
+  let info = createNode(footer, 'span', '', '©2023 Anna Chebysheva');
+  let link = createNode(footer, 'a', 'github-link', 'GitHub');
+  link.href = 'https://github.com/marblehands';
+  link.target = '_blank';
   body.append(footer);
 }
 
-export function generateModal(secretWordText, isWin) {
-  let modalWrapper = createNode(body, "div", "modal-wrapper");
-  let gameInfo = createNode(modalWrapper, "div", "game-info");
-  let btnTextWrapper = createNode(gameInfo, "div", "text-btn-wrapper");
-  let textWrapper = createNode(btnTextWrapper, "div", "text-wrapper");
-  let title = createNode(textWrapper, "p", "game-info-title");
-  let subtitle = createNode(textWrapper, "p", "game-info-subtitle");
+function generateModal(secretWordText, isWin) {
+  document.removeEventListener('keydown', keyboardHandler);
+
+  let modalWrapper = createNode(body, 'div', 'modal-wrapper');
+  let gameInfo = createNode(modalWrapper, 'div', 'game-info');
+  let btnTextWrapper = createNode(gameInfo, 'div', 'text-btn-wrapper');
+  let textWrapper = createNode(btnTextWrapper, 'div', 'text-wrapper');
+  let title = createNode(textWrapper, 'p', 'game-info-title');
+  let subtitle = createNode(textWrapper, 'p', 'game-info-subtitle');
 
   if (isWin) {
-    title.textContent = "YOU WON ✨";
-    subtitle.textContent = "Well done! Your hard work and skill paid off.";
+    title.textContent = 'YOU WON ✨';
+    subtitle.textContent = 'Well done! Your hard work and skill paid off.';
   } else {
-    title.textContent = "GAME OVER ☔";
-    subtitle.textContent = "Not your day, but great effort!";
+    title.textContent = 'GAME OVER ☔';
+    subtitle.textContent = 'Not your day, but great effort!';
   }
 
   let btn = createNode(
     btnTextWrapper,
-    "button",
-    "btn-play-again",
-    "PLAY AGAIN"
+    'button',
+    'btn-play-again',
+    'PLAY AGAIN'
   );
-  btn.addEventListener("click", function () {
-    modalWrapper.classList.remove("show");
-    gameInfo.classList.remove("show");
+
+  btn.addEventListener('click', function () {
+    modalWrapper.classList.remove('show');
+    gameInfo.classList.remove('show');
     startGame();
   });
 
-  let wordModal = createNode(modalWrapper, "div", "word-wrapper");
-  const lettersArray = secretWordText.toUpperCase().split("");
+  let wordModal = createNode(modalWrapper, 'div', 'word-wrapper');
+  const lettersArray = secretWordText.toUpperCase().split('');
   lettersArray.forEach((char) => {
-    let letter = createNode(wordModal, "div", "letter letter-default");
-    let span = createNode(letter, "span", "", char);
+    let letter = createNode(wordModal, 'div', 'letter letter-default');
+    let span = createNode(letter, 'span', '', char);
     wordModal.appendChild(letter);
   });
 
   gameInfo.prepend(wordModal);
 
   setTimeout(() => {
-    modalWrapper.classList.add("show");
-    gameInfo.classList.add("show");
+    modalWrapper.classList.add('show');
+    gameInfo.classList.add('show');
   }, 100);
 }
 
@@ -206,51 +219,47 @@ function getRandomNum() {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-export function getRandomQuestion() {
-  const currentId = localStorage.getItem("currentIdMarblehands") || 0;
+function getRandomQuestion() {
+  const currentId = localStorage.getItem('currentIdMarblehands') || 0;
   let id = getRandomNum();
   while (id === Number(currentId)) {
     id = getRandomNum();
   }
-  localStorage.setItem("currentIdMarblehands", id);
-  console.log("Previous Question ID: ", currentId, "Next Question ID:", id);
+  localStorage.setItem('currentIdMarblehands', id);
+  console.log('Previous Question ID: ', currentId, 'Next Question ID:', id);
   const question = quizList.find((item) => item.id === id);
   return question;
 }
 
-buttons.forEach((btn) => {
-  btn.addEventListener("click", clickHandler);
-});
-
 function clickHandler(event) {
   const btn = event.currentTarget;
-  const char = btn.getAttribute("data-value");
-  const isDisabled = btn.classList.contains("disabled");
+  const char = btn.getAttribute('data-value');
+  const isDisabled = btn.classList.contains('disabled');
   if (!isDisabled) {
     openLetters(searchMatches(char, btn));
-    btn.removeEventListener("click", clickHandler);
-    btn.classList.add("disabled");
+    btn.removeEventListener('click', clickHandler);
+    btn.classList.add('disabled');
   }
 }
 
-document.addEventListener("keydown", (event) => {
+function keyboardHandler(event) {
+  const btn = event.currentTarget;
   const char = getChar(event.code);
-  // console.log(char)
-  if (event.code.includes("Key")) {
+  if (event.code.includes('Key')) {
     const btn = findTargetBtn(char);
     if (btn) {
-      btn.classList.add("disabled");
-      btn.removeEventListener("click", clickHandler);
+      btn.classList.add('disabled');
+      btn.removeEventListener('click', clickHandler);
       openLetters(searchMatches(char, btn));
     }
   }
-});
+}
 
 function findTargetBtn(char) {
   let result;
   buttons.forEach((btn) => {
-    const key = btn.getAttribute("data-value");
-    const isDisabled = btn.classList.contains("disabled");
+    const key = btn.getAttribute('data-value');
+    const isDisabled = btn.classList.contains('disabled');
     if (key === char && !isDisabled) {
       result = btn;
     }
@@ -260,13 +269,9 @@ function findTargetBtn(char) {
 
 function getChar(code) {
   let eventCode = code;
-  let arr = eventCode.split("");
+  let arr = eventCode.split('');
   let char = arr[arr.length - 1];
   return char;
-}
-
-export function test() {
-  // console.log('test')
 }
 
 function searchMatches(char, btn) {
@@ -277,17 +282,15 @@ function searchMatches(char, btn) {
 
     if (letter === char) {
       indexes.push(i);
-      // console.log(btn);
-      // console.log('hi');
     }
   }
   if (!indexes.length) {
     // console.log('test');
-    btn.classList.add("btn-wrong");
-    btn.classList.add("btn-wrong-1");
+    btn.classList.add('btn-wrong');
+    btn.classList.add('btn-wrong-1');
   } else {
-    btn.classList.add("btn-correct");
-    btn.classList.add("btn-correct-1");
+    btn.classList.add('btn-correct');
+    btn.classList.add('btn-correct-1');
   }
 
   return indexes;
@@ -296,9 +299,9 @@ function searchMatches(char, btn) {
 function openLetters(indexes) {
   if (indexes.length) {
     indexes.forEach((index) => {
-      secretLetters[Number(index)].classList.remove("letter-hidden");
-      secretLettersWrappers[Number(index)].classList.remove("letter-default");
-      secretLettersWrappers[Number(index)].classList.add("letter-success");
+      secretLetters[Number(index)].classList.remove('letter-hidden');
+      secretLettersWrappers[Number(index)].classList.remove('letter-default');
+      secretLettersWrappers[Number(index)].classList.add('letter-success');
     });
     lettersCount -= indexes.length;
     if (!lettersCount) {
@@ -342,9 +345,9 @@ function openLetters(indexes) {
   }
 }
 
-export function startGame() {
+function startGame() {
   const body = document.body;
-  const scripts = Array.from(document.getElementsByTagName("script"));
+  const scripts = Array.from(document.getElementsByTagName('script'));
 
   Array.from(body.children).forEach((child) => {
     if (!scripts.includes(child)) {
@@ -352,8 +355,8 @@ export function startGame() {
     }
   });
 
-  buttons = []; //все клавиши клавиатуры, массив объектов
-  secretLetters = []; // все контейнеры где лежат буквы секретного слова, массив объектов
+  buttons = [];
+  secretLetters = [];
   secretLettersWrappers = [];
   lifes = [];
   incorrectGuesses = 0;
@@ -369,10 +372,12 @@ export function startGame() {
   drawFooter();
 
   buttons.forEach((btn) => {
-    btn.addEventListener("click", clickHandler);
+    btn.addEventListener('click', clickHandler);
   });
+
+  document.addEventListener('keydown', keyboardHandler);
 }
 
 console.log(
-  "Dear Reviewer,\n\nPlease check your keyboard layout, the game is done in English.\n\nThank you for your time and patience :)"
+  'Dear Reviewer,\n\nPlease check your keyboard layout, the game is done in English.\n\nThank you for your time and patience :)'
 );
