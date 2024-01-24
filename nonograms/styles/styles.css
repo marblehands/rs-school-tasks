@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.board-wrapper {
+  background-color: beige;
+  border: 2px solid black;
+  display: grid;
+  width: fit-content;
+}
+
+.board-item {
+  width: 60px;
+  height: 60px;
+  border: 0.5px solid black;
+}
