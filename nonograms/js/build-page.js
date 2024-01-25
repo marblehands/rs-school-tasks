@@ -3,33 +3,102 @@ import { countHints, getMatrix } from './handle-matrix.js';
 import { createEmptyMatrix } from './handle-matrix.js';
 import { clickHandler } from './handle-events.js';
 
-export function createBasicNode(parent, tag, attributes, classes) {
+export function createBasicNode(parent, tag, classes = '', content = '') {
   const node = document.createElement(tag);
   if (parent) parent.append(node);
   if (!parent) document.body.append(node);
   if (classes) node.className = classes;
+  if (content) node.textContent = content;
   return node;
 }
 
-export function drawBoard(size) {
-  const gridWrapper = createBasicNode(0, 'div', 0, 'board-wrapper');
-  for (let i = 0; i < size ** 2; i++) {
-    const gridItem = createBasicNode(gridWrapper, 'div', 0, 'board-item');
-    gridItem.addEventListener('click', clickHandler);
+function defineModuleSize(size) {
+  if (size === 5) return 60;
+  if (size === 10) return 40;
+  if (size === 15) return 30;
+}
+
+export function drawBoard(size, map) {
+  const module = defineModuleSize(size);
+  // Get hints
+  const hints = countHints(map);
+  const rows = hints.rows;
+  const columns = hints.columns;
+
+  let maxLength = 0;
+  rows.forEach((row) => {
+    maxLength = row.length > maxLength ? row.length : maxLength;
+  });
+  columns.forEach((column) => {
+    maxLength = column.length > maxLength ? column.length : maxLength;
+  });
+
+  // Generate board
+  const boardWrapper = createBasicNode(0, 'div', 'board-wrapper');
+  boardWrapper.style.gridTemplateColumns = `${module * maxLength}px 1fr`;
+  boardWrapper.style.gridTemplateRows = `${module * maxLength}px 1fr`;
+  const imgPreview = createBasicNode(boardWrapper, 'div', 'img-preview');
+  const columnHintsWrapper = createBasicNode(
+    boardWrapper,
+    'div',
+    'column-hints-wrapper'
+  );
+
+  for (let i = 0; i < size; i++) {
+    const columnWrapper = createBasicNode(
+      columnHintsWrapper,
+      'div',
+      'column-wrapper'
+    );
+    for (let i = 0; i < maxLength; i++) {
+      let content = columns[i] || ' ';
+      const hintItem = createBasicNode(
+        columnWrapper,
+        'div',
+        'hint-item grid-item',
+        content
+      );
+      hintItem.style.width = `${module}px`;
+      hintItem.style.height = `${module}px`;
+    }
   }
-  document.body.append(gridWrapper);
+
+  const rowHintsWrapper = createBasicNode(
+    boardWrapper,
+    'div',
+    'row-hints-wrapper'
+  );
+
+  for (let i = 0; i < size; i++) {
+    const rowWrapper = createBasicNode(rowHintsWrapper, 'div', 'row-wrapper');
+    for (let i = 0; i < maxLength; i++) {
+      let content = rows[i] || ' ';
+      const hintItem = createBasicNode(
+        rowWrapper,
+        'div',
+        'hint-item grid-item',
+        content
+      );
+      hintItem.style.width = `${module}px`;
+      hintItem.style.height = `${module}px`;
+    }
+  }
+
+  const gridWrapper = createBasicNode(boardWrapper, 'div', 'grid-wrapper');
+  for (let i = 0; i < size ** 2; i++) {
+    const gridItem = createBasicNode(gridWrapper, 'div', 'grid-item count');
+    gridItem.addEventListener('click', clickHandler);
+    gridItem.style.width = `${module}px`;
+    gridItem.style.height = `${module}px`;
+  }
 
   gridWrapper.style.gridTemplateRows = `repeat(${size}, 1fr)`;
   gridWrapper.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
-  const button = createBasicNode(0, 'button', 0, 'btn-get-matrix');
+  const button = createBasicNode(0, 'button', 'btn-get-matrix', 'Get Matrix');
 
-  button.addEventListener('click', getMatrix);
+  button.addEventListener('click', () => getMatrix(size));
   document.body.append(button);
-  button.style.display = 'none';
+  // button.style.display = 'none';
 }
 
-drawBoard(5);
-
-console.log(countHints(templates[0].map));
-
-export function drawHints() {}
+drawBoard(15, templates[0][0].map);

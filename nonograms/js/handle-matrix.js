@@ -9,8 +9,8 @@ export function createEmptyMatrix(size) {
   return matrix;
 }
 
-export function getMatrix() {
-  const gridItems = document.querySelectorAll('.board-item');
+export function getMatrix(size) {
+  const gridItems = document.querySelectorAll('.count');
   let arr = [];
   Array.from(gridItems).map((item) => {
     if (item.coloured) {
@@ -21,10 +21,13 @@ export function getMatrix() {
     return item;
   });
   let matrix = [];
-  for (let i = 0; i < 21; i += 5) {
-    matrix.push(arr.slice(i, i + 5));
+  let limitNum = size ** 2 - (size - 1);
+  for (let i = 0; i < limitNum; i += size) {
+    matrix.push(arr.slice(i, i + size));
   }
-  return console.log(JSON.stringify({ size: 5, name: 'hash', map: matrix }));
+  return console.log(
+    JSON.stringify({ size: `${size}`, name: ' ', map: matrix })
+  );
 }
 
 export function countHints(map) {
@@ -38,7 +41,7 @@ export function countHints(map) {
     for (let k = 0; k < map.length; k++) {
       if (map[i][k]) {
         count++;
-        if (count === map.length) {
+        if (count === map.length || k === map.length - 1) {
           rowHints.push(count);
         }
       } else if (count) {

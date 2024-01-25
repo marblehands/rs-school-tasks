@@ -13,19 +13,39 @@
 }
 
 .board-wrapper {
+  display: grid;
+}
+
+.column-hints-wrapper {
+  display: flex;
+}
+
+.row-hints-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.grid-wrapper {
   background-color: beige;
   border: 2px solid black;
   display: grid;
   width: fit-content;
 }
 
-.board-item {
-  width: 60px;
-  height: 60px;
+.grid-item {
   border: 0.5px solid black;
 }
 
 .btn-get-matrix {
   width: 100px;
-  height: 60px;
+  height: 40px;
+}
+
+.column-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.row-wrapper {
+  display: flex;
 }
