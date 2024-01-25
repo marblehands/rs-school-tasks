@@ -1,6 +1,7 @@
 import templates from './templates.js';
-
-let gridItems = [];
+import { countHints, getMatrix } from './handle-matrix.js';
+import { createEmptyMatrix } from './handle-matrix.js';
+import { clickHandler } from './handle-events.js';
 
 export function createBasicNode(parent, tag, attributes, classes) {
   const node = document.createElement(tag);
@@ -15,7 +16,6 @@ export function drawBoard(size) {
   for (let i = 0; i < size ** 2; i++) {
     const gridItem = createBasicNode(gridWrapper, 'div', 0, 'board-item');
     gridItem.addEventListener('click', clickHandler);
-    gridItems.push(gridItem);
   }
   document.body.append(gridWrapper);
 
@@ -28,38 +28,8 @@ export function drawBoard(size) {
   button.style.display = 'none';
 }
 
-export function createEmptyMatrix(size) {
-  let matrix = [];
-  for (let i = 0; i < size; i++) {
-    const arrRow = new Array(size).fill(0);
-    matrix.push(arrRow);
-  }
-  return matrix;
-}
-
-function clickHandler(event) {
-  const item = event.currentTarget;
-  item.style.backgroundColor = 'black';
-  item.coloured = 'true';
-  console.log(item.property);
-}
-
 drawBoard(5);
 
-function getMatrix() {
-  const gridItems = document.querySelectorAll('.board-item');
-  let arr = [];
-  Array.from(gridItems).map((item) => {
-    if (item.coloured) {
-      arr.push(1);
-    } else {
-      arr.push(0);
-    }
-    return item;
-  });
-  let matrix = [];
-  for (let i = 0; i < 21; i += 5) {
-    matrix.push(arr.slice(i, i + 5));
-  }
-  return console.log(JSON.stringify({ size: 5, name: 'hash', map: matrix }));
-}
+console.log(countHints(templates[0].map));
+
+export function drawHints() {}

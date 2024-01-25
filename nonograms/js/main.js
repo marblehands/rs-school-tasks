@@ -1,3 +1,2 @@
 import { createBasicNode } from './build-page.js';
-import { drawBoard } from './build-page.js';
-import { createEmptyMatrix } from './build-page.js';
+import { countHints } from './handle-matrix.js';
