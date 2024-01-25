@@ -6,6 +6,7 @@
 
 .body {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -22,4 +23,9 @@
   width: 60px;
   height: 60px;
   border: 0.5px solid black;
+}
+
+.btn-get-matrix {
+  width: 100px;
+  height: 60px;
 }
