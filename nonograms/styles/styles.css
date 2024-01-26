@@ -47,49 +47,43 @@
 
 /* Border settings */
 .board-wrapper {
-  border-left: 3px solid black;
-  border-top: 3px solid black;
-  border-bottom: 3px solid black;
-  /* border-right: 1px solid black; */
+  border: 1px solid black;
 }
 
 .column-hints-wrapper {
-  border-left: 2px solid black;
-  border-right: 2px solid black;
+  border: 1px solid black;
 }
 
 .grid-wrapper {
-  border-top: 2px solid black;
-  border-left: 2px solid black;
-  border-right: 2px solid black;
+  border: 1px solid black;
 }
 
 .row-hints-wrapper {
-  border-top: 2px solid black;
+  border: 1px solid black;
 }
 
-.grid-wrapper div:nth-child(5n) {
-  border-right: 2.3px solid black;
-}
+/* .grid-wrapper div:nth-child(5n) {
+  border: 1px solid black;
+} */
 
-.row-hints-wrapper .row-wrapper:nth-child(5n) {
+/* .row-hints-wrapper .row-wrapper:nth-child(5n) {
   border-bottom: 1px solid black;
 }
 
 .column-hints-wrapper .column-wrapper:nth-child(5n) .hint-item {
-  border-right: 2.3px solid black;
+  border-right: 1px solid black;
 }
 
 .grid-wrapper div:nth-child(n + 51):nth-child(-n + 60) {
-  border-top: 2.3px solid black;
-}
+  border-top: 1px solid black;
+} */
 
 .grid-item {
-  border: 0.3px solid black;
+  border: 0.2px solid black;
 }
 
 .img-preview {
-  border: 0.3px solid black;
+  border: 1px solid black;
 }
 
 .grid-item-checked {

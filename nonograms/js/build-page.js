@@ -1,7 +1,7 @@
-import templates from './templates.js';
-import { countHints, getMatrix } from './handle-matrix.js';
-import { createEmptyMatrix } from './handle-matrix.js';
+// import templates from './templates.js';
+import { getMatrix } from './handle-matrix.js';
 import { clickHandler } from './handle-events.js';
+import { countHints } from './handle-matrix.js';
 
 export function createBasicNode(parent, tag, classes = '', content = '') {
   const node = document.createElement(tag);
@@ -47,14 +47,15 @@ export function drawBoard(size, map) {
     return column;
   });
 
-  console.log(rows);
-  console.log(columns);
-  console.log(maxLength);
+  // console.log(rows);
+  // console.log(columns);
+  // console.log(maxLength);
 
   // Generate board
   const boardWrapper = createBasicNode(0, 'div', 'board-wrapper');
   boardWrapper.style.gridTemplateColumns = `${module * maxLength}px 1fr`;
   boardWrapper.style.gridTemplateRows = `${module * maxLength}px 1fr`;
+  // eslint-disable-next-line no-unused-vars
   const imgPreview = createBasicNode(boardWrapper, 'div', 'img-preview');
   const columnHintsWrapper = createBasicNode(
     boardWrapper,
@@ -124,5 +125,3 @@ export function drawBoard(size, map) {
   document.body.append(button);
   button.style.display = 'none';
 }
-
-drawBoard(10, templates[1][1].map);

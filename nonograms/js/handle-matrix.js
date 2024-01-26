@@ -1,20 +1,12 @@
-import templates from './templates.js';
-
-export function createEmptyMatrix(size) {
-  let matrix = [];
-  for (let i = 0; i < size; i++) {
-    const arrRow = new Array(size).fill(0);
-    matrix.push(arrRow);
-  }
-  return matrix;
-}
-
-export function getMatrix(size) {
+export function getMatrix() {
   const gridItems = document.querySelectorAll('.count');
+  const size = Math.sqrt(Array.from(gridItems).length);
   let arr = [];
   Array.from(gridItems).map((item) => {
-    if (item.coloured) {
+    if (item.coloured === 'true') {
       arr.push(1);
+    } else if (item.checked === 'true') {
+      arr.push(2);
     } else {
       arr.push(0);
     }
@@ -25,9 +17,7 @@ export function getMatrix(size) {
   for (let i = 0; i < limitNum; i += size) {
     matrix.push(arr.slice(i, i + size));
   }
-  return console.log(
-    JSON.stringify({ size: `${size}`, name: ' ', map: matrix })
-  );
+  return matrix;
 }
 
 export function countHints(map) {
