@@ -27,13 +27,8 @@
 
 .grid-wrapper {
   background-color: beige;
-  border: 2px solid black;
   display: grid;
   width: fit-content;
-}
-
-.grid-item {
-  border: 0.5px solid black;
 }
 
 .btn-get-matrix {
@@ -48,4 +43,38 @@
 
 .row-wrapper {
   display: flex;
+}
+
+/* Border settings */
+.board-wrapper {
+  border-left: 3px solid black;
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
+}
+
+.column-hints-wrapper {
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+}
+
+.grid-wrapper {
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+}
+
+.row-hints-wrapper {
+  border-top: 2px solid black;
+}
+
+/* .grid-wrapper div:nth-child(5n) {
+  border-right: 1px solid black;
+}
+
+.grid-wrapper div:nth-child(n + 51):nth-child(-n + 60) {
+  border-top: 2px solid black;
+} */
+
+.grid-item {
+  border: 0.3px solid black;
 }
