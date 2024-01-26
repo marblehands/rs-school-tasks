@@ -105,7 +105,13 @@ export function drawBoard(size, map) {
   const gridWrapper = createBasicNode(boardWrapper, 'div', 'grid-wrapper');
   for (let i = 0; i < size ** 2; i++) {
     const gridItem = createBasicNode(gridWrapper, 'div', 'grid-item count');
-    gridItem.addEventListener('click', clickHandler);
+    gridItem.addEventListener('click', (event) => {
+      clickHandler(event);
+    });
+    gridItem.addEventListener('contextmenu', function (event) {
+      event.preventDefault();
+      clickHandler(event);
+    });
     gridItem.style.width = `${module}px`;
     gridItem.style.height = `${module}px`;
   }
@@ -116,7 +122,7 @@ export function drawBoard(size, map) {
 
   button.addEventListener('click', () => getMatrix(size));
   document.body.append(button);
-  // button.style.display = 'none';
+  button.style.display = 'none';
 }
 
-drawBoard(15, templates[2][1].map);
+drawBoard(10, templates[1][1].map);
