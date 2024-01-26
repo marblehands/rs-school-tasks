@@ -22,8 +22,8 @@ export function drawBoard(size, map) {
   const module = defineModuleSize(size);
   // Get hints
   const hints = countHints(map);
-  const rows = hints.rows;
-  const columns = hints.columns;
+  let rows = hints.rows;
+  let columns = hints.columns;
 
   let maxLength = 0;
   rows.forEach((row) => {
@@ -32,6 +32,24 @@ export function drawBoard(size, map) {
   columns.forEach((column) => {
     maxLength = column.length > maxLength ? column.length : maxLength;
   });
+
+  rows = rows.map((row) => {
+    while (row.length < maxLength) {
+      row.unshift(0);
+    }
+    return row;
+  });
+
+  columns = columns.map((column) => {
+    while (column.length < maxLength) {
+      column.unshift(0);
+    }
+    return column;
+  });
+
+  console.log(rows);
+  console.log(columns);
+  console.log(maxLength);
 
   // Generate board
   const boardWrapper = createBasicNode(0, 'div', 'board-wrapper');
@@ -50,8 +68,8 @@ export function drawBoard(size, map) {
       'div',
       'column-wrapper'
     );
-    for (let i = 0; i < maxLength; i++) {
-      let content = columns[i] || ' ';
+    for (let k = 0; k < maxLength; k++) {
+      let content = columns[i][k] || ' ';
       const hintItem = createBasicNode(
         columnWrapper,
         'div',
@@ -71,8 +89,8 @@ export function drawBoard(size, map) {
 
   for (let i = 0; i < size; i++) {
     const rowWrapper = createBasicNode(rowHintsWrapper, 'div', 'row-wrapper');
-    for (let i = 0; i < maxLength; i++) {
-      let content = rows[i] || ' ';
+    for (let k = 0; k < maxLength; k++) {
+      let content = rows[i][k] || ' ';
       const hintItem = createBasicNode(
         rowWrapper,
         'div',
@@ -101,4 +119,4 @@ export function drawBoard(size, map) {
   // button.style.display = 'none';
 }
 
-drawBoard(15, templates[0][0].map);
+drawBoard(15, templates[2][1].map);
