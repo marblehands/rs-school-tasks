@@ -1,3 +1,10 @@
+@import url('variables.css');
+@import url('fonts.css');
+@import url('buttons.css');
+@import url('header.css');
+@import url('board.css');
+@import url('footer.css');
+
 * {
   margin: 0;
   padding: 0;
@@ -7,85 +14,16 @@
 .body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   height: 100vh;
+  position: relative;
+  background-color: var(--primary-light);
 }
 
-.board-wrapper {
-  display: grid;
-}
-
-.column-hints-wrapper {
+.main {
+  flex-grow: 1;
   display: flex;
-}
-
-.row-hints-wrapper {
-  display: flex;
-  flex-direction: column;
-}
-
-.grid-wrapper {
-  background-color: beige;
-  display: grid;
-  width: fit-content;
-}
-
-.btn-get-matrix {
-  width: 100px;
-  height: 40px;
-}
-
-.column-wrapper {
-  display: flex;
-  flex-direction: column;
-}
-
-.row-wrapper {
-  display: flex;
-}
-
-/* Border settings */
-.board-wrapper {
-  border: 1px solid black;
-}
-
-.column-hints-wrapper {
-  border: 1px solid black;
-}
-
-.grid-wrapper {
-  border: 1px solid black;
-}
-
-.row-hints-wrapper {
-  border: 1px solid black;
-}
-
-/* .grid-wrapper div:nth-child(5n) {
-  border: 1px solid black;
-} */
-
-/* .row-hints-wrapper .row-wrapper:nth-child(5n) {
-  border-bottom: 1px solid black;
-}
-
-.column-hints-wrapper .column-wrapper:nth-child(5n) .hint-item {
-  border-right: 1px solid black;
-}
-
-.grid-wrapper div:nth-child(n + 51):nth-child(-n + 60) {
-  border-top: 1px solid black;
-} */
-
-.grid-item {
-  border: 0.2px solid black;
-}
-
-.img-preview {
-  border: 1px solid black;
-}
-
-.grid-item-checked {
-  background: url(../assets/svg/cross.svg) center/80% no-repeat;
+  justify-content: center;
+  align-items: center;
 }

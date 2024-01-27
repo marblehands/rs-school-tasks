@@ -1,0 +1,17 @@
+@import url('variables.css');
+@import url('fonts.css');
+
+.link {
+  text-decoration: none;
+  color: var(--primary-dark);
+  background-color: transparent;
+  display: block;
+  border: none;
+  font: 24px Helvetica, sans-serif;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: text-decoration 0.5s ease;
+  &:hover {
+    text-decoration: underline;
+  }
+}

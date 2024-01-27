@@ -1,5 +1,5 @@
 // import templates from './templates.js';
-import { getMatrix } from './handle-matrix.js';
+// import { getMatrix } from './handle-matrix.js';
 import { clickHandler } from './handle-events.js';
 import { countHints } from './handle-matrix.js';
 
@@ -19,6 +19,8 @@ function defineModuleSize(size) {
 }
 
 export function drawBoard(size, map) {
+  const existingBoard = document.querySelector('.main');
+  if (existingBoard) document.body.removeChild(existingBoard);
   const module = defineModuleSize(size);
   // Get hints
   const hints = countHints(map);
@@ -52,7 +54,8 @@ export function drawBoard(size, map) {
   // console.log(maxLength);
 
   // Generate board
-  const boardWrapper = createBasicNode(0, 'div', 'board-wrapper');
+  const main = createBasicNode(0, 'main', 'main');
+  const boardWrapper = createBasicNode(main, 'div', 'board-wrapper');
   boardWrapper.style.gridTemplateColumns = `${module * maxLength}px 1fr`;
   boardWrapper.style.gridTemplateRows = `${module * maxLength}px 1fr`;
   // eslint-disable-next-line no-unused-vars
@@ -119,9 +122,9 @@ export function drawBoard(size, map) {
 
   gridWrapper.style.gridTemplateRows = `repeat(${size}, 1fr)`;
   gridWrapper.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
-  const button = createBasicNode(0, 'button', 'btn-get-matrix', 'Get Matrix');
+  // const button = createBasicNode(0, 'button', 'btn-get-matrix', 'Get Matrix');
 
-  button.addEventListener('click', () => getMatrix(size));
-  document.body.append(button);
-  button.style.display = 'none';
+  // button.addEventListener('click', () => getMatrix(size));
+  // document.body.append(button);
+  // button.style.display = 'none';
 }

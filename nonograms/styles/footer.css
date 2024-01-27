@@ -1,0 +1,8 @@
+@import url('variables.css');
+
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 40px;
+}
