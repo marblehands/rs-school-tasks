@@ -1,9 +1,9 @@
 import { createBasicNode } from './build-page.js';
-import { createLink } from './footer.js';
 
 export function drawModal(time) {
   const modalWrapper = createBasicNode(0, 'div', 'modal');
   const modalInfo = createBasicNode(modalWrapper, 'div', 'modal__info');
+  // eslint-disable-next-line no-unused-vars
   const title = createBasicNode(
     modalInfo,
     'h2',
@@ -11,7 +11,15 @@ export function drawModal(time) {
     `Great! You have solved the nonogram in ${time} seconds!`
   );
   const footer = createBasicNode(modalWrapper, 'footer', 'footer');
-  createLink(footer, 'link', 'Play Again');
-  createLink(footer, 'link', 'Play Random Game');
-  createLink(footer, 'link', 'View High Score');
+  // eslint-disable-next-line no-unused-vars
+  const playBtn = createBasicNode(footer, 'a', 'link', 'Play Again');
+  // eslint-disable-next-line no-unused-vars
+  const playRandomBtn = createBasicNode(
+    footer,
+    'a',
+    'link',
+    'Play Random Game'
+  );
+  // eslint-disable-next-line no-unused-vars
+  const scoreBtn = createBasicNode(footer, 'a', 'link', 'View High Score');
 }
