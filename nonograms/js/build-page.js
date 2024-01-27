@@ -109,13 +109,8 @@ export function drawBoard(size, map) {
   const gridWrapper = createBasicNode(boardWrapper, 'div', 'grid-wrapper');
   for (let i = 0; i < size ** 2; i++) {
     const gridItem = createBasicNode(gridWrapper, 'div', 'grid-item count');
-    gridItem.addEventListener('click', (event) => {
-      clickHandler(event);
-    });
-    gridItem.addEventListener('contextmenu', function (event) {
-      event.preventDefault();
-      clickHandler(event);
-    });
+    gridItem.addEventListener('click', clickHandler);
+    gridItem.addEventListener('contextmenu', clickHandler);
     gridItem.style.width = `${module}px`;
     gridItem.style.height = `${module}px`;
   }

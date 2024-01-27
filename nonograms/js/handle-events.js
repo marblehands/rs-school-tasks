@@ -19,6 +19,7 @@ function endGame() {
 }
 
 export function clickHandler(event) {
+  event.preventDefault();
   const item = event.currentTarget;
   if (event.button === 0) {
     if (!item.coloured || item.coloured === 'false') {
