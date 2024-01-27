@@ -49,7 +49,7 @@ export function clickHandler(event) {
 
 function checkStateOfGame() {
   const currentMatrix = getMatrix();
-  console.log(currentMatrix);
+  // console.log(currentMatrix);
   const matrixComparison = compareMatrix(map, currentMatrix);
   if (matrixComparison) setTimeout(endGame, 450);
 }
