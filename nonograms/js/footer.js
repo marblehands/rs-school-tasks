@@ -7,7 +7,7 @@ export function drawGameControls() {
   createLink(footer, 'link', 'Save Current Game');
 }
 
-function createLink(parent, classes, content) {
+export function createLink(parent, classes, content) {
   // eslint-disable-next-line no-unused-vars
   const link = createBasicNode(parent, 'a', classes, content);
 }

@@ -4,6 +4,8 @@
 @import url('header.css');
 @import url('board.css');
 @import url('footer.css');
+@import url('modal.css');
+@import url('typography.css');
 
 * {
   margin: 0;

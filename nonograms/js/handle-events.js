@@ -1,5 +1,6 @@
 import { getMatrix } from './handle-matrix.js';
 import { map } from './initial-game.js';
+import { drawModal } from './game-over.js';
 
 export function compareMatrix(map, currentMatrix) {
   for (let i = 0; i < map.length; i++) {
@@ -14,7 +15,7 @@ export function compareMatrix(map, currentMatrix) {
 }
 
 function endGame() {
-  alert('game over');
+  drawModal(12);
 }
 
 export function clickHandler(event) {
