@@ -28,6 +28,7 @@ export function clickHandler(event) {
       item.style.backgroundColor = 'black';
       item.coloured = 'true';
       item.checked = 'false';
+      console.log(item.coloured, item.checked);
     } else {
       item.style.backgroundColor = 'transparent';
       item.classList.remove('grid-item-checked');
@@ -51,12 +52,12 @@ export function clickHandler(event) {
   console.log(isTimer);
   switchTimer('on');
   console.log(isTimer);
-  checkStateOfGame();
+  const isGameOver = checkStateOfGame();
+  if (isGameOver) setTimeout(endGame, 450);
 }
 
-function checkStateOfGame() {
+export function checkStateOfGame() {
   const currentMatrix = getMatrix();
-  // console.log(currentMatrix);
   const matrixComparison = compareMatrix(map, currentMatrix);
-  if (matrixComparison) setTimeout(endGame, 450);
+  return matrixComparison;
 }
