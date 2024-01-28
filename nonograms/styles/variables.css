@@ -1,5 +1,29 @@
 :root {
   --primary-light: #f4e2e3;
+  --primary-light-rgb: 244 226 227;
   --primary-hint: #f2d5d6;
+  --primary-hint-rgb: 226 213 214;
   --primary-dark: #292929;
+  --primary-dark-rgb: 41 41 41;
+  --grid-item-coloured: #000000;
+  --grid-item-coloured-rgb: 0 0 0;
+  --borders: #292929;
+  --borders-rgb: 41 41 41;
+  color-scheme: light;
+}
+
+/* Dark */
+
+.dark {
+  --primary-light: #292929;
+  --primary-light-rgb: 41 41 41;
+  --primary-hint: #343434;
+  --primary-hint-rgb: 52 52 52;
+  --primary-dark: #f4e2e3;
+  --primary-dark-rgb: 244 226 227;
+  --grid-item-coloured: #ffffff;
+  --grid-item-coloured-rgb: 255 255 255;
+  --borders: #6a5d5e;
+  --borders-rgb: 106 93 92;
+  color-scheme: dark;
 }

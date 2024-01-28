@@ -1,8 +1,13 @@
 import { getMatrix } from './handle-matrix.js';
 import { map } from './initial-game.js';
 import { drawModal } from './game-over.js';
-import { isTimer } from './timer.js';
 import { switchTimer } from './timer.js';
+import {
+  playCellColoured,
+  playCellEmpty,
+  playCellCross,
+  playWinGame,
+} from './audio.js';
 
 export function compareMatrix(map, currentMatrix) {
   for (let i = 0; i < map.length; i++) {
@@ -18,6 +23,7 @@ export function compareMatrix(map, currentMatrix) {
 
 function endGame() {
   drawModal();
+  playWinGame();
 }
 
 export function clickHandler(event) {
@@ -25,11 +31,13 @@ export function clickHandler(event) {
   const item = event.currentTarget;
   if (event.button === 0) {
     if (!item.coloured || item.coloured === 'false') {
-      item.style.backgroundColor = 'black';
+      playCellColoured();
+      item.classList.add('grid-item-coloured');
       item.coloured = 'true';
       item.checked = 'false';
     } else {
-      item.style.backgroundColor = 'transparent';
+      playCellEmpty();
+      item.classList.remove('grid-item-coloured');
       item.classList.remove('grid-item-checked');
       item.coloured = 'false';
       item.checked = 'false';
@@ -37,26 +45,26 @@ export function clickHandler(event) {
   }
   if (event.button === 2) {
     if (!item.checked || item.checked === 'false') {
-      item.style.backgroundColor = 'transparent';
+      playCellCross();
+      item.classList.remove('grid-item-coloured');
       item.classList.add('grid-item-checked');
       item.checked = 'true';
       item.coloured = 'false';
     } else {
-      item.style.backgroundColor = 'transparent';
+      playCellEmpty();
+      item.classList.remove('grid-item-coloured');
       item.classList.remove('grid-item-checked');
       item.checked = 'false';
       item.coloured = 'false';
     }
   }
-  console.log(isTimer);
   switchTimer('on');
-  console.log(isTimer);
-  checkStateOfGame();
+  const isGameOver = checkStateOfGame();
+  if (isGameOver) setTimeout(endGame, 450);
 }
 
-function checkStateOfGame() {
+export function checkStateOfGame() {
   const currentMatrix = getMatrix();
-  // console.log(currentMatrix);
   const matrixComparison = compareMatrix(map, currentMatrix);
-  if (matrixComparison) setTimeout(endGame, 450);
+  return matrixComparison;
 }

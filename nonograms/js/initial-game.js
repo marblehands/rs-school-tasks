@@ -3,10 +3,13 @@ import { drawBoard } from './build-page.js';
 import { createBasicNode } from './build-page.js';
 import { drawHeader } from './header.js';
 import { drawGameControls } from './footer.js';
+import { resetGridItem } from './reset-game.js';
+import { clickHandler } from './handle-events.js';
 
 // Initial Variables
-export let map = templates[0][0].map; //default image and level
-export let size = 5; //default level of complexity
+export let template = templates[0][0]; //default object
+export let map = templates[0][0].map; //default image matrix
+export let size = templates[0][0].size; //default level of complexity
 
 // Initial calls for default game
 drawHeader();
@@ -72,4 +75,52 @@ export function setLevel(level) {
       break;
   }
   console.log('уровень: ', level);
+}
+
+export function loadGame(state, templateData) {
+  template = templateData;
+  map = templateData.map;
+  size = templateData.size;
+
+  loadBoard(state, true);
+}
+
+export function loadBoard(matrix, isBtnActive) {
+  const gridItems = document.querySelectorAll('.count');
+  const mapArr = matrix.flat();
+  gridItems.forEach((item, index) => {
+    resetGridItem(item);
+    if (isBtnActive) {
+      item.addEventListener('click', clickHandler);
+      item.addEventListener('contextmenu', clickHandler);
+    }
+    loadGridItem(mapArr[index], item);
+  });
+}
+
+export function loadGridItem(value, item) {
+  if (!value) drawEmptyItem(item);
+  if (value === 1) drawBlackItem(item);
+  if (value === 2) drawCrossItem(item);
+}
+
+function drawBlackItem(item) {
+  item.classList.add('grid-item-coloured');
+  item.classList.remove('grid-item-checked');
+  item.coloured = 'true';
+  item.checked = 'false';
+}
+
+function drawCrossItem(item) {
+  item.classList.remove('grid-item-coloured');
+  item.classList.add('grid-item-checked');
+  item.coloured = 'false';
+  item.checked = 'true';
+}
+
+function drawEmptyItem(item) {
+  item.classList.remove('grid-item-coloured');
+  item.classList.remove('grid-item-checked');
+  item.coloured = 'false';
+  item.checked = 'false';
 }
