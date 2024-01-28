@@ -2,6 +2,7 @@
 // import { getMatrix } from './handle-matrix.js';
 import { clickHandler } from './handle-events.js';
 import { countHints } from './handle-matrix.js';
+import { drawWatch } from './timer.js';
 
 export function createBasicNode(parent, tag, classes = '', content = '') {
   const node = document.createElement(tag);
@@ -55,6 +56,7 @@ export function drawBoard(size, map) {
 
   // Generate board
   const main = createBasicNode(0, 'main', 'main');
+  drawWatch(main);
   const boardWrapper = createBasicNode(main, 'div', 'board-wrapper');
   boardWrapper.style.gridTemplateColumns = `${module * maxLength}px 1fr`;
   boardWrapper.style.gridTemplateRows = `${module * maxLength}px 1fr`;
