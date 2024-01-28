@@ -1,0 +1,70 @@
+@import url('variables.css');
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+}
+
+.logo {
+  min-width: 166px;
+  min-height: 65px;
+  background: url(../assets/svg/logo-bg.svg) center/cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font: 24px DotGothic16, sans-serif;
+  letter-spacing: 1.68px;
+}
+
+.header__nav {
+  display: flex;
+  gap: 8px;
+}
+
+.header__btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 1px solid var(--primary-dark);
+  transition: background 0.5s ease;
+}
+
+.header__btn_sound {
+  background: url(../assets/svg/volume-on.svg) center/40% no-repeat;
+  &:hover {
+    background: url(../assets/svg/volume-on-hover.svg) center/40% no-repeat
+      var(--primary-dark);
+    cursor: pointer;
+  }
+}
+
+.header__btn_settings {
+  background: url(../assets/svg/settings.svg) center/40% no-repeat;
+  &:hover {
+    background: url(../assets/svg/settings-hover.svg) center/40% no-repeat
+      var(--primary-dark);
+    cursor: pointer;
+  }
+}
+
+.header__btn_score {
+  background: url(../assets/svg/star.svg) center/40% no-repeat;
+  &:hover {
+    background: url(../assets/svg/star-hover.svg) center/40% no-repeat
+      var(--primary-dark);
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 680px) {
+  .header {
+    padding: 20px;
+  }
+}

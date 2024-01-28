@@ -1,0 +1,87 @@
+@import url('variables.css');
+
+.board-wrapper {
+  display: grid;
+}
+
+.column-hints-wrapper {
+  display: flex;
+}
+
+.row-hints-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.grid-wrapper {
+  display: grid;
+  width: fit-content;
+}
+
+.btn-get-matrix {
+  width: 100px;
+  height: 40px;
+}
+
+.column-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.row-wrapper {
+  display: flex;
+}
+
+/* Border settings */
+.board-wrapper {
+  border: 1px solid var(--primary-dark);
+}
+
+.column-hints-wrapper {
+  border: 1px solid var(--primary-dark);
+}
+
+.grid-wrapper {
+  border: 1px solid var(--primary-dark);
+}
+
+.row-hints-wrapper {
+  border: 1px solid var(--primary-dark);
+}
+
+/* .grid-wrapper div:nth-child(5n) {
+  border: 1px solid var(--primary-dark);
+} */
+
+/* .row-hints-wrapper .row-wrapper:nth-child(5n) {
+  border-bottom: 1px solid var(--primary-dark);
+}
+
+.column-hints-wrapper .column-wrapper:nth-child(5n) .hint-item {
+  border-right: 1px solid var(--primary-dark);
+}
+
+.grid-wrapper div:nth-child(n + 51):nth-child(-n + 60) {
+  border-top: 1px solid var(--primary-dark);
+} */
+
+.grid-item {
+  border: 0.2px solid var(--primary-dark);
+}
+
+.hint-item {
+  background-color: var(--primary-hint);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  font: 120% DotGothic16;
+}
+
+.img-preview {
+  border: 1px solid var(--primary-dark);
+}
+
+.grid-item-checked {
+  background: url(../assets/svg/cross.svg) center/80% no-repeat;
+}

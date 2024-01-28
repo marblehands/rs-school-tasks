@@ -1,0 +1,33 @@
+@import url('variables.css');
+@import url('fonts.css');
+
+.link {
+  text-decoration: none;
+  color: var(--primary-dark);
+  background-color: transparent;
+  display: block;
+  border: none;
+  font: 24px Helvetica, sans-serif;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: text-decoration 0.5s ease;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+@media (max-width: 900px) {
+  .link {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 680px) {
+  .link {
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--primary-dark);
+  }
+}
