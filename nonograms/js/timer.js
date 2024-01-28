@@ -1,9 +1,8 @@
 import { createBasicNode } from './build-page.js';
 
 export let isTimer = false;
-let timer;
-let startTime = 0;
 export let seconds;
+let timer;
 
 export function drawWatch(main) {
   const wrapper = createBasicNode(main, 'div', 'timer__wrapper');
@@ -28,13 +27,18 @@ export function updateTime(startTime) {
 }
 
 export function switchOnTimer() {
-  startTime = Date.now();
+  const startTime = Date.now();
   timer = setInterval(() => {
     updateTime(startTime);
   }, 1000);
 }
 
-// export function pauseTime() {
-//   isTimer = false;
-//   clearInterval(timer);
-// }
+export function pauseTime() {
+  isTimer = false;
+  clearInterval(timer);
+}
+
+export function resetWatch() {
+  const timer = document.querySelector('.timer');
+  timer.textContent = '00:00';
+}
