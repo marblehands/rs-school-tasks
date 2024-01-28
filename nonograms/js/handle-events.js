@@ -1,11 +1,13 @@
 import { getMatrix } from './handle-matrix.js';
 import { map } from './initial-game.js';
 import { drawModal } from './game-over.js';
+import { isTimer } from './timer.js';
+import { switchOnTimer } from './timer.js';
 
 export function compareMatrix(map, currentMatrix) {
   for (let i = 0; i < map.length; i++) {
     for (let k = 0; k < map[0].length; k++) {
-      if (currentMatrix[i][k] === 2) continue;
+      if (currentMatrix[i][k] === 2 && !map[i][k]) continue;
       if (currentMatrix[i][k] !== map[i][k]) {
         return false;
       }
@@ -15,7 +17,7 @@ export function compareMatrix(map, currentMatrix) {
 }
 
 function endGame() {
-  drawModal(12);
+  drawModal();
 }
 
 export function clickHandler(event) {
@@ -46,6 +48,7 @@ export function clickHandler(event) {
       item.coloured = 'false';
     }
   }
+  if (!isTimer) switchOnTimer();
   checkStateOfGame();
 }
 
