@@ -15,28 +15,35 @@ export function drawWatch(main) {
 
 export function updateTime(startTime) {
   isTimer = true;
-  const timer = document.querySelector('.timer');
+  const watch = document.querySelector('.timer');
   const currentTime = Date.now();
   const diff = currentTime - startTime;
   seconds = Math.floor(diff / 1000);
   let minutes = Math.floor(seconds / 60);
   if (minutes) seconds -= minutes * 60;
-  timer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds
+  watch.textContent = `${minutes.toString().padStart(2, '0')}:${seconds
     .toString()
     .padStart(2, '0')}`;
 }
 
-export function switchOnTimer() {
-  const startTime = Date.now();
-  timer = setInterval(() => {
-    updateTime(startTime);
-  }, 1000);
+export function switchTimer(command) {
+  if (!isTimer && command === 'on') {
+    isTimer = true;
+    const startTime = Date.now();
+    timer = setInterval(() => {
+      updateTime(startTime);
+    }, 1000);
+  }
+  if (isTimer && command === 'off') {
+    isTimer = false;
+    clearInterval(timer);
+  }
 }
 
-export function pauseTime() {
-  isTimer = false;
-  clearInterval(timer);
-}
+// export function pauseTime() {
+//   isTimer = false;
+//   clearInterval(timer);
+// }
 
 export function resetWatch() {
   const timer = document.querySelector('.timer');
