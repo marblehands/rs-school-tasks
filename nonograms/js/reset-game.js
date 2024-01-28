@@ -1,5 +1,5 @@
 import { clickHandler } from './handle-events.js';
-import { pauseTime, resetWatch } from './timer.js';
+import { switchTimer, resetWatch } from './timer.js';
 
 export function resetGame() {
   const gridItems = document.querySelectorAll('.count');
@@ -9,7 +9,7 @@ export function resetGame() {
     item.addEventListener('click', clickHandler);
     item.addEventListener('contextmenu', clickHandler);
   });
-  pauseTime();
+  switchTimer('off');
   resetWatch();
 }
 

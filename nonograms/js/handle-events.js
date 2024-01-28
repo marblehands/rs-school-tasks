@@ -2,7 +2,7 @@ import { getMatrix } from './handle-matrix.js';
 import { map } from './initial-game.js';
 import { drawModal } from './game-over.js';
 import { isTimer } from './timer.js';
-import { switchOnTimer } from './timer.js';
+import { switchTimer } from './timer.js';
 
 export function compareMatrix(map, currentMatrix) {
   for (let i = 0; i < map.length; i++) {
@@ -48,7 +48,9 @@ export function clickHandler(event) {
       item.coloured = 'false';
     }
   }
-  if (!isTimer) switchOnTimer();
+  console.log(isTimer);
+  switchTimer('on');
+  console.log(isTimer);
   checkStateOfGame();
 }
 

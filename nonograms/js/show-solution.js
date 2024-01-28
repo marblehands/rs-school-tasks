@@ -1,6 +1,6 @@
 import { map } from './initial-game.js';
 import { resetGridItem } from './reset-game.js';
-import { pauseTime } from './timer.js';
+import { switchTimer } from './timer.js';
 
 export function showSolution() {
   const gridItems = document.querySelectorAll('.count');
@@ -10,5 +10,5 @@ export function showSolution() {
   arr.forEach((item, index) => {
     if (mapArr[index]) item.style.backgroundColor = 'black';
   });
-  pauseTime();
+  switchTimer('off');
 }
