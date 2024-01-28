@@ -94,7 +94,6 @@ export function loadBoard(matrix, isBtnActive) {
       item.addEventListener('click', clickHandler);
       item.addEventListener('contextmenu', clickHandler);
     }
-    console.log(mapArr[index]);
     loadGridItem(mapArr[index], item);
   });
 }
@@ -106,21 +105,21 @@ export function loadGridItem(value, item) {
 }
 
 function drawBlackItem(item) {
-  item.style.backgroundColor = 'black';
+  item.classList.add('grid-item-coloured');
   item.classList.remove('grid-item-checked');
   item.coloured = 'true';
   item.checked = 'false';
 }
 
 function drawCrossItem(item) {
-  item.style.backgroundColor = 'transparent';
+  item.classList.remove('grid-item-coloured');
   item.classList.add('grid-item-checked');
   item.coloured = 'false';
   item.checked = 'true';
 }
 
 function drawEmptyItem(item) {
-  item.style.backgroundColor = 'transparent';
+  item.classList.remove('grid-item-coloured');
   item.classList.remove('grid-item-checked');
   item.coloured = 'false';
   item.checked = 'false';
