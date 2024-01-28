@@ -7,6 +7,8 @@
   --primary-dark-rgb: 41 41 41;
   --grid-item-coloured: #000000;
   --grid-item-coloured-rgb: 0 0 0;
+  --borders: #292929;
+  --borders-rgb: 41 41 41;
   color-scheme: light;
 }
 
@@ -21,5 +23,7 @@
   --primary-dark-rgb: 244 226 227;
   --grid-item-coloured: #ffffff;
   --grid-item-coloured-rgb: 255 255 255;
+  --borders: #6a5d5e;
+  --borders-rgb: 106 93 92;
   color-scheme: dark;
 }

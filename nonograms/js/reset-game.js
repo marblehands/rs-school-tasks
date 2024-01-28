@@ -16,7 +16,7 @@ export function resetGame() {
 export function resetGridItem(item) {
   item.coloured = 'false';
   item.checked = 'false';
-  item.style.backgroundColor = 'transparent';
+  item.classList.remove('grid-item-coloured');
   item.classList.remove('grid-item-checked');
   item.removeEventListener('click', clickHandler);
   item.removeEventListener('contextmenu', clickHandler);
