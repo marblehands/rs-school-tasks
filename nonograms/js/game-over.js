@@ -3,10 +3,10 @@ import { seconds } from './timer.js';
 
 export function drawModal() {
   const modalWrapper = createBasicNode(0, 'div', 'modal');
-  const modalInfo = createBasicNode(modalWrapper, 'div', 'modal__info');
+  const modalContent = createBasicNode(modalWrapper, 'div', 'modal__content');
   // eslint-disable-next-line no-unused-vars
   const title = createBasicNode(
-    modalInfo,
+    modalContent,
     'h2',
     'modal__title',
     `Great! You have solved the nonogram in ${seconds} seconds!`

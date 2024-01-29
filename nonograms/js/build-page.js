@@ -15,7 +15,7 @@ export function createBasicNode(
   if (parent) {
     parent.append(node);
   } else {
-    document.body.append(node);
+    document.body.appendChild(node);
   }
   if (classes) {
     node.classList.add(...classes.split(' '));
