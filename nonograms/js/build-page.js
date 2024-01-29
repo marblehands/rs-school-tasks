@@ -1,5 +1,6 @@
 // import templates from './templates.js';
 // import { getMatrix } from './handle-matrix.js';
+// import { drawSettings } from './game-settings.js';
 import { clickHandler } from './handle-events.js';
 import { countHints } from './handle-matrix.js';
 import { drawWatch } from './timer.js';
@@ -13,7 +14,7 @@ export function createBasicNode(
 ) {
   const node = document.createElement(tag);
   if (parent) {
-    parent.append(node);
+    parent.appendChild(node);
   } else {
     document.body.appendChild(node);
   }

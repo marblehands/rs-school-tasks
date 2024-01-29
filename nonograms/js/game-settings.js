@@ -1,7 +1,9 @@
 import { createBasicNode } from './build-page.js';
 
-export function drawSettings() {
-  const modalWrapper = createBasicNode(0, 'div', 'modal');
+let isSettings = false;
+
+function drawSettings() {
+  const modalWrapper = createBasicNode(0, 'div', 'modal modal__settings');
   const modalContent = createBasicNode(modalWrapper, 'div', 'modal__content');
   // eslint-disable-next-line no-unused-vars
   const title = createBasicNode(
@@ -43,7 +45,7 @@ function drawRadio(form) {
     const radio = createBasicNode(
       radioWrapper,
       'input',
-      'input input__chips',
+      'form__input',
       '',
       attributes
     );
@@ -51,7 +53,7 @@ function drawRadio(form) {
     const label = createBasicNode(
       radioWrapper,
       'label',
-      'label label__radio',
+      'form__radio-label',
       `${values[i].toUpperCase()}`,
       { for: `${values[i]}` }
     );
@@ -96,4 +98,16 @@ function drawButtons(form, labels) {
       type: 'button',
     });
   });
+}
+
+export function toggleSettings(event) {
+  const btn = event.currentTarget;
+  btn.classList.toggle('checked');
+  if (!isSettings) {
+    drawSettings();
+  } else {
+    const settings = document.querySelector('.modal__settings');
+    document.body.removeChild(settings);
+  }
+  isSettings = !isSettings;
 }

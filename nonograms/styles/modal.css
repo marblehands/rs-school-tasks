@@ -39,11 +39,11 @@
   gap: 8px;
 }
 
-.form__group_radio .input {
+.form__group_radio .form__input {
   display: none;
 }
 
-.label__radio,
+.form__radio-label,
 .form__select {
   font: 16px DotGothic16, sans-serif;
   letter-spacing: 1.12px;
@@ -54,7 +54,7 @@
   border-radius: 30px;
 }
 
-.label__radio {
+.form__radio-label {
   width: 130px;
   display: flex;
   justify-content: center;
@@ -67,7 +67,7 @@
   }
 }
 
-.input:checked + .label__radio {
+.form__input:checked + .form__radio-label {
   color: var(--primary-light);
   background-color: var(--primary-dark);
   &:hover {
