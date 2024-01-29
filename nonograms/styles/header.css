@@ -46,6 +46,15 @@
   }
 }
 
+.header__btn_sound-off {
+  background: url(../assets/svg/volume-off.svg) center/40% no-repeat;
+  &:hover {
+    background: url(../assets/svg/volume-off-hover.svg) center/40% no-repeat
+      var(--primary-dark);
+    cursor: pointer;
+  }
+}
+
 .header__btn_settings {
   background: url(../assets/svg/settings.svg) center/40% no-repeat;
   &:hover {
