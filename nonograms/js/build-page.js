@@ -4,12 +4,30 @@ import { clickHandler } from './handle-events.js';
 import { countHints } from './handle-matrix.js';
 import { drawWatch } from './timer.js';
 
-export function createBasicNode(parent, tag, classes = '', content = '') {
+export function createBasicNode(
+  parent,
+  tag,
+  classes = '',
+  content = '',
+  attributes = 0
+) {
   const node = document.createElement(tag);
-  if (parent) parent.append(node);
-  if (!parent) document.body.append(node);
-  if (classes) node.className = classes;
-  if (content) node.textContent = content;
+  if (parent) {
+    parent.append(node);
+  } else {
+    document.body.append(node);
+  }
+  if (classes) {
+    node.classList.add(...classes.split(' '));
+  }
+  if (content) {
+    node.textContent = content;
+  }
+  if (attributes) {
+    Object.entries(attributes).forEach(([key, value]) =>
+      node.setAttribute(key, value)
+    );
+  }
   return node;
 }
 
