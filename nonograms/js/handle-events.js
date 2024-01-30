@@ -33,6 +33,7 @@ export function clickHandler(event) {
     if (!item.coloured || item.coloured === 'false') {
       playCellColoured();
       item.classList.add('grid-item-coloured');
+      item.classList.remove('grid-item-checked');
       item.coloured = 'true';
       item.checked = 'false';
     } else {
