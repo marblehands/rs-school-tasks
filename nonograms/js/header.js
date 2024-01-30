@@ -2,6 +2,7 @@ import { createBasicNode } from './build-page.js';
 import { changeTheme } from './change-theme.js';
 import { toggleSound } from './audio.js';
 import { toggleSettings } from './game-settings.js';
+import { toggleScore } from './score.js';
 
 export function drawHeader() {
   const headerWrapper = createBasicNode(0, 'header', 'header');
@@ -29,7 +30,6 @@ export function drawHeader() {
   );
   settingsBtn.addEventListener('click', toggleSettings);
 
-  // eslint-disable-next-line no-unused-vars
   const scoreBtn = createBasicNode(
     settingsWrapper,
     'button',
@@ -37,4 +37,5 @@ export function drawHeader() {
     '',
     { type: 'button', 'aria-label': 'open score table' }
   );
+  scoreBtn.addEventListener('click', toggleScore);
 }

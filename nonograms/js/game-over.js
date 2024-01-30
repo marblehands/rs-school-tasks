@@ -2,7 +2,7 @@ import { createBasicNode } from './build-page.js';
 import { seconds } from './timer.js';
 
 export function drawModal() {
-  const modalWrapper = createBasicNode(0, 'div', 'modal');
+  const modalWrapper = createBasicNode(0, 'div', 'modal modal__game-over');
   const modalContent = createBasicNode(modalWrapper, 'div', 'modal__content');
   // eslint-disable-next-line no-unused-vars
   const title = createBasicNode(
