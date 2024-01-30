@@ -1,9 +1,9 @@
 import { createBasicNode } from './build-page.js';
 
+export const WINS = 5;
 let isScore = false;
 
 export function drawScore() {
-  const WINS = 5;
   const modalWrapper = createBasicNode(0, 'div', 'modal modal__score');
   const modalContent = createBasicNode(modalWrapper, 'div', 'modal__content');
   // eslint-disable-next-line no-unused-vars
