@@ -1,4 +1,5 @@
 import { createBasicNode } from './build-page.js';
+import { getSavedWins } from './save-game.js';
 
 export const WINS = 5;
 let isScore = false;
@@ -9,6 +10,9 @@ export function drawScore() {
   // eslint-disable-next-line no-unused-vars
   const title = createBasicNode(modalContent, 'h2', 'modal__title', `Score`);
   drawTable(modalContent, WINS);
+  fillColumn('name');
+  fillColumn('level');
+  fillColumn('time');
 }
 
 function drawTable(parent, rows) {
@@ -29,9 +33,14 @@ function drawTable(parent, rows) {
 
 function drawRow(parent, columns) {
   const row = createBasicNode(parent, 'tr');
-  const dataAttributes = ['puzzle', 'level', 'time'];
+  const dataAttributes = ['name', 'level', 'time'];
   for (let i = 0; i < columns; i++) {
-    const cell = createBasicNode(row, 'th', 'table__cell', '--', {
+    let content = '--';
+    if (i === 2) {
+      content === '00:00';
+    }
+    // eslint-disable-next-line no-unused-vars
+    const cell = createBasicNode(row, 'td', 'table__cell', content, {
       'data-name': dataAttributes[i],
     });
   }
@@ -48,4 +57,15 @@ export function toggleScore(event) {
     document.body.removeChild(score);
   }
   isScore = !isScore;
+}
+
+function fillColumn(property) {
+  const games = getSavedWins() || 0;
+  if (games) {
+    const data = games.map((game) => game[property]);
+    const cells = document.querySelectorAll(`[data-name="${property}"]`);
+    cells.forEach((cell, index) => {
+      cell.textContent = data[index];
+    });
+  }
 }

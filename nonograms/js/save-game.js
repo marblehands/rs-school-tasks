@@ -22,7 +22,7 @@ export function getSavedGame() {
   return data;
 }
 
-function getSavedWins() {
+export function getSavedWins() {
   const data = JSON.parse(localStorage.getItem('win-marblehands')) || 0;
   return data;
 }
@@ -37,13 +37,13 @@ export function saveWinGame() {
       const itemsRemoved = data.length - WINS + 1;
       data.splice(0, itemsRemoved);
     }
-    data.push({ name: name, level: level, time: time });
+    data.push({ name, level, time });
     data.sort((a, b) => a.time - b.time);
     localStorage.setItem('win-marblehands', JSON.stringify(data));
   } else {
     localStorage.setItem(
       'win-marblehands',
-      JSON.stringify([{ name: name, level: level, time: time }])
+      JSON.stringify([{ name, level, time }])
     );
   }
 }
