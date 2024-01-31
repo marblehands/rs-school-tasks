@@ -57,15 +57,15 @@ function createRadio(parent, value, id) {
 
 export function setLevel(level) {
   switch (level) {
-    case 'Ease':
+    case 'ease':
       size = 5;
       map = templates[0][0].map;
       break;
-    case 'Medium':
+    case 'medium':
       size = 10;
       map = templates[1][0].map;
       break;
-    case 'Hard':
+    case 'hard':
       size = 15;
       map = templates[2][0].map;
       break;
@@ -74,6 +74,7 @@ export function setLevel(level) {
       map = templates[0][0].map;
       break;
   }
+  drawBoard(size, map);
   console.log('уровень: ', level);
 }
 

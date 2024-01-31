@@ -39,8 +39,6 @@ function defineModuleSize(size) {
 }
 
 export function drawBoard(size, map) {
-  const existingBoard = document.querySelector('.main');
-  if (existingBoard) document.body.removeChild(existingBoard);
   const module = defineModuleSize(size);
   // Get hints
   const hints = countHints(map);
@@ -74,7 +72,12 @@ export function drawBoard(size, map) {
   // console.log(maxLength);
 
   // Generate board
-  const main = createBasicNode(0, 'main', 'main');
+  let main = document.querySelector('.main');
+  if (main) {
+    main.innerHTML = '';
+  } else {
+    main = createBasicNode(0, 'main', 'main');
+  }
   drawWatch(main);
   const boardWrapper = createBasicNode(main, 'div', 'board-wrapper');
   boardWrapper.style.gridTemplateColumns = `${module * maxLength}px 1fr`;

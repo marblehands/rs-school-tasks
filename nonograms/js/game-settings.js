@@ -1,4 +1,5 @@
 import { createBasicNode } from './build-page.js';
+import { setLevel } from './initial-game.js';
 
 let isSettings = false;
 
@@ -22,9 +23,9 @@ function drawSettings() {
   drawRadio(form);
   drawImageSelect(form);
   const btnWrapper = createBasicNode(form, 'div', 'form__btn-wrapper');
-  drawButtons(btnWrapper, ['Play Game', 'Random Game']);
+  drawButtons(btnWrapper, ['Random Game', 'Play Game']);
 }
-
+let isChecked = 0;
 function drawRadio(form) {
   const wrapper = createBasicNode(form, 'div', 'form__group form__group_radio');
   // eslint-disable-next-line no-unused-vars
@@ -38,7 +39,7 @@ function drawRadio(form) {
       id: `${values[i]}`,
       value: `${values[i]}`,
     };
-    if (i === 0) {
+    if (i === isChecked) {
       attributes.checked = '';
     }
     // eslint-disable-next-line no-unused-vars
@@ -49,6 +50,10 @@ function drawRadio(form) {
       '',
       attributes
     );
+    radio.addEventListener('change', () => {
+      setLevel(radio.value);
+      isChecked = values.indexOf(radio.value);
+    });
     // eslint-disable-next-line no-unused-vars
     const label = createBasicNode(
       radioWrapper,

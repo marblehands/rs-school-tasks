@@ -1,7 +1,9 @@
 import { createBasicNode } from './build-page.js';
 import { seconds } from './timer.js';
+import { minutes } from './timer.js';
 
 export function drawModal() {
+  const time = seconds + minutes * 60;
   const modalWrapper = createBasicNode(0, 'div', 'modal modal__game-over');
   const modalContent = createBasicNode(modalWrapper, 'div', 'modal__content');
   // eslint-disable-next-line no-unused-vars
@@ -9,7 +11,7 @@ export function drawModal() {
     modalContent,
     'h2',
     'modal__title',
-    `Great! You have solved the nonogram in ${seconds} seconds!`
+    `Great! You have solved the nonogram in ${time} seconds!`
   );
   const footer = createBasicNode(modalWrapper, 'footer', 'footer');
   // eslint-disable-next-line no-unused-vars

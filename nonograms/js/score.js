@@ -62,10 +62,22 @@ export function toggleScore(event) {
 function fillColumn(property) {
   const games = getSavedWins() || 0;
   if (games) {
-    const data = games.map((game) => game[property]);
+    let data = games.map((game) => game[property]);
+    if (property === 'time') {
+      data = data.map((time) => formatTime(time));
+    }
     const cells = document.querySelectorAll(`[data-name="${property}"]`);
     cells.forEach((cell, index) => {
       cell.textContent = data[index];
     });
   }
+}
+
+function formatTime(str) {
+  let seconds = Number(str);
+  const minutes = Math.floor(seconds / 60);
+  const restOfSeconds = seconds % (minutes * 60) || seconds;
+  return `${minutes.toString().padStart(2, '0')}:${restOfSeconds
+    .toString()
+    .padStart(2, '0')}`;
 }
