@@ -1,59 +1,20 @@
 import templates from './templates.js';
 import { drawBoard } from './build-page.js';
-import { createBasicNode } from './build-page.js';
 import { drawHeader } from './header.js';
 import { drawGameControls } from './footer.js';
 import { resetGridItem } from './reset-game.js';
 import { clickHandler } from './handle-events.js';
 
 // Initial Variables
-export let template = templates[0][0]; //default object
-export let map = templates[0][0].map; //default image matrix
-export let size = templates[0][0].size; //default level of complexity
+export let template = templates[2][0]; //default object
+export let map = templates[2][0].map; //default image matrix
+export let size = templates[2][0].size; //default level of complexity
 
 // Initial calls for default game
 drawHeader();
 drawBoard(size, map);
 drawGameControls();
-
-export function drawControls() {
-  const levelWrapper = createBasicNode(0, 'section', 'level-wrapper');
-  // eslint-disable-next-line no-unused-vars
-  const title = createBasicNode(
-    levelWrapper,
-    'h2',
-    'headline-2',
-    'Choose Level'
-  );
-  const radioWrapper = createBasicNode(levelWrapper, 'div', 'radio-wrapper');
-  createRadio(radioWrapper, 'Easy', 'easy');
-  createRadio(radioWrapper, 'Medium', 'medium');
-  createRadio(radioWrapper, 'Hard', 'hard');
-  const continueBtn = createBasicNode(
-    levelWrapper,
-    'button',
-    'link',
-    'Confirm and Continue ->'
-  );
-  continueBtn.type = 'button';
-  continueBtn.addEventListener('click', () => {
-    drawBoard(size, map);
-  });
-}
-
-function createRadio(parent, value, id) {
-  const radioBtn = createBasicNode(parent, 'input', 'radio-input');
-  radioBtn.type = 'radio';
-  radioBtn.name = 'level';
-  radioBtn.value = value;
-  radioBtn.id = id;
-  radioBtn.addEventListener('change', () => {
-    setLevel(radioBtn.value);
-  });
-  const label = createBasicNode(parent, 'label', 'radio-btn');
-  label.htmlFor = id;
-  label.textContent = value;
-}
+setPuzzle('hash');
 
 export function setLevel(level) {
   switch (level) {
@@ -89,6 +50,7 @@ export function loadGame(state, templateData) {
 export function loadBoard(matrix, isBtnActive) {
   const gridItems = document.querySelectorAll('.count');
   const mapArr = matrix.flat();
+  console.log(mapArr);
   gridItems.forEach((item, index) => {
     resetGridItem(item);
     if (isBtnActive) {
@@ -124,4 +86,14 @@ function drawEmptyItem(item) {
   item.classList.remove('grid-item-checked');
   item.coloured = 'false';
   item.checked = 'false';
+}
+
+export function setPuzzle(name) {
+  console.log(name);
+  const arr = templates.flat();
+  const puzzle = arr.filter((item) => item.name === name);
+  template = puzzle[0];
+  map = template.map;
+  size = Number(template.size);
+  drawBoard(size, map);
 }

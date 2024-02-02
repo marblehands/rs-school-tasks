@@ -10,6 +10,7 @@
   background-color: var(--primary-light);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .modal__content {

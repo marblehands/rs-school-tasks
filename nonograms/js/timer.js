@@ -41,11 +41,6 @@ export function switchTimer(command) {
   }
 }
 
-// export function pauseTime() {
-//   isTimer = false;
-//   clearInterval(timer);
-// }
-
 export function resetWatch() {
   const timer = document.querySelector('.timer');
   timer.textContent = '00:00';

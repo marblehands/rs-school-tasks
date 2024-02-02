@@ -39,7 +39,6 @@ function defineModuleSize(size) {
 }
 
 export function drawBoard(size, map) {
-  const module = defineModuleSize(size);
   // Get hints
   const hints = countHints(map);
   let rows = hints.rows;
@@ -72,8 +71,10 @@ export function drawBoard(size, map) {
   // console.log(maxLength);
 
   // Generate board
+  const module = defineModuleSize(size);
   let main = document.querySelector('.main');
   if (main) {
+    console.log(main);
     main.innerHTML = '';
   } else {
     main = createBasicNode(0, 'main', 'main');
@@ -137,6 +138,7 @@ export function drawBoard(size, map) {
     gridItem.addEventListener('contextmenu', clickHandler);
     gridItem.style.width = `${module}px`;
     gridItem.style.height = `${module}px`;
+    console.log('test');
   }
 
   gridWrapper.style.gridTemplateRows = `repeat(${size}, 1fr)`;

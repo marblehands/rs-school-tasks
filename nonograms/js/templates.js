@@ -38,6 +38,7 @@ const templates = [
     },
     {
       size: 5,
+      level: 'easy',
       name: 'dog',
       map: [
         [0, 0, 0, 1, 0],

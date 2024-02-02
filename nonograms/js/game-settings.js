@@ -1,5 +1,9 @@
 import { createBasicNode } from './build-page.js';
 import { setLevel } from './initial-game.js';
+import { switchTimer, resetWatch } from './timer.js';
+import { size } from './initial-game.js';
+import templates from './templates.js';
+import { setPuzzle } from './initial-game.js';
 
 let isSettings = false;
 
@@ -25,6 +29,7 @@ function drawSettings() {
   const btnWrapper = createBasicNode(form, 'div', 'form__btn-wrapper');
   drawButtons(btnWrapper, ['Random Game', 'Play Game']);
 }
+
 let isChecked = 0;
 function drawRadio(form) {
   const wrapper = createBasicNode(form, 'div', 'form__group form__group_radio');
@@ -50,9 +55,8 @@ function drawRadio(form) {
       '',
       attributes
     );
-    radio.addEventListener('change', () => {
-      setLevel(radio.value);
-      isChecked = values.indexOf(radio.value);
+    radio.addEventListener('change', (event) => {
+      levelRadioHandler(event, values);
     });
     // eslint-disable-next-line no-unused-vars
     const label = createBasicNode(
@@ -63,6 +67,15 @@ function drawRadio(form) {
       { for: `${values[i]}` }
     );
   }
+}
+
+export function levelRadioHandler(event, values) {
+  const item = event.currentTarget;
+  setLevel(item.value);
+  isChecked = values.indexOf(item.value);
+  switchTimer('off');
+  resetWatch();
+  changePuzzleNames();
 }
 
 function drawImageSelect(form) {
@@ -87,11 +100,17 @@ function drawImageSelect(form) {
     name: 'image',
   });
 
-  const values = ['1', '2', '3', '4', '5'];
+  select.addEventListener('change', selectHandler);
+
+  const puzzles = getCurrentPuzzles(size)
+    .flat()
+    .map((item) => item.name);
+  console.log(puzzles);
   for (let i = 0; i < 5; i++) {
     // eslint-disable-next-line no-unused-vars
-    const option = createBasicNode(select, 'option', '', `${values[i]}`, {
-      value: `${values[i]}`,
+    const option = createBasicNode(select, 'option', '', `${puzzles[i]}`, {
+      value: `${puzzles[i]}`,
+      'data-name': 'option',
     });
   }
 }
@@ -115,4 +134,27 @@ export function toggleSettings(event) {
     document.body.removeChild(settings);
   }
   isSettings = !isSettings;
+}
+
+function getCurrentPuzzles(size) {
+  return templates.filter((item) => item.some((puzzle) => puzzle.size == size));
+}
+
+function changePuzzleNames() {
+  const options = document.querySelectorAll('[data-name="option"]');
+  const puzzles = getCurrentPuzzles(size)
+    .flat()
+    .map((item) => item.name);
+  for (let i = 0; i < 5; i++) {
+    options[i].value = puzzles[i];
+    options[i].textContent = puzzles[i];
+  }
+}
+
+function selectHandler(event) {
+  const select = event.currentTarget;
+  const index = select.selectedIndex;
+  const option = select.options[index];
+  console.log(option.value);
+  setPuzzle(option.value);
 }
