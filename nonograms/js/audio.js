@@ -1,27 +1,43 @@
+export let isSound = true;
+
+export function toggleSound(event) {
+  const button = event.currentTarget;
+  button.classList.toggle('header__btn_sound-off');
+  isSound = !isSound;
+}
+
 export function playCellColoured() {
-  const click = new Audio('./assets/audio/tap.mp3');
-  click.addEventListener('canplaythrough', () => {
-    click.play();
-  });
+  if (isSound) {
+    const click = new Audio('./assets/audio/tap.mp3');
+    click.addEventListener('canplaythrough', () => {
+      click.play();
+    });
+  }
 }
 
 export function playCellEmpty() {
-  const unclick = new Audio('./assets/audio/untap.mp3');
-  unclick.addEventListener('canplaythrough', () => {
-    unclick.play();
-  });
+  if (isSound) {
+    const unclick = new Audio('./assets/audio/untap.mp3');
+    unclick.addEventListener('canplaythrough', () => {
+      unclick.play();
+    });
+  }
 }
 
 export function playCellCross() {
-  const cross = new Audio('./assets/audio/cross.mp3');
-  cross.addEventListener('canplaythrough', () => {
-    cross.play();
-  });
+  if (isSound) {
+    const cross = new Audio('./assets/audio/cross.mp3');
+    cross.addEventListener('canplaythrough', () => {
+      cross.play();
+    });
+  }
 }
 
 export function playWinGame() {
-  const win = new Audio('./assets/audio/win.mp3');
-  win.addEventListener('canplaythrough', () => {
-    win.play();
-  });
+  if (isSound) {
+    const win = new Audio('./assets/audio/win.mp3');
+    win.addEventListener('canplaythrough', () => {
+      win.play();
+    });
+  }
 }

@@ -1,15 +1,34 @@
 // import templates from './templates.js';
 // import { getMatrix } from './handle-matrix.js';
+// import { drawSettings } from './game-settings.js';
 import { clickHandler } from './handle-events.js';
 import { countHints } from './handle-matrix.js';
 import { drawWatch } from './timer.js';
 
-export function createBasicNode(parent, tag, classes = '', content = '') {
+export function createBasicNode(
+  parent,
+  tag,
+  classes = '',
+  content = '',
+  attributes = 0
+) {
   const node = document.createElement(tag);
-  if (parent) parent.append(node);
-  if (!parent) document.body.append(node);
-  if (classes) node.className = classes;
-  if (content) node.textContent = content;
+  if (parent) {
+    parent.appendChild(node);
+  } else {
+    document.body.appendChild(node);
+  }
+  if (classes) {
+    node.classList.add(...classes.split(' '));
+  }
+  if (content) {
+    node.textContent = content;
+  }
+  if (attributes) {
+    Object.entries(attributes).forEach(([key, value]) =>
+      node.setAttribute(key, value)
+    );
+  }
   return node;
 }
 
@@ -20,9 +39,6 @@ function defineModuleSize(size) {
 }
 
 export function drawBoard(size, map) {
-  const existingBoard = document.querySelector('.main');
-  if (existingBoard) document.body.removeChild(existingBoard);
-  const module = defineModuleSize(size);
   // Get hints
   const hints = countHints(map);
   let rows = hints.rows;
@@ -55,7 +71,14 @@ export function drawBoard(size, map) {
   // console.log(maxLength);
 
   // Generate board
-  const main = createBasicNode(0, 'main', 'main');
+  const module = defineModuleSize(size);
+  let main = document.querySelector('.main');
+  if (main) {
+    console.log(main);
+    main.innerHTML = '';
+  } else {
+    main = createBasicNode(0, 'main', 'main');
+  }
   drawWatch(main);
   const boardWrapper = createBasicNode(main, 'div', 'board-wrapper');
   boardWrapper.style.gridTemplateColumns = `${module * maxLength}px 1fr`;
@@ -115,6 +138,7 @@ export function drawBoard(size, map) {
     gridItem.addEventListener('contextmenu', clickHandler);
     gridItem.style.width = `${module}px`;
     gridItem.style.height = `${module}px`;
+    console.log('test');
   }
 
   gridWrapper.style.gridTemplateRows = `repeat(${size}, 1fr)`;

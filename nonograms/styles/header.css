@@ -39,6 +39,7 @@
 
 .header__btn_sound {
   background: url(../assets/svg/volume-on.svg) center/40% no-repeat;
+  cursor: pointer;
   &:hover {
     background: url(../assets/svg/volume-on-hover.svg) center/40% no-repeat
       var(--primary-dark);
@@ -46,20 +47,48 @@
   }
 }
 
+.header__btn_sound-off {
+  background: url(../assets/svg/volume-off.svg) center/40% no-repeat;
+  cursor: pointer;
+  &:hover {
+    background: url(../assets/svg/volume-off-hover.svg) center/40% no-repeat
+      var(--primary-dark);
+  }
+}
+
 .header__btn_settings {
   background: url(../assets/svg/settings.svg) center/40% no-repeat;
+  cursor: pointer;
   &:hover {
     background: url(../assets/svg/settings-hover.svg) center/40% no-repeat
       var(--primary-dark);
+  }
+}
+
+.header__btn_settings.checked {
+  background: url(../assets/svg/settings-hover.svg) center/40% no-repeat
+    var(--primary-dark);
+  cursor: pointer;
+  &:hover {
     cursor: pointer;
   }
 }
 
 .header__btn_score {
   background: url(../assets/svg/star.svg) center/40% no-repeat;
+  cursor: pointer;
   &:hover {
     background: url(../assets/svg/star-hover.svg) center/40% no-repeat
       var(--primary-dark);
+    cursor: pointer;
+  }
+}
+
+.header__btn_score.checked {
+  background: url(../assets/svg/star-hover.svg) center/40% no-repeat
+    var(--primary-dark);
+  cursor: pointer;
+  &:hover {
     cursor: pointer;
   }
 }

@@ -2,6 +2,7 @@ import { createBasicNode } from './build-page.js';
 
 export let isTimer = false;
 export let seconds;
+export let minutes;
 let timer;
 
 export function drawWatch(main) {
@@ -19,7 +20,7 @@ export function updateTime(startTime) {
   const currentTime = Date.now();
   const diff = currentTime - startTime;
   seconds = Math.floor(diff / 1000);
-  let minutes = Math.floor(seconds / 60);
+  minutes = Math.floor(seconds / 60);
   if (minutes) seconds -= minutes * 60;
   watch.textContent = `${minutes.toString().padStart(2, '0')}:${seconds
     .toString()
@@ -39,11 +40,6 @@ export function switchTimer(command) {
     clearInterval(timer);
   }
 }
-
-// export function pauseTime() {
-//   isTimer = false;
-//   clearInterval(timer);
-// }
 
 export function resetWatch() {
   const timer = document.querySelector('.timer');

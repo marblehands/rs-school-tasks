@@ -2,6 +2,7 @@ import { getMatrix } from './handle-matrix.js';
 import { map } from './initial-game.js';
 import { drawModal } from './game-over.js';
 import { switchTimer } from './timer.js';
+import { saveWinGame } from './save-game.js';
 import {
   playCellColoured,
   playCellEmpty,
@@ -24,6 +25,7 @@ export function compareMatrix(map, currentMatrix) {
 function endGame() {
   drawModal();
   playWinGame();
+  saveWinGame();
 }
 
 export function clickHandler(event) {
@@ -33,6 +35,7 @@ export function clickHandler(event) {
     if (!item.coloured || item.coloured === 'false') {
       playCellColoured();
       item.classList.add('grid-item-coloured');
+      item.classList.remove('grid-item-checked');
       item.coloured = 'true';
       item.checked = 'false';
     } else {
