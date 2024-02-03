@@ -149,3 +149,16 @@ export function drawBoard(size, map) {
   // document.body.append(button);
   // button.style.display = 'none';
 }
+
+export function closeModal(className) {
+  const modal = document.querySelector(`.${className}`);
+  if (modal) document.body.removeChild(modal);
+  if (className === 'modal__score' && modal) {
+    const btnScore = document.querySelector('.header__btn_score');
+    btnScore.classList.remove('checked');
+  }
+  if (className === 'modal__settings' && modal) {
+    const btnSet = document.querySelector('.header__btn_settings');
+    btnSet.classList.remove('checked');
+  }
+}
