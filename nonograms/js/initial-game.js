@@ -6,37 +6,42 @@ import { resetGridItem } from './reset-game.js';
 import { clickHandler } from './handle-events.js';
 
 // Initial Variables
-export let template = templates[2][0]; //default object
-export let map = templates[2][0].map; //default image matrix
-export let size = templates[2][0].size; //default level of complexity
+export let template = templates[0][0]; //default object
+export let map = templates[0][0].map; //default image matrix
+export let size = 5; //default level of complexity
 
 // Initial calls for default game
 drawHeader();
-drawBoard(size, map);
+drawBoard(templates[0][0].size, templates[0][0].map);
 drawGameControls();
-setPuzzle('hash');
+saveSettings();
+// setPuzzle('hash');
 
 export function setLevel(level) {
+  if (!level) {
+    size = 5;
+    map = templates[0][0].map;
+  }
   switch (level) {
     case 'ease':
       size = 5;
-      map = templates[0][0].map;
+      // map = templates[0][0].map;
       break;
     case 'medium':
       size = 10;
-      map = templates[1][0].map;
+      // map = templates[1][0].map;
       break;
     case 'hard':
       size = 15;
-      map = templates[2][0].map;
+      // map = templates[2][0].map;
       break;
     default:
       size = 5;
-      map = templates[0][0].map;
+      // map = templates[0][0].map;
       break;
   }
-  drawBoard(size, map);
-  console.log('уровень: ', level);
+  // drawBoard(size, map);
+  // console.log('уровень: ', level);
 }
 
 export function loadGame(state, templateData) {
@@ -96,4 +101,9 @@ export function setPuzzle(name) {
   map = template.map;
   size = Number(template.size);
   drawBoard(size, map);
+}
+
+function saveSettings() {
+  const data = { level: 'easy', name: 'hash' };
+  localStorage.setItem('set-marblehands', JSON.stringify(data));
 }

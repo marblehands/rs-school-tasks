@@ -26,7 +26,11 @@ export function drawHeader() {
     'button',
     'header__btn header__btn_settings',
     '',
-    { type: 'button', 'aria-label': 'open game settings modal window' }
+    {
+      type: 'button',
+      'aria-label': 'open game settings modal window',
+      id: 'settings',
+    }
   );
   settingsBtn.addEventListener('click', toggleSettings);
 

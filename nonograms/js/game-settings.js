@@ -1,14 +1,18 @@
 import { createBasicNode } from './build-page.js';
 import { setLevel } from './initial-game.js';
 import { switchTimer, resetWatch } from './timer.js';
-import { size } from './initial-game.js';
 import templates from './templates.js';
 import { setPuzzle } from './initial-game.js';
+import { closeModal } from './build-page.js';
 
 let isSettings = false;
+let isChecked;
+let currentPuzzle = 'hash';
+let currentLevel = 'easy';
 
 function drawSettings() {
   const modalWrapper = createBasicNode(0, 'div', 'modal modal__settings');
+  modalWrapper.addEventListener('click', closeSettingsModal);
   const modalContent = createBasicNode(modalWrapper, 'div', 'modal__content');
   // eslint-disable-next-line no-unused-vars
   const title = createBasicNode(
@@ -27,10 +31,10 @@ function drawSettings() {
   drawRadio(form);
   drawImageSelect(form);
   const btnWrapper = createBasicNode(form, 'div', 'form__btn-wrapper');
-  drawButtons(btnWrapper, ['Random Game', 'Play Game']);
+  drawButtons(btnWrapper, ['Random Game', 'Confirm & Play']);
+  setImageInSelect();
 }
 
-let isChecked = 0;
 function drawRadio(form) {
   const wrapper = createBasicNode(form, 'div', 'form__group form__group_radio');
   // eslint-disable-next-line no-unused-vars
@@ -44,7 +48,9 @@ function drawRadio(form) {
       id: `${values[i]}`,
       value: `${values[i]}`,
     };
-    if (i === isChecked) {
+    if (isChecked && i === isChecked) {
+      attributes.checked = '';
+    } else if (i === 0) {
       attributes.checked = '';
     }
     // eslint-disable-next-line no-unused-vars
@@ -71,11 +77,19 @@ function drawRadio(form) {
 
 export function levelRadioHandler(event, values) {
   const item = event.currentTarget;
-  setLevel(item.value);
-  isChecked = values.indexOf(item.value);
-  switchTimer('off');
-  resetWatch();
+  currentLevel = item.value;
+  isChecked = Number(values.indexOf(item.value));
   changePuzzleNames();
+  if (!isChecked) {
+    currentLevel = 'easy';
+    currentPuzzle = 'hash';
+  } else if (isChecked === 1) {
+    currentLevel = 'medium';
+    currentPuzzle = 'mushroom';
+  } else {
+    currentLevel = 'hard';
+    currentPuzzle = 'peach';
+  }
 }
 
 function drawImageSelect(form) {
@@ -84,8 +98,6 @@ function drawImageSelect(form) {
     'div',
     'form__group form__group_select'
   );
-  // eslint-disable-next-line no-unused-vars
-
   // eslint-disable-next-line no-unused-vars
   const label = createBasicNode(
     wrapper,
@@ -102,10 +114,9 @@ function drawImageSelect(form) {
 
   select.addEventListener('change', selectHandler);
 
-  const puzzles = getCurrentPuzzles(size)
+  const puzzles = getCurrentPuzzles(currentLevel)
     .flat()
     .map((item) => item.name);
-  console.log(puzzles);
   for (let i = 0; i < 5; i++) {
     // eslint-disable-next-line no-unused-vars
     const option = createBasicNode(select, 'option', '', `${puzzles[i]}`, {
@@ -121,28 +132,40 @@ function drawButtons(form, labels) {
     const button = createBasicNode(form, 'button', 'form__btn', label, {
       type: 'button',
     });
+    if (label === 'Confirm & Play') {
+      button.setAttribute('id', 'confirm');
+      button.addEventListener('click', toggleSettings);
+      button.addEventListener('click', playNewGame);
+    }
   });
 }
 
-export function toggleSettings(event) {
-  const btn = event.currentTarget;
-  btn.classList.toggle('checked');
-  if (!isSettings) {
+export function toggleSettings() {
+  const btn = document.getElementById('settings');
+  const settings = document.querySelector('.modal__settings');
+  if (!settings) {
+    btn.classList.add('checked');
     drawSettings();
+    closeModal('modal__game-over');
+    closeModal('modal__score');
   } else {
-    const settings = document.querySelector('.modal__settings');
+    btn.classList.remove('checked');
     document.body.removeChild(settings);
   }
   isSettings = !isSettings;
 }
 
-function getCurrentPuzzles(size) {
-  return templates.filter((item) => item.some((puzzle) => puzzle.size == size));
+function getCurrentPuzzles(currentLevel) {
+  let level = currentLevel;
+  if (!level) level = 'easy';
+  return templates.filter((item) =>
+    item.some((puzzle) => puzzle.level == level)
+  );
 }
 
 function changePuzzleNames() {
   const options = document.querySelectorAll('[data-name="option"]');
-  const puzzles = getCurrentPuzzles(size)
+  const puzzles = getCurrentPuzzles(currentLevel)
     .flat()
     .map((item) => item.name);
   for (let i = 0; i < 5; i++) {
@@ -155,6 +178,37 @@ function selectHandler(event) {
   const select = event.currentTarget;
   const index = select.selectedIndex;
   const option = select.options[index];
-  console.log(option.value);
-  setPuzzle(option.value);
+  currentPuzzle = option.value;
+}
+
+function playNewGame() {
+  switchTimer('off');
+  resetWatch();
+  setLevel(currentLevel);
+  setPuzzle(currentPuzzle);
+  setCurrentSettings(currentLevel, currentPuzzle);
+}
+
+function closeSettingsModal(event) {
+  const target = event.currentTarget;
+  const confirmBtn = document.getElementById('confirm');
+  if (target === confirmBtn) {
+    isSettings = !isSettings;
+  }
+}
+
+function setCurrentSettings(level, name) {
+  localStorage.setItem(
+    'set-marblehands',
+    JSON.stringify({ level: `${level}`, name: `${name}` })
+  );
+}
+
+function setImageInSelect() {
+  const currImg = JSON.parse(localStorage.getItem('set-marblehands')).name;
+  const options = document.querySelectorAll('[data-name="option"]');
+  options.forEach((option) => (option.selected = false));
+  const option = Array.from(options).find((option) => option.value === currImg);
+  console.log(option);
+  if (option) option.selected = true;
 }

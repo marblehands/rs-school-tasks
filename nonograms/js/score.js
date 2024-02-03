@@ -1,5 +1,6 @@
 import { createBasicNode } from './build-page.js';
 import { getSavedWins } from './save-game.js';
+import { closeModal } from './build-page.js';
 
 export const WINS = 5;
 let isScore = false;
@@ -49,12 +50,15 @@ function drawRow(parent, columns) {
 //there is the same function toggleSettings, maybe better to refactor these two into one
 export function toggleScore(event) {
   const btn = event.currentTarget;
-  btn.classList.toggle('checked');
-  if (!isScore) {
+  const score = document.querySelector('.modal__score');
+  if (!score) {
+    btn.classList.add('checked');
     drawScore();
+    closeModal('modal__game-over');
+    closeModal('modal__settings');
   } else {
-    const score = document.querySelector('.modal__score');
     document.body.removeChild(score);
+    btn.classList.remove('checked');
   }
   isScore = !isScore;
 }
