@@ -1,5 +1,5 @@
 import { createBasicNode } from './build-page.js';
-import { getSavedWins } from './save-game.js';
+import { getSavedWins } from '../save-game.js';
 import { closeModal } from './build-page.js';
 
 export const WINS = 5;

@@ -1,14 +1,14 @@
 import { getMatrix } from './handle-matrix.js';
 import { map } from './initial-game.js';
-import { drawModal } from './game-over.js';
-import { switchTimer } from './timer.js';
+import { drawModal } from './components/game-over.js';
+import { switchTimer } from './components/timer.js';
 import { saveWinGame } from './save-game.js';
 import {
   playCellColoured,
   playCellEmpty,
   playCellCross,
   playWinGame,
-} from './audio.js';
+} from './components/audio.js';
 
 export function compareMatrix(map, currentMatrix) {
   for (let i = 0; i < map.length; i++) {

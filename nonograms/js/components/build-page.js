@@ -1,8 +1,8 @@
 // import templates from './templates.js';
 // import { getMatrix } from './handle-matrix.js';
 // import { drawSettings } from './game-settings.js';
-import { clickHandler } from './handle-events.js';
-import { countHints } from './handle-matrix.js';
+import { clickHandler } from '../handle-events.js';
+import { countHints } from '../handle-matrix.js';
 import { drawWatch } from './timer.js';
 
 export function createBasicNode(

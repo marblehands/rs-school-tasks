@@ -1,5 +1,5 @@
 import { clickHandler } from './handle-events.js';
-import { switchTimer, resetWatch } from './timer.js';
+import { switchTimer, resetWatch } from './components/timer.js';
 
 export function resetGame() {
   const gridItems = document.querySelectorAll('.count');
