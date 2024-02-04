@@ -3,7 +3,7 @@ export let currentTheme = true;
 export function changeTheme() {
   const root = document.querySelector(':root');
   root.classList.toggle('dark');
-  changeIcons(['sound', 'settings', 'score']);
+  changeIcons(['settings', 'score']);
 }
 
 function changeIcons(buttons) {

@@ -121,3 +121,7 @@
     color: var(--primary-dark);
   }
 }
+
+.form__btn_close {
+  width: 200px;
+}

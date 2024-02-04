@@ -154,11 +154,11 @@ export function closeModal(className) {
   const modal = document.querySelector(`.${className}`);
   if (modal) document.body.removeChild(modal);
   if (className === 'modal__score' && modal) {
-    const btnScore = document.querySelector('.header__btn_score');
-    btnScore.classList.remove('checked');
+    const btn = document.getElementById('score');
+    btn.classList.remove('checked');
   }
   if (className === 'modal__settings' && modal) {
-    const btnSet = document.querySelector('.header__btn_settings');
-    btnSet.classList.remove('checked');
+    const btn = document.getElementById('settings');
+    btn.classList.remove('checked');
   }
 }

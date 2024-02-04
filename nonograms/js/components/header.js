@@ -17,7 +17,11 @@ export function drawHeader() {
     'button',
     'header__btn header__btn_sound',
     '',
-    { type: 'button', 'aria-label': 'turn on and turn off sound effects' }
+    {
+      type: 'button',
+      'aria-label': 'turn on and turn off sound effects',
+      id: 'sound',
+    }
   );
   soundBtn.addEventListener('click', toggleSound);
 
@@ -39,7 +43,7 @@ export function drawHeader() {
     'button',
     'header__btn header__btn_score',
     '',
-    { type: 'button', 'aria-label': 'open score table' }
+    { type: 'button', 'aria-label': 'open score table', id: 'score' }
   );
   scoreBtn.addEventListener('click', toggleScore);
 
