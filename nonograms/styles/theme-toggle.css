@@ -18,10 +18,10 @@
   display: block;
   top: 6px;
   right: 6px;
-  width: 48px;
-  height: 48px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
-  background: url(../assets/svg/sun-light.svg) center/50% no-repeat
+  background: url(../assets/svg/sun.svg) center/50% no-repeat
     var(--primary-dark);
   transition: right 0.5s ease, transform 0.5s ease, background 0.5s ease;
 }
@@ -31,8 +31,8 @@
 }
 
 .toggle__input:checked + .toggle__label:after {
-  right: 102px;
-  background: url(../assets/svg/moon-light.svg) center/50% no-repeat
+  right: 100px;
+  background: url(../assets/svg/moon.svg) center/50% no-repeat
     var(--primary-dark);
   transform: translateX(100%);
 }
