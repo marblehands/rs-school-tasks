@@ -1,4 +1,4 @@
-let currentTheme = true;
+export let currentTheme = true;
 
 export function changeTheme() {
   const root = document.querySelector(':root');

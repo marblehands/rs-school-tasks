@@ -1,8 +1,11 @@
+import { currentTheme } from '../change-theme.js';
 export let isSound = true;
 
 export function toggleSound(event) {
   const button = event.currentTarget;
-  button.classList.toggle('header__btn_sound-off');
+  if (currentTheme) button.classList.toggle('header__btn_sound-off');
+  if (!currentTheme)
+    button.classList.toggle('header__btn_sound-off_theme-dark');
   isSound = !isSound;
 }
 

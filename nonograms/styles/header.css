@@ -43,7 +43,6 @@
   &:hover {
     background: url(../assets/svg/volume-on-hover.svg) center/40% no-repeat
       var(--primary-dark);
-    cursor: pointer;
   }
 }
 
@@ -73,7 +72,6 @@
   &.checked {
     background: url(../assets/svg/star-hover.svg) center/40% no-repeat
       var(--primary-dark);
-    cursor: pointer;
   }
 }
 
@@ -105,6 +103,15 @@
   &:hover,
   &.checked {
     background: url(../assets/svg/star.svg) center/40% no-repeat
+      var(--primary-dark);
+  }
+}
+
+.header__btn_sound-off_theme-dark {
+  background: url(../assets/svg/volume-off-hover.svg) center/40% no-repeat;
+  cursor: pointer;
+  &:hover {
+    background: url(../assets/svg/volume-off.svg) center/40% no-repeat
       var(--primary-dark);
   }
 }
