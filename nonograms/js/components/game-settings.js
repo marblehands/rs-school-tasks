@@ -1,8 +1,8 @@
 import { createBasicNode } from './build-page.js';
-import { setLevel } from './initial-game.js';
+import { setLevel } from '../initial-game.js';
 import { switchTimer, resetWatch } from './timer.js';
-import templates from './templates.js';
-import { setPuzzle } from './initial-game.js';
+import templates from '../templates.js';
+import { setPuzzle } from '../initial-game.js';
 import { closeModal } from './build-page.js';
 
 let isSettings = false;

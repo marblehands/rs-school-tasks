@@ -7,6 +7,7 @@
 @import url('modal.css');
 @import url('typography.css');
 @import url('timer.css');
+@import url('theme-toggle.css');
 
 * {
   margin: 0;
