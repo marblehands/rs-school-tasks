@@ -1,4 +1,5 @@
 import { createBasicNode } from './build-page.js';
+import { changeTheme } from '../change-theme.js';
 
 export function drawToggle(parent) {
   const wrapper = createBasicNode(parent, 'div', 'toggle__wrapper');
@@ -7,6 +8,7 @@ export function drawToggle(parent) {
     type: 'checkbox',
     id: 'theme-toggle',
   });
+  input.addEventListener('change', changeTheme);
   // eslint-disable-next-line no-unused-vars
   const label = createBasicNode(wrapper, 'label', 'toggle__label', '', {
     for: 'theme-toggle',
