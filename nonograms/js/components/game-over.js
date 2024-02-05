@@ -1,6 +1,7 @@
 import { createBasicNode } from './build-page.js';
-import { seconds } from './timer.js';
-import { minutes } from './timer.js';
+import { seconds, minutes } from './timer.js';
+import { closeModal } from './build-page.js';
+import { playNewGame } from './game-settings.js';
 
 export function drawModal() {
   const time = seconds + minutes * 60;
@@ -13,16 +14,18 @@ export function drawModal() {
     'modal__title',
     `Great! You have solved the nonogram in ${time} seconds!`
   );
-  const footer = createBasicNode(modalWrapper, 'footer', 'footer');
-  // eslint-disable-next-line no-unused-vars
-  const playBtn = createBasicNode(footer, 'a', 'link', 'Play Again');
-  // eslint-disable-next-line no-unused-vars
-  const playRandomBtn = createBasicNode(
-    footer,
-    'a',
-    'link',
-    'Play Random Game'
+  const button = createBasicNode(
+    modalContent,
+    'button',
+    'form__btn form__btn_close',
+    'Close',
+    {
+      type: 'button',
+    }
   );
-  // eslint-disable-next-line no-unused-vars
-  const scoreBtn = createBasicNode(footer, 'a', 'link', 'View High Score');
+
+  button.addEventListener('click', () => {
+    closeModal('modal__game-over');
+    playNewGame();
+  });
 }

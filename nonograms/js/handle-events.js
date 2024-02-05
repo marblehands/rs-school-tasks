@@ -1,5 +1,5 @@
 import { getMatrix } from './handle-matrix.js';
-import { map } from './initial-game.js';
+import { matrix } from './initial-game.js';
 import { drawModal } from './components/game-over.js';
 import { switchTimer } from './components/timer.js';
 import { saveWinGame } from './save-game.js';
@@ -68,6 +68,6 @@ export function clickHandler(event) {
 
 export function checkStateOfGame() {
   const currentMatrix = getMatrix();
-  const matrixComparison = compareMatrix(map, currentMatrix);
+  const matrixComparison = compareMatrix(matrix, currentMatrix);
   return matrixComparison;
 }

@@ -2,12 +2,13 @@
 @import url('fonts.css');
 @import url('buttons.css');
 @import url('header.css');
-@import url('board.css');
+@import url('new-board.css');
 @import url('footer.css');
 @import url('modal.css');
 @import url('typography.css');
 @import url('timer.css');
 @import url('theme-toggle.css');
+@import url('score-table.css');
 
 * {
   margin: 0;
@@ -15,7 +16,7 @@
   box-sizing: border-box;
 }
 
-.body {
+/* .body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -23,6 +24,16 @@
   height: 100vh;
   position: relative;
   background-color: var(--primary-light);
+} */
+
+.body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-light);
+  gap: 24px;
+  height: 100vh;
 }
 
 .main {
@@ -32,5 +43,4 @@
   gap: 24px;
   justify-content: center;
   align-items: center;
-  margin: 110px 0 40px;
 }

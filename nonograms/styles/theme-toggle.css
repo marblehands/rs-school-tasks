@@ -36,3 +36,17 @@
     var(--primary-dark);
   transform: translateX(100%);
 }
+
+@media (max-width: 640px) {
+  .toggle__label {
+    width: 96px;
+    height: 48px;
+  }
+  .toggle__label:after {
+    width: 36px;
+    height: 36px;
+  }
+  .toggle__input:checked + .toggle__label:after {
+    right: 88px;
+  }
+}

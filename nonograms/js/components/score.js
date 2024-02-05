@@ -14,6 +14,20 @@ export function drawScore() {
   fillColumn('name');
   fillColumn('level');
   fillColumn('time');
+
+  const button = createBasicNode(
+    modalContent,
+    'button',
+    'form__btn form__btn_close',
+    'Close',
+    {
+      type: 'button',
+    }
+  );
+
+  button.addEventListener('click', () => {
+    closeModal('modal__score');
+  });
 }
 
 function drawTable(parent, rows) {
@@ -33,7 +47,7 @@ function drawTable(parent, rows) {
 }
 
 function drawRow(parent, columns) {
-  const row = createBasicNode(parent, 'tr');
+  const row = createBasicNode(parent, 'tr', 'table__row');
   const dataAttributes = ['name', 'level', 'time'];
   for (let i = 0; i < columns; i++) {
     let content = '--';
@@ -41,9 +55,15 @@ function drawRow(parent, columns) {
       content === '00:00';
     }
     // eslint-disable-next-line no-unused-vars
-    const cell = createBasicNode(row, 'td', 'table__cell', content, {
-      'data-name': dataAttributes[i],
-    });
+    const cell = createBasicNode(
+      row,
+      'td',
+      `table__cell ${dataAttributes[i]}`,
+      content,
+      {
+        'data-name': dataAttributes[i],
+      }
+    );
   }
 }
 

@@ -1,21 +1,21 @@
 import templates from './templates.js';
-import { drawBoard } from './components/build-page.js';
 import { drawHeader } from './components/header.js';
 import { drawGameControls } from './components/footer.js';
 import { resetGridItem } from './reset-game.js';
 import { clickHandler } from './handle-events.js';
+import { createBoard } from './components/create-board.js';
 
 // Initial Variables
 export let template = templates[0][0]; //default object
 export let map = templates[0][0].map; //default image matrix
 export let size = 5; //default level of complexity
+export let matrix;
 
 // Initial calls for default game
 drawHeader();
-drawBoard(templates[0][0].size, templates[0][0].map);
+createBoard(templates[0][0].size, templates[0][0].map);
 drawGameControls();
 saveSettings();
-// setPuzzle('hash');
 
 export function setLevel(level) {
   if (!level) {
@@ -25,23 +25,17 @@ export function setLevel(level) {
   switch (level) {
     case 'ease':
       size = 5;
-      // map = templates[0][0].map;
       break;
     case 'medium':
       size = 10;
-      // map = templates[1][0].map;
       break;
     case 'hard':
       size = 15;
-      // map = templates[2][0].map;
       break;
     default:
       size = 5;
-      // map = templates[0][0].map;
       break;
   }
-  // drawBoard(size, map);
-  // console.log('уровень: ', level);
 }
 
 export function loadGame(state, templateData) {
@@ -94,13 +88,13 @@ function drawEmptyItem(item) {
 }
 
 export function setPuzzle(name) {
-  console.log(name);
   const arr = templates.flat();
   const puzzle = arr.filter((item) => item.name === name);
   template = puzzle[0];
   map = template.map;
+  matrix = template.matrix;
   size = Number(template.size);
-  drawBoard(size, map);
+  createBoard(size, map);
 }
 
 function saveSettings() {
