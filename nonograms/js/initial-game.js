@@ -4,6 +4,7 @@ import { drawHeader } from './components/header.js';
 import { drawGameControls } from './components/footer.js';
 import { resetGridItem } from './reset-game.js';
 import { clickHandler } from './handle-events.js';
+import { createBoard } from './components/create-board.js';
 
 // Initial Variables
 export let template = templates[0][0]; //default object
@@ -12,7 +13,8 @@ export let size = 5; //default level of complexity
 
 // Initial calls for default game
 drawHeader();
-drawBoard(templates[0][0].size, templates[0][0].map);
+// drawBoard(templates[0][0].size, templates[0][0].map);
+createBoard(templates[0][0].size, templates[0][0].map);
 drawGameControls();
 saveSettings();
 // setPuzzle('hash');
@@ -100,7 +102,7 @@ export function setPuzzle(name) {
   template = puzzle[0];
   map = template.map;
   size = Number(template.size);
-  drawBoard(size, map);
+  createBoard(size, map);
 }
 
 function saveSettings() {

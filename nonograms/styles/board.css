@@ -41,22 +41,6 @@
   border: 1px solid var(--borders);
 }
 
-/* .grid-wrapper div:nth-child(5n) {
-  border: 1px solid var(--primary-dark);
-} */
-
-/* .row-hints-wrapper .row-wrapper:nth-child(5n) {
-  border-bottom: 1px solid var(--primary-dark);
-}
-
-.column-hints-wrapper .column-wrapper:nth-child(5n) .hint-item {
-  border-right: 1px solid var(--primary-dark);
-}
-
-.grid-wrapper div:nth-child(n + 51):nth-child(-n + 60) {
-  border-top: 1px solid var(--primary-dark);
-} */
-
 .grid-item {
   border: 0.2px solid var(--borders);
 }

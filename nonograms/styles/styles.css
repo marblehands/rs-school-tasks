@@ -2,7 +2,7 @@
 @import url('fonts.css');
 @import url('buttons.css');
 @import url('header.css');
-@import url('board.css');
+@import url('new-board.css');
 @import url('footer.css');
 @import url('modal.css');
 @import url('typography.css');
@@ -15,11 +15,22 @@
   box-sizing: border-box;
 }
 
-.body {
+/* .body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  height: 100vh;
+  position: relative;
+  background-color: var(--primary-light);
+} */
+
+body {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  place-content: center;
   height: 100vh;
   position: relative;
   background-color: var(--primary-light);
