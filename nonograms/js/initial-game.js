@@ -12,11 +12,9 @@ export let size = 5; //default level of complexity
 
 // Initial calls for default game
 drawHeader();
-// drawBoard(templates[0][0].size, templates[0][0].map);
 createBoard(templates[0][0].size, templates[0][0].map);
 drawGameControls();
 saveSettings();
-// setPuzzle('hash');
 
 export function setLevel(level) {
   if (!level) {
@@ -26,23 +24,17 @@ export function setLevel(level) {
   switch (level) {
     case 'ease':
       size = 5;
-      // map = templates[0][0].map;
       break;
     case 'medium':
       size = 10;
-      // map = templates[1][0].map;
       break;
     case 'hard':
       size = 15;
-      // map = templates[2][0].map;
       break;
     default:
       size = 5;
-      // map = templates[0][0].map;
       break;
   }
-  // drawBoard(size, map);
-  // console.log('уровень: ', level);
 }
 
 export function loadGame(state, templateData) {
@@ -56,7 +48,6 @@ export function loadGame(state, templateData) {
 export function loadBoard(matrix, isBtnActive) {
   const gridItems = document.querySelectorAll('.count');
   const mapArr = matrix.flat();
-  console.log(mapArr);
   gridItems.forEach((item, index) => {
     resetGridItem(item);
     if (isBtnActive) {
@@ -95,7 +86,6 @@ function drawEmptyItem(item) {
 }
 
 export function setPuzzle(name) {
-  console.log(name);
   const arr = templates.flat();
   const puzzle = arr.filter((item) => item.name === name);
   template = puzzle[0];

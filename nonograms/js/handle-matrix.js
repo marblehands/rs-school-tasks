@@ -21,7 +21,6 @@ export function getMatrix() {
 }
 
 export function countHints(map) {
-  console.log(map);
   let rows = [];
   let columns = [];
 

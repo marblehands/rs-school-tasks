@@ -28,16 +28,4 @@ export function drawModal() {
     closeModal('modal__game-over');
     playNewGame();
   });
-  // const footer = createBasicNode(modalWrapper, 'footer', 'footer');
-  // // eslint-disable-next-line no-unused-vars
-  // const playBtn = createBasicNode(footer, 'a', 'link', 'Play Again');
-  // // eslint-disable-next-line no-unused-vars
-  // const playRandomBtn = createBasicNode(
-  //   footer,
-  //   'a',
-  //   'link',
-  //   'Play Random Game'
-  // );
-  // // eslint-disable-next-line no-unused-vars
-  // const scoreBtn = createBasicNode(footer, 'a', 'link', 'View High Score');
 }

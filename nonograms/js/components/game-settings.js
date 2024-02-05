@@ -209,6 +209,5 @@ function setImageInSelect() {
   const options = document.querySelectorAll('[data-name="option"]');
   options.forEach((option) => (option.selected = false));
   const option = Array.from(options).find((option) => option.value === currImg);
-  console.log(option);
   if (option) option.selected = true;
 }

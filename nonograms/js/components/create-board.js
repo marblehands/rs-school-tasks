@@ -147,8 +147,6 @@ function createMain() {
 
 // eslint-disable-next-line no-unused-vars
 function fillHints(data, hints) {
-  console.log(data);
-  console.log(hints);
   for (let i = 0; i < data.length; i++) {
     for (let k = 0; k < data[0].length; k++) {
       data[i][k].textContent = hints[i][k] || ' ';

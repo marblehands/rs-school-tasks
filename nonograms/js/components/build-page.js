@@ -1,6 +1,3 @@
-// import templates from './templates.js';
-// import { getMatrix } from './handle-matrix.js';
-// import { drawSettings } from './game-settings.js';
 import { clickHandler } from '../handle-events.js';
 import { countHints } from '../handle-matrix.js';
 import { drawWatch } from './timer.js';
@@ -66,15 +63,10 @@ export function drawBoard(size, map) {
     return column;
   });
 
-  // console.log(rows);
-  // console.log(columns);
-  // console.log(maxLength);
-
   // Generate board
   const module = defineModuleSize(size);
   let main = document.querySelector('.main');
   if (main) {
-    console.log(main);
     main.innerHTML = '';
   } else {
     main = createBasicNode(0, 'main', 'main');
@@ -138,16 +130,10 @@ export function drawBoard(size, map) {
     gridItem.addEventListener('contextmenu', clickHandler);
     gridItem.style.width = `${module}px`;
     gridItem.style.height = `${module}px`;
-    console.log('test');
   }
 
   gridWrapper.style.gridTemplateRows = `repeat(${size}, 1fr)`;
   gridWrapper.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
-  // const button = createBasicNode(0, 'button', 'btn-get-matrix', 'Get Matrix');
-
-  // button.addEventListener('click', () => getMatrix(size));
-  // document.body.append(button);
-  // button.style.display = 'none';
 }
 
 export function closeModal(className) {

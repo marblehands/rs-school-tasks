@@ -6,7 +6,6 @@ import { WINS } from './components/score.js';
 
 export function saveGame() {
   const currentMatrix = getMatrix();
-  console.log(currentMatrix);
   const isGameOver = checkStateOfGame();
   if (!isGameOver) {
     const data = {
