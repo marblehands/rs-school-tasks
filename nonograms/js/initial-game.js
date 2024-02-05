@@ -9,6 +9,7 @@ import { createBoard } from './components/create-board.js';
 export let template = templates[0][0]; //default object
 export let map = templates[0][0].map; //default image matrix
 export let size = 5; //default level of complexity
+export let matrix;
 
 // Initial calls for default game
 drawHeader();
@@ -48,6 +49,7 @@ export function loadGame(state, templateData) {
 export function loadBoard(matrix, isBtnActive) {
   const gridItems = document.querySelectorAll('.count');
   const mapArr = matrix.flat();
+  console.log(mapArr);
   gridItems.forEach((item, index) => {
     resetGridItem(item);
     if (isBtnActive) {
@@ -90,6 +92,7 @@ export function setPuzzle(name) {
   const puzzle = arr.filter((item) => item.name === name);
   template = puzzle[0];
   map = template.map;
+  matrix = template.matrix;
   size = Number(template.size);
   createBoard(size, map);
 }
