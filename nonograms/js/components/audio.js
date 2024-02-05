@@ -3,9 +3,23 @@ export let isSound = true;
 
 export function toggleSound(event) {
   const button = event.currentTarget;
-  if (currentTheme) button.classList.toggle('header__btn_sound-off');
-  if (!currentTheme)
-    button.classList.toggle('header__btn_sound-off_theme-dark');
+  if (currentTheme) {
+    if (isSound) {
+      button.classList.add('header__btn_sound-off');
+      button.classList.remove('header__btn_sound');
+    } else {
+      button.classList.add('header__btn_sound');
+      button.classList.remove('header__btn_sound-off');
+    }
+  } else {
+    if (isSound) {
+      button.classList.add('header__btn_sound-off_theme-dark');
+      button.classList.remove('header__btn_sound_theme-dark');
+    } else {
+      button.classList.remove('header__btn_sound-off_theme-dark');
+      button.classList.add('header__btn_sound_theme-dark');
+    }
+  }
   isSound = !isSound;
 }
 
