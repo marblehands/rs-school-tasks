@@ -8,6 +8,7 @@
 @import url('typography.css');
 @import url('timer.css');
 @import url('theme-toggle.css');
+@import url('score-table.css');
 
 * {
   margin: 0;
