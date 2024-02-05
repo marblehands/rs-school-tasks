@@ -85,14 +85,18 @@ export function toggleScore(event) {
 
 function fillColumn(property) {
   const games = getSavedWins() || 0;
+  const cells = document.querySelectorAll(`[data-name="${property}"]`);
   if (games) {
     let data = games.map((game) => game[property]);
     if (property === 'time') {
       data = data.map((time) => formatTime(time));
     }
-    const cells = document.querySelectorAll(`[data-name="${property}"]`);
     cells.forEach((cell, index) => {
-      cell.textContent = data[index];
+      if (data[index]) {
+        cell.textContent = data[index];
+      } else {
+        cell.textContent = '--';
+      }
     });
   }
 }

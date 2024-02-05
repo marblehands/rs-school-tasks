@@ -23,7 +23,7 @@ export function getSavedGame() {
 
 export function getSavedWins() {
   const data = JSON.parse(localStorage.getItem('win-marblehands')) || 0;
-  return data;
+  if (data) return data.sort((a, b) => a.time - b.time);
 }
 
 export function saveWinGame() {
@@ -37,7 +37,6 @@ export function saveWinGame() {
       data.splice(0, itemsRemoved);
     }
     data.push({ name, level, time });
-    data.sort((a, b) => a.time - b.time);
     localStorage.setItem('win-marblehands', JSON.stringify(data));
   } else {
     localStorage.setItem(
