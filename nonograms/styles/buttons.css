@@ -16,18 +16,23 @@
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
   .link {
-    font-size: 18px;
-  }
-}
-
-@media (max-width: 680px) {
-  .link {
+    /* width: calc(50% - 20px); */
+    flex-grow: 1;
+    width: 240px;
     padding: 16px;
+    font-size: 18px;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 30px;
     border: 1px solid var(--primary-dark);
+    transition: background-color 0.5s ease, color 0.5s ease;
+    &:hover {
+      text-decoration: none;
+      background-color: var(--primary-dark);
+      color: var(--primary-light);
+    }
   }
 }

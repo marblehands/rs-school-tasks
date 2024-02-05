@@ -3,6 +3,10 @@ import { countHints } from '../handle-matrix.js';
 import { drawWatch } from './timer.js';
 import { clickHandler } from '../handle-events.js';
 
+let maxLength;
+let num;
+let wrapper;
+
 export function createBoard(size, map) {
   // get the necessary data
   const hints = getHints(map);
@@ -10,7 +14,7 @@ export function createBoard(size, map) {
   const rows = hints.rows;
   // eslint-disable-next-line no-unused-vars
   const columns = hints.columns;
-  const maxLength = hints.maxLength;
+  maxLength = hints.maxLength;
   const module = size / 5;
   const main = createMain();
 
@@ -19,10 +23,11 @@ export function createBoard(size, map) {
 
   // create game board
   // main wrapper
-  const num = size + maxLength;
-  const wrapper = createBasicNode(main, 'div', 'wrapper');
-  wrapper.style.gridTemplateColumns = `calc((35vw / ${num}) * ${maxLength}) 1fr`;
-  wrapper.style.gridTemplateRows = `calc((35vw / ${num}) * ${maxLength}) 1fr`;
+  const wrapperSize = getWrapperSize();
+  num = size + maxLength;
+  wrapper = createBasicNode(main, 'div', 'wrapper');
+  wrapper.style.gridTemplateColumns = `calc((${wrapperSize}vw / ${num}) * ${maxLength}) 1fr`;
+  wrapper.style.gridTemplateRows = `calc((${wrapperSize}vw / ${num}) * ${maxLength}) 1fr`;
 
   // eslint-disable-next-line no-unused-vars
   const img = createBasicNode(wrapper, 'div', 'img-preview');
@@ -53,8 +58,7 @@ export function createBoard(size, map) {
       for (let i = 0; i < maxLength; i++) {
         const hintItem = createBasicNode(columnHints, 'div', 'hint-item');
         columnArr.push(hintItem);
-        const fontRatio = 160 / module;
-        hintItem.style.fontSize = `${fontRatio + 20}%`;
+        if (module > 1) hintItem.style.fontSize = '80%';
       }
       columnHintItems.push(columnArr);
     }
@@ -81,8 +85,7 @@ export function createBoard(size, map) {
       for (let i = 0; i < maxLength; i++) {
         const hintItem = createBasicNode(rowHints, 'div', 'hint-item');
         rowArr.push(hintItem);
-        const fontRatio = 200 / module;
-        hintItem.style.fontSize = `${fontRatio}%`;
+        if (module > 1) hintItem.style.fontSize = '80%';
       }
       rowHintItems.push(rowArr);
     }
@@ -153,3 +156,25 @@ function fillHints(data, hints) {
     }
   }
 }
+
+function getWrapperSize() {
+  const windowWidth = window.innerWidth;
+
+  if (windowWidth <= 640) {
+    return 86;
+  } else if (windowWidth <= 768) {
+    return 70;
+  } else if (windowWidth <= 900) {
+    return 60;
+  } else if (windowWidth <= 1200) {
+    return 50;
+  } else {
+    return 35;
+  }
+}
+
+window.addEventListener('resize', () => {
+  const wrapperSize = getWrapperSize();
+  wrapper.style.gridTemplateColumns = `calc((${wrapperSize}vw / ${num}) * ${maxLength}) 1fr`;
+  wrapper.style.gridTemplateRows = `calc((${wrapperSize}vw / ${num}) * ${maxLength}) 1fr`;
+});

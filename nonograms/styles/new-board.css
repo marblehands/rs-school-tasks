@@ -1,17 +1,5 @@
-* {
-  box-sizing: border-box;
-}
+@import url('variables.css');
 
-body {
-  margin: 0;
-  padding: 0;
-  display: grid;
-  place-items: center;
-  place-content: center;
-  height: 100vh;
-}
-
-/* 15x15 */
 .wrapper {
   width: 35vw;
   height: 35vw;
@@ -91,6 +79,7 @@ body {
   align-items: center;
   color: var(--primary-dark);
   font-family: DotGothic16;
+  font-size: 170%;
 }
 
 .grid-item {
@@ -109,5 +98,33 @@ body {
   background-color: var(--grid-item-coloured);
   &:hover {
     background-color: var(--primary-dark);
+  }
+}
+
+@media (max-width: 1200px) {
+  .wrapper {
+    width: 50vw;
+    height: 50vw;
+  }
+}
+
+@media (max-width: 900px) {
+  .wrapper {
+    width: 60vw;
+    height: 60vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    width: 70vw;
+    height: 70vw;
+  }
+}
+
+@media (max-width: 640px) {
+  .wrapper {
+    width: 86vw;
+    height: 86vw;
   }
 }

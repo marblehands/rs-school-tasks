@@ -4,10 +4,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 40px 40px;
-  position: fixed;
-  top: 0;
-  z-index: 1;
+  padding: 24px 24px 0 24px;
 }
 
 .logo {
@@ -116,8 +113,20 @@
   }
 }
 
-@media (max-width: 680px) {
+@media (max-width: 900px) {
   .header {
     padding: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .header__btn {
+    width: 48px;
+    height: 48px;
+  }
+  .logo {
+    min-width: 120px;
+    min-height: 48px;
+    font: 18px DotGothic16, sans-serif;
   }
 }
