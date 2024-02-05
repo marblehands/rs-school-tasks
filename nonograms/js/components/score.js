@@ -14,6 +14,20 @@ export function drawScore() {
   fillColumn('name');
   fillColumn('level');
   fillColumn('time');
+
+  const button = createBasicNode(
+    modalContent,
+    'button',
+    'form__btn form__btn_close',
+    'Close',
+    {
+      type: 'button',
+    }
+  );
+
+  button.addEventListener('click', () => {
+    closeModal('modal__score');
+  });
 }
 
 function drawTable(parent, rows) {
