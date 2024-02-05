@@ -9,7 +9,7 @@ import { createBoard } from './components/create-board.js';
 export let template = templates[0][0]; //default object
 export let map = templates[0][0].map; //default image matrix
 export let size = 5; //default level of complexity
-export let matrix;
+export let matrix = templates[0][0].matrix;
 
 // Initial calls for default game
 drawHeader();
@@ -42,6 +42,7 @@ export function loadGame(state, templateData) {
   template = templateData;
   map = templateData.map;
   size = templateData.size;
+  matrix = templateData.matrix;
 
   loadBoard(state, true);
 }
