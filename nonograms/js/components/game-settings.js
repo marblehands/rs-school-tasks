@@ -4,6 +4,7 @@ import { switchTimer, resetWatch } from './timer.js';
 import templates from '../templates.js';
 import { setPuzzle } from '../initial-game.js';
 import { closeModal } from './build-page.js';
+import { generateRandomNumber } from '../random-game.js';
 
 let isSettings = false;
 let isChecked;
@@ -137,6 +138,10 @@ function drawButtons(form, labels) {
       button.addEventListener('click', toggleSettings);
       button.addEventListener('click', playNewGame);
     }
+    if (label === 'Random Game') {
+      button.addEventListener('click', toggleSettings);
+      button.addEventListener('click', randomFunction);
+    }
   });
 }
 
@@ -161,6 +166,40 @@ function getCurrentPuzzles(currentLevel) {
   return templates.filter((item) =>
     item.some((puzzle) => puzzle.level == level)
   );
+}
+
+function getRandomNames() {
+  const names = templates.flatMap((level) =>
+    level.map((template) => template.name)
+  );
+  const max = names.length;
+  const index = generateRandomNumber(max);
+  console.log(names[index]);
+  return names[index];
+}
+
+function randomFunction() {
+  const puzzle = getRandomNames();
+  const template = templates.flatMap((level) =>
+    level.filter((template) => template.name === puzzle)
+  );
+  console.log(template);
+  currentLevel = template[0].level;
+  currentPuzzle = puzzle;
+  playNewGame();
+  isChecked = levelToNum(currentLevel);
+}
+
+function levelToNum(level) {
+  let index;
+  if (level === 'easy') {
+    index = 0;
+  } else if (level === 'medium') {
+    index = 1;
+  } else {
+    index = 2;
+  }
+  return index;
 }
 
 function changePuzzleNames() {
