@@ -181,7 +181,7 @@ function selectHandler(event) {
   currentPuzzle = option.value;
 }
 
-function playNewGame() {
+export function playNewGame() {
   switchTimer('off');
   resetWatch();
   setLevel(currentLevel);

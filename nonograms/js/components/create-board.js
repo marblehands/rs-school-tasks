@@ -98,7 +98,7 @@ export function createBoard(size, map) {
   for (let i = 0; i < module ** 2; i++) {
     const gridItemsArea = createBasicNode(gridWrapper, 'div', 'grid-area-item');
     for (let i = 0; i < 25; i++) {
-      const gridItem = createBasicNode(gridItemsArea, 'div', 'grid-item');
+      const gridItem = createBasicNode(gridItemsArea, 'div', 'grid-item count');
       gridItem.addEventListener('click', clickHandler);
       gridItem.addEventListener('contextmenu', clickHandler);
     }

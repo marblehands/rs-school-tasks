@@ -1,5 +1,4 @@
 import templates from './templates.js';
-import { drawBoard } from './components/build-page.js';
 import { drawHeader } from './components/header.js';
 import { drawGameControls } from './components/footer.js';
 import { resetGridItem } from './reset-game.js';

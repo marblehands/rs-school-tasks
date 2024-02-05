@@ -1,6 +1,7 @@
 import { createBasicNode } from './build-page.js';
-import { seconds, minutes, switchTimer } from './timer.js';
+import { seconds, minutes } from './timer.js';
 import { closeModal } from './build-page.js';
+import { playNewGame } from './game-settings.js';
 
 export function drawModal() {
   const time = seconds + minutes * 60;
@@ -25,7 +26,7 @@ export function drawModal() {
 
   button.addEventListener('click', () => {
     closeModal('modal__game-over');
-    switchTimer('off');
+    playNewGame();
   });
   // const footer = createBasicNode(modalWrapper, 'footer', 'footer');
   // // eslint-disable-next-line no-unused-vars
