@@ -50,7 +50,6 @@ export function loadGame(state, templateData) {
 export function loadBoard(matrix, isBtnActive) {
   const gridItems = document.querySelectorAll('.count');
   const mapArr = matrix.flat();
-  console.log(mapArr);
   gridItems.forEach((item, index) => {
     resetGridItem(item);
     if (isBtnActive) {

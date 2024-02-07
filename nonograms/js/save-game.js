@@ -11,6 +11,8 @@ export function saveGame() {
     const data = {
       state: currentMatrix,
       template: template,
+      seconds: seconds,
+      minutes: minutes,
     };
     localStorage.setItem('game-marblehands', JSON.stringify(data));
   }
