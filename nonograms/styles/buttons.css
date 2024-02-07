@@ -11,9 +11,14 @@
   text-transform: uppercase;
   cursor: pointer;
   transition: text-decoration 0.5s ease;
+  flex-basis: 270px;
   &:hover {
     text-decoration: underline;
   }
+}
+
+.link:nth-child(2) {
+  text-align: center;
 }
 
 @media (max-width: 1200px) {
