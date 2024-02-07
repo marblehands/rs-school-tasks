@@ -5,6 +5,9 @@ import templates from '../templates.js';
 import { setPuzzle } from '../initial-game.js';
 import { closeModal } from './build-page.js';
 import { generateRandomNumber } from '../random-game.js';
+import { getSavedGame } from '../save-game.js';
+import { loadGame } from '../initial-game.js';
+import { setSavedTimer } from './timer.js';
 
 let isSettings = false;
 let isChecked;
@@ -32,8 +35,12 @@ function drawSettings() {
   drawRadio(form);
   drawImageSelect(form);
   const btnWrapper = createBasicNode(form, 'div', 'form__btn-wrapper');
-  drawButtons(btnWrapper, ['Random Game', 'Confirm & Play']);
+  drawButtons(btnWrapper, ['Confirm & Play', 'Random Game']);
   setImageInSelect();
+  const saving = getSavedGame();
+  if (saving) {
+    drawButtons(btnWrapper, ['Continue Last Game']);
+  }
 }
 
 function drawRadio(form) {
@@ -142,6 +149,10 @@ function drawButtons(form, labels) {
       button.addEventListener('click', toggleSettings);
       button.addEventListener('click', randomFunction);
     }
+    if (label === 'Continue Last Game') {
+      button.addEventListener('click', toggleSettings);
+      button.addEventListener('click', continueLastGame);
+    }
   });
 }
 
@@ -249,4 +260,25 @@ function setImageInSelect() {
   options.forEach((option) => (option.selected = false));
   const option = Array.from(options).find((option) => option.value === currImg);
   if (option) option.selected = true;
+}
+
+function continueLastGame() {
+  const saving = getSavedGame();
+  const seconds = saving.seconds;
+  const minutes = saving.minutes;
+  const savedTimer = { seconds, minutes };
+  setSavedTimer(savedTimer);
+  switchTimer('off');
+  switchTimer('continue');
+  const template = saving.template;
+  currentLevel = template.level;
+  currentPuzzle = template.name;
+  setLevel(currentLevel);
+  setPuzzle(currentPuzzle);
+  const watch = document.querySelector('.timer');
+  watch.textContent = `${minutes.toString().padStart(2, '0')}:${seconds
+    .toString()
+    .padStart(2, '0')}`;
+  setCurrentSettings(currentLevel, currentPuzzle);
+  loadGame(saving.state, saving.template);
 }
