@@ -4,7 +4,7 @@
 
 Here is a collection of badges I earned from completing Microsoft Learn's TypeScript modules:
 
-1. **Getting Started with TypeScript**: [Badge](badge-link)
+1. **Get Started with TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/marblehands-1714/YVH7TL3R?sharingId=A6472D01C26EF99E)
 2. **Declare Variable Types in TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/ValeryDluski/HYTXXB38?sharingId=10189BC4D7E76BC1)
 3. **Implement Interfaces in TypeScript**: [Badge](badge-link)
 4. **Develop Typed Functions in TypeScript**: [Badge](badge-link)
