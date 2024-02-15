@@ -15,11 +15,11 @@ Here is a collection of badges I earned from completing Microsoft Learn's TypeSc
 
 ## Reflections
 
-<details><summary>**1. Get Started with TypeScript Module reflection**</summary>
+### Get Started with TypeScript Module reflection
 
 #### 📝 Description
 
-\*\*In this module I got a brief overview of TypeScript and its most basic key concepts. Personal reflections were written down based on the material covered.
+In this module I got a brief overview of TypeScript and its most basic key concepts. Personal reflections were written down based on the material covered.
 
 #### 💡 Key Insights
 
@@ -49,6 +49,4 @@ Here is a collection of badges I earned from completing Microsoft Learn's TypeSc
 - Simplifies code documentation.
 - Simplifies collaboration in a large team.
 - Eases development of complex applications with a large code base.
-- Great for OOP style programming
-
-</details>
+- Great for OOP style programming.
