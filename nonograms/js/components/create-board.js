@@ -1,7 +1,7 @@
-import { createBasicNode } from './build-page';
-import { countHints } from '../handle-matrix';
-import { drawWatch } from './timer';
-import { clickHandler } from '../handle-events';
+import { createBasicNode } from './build-page.js';
+import { countHints } from '../handle-matrix.js';
+import { drawWatch } from './timer.js';
+import { clickHandler } from '../handle-events.js';
 
 let maxLength;
 let num;

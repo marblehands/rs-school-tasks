@@ -1,8 +1,8 @@
-import { createBasicNode } from './build-page';
-import { toggleSound } from './audio';
-import { toggleSettings } from './game-settings';
-import { toggleScore } from './score';
-import { drawToggle } from './theme-toggle';
+import { createBasicNode } from './build-page.js';
+import { toggleSound } from './audio.js';
+import { toggleSettings } from './game-settings.js';
+import { toggleScore } from './score.js';
+import { drawToggle } from './theme-toggle.js';
 
 export function drawHeader() {
   const headerWrapper = createBasicNode(0, 'header', 'header');

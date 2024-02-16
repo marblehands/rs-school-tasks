@@ -1,8 +1,8 @@
-import { checkStateOfGame } from './handle-events';
-import { getMatrix } from './handle-matrix';
-import { template } from './initial-game';
-import { seconds, minutes } from './components/timer';
-import { WINS } from './components/score';
+import { checkStateOfGame } from './handle-events.js';
+import { getMatrix } from './handle-matrix.js';
+import { template } from './initial-game.js';
+import { seconds, minutes } from './components/timer.js';
+import { WINS } from './components/score.js';
 
 export function saveGame() {
   const currentMatrix = getMatrix();

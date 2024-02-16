@@ -1,5 +1,5 @@
-import { clickHandler } from './handle-events';
-import { switchTimer, resetWatch } from './components/timer';
+import { clickHandler } from './handle-events.js';
+import { switchTimer, resetWatch } from './components/timer.js';
 
 export function resetGridItem(item) {
   item.coloured = 'false';

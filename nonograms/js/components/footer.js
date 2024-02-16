@@ -1,7 +1,7 @@
-import { createBasicNode } from './build-page';
-import { resetGame } from '../reset-game';
-import { saveGame } from '../save-game';
-import { showSolution } from '../show-solution';
+import { createBasicNode } from './build-page.js';
+import { resetGame } from '../reset-game.js';
+import { saveGame } from '../save-game.js';
+import { showSolution } from '../show-solution.js';
 
 export function drawGameControls() {
   const footer = createBasicNode(0, 'footer', 'footer');

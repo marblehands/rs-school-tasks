@@ -1,5 +1,5 @@
-import { createBasicNode, closeModal } from './build-page';
-import { getSavedWins } from '../save-game';
+import { createBasicNode, closeModal } from './build-page.js';
+import { getSavedWins } from '../save-game.js';
 
 export const WINS = 5;
 let isScore = false;

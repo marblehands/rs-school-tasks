@@ -1,5 +1,5 @@
-import { getSavedGame } from './save-game';
-import { loadGame } from './initial-game';
+import { getSavedGame } from './save-game.js';
+import { loadGame } from './initial-game.js';
 
 export function continueGame() {
   const saving = getSavedGame();

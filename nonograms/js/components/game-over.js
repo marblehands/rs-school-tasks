@@ -1,6 +1,6 @@
-import { createBasicNode, closeModal } from './build-page';
-import { seconds, minutes } from './timer';
-import { playNewGame } from './game-settings';
+import { createBasicNode, closeModal } from './build-page.js';
+import { seconds, minutes } from './timer.js';
+import { playNewGame } from './game-settings.js';
 
 export function drawModal() {
   const time = seconds + minutes * 60;

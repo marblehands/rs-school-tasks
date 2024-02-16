@@ -1,4 +1,4 @@
-import { currentTheme } from '../change-theme';
+import { currentTheme } from '../change-theme.js';
 
 export let isSound = true;
 

@@ -1,4 +1,4 @@
-import { createBasicNode } from './build-page';
+import { createBasicNode } from './build-page.js';
 
 export let isTimer = false;
 export let seconds;

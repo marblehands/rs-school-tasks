@@ -1,6 +1,6 @@
-import { clickHandler } from '../handle-events';
-import { countHints } from '../handle-matrix';
-import { drawWatch } from './timer';
+import { clickHandler } from '../handle-events.js';
+import { countHints } from '../handle-matrix.js';
+import { drawWatch } from './timer.js';
 
 export function createBasicNode(
   parent,

@@ -1,5 +1,5 @@
-import { createBasicNode } from './build-page';
-import { changeTheme } from '../change-theme';
+import { createBasicNode } from './build-page.js';
+import { changeTheme } from '../change-theme.js';
 
 export function drawToggle(parent) {
   const wrapper = createBasicNode(parent, 'div', 'toggle__wrapper');
