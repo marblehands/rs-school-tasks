@@ -1,4 +1,5 @@
-import { currentTheme } from '../change-theme.js';
+import { currentTheme } from '../change-theme';
+
 export let isSound = true;
 
 export function toggleSound(event) {

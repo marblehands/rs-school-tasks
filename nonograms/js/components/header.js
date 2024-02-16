@@ -1,8 +1,8 @@
-import { createBasicNode } from './build-page.js';
-import { toggleSound } from './audio.js';
-import { toggleSettings } from './game-settings.js';
-import { toggleScore } from './score.js';
-import { drawToggle } from './theme-toggle.js';
+import { createBasicNode } from './build-page';
+import { toggleSound } from './audio';
+import { toggleSettings } from './game-settings';
+import { toggleScore } from './score';
+import { drawToggle } from './theme-toggle';
 
 export function drawHeader() {
   const headerWrapper = createBasicNode(0, 'header', 'header');
@@ -21,7 +21,7 @@ export function drawHeader() {
       type: 'button',
       'aria-label': 'turn on and turn off sound effects',
       id: 'sound',
-    }
+    },
   );
   soundBtn.addEventListener('click', toggleSound);
 
@@ -34,7 +34,7 @@ export function drawHeader() {
       type: 'button',
       'aria-label': 'open game settings modal window',
       id: 'settings',
-    }
+    },
   );
   settingsBtn.addEventListener('click', toggleSettings);
 
@@ -43,7 +43,7 @@ export function drawHeader() {
     'button',
     'header__btn header__btn_score',
     '',
-    { type: 'button', 'aria-label': 'open score table', id: 'score' }
+    { type: 'button', 'aria-label': 'open score table', id: 'score' },
   );
   scoreBtn.addEventListener('click', toggleScore);
 

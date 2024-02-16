@@ -1,5 +1,14 @@
-import { clickHandler } from './handle-events.js';
-import { switchTimer, resetWatch } from './components/timer.js';
+import { clickHandler } from './handle-events';
+import { switchTimer, resetWatch } from './components/timer';
+
+export function resetGridItem(item) {
+  item.coloured = 'false';
+  item.checked = 'false';
+  item.classList.remove('grid-item-coloured');
+  item.classList.remove('grid-item-checked');
+  item.removeEventListener('click', clickHandler);
+  item.removeEventListener('contextmenu', clickHandler);
+}
 
 export function resetGame() {
   const gridItems = document.querySelectorAll('.count');
@@ -11,13 +20,4 @@ export function resetGame() {
   });
   switchTimer('off');
   resetWatch();
-}
-
-export function resetGridItem(item) {
-  item.coloured = 'false';
-  item.checked = 'false';
-  item.classList.remove('grid-item-coloured');
-  item.classList.remove('grid-item-checked');
-  item.removeEventListener('click', clickHandler);
-  item.removeEventListener('contextmenu', clickHandler);
 }

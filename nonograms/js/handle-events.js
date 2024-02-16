@@ -1,14 +1,14 @@
-import { getMatrix } from './handle-matrix.js';
-import { matrix } from './initial-game.js';
-import { drawModal } from './components/game-over.js';
-import { switchTimer } from './components/timer.js';
-import { saveWinGame } from './save-game.js';
+import { getMatrix } from './handle-matrix';
+import { matrix } from './initial-game';
+import { drawModal } from './components/game-over';
+import { switchTimer } from './components/timer';
+import { saveWinGame } from './save-game';
 import {
   playCellColoured,
   playCellEmpty,
   playCellCross,
   playWinGame,
-} from './components/audio.js';
+} from './components/audio';
 
 export function compareMatrix(map, currentMatrix) {
   for (let i = 0; i < map.length; i++) {
@@ -26,6 +26,12 @@ function endGame() {
   drawModal();
   playWinGame();
   saveWinGame();
+}
+
+export function checkStateOfGame() {
+  const currentMatrix = getMatrix();
+  const matrixComparison = compareMatrix(matrix, currentMatrix);
+  return matrixComparison;
 }
 
 export function clickHandler(event) {
@@ -64,10 +70,4 @@ export function clickHandler(event) {
   switchTimer('on');
   const isGameOver = checkStateOfGame();
   if (isGameOver) setTimeout(endGame, 450);
-}
-
-export function checkStateOfGame() {
-  const currentMatrix = getMatrix();
-  const matrixComparison = compareMatrix(matrix, currentMatrix);
-  return matrixComparison;
 }

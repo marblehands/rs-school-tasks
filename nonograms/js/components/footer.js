@@ -1,7 +1,7 @@
-import { createBasicNode } from './build-page.js';
-import { resetGame } from '../reset-game.js';
-import { saveGame } from '../save-game.js';
-import { showSolution } from '../show-solution.js';
+import { createBasicNode } from './build-page';
+import { resetGame } from '../reset-game';
+import { saveGame } from '../save-game';
+import { showSolution } from '../show-solution';
 
 export function drawGameControls() {
   const footer = createBasicNode(0, 'footer', 'footer');
@@ -14,12 +14,4 @@ export function drawGameControls() {
 
   const saveBtn = createBasicNode(footer, 'a', 'link', 'Save Current Game');
   saveBtn.addEventListener('click', saveGame);
-
-  // const continueBtn = createBasicNode(
-  //   footer,
-  //   'a',
-  //   'link',
-  //   'Continue Last Game'
-  // );
-  // continueBtn.addEventListener('click', continueGame);
 }

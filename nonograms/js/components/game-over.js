@@ -1,7 +1,6 @@
-import { createBasicNode } from './build-page.js';
-import { seconds, minutes } from './timer.js';
-import { closeModal } from './build-page.js';
-import { playNewGame } from './game-settings.js';
+import { createBasicNode, closeModal } from './build-page';
+import { seconds, minutes } from './timer';
+import { playNewGame } from './game-settings';
 
 export function drawModal() {
   const time = seconds + minutes * 60;
@@ -12,7 +11,7 @@ export function drawModal() {
     modalContent,
     'h2',
     'modal__title',
-    `Great! You have solved the nonogram in ${time} seconds!`
+    `Great! You have solved the nonogram in ${time} seconds!`,
   );
   const button = createBasicNode(
     modalContent,
@@ -21,7 +20,7 @@ export function drawModal() {
     'Close',
     {
       type: 'button',
-    }
+    },
   );
 
   button.addEventListener('click', () => {

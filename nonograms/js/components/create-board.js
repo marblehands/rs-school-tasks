@@ -1,7 +1,7 @@
-import { createBasicNode } from './build-page.js';
-import { countHints } from '../handle-matrix.js';
-import { drawWatch } from './timer.js';
-import { clickHandler } from '../handle-events.js';
+import { createBasicNode } from './build-page';
+import { countHints } from '../handle-matrix';
+import { drawWatch } from './timer';
+import { clickHandler } from '../handle-events';
 
 let maxLength;
 let num;
@@ -11,9 +11,9 @@ export function createBoard(size, map) {
   // get the necessary data
   const hints = getHints(map);
   // eslint-disable-next-line no-unused-vars
-  const rows = hints.rows;
+  const { rows } = hints;
   // eslint-disable-next-line no-unused-vars
-  const columns = hints.columns;
+  const { columns } = hints;
   maxLength = hints.maxLength;
   const module = size / 5;
   const main = createMain();
@@ -36,25 +36,25 @@ export function createBoard(size, map) {
   const columnHintsWrapper = createBasicNode(
     wrapper,
     'div',
-    'column-hints-wrapper'
+    'column-hints-wrapper',
   );
   columnHintsWrapper.style.gridTemplateColumns = `repeat(${module}, 1fr)`;
 
-  let columnHintItems = [];
+  const columnHintItems = [];
   for (let i = 0; i < module; i++) {
     const columnHintsArea = createBasicNode(
       columnHintsWrapper,
       'div',
-      'column-hints-area'
+      'column-hints-area',
     );
     for (let i = 0; i < 5; i++) {
       const columnHints = createBasicNode(
         columnHintsArea,
         'div',
-        'column-hints'
+        'column-hints',
       );
       columnHints.style.gridTemplateRows = `repeat(${maxLength}, 1fr)`;
-      let columnArr = [];
+      const columnArr = [];
       for (let i = 0; i < maxLength; i++) {
         const hintItem = createBasicNode(columnHints, 'div', 'hint-item');
         columnArr.push(hintItem);
@@ -71,17 +71,17 @@ export function createBoard(size, map) {
   const rowHintsWrapper = createBasicNode(wrapper, 'div', 'row-hints-wrapper');
   rowHintsWrapper.style.gridTemplateRows = `repeat(${module}, 1fr)`;
 
-  let rowHintItems = [];
+  const rowHintItems = [];
   for (let i = 0; i < module; i++) {
     const rowHintsArea = createBasicNode(
       rowHintsWrapper,
       'div',
-      'row-hints-area'
+      'row-hints-area',
     );
     for (let i = 0; i < 5; i++) {
       const rowHints = createBasicNode(rowHintsArea, 'div', 'row-hints');
       rowHints.style.gridTemplateColumns = `repeat(${maxLength}, 1fr)`;
-      let rowArr = [];
+      const rowArr = [];
       for (let i = 0; i < maxLength; i++) {
         const hintItem = createBasicNode(rowHints, 'div', 'hint-item');
         rowArr.push(hintItem);
@@ -100,7 +100,7 @@ export function createBoard(size, map) {
   gridWrapper.style.gridTemplateRows = `repeat(${module}, 1fr)`;
   for (let i = 0; i < module ** 2; i++) {
     const gridItemsArea = createBasicNode(gridWrapper, 'div', 'grid-area-item');
-    for (let i = 0; i < 25; i++) {
+    for (let j = 0; j < 25; j++) {
       const gridItem = createBasicNode(gridItemsArea, 'div', 'grid-item count');
       gridItem.addEventListener('click', clickHandler);
       gridItem.addEventListener('contextmenu', clickHandler);
@@ -110,10 +110,10 @@ export function createBoard(size, map) {
 
 export function getHints(map) {
   const hints = countHints(map);
-  let rows = hints.rows;
-  let columns = hints.columns;
+  let { rows } = hints;
+  let { columns } = hints;
 
-  let maxLength = 0;
+  maxLength = 0;
   rows.forEach((row) => {
     maxLength = row.length > maxLength ? row.length : maxLength;
   });

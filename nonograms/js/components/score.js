@@ -1,6 +1,5 @@
-import { createBasicNode } from './build-page.js';
-import { getSavedWins } from '../save-game.js';
-import { closeModal } from './build-page.js';
+import { createBasicNode, closeModal } from './build-page';
+import { getSavedWins } from '../save-game';
 
 export const WINS = 5;
 let isScore = false;
@@ -9,7 +8,7 @@ export function drawScore() {
   const modalWrapper = createBasicNode(0, 'div', 'modal modal__score');
   const modalContent = createBasicNode(modalWrapper, 'div', 'modal__content');
   // eslint-disable-next-line no-unused-vars
-  const title = createBasicNode(modalContent, 'h2', 'modal__title', `Score`);
+  const title = createBasicNode(modalContent, 'h2', 'modal__title', 'Score');
   drawTable(modalContent, WINS);
   fillColumn('name');
   fillColumn('level');
@@ -22,7 +21,7 @@ export function drawScore() {
     'Close',
     {
       type: 'button',
-    }
+    },
   );
 
   button.addEventListener('click', () => {
@@ -36,7 +35,7 @@ function drawTable(parent, rows) {
   const tr = createBasicNode(thead, 'tr', 'table__header');
   const titles = ['Puzzle', 'Difficulty', 'Time'];
   titles.forEach((title) =>
-    createBasicNode(tr, 'th', 'table__headline', title)
+    createBasicNode(tr, 'th', 'table__headline', title),
   );
   const tbody = createBasicNode(table, 'tbody');
   let count = rows;
@@ -52,7 +51,7 @@ function drawRow(parent, columns) {
   for (let i = 0; i < columns; i++) {
     let content = '--';
     if (i === 2) {
-      content === '00:00';
+      content = '00:00';
     }
     // eslint-disable-next-line no-unused-vars
     const cell = createBasicNode(
@@ -62,12 +61,12 @@ function drawRow(parent, columns) {
       content,
       {
         'data-name': dataAttributes[i],
-      }
+      },
     );
   }
 }
 
-//there is the same function toggleSettings, maybe better to refactor these two into one
+// there is the same function toggleSettings, maybe better to refactor these two into one
 export function toggleScore(event) {
   const btn = event.currentTarget;
   const score = document.querySelector('.modal__score');
@@ -102,7 +101,7 @@ function fillColumn(property) {
 }
 
 function formatTime(str) {
-  let seconds = Number(str);
+  const seconds = Number(str);
   const minutes = Math.floor(seconds / 60);
   const restOfSeconds = seconds % (minutes * 60) || seconds;
   return `${minutes.toString().padStart(2, '0')}:${restOfSeconds

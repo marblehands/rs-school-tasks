@@ -1,9 +1,9 @@
-import templates from './templates.js';
-import { drawHeader } from './components/header.js';
-import { drawGameControls } from './components/footer.js';
-import { resetGridItem } from './reset-game.js';
-import { clickHandler } from './handle-events.js';
-import { createBoard } from './components/create-board.js';
+import templates from './templates';
+import { drawHeader } from './components/header';
+import { drawGameControls } from './components/footer';
+import { resetGridItem } from './reset-game';
+import { clickHandler } from './handle-events';
+import { createBoard } from './components/create-board';
 
 // Initial Variables
 export let template = templates[0][0]; //default object

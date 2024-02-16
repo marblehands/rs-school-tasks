@@ -1,7 +1,7 @@
 export function getMatrix() {
   const gridItems = document.querySelectorAll('.count');
   const size = Math.sqrt(Array.from(gridItems).length);
-  let arr = [];
+  const arr = [];
   Array.from(gridItems).map((item) => {
     if (item.coloured === 'true') {
       arr.push(1);
@@ -12,8 +12,8 @@ export function getMatrix() {
     }
     return item;
   });
-  let matrix = [];
-  let limitNum = size ** 2 - (size - 1);
+  const matrix = [];
+  const limitNum = size ** 2 - (size - 1);
   for (let i = 0; i < limitNum; i += size) {
     matrix.push(arr.slice(i, i + size));
   }
@@ -21,11 +21,11 @@ export function getMatrix() {
 }
 
 export function countHints(map) {
-  let rows = [];
-  let columns = [];
+  const rows = [];
+  const columns = [];
 
   for (let i = 0; i < map.length; i++) {
-    let rowHints = [];
+    const rowHints = [];
     let count = 0;
     for (let k = 0; k < map.length; k++) {
       if (map[i][k]) {
@@ -42,7 +42,7 @@ export function countHints(map) {
   }
 
   for (let i = 0; i < map.length; i++) {
-    let columnHints = [];
+    const columnHints = [];
     let count = 0;
     for (let k = 0; k < map.length; k++) {
       if (map[k][i]) {
@@ -57,5 +57,5 @@ export function countHints(map) {
     }
     columns.push(columnHints);
   }
-  return { rows: rows, columns: columns };
+  return { rows, columns };
 }

@@ -1,11 +1,10 @@
-import { getSavedGame } from './save-game.js';
-import { loadGame } from './initial-game.js';
+import { getSavedGame } from './save-game';
+import { loadGame } from './initial-game';
 
 export function continueGame() {
   const saving = getSavedGame();
   if (saving) {
-    const state = saving.state;
-    const templateData = saving.template;
+    const { state, templateData } = saving;
     loadGame(state, templateData);
   }
 }

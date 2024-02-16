@@ -1,6 +1,5 @@
-import { matrix } from './initial-game.js';
-import { switchTimer } from './components/timer.js';
-import { loadBoard } from './initial-game.js';
+import { matrix, loadBoard } from './initial-game';
+import { switchTimer } from './components/timer';
 
 export function showSolution() {
   loadBoard(matrix, false);

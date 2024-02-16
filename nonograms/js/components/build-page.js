@@ -1,6 +1,6 @@
-import { clickHandler } from '../handle-events.js';
-import { countHints } from '../handle-matrix.js';
-import { drawWatch } from './timer.js';
+import { clickHandler } from '../handle-events';
+import { countHints } from '../handle-matrix';
+import { drawWatch } from './timer';
 
 export function createBasicNode(
   parent,
@@ -38,8 +38,8 @@ function defineModuleSize(size) {
 export function drawBoard(size, map) {
   // Get hints
   const hints = countHints(map);
-  let rows = hints.rows;
-  let columns = hints.columns;
+  let { rows } = hints;
+  let { columns } = hints;
 
   let maxLength = 0;
   rows.forEach((row) => {
@@ -90,7 +90,7 @@ export function drawBoard(size, map) {
       'column-wrapper',
     );
     for (let k = 0; k < maxLength; k++) {
-      let content = columns[i][k] || ' ';
+      const content = columns[i][k] || ' ';
       const hintItem = createBasicNode(
         columnWrapper,
         'div',
@@ -111,7 +111,7 @@ export function drawBoard(size, map) {
   for (let i = 0; i < size; i++) {
     const rowWrapper = createBasicNode(rowHintsWrapper, 'div', 'row-wrapper');
     for (let k = 0; k < maxLength; k++) {
-      let content = rows[i][k] || ' ';
+      const content = rows[i][k] || ' ';
       const hintItem = createBasicNode(
         rowWrapper,
         'div',

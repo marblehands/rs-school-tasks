@@ -1,4 +1,4 @@
-import { createBasicNode } from './build-page.js';
+import { createBasicNode } from './build-page';
 
 export let isTimer = false;
 export let seconds;
@@ -9,7 +9,7 @@ let timer;
 export function drawWatch(main) {
   const wrapper = createBasicNode(main, 'div', 'timer__wrapper');
   // eslint-disable-next-line no-unused-vars
-  const timer = createBasicNode(wrapper, 'span', 'timer', '00:00');
+  const timerElement = createBasicNode(wrapper, 'span', 'timer', '00:00');
 }
 
 export function updateTime(startTime) {
@@ -47,8 +47,8 @@ export function switchTimer(command) {
 }
 
 export function resetWatch() {
-  const timer = document.querySelector('.timer');
-  timer.textContent = '00:00';
+  const watch = document.querySelector('.timer');
+  watch.textContent = '00:00';
 }
 
 export function setSavedTimer(time) {

@@ -1,8 +1,8 @@
-import { checkStateOfGame } from './handle-events.js';
-import { getMatrix } from './handle-matrix.js';
-import { template } from './initial-game.js';
-import { seconds, minutes } from './components/timer.js';
-import { WINS } from './components/score.js';
+import { checkStateOfGame } from './handle-events';
+import { getMatrix } from './handle-matrix';
+import { template } from './initial-game';
+import { seconds, minutes } from './components/timer';
+import { WINS } from './components/score';
 
 export function saveGame() {
   const currentMatrix = getMatrix();
@@ -10,9 +10,9 @@ export function saveGame() {
   if (!isGameOver) {
     const data = {
       state: currentMatrix,
-      template: template,
-      seconds: seconds,
-      minutes: minutes,
+      template,
+      seconds,
+      minutes,
     };
     localStorage.setItem('game-marblehands', JSON.stringify(data));
   }
@@ -29,8 +29,7 @@ export function getSavedWins() {
 }
 
 export function saveWinGame() {
-  const name = template.name;
-  const level = template.level;
+  const { name, level } = template;
   const time = minutes * 60 + seconds;
   const data = getSavedWins();
   if (data) {
@@ -43,7 +42,7 @@ export function saveWinGame() {
   } else {
     localStorage.setItem(
       'win-marblehands',
-      JSON.stringify([{ name, level, time }])
+      JSON.stringify([{ name, level, time }]),
     );
   }
 }

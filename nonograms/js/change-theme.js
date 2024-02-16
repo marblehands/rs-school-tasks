@@ -1,4 +1,4 @@
-import { isSound } from './components/audio.js';
+import { isSound } from './components/audio';
 
 export let currentTheme = true;
 

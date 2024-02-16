@@ -23,14 +23,14 @@ function drawSettings() {
     modalContent,
     'h2',
     'modal__title',
-    'Game Settings'
+    'Game Settings',
   );
   const form = createBasicNode(
     modalContent,
     'form',
     'form form__settings',
     '',
-    { action: '#' }
+    { action: '#' },
   );
   drawRadio(form);
   drawImageSelect(form);
@@ -67,7 +67,7 @@ function drawRadio(form) {
       'input',
       'form__input',
       '',
-      attributes
+      attributes,
     );
     radio.addEventListener('change', (event) => {
       levelRadioHandler(event, values);
@@ -78,7 +78,7 @@ function drawRadio(form) {
       'label',
       'form__radio-label',
       `${values[i].toUpperCase()}`,
-      { for: `${values[i]}` }
+      { for: `${values[i]}` },
     );
   }
 }
@@ -104,7 +104,7 @@ function drawImageSelect(form) {
   const wrapper = createBasicNode(
     form,
     'div',
-    'form__group form__group_select'
+    'form__group form__group_select',
   );
   // eslint-disable-next-line no-unused-vars
   const label = createBasicNode(
@@ -112,7 +112,7 @@ function drawImageSelect(form) {
     'label',
     'form__label',
     'Choose image:',
-    { for: 'image' }
+    { for: 'image' },
   );
 
   const select = createBasicNode(wrapper, 'select', 'form__select', '', {
@@ -147,7 +147,7 @@ function drawButtons(form, labels) {
     }
     if (label === 'Random Game') {
       button.addEventListener('click', toggleSettings);
-      button.addEventListener('click', randomFunction);
+      button.addEventListener('click', loadRandomGame);
     }
     if (label === 'Continue Last Game') {
       button.addEventListener('click', toggleSettings);
@@ -175,26 +175,24 @@ function getCurrentPuzzles(currentLevel) {
   let level = currentLevel;
   if (!level) level = 'easy';
   return templates.filter((item) =>
-    item.some((puzzle) => puzzle.level == level)
+    item.some((puzzle) => puzzle.level == level),
   );
 }
 
 function getRandomNames() {
   const names = templates.flatMap((level) =>
-    level.map((template) => template.name)
+    level.map((template) => template.name),
   );
   const max = names.length;
   const index = generateRandomNumber(max);
-  console.log(names[index]);
   return names[index];
 }
 
-function randomFunction() {
+function loadRandomGame() {
   const puzzle = getRandomNames();
   const template = templates.flatMap((level) =>
-    level.filter((template) => template.name === puzzle)
+    level.filter((template) => template.name === puzzle),
   );
-  console.log(template);
   currentLevel = template[0].level;
   currentPuzzle = puzzle;
   playNewGame();
@@ -250,7 +248,7 @@ function closeSettingsModal(event) {
 function setCurrentSettings(level, name) {
   localStorage.setItem(
     'set-marblehands',
-    JSON.stringify({ level: `${level}`, name: `${name}` })
+    JSON.stringify({ level: `${level}`, name: `${name}` }),
   );
 }
 
@@ -264,13 +262,11 @@ function setImageInSelect() {
 
 function continueLastGame() {
   const saving = getSavedGame();
-  const seconds = saving.seconds;
-  const minutes = saving.minutes;
+  const { seconds, minutes, template } = saving;
   const savedTimer = { seconds, minutes };
   setSavedTimer(savedTimer);
   switchTimer('off');
   switchTimer('continue');
-  const template = saving.template;
   currentLevel = template.level;
   currentPuzzle = template.name;
   setLevel(currentLevel);
