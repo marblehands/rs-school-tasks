@@ -7,7 +7,7 @@ export function createBasicNode(
   tag,
   classes = '',
   content = '',
-  attributes = 0
+  attributes = 0,
 ) {
   const node = document.createElement(tag);
   if (parent) {
@@ -23,7 +23,7 @@ export function createBasicNode(
   }
   if (attributes) {
     Object.entries(attributes).forEach(([key, value]) =>
-      node.setAttribute(key, value)
+      node.setAttribute(key, value),
     );
   }
   return node;
@@ -80,14 +80,14 @@ export function drawBoard(size, map) {
   const columnHintsWrapper = createBasicNode(
     boardWrapper,
     'div',
-    'column-hints-wrapper'
+    'column-hints-wrapper',
   );
 
   for (let i = 0; i < size; i++) {
     const columnWrapper = createBasicNode(
       columnHintsWrapper,
       'div',
-      'column-wrapper'
+      'column-wrapper',
     );
     for (let k = 0; k < maxLength; k++) {
       let content = columns[i][k] || ' ';
@@ -95,7 +95,7 @@ export function drawBoard(size, map) {
         columnWrapper,
         'div',
         'hint-item grid-item',
-        content
+        content,
       );
       hintItem.style.width = `${module}px`;
       hintItem.style.height = `${module}px`;
@@ -105,7 +105,7 @@ export function drawBoard(size, map) {
   const rowHintsWrapper = createBasicNode(
     boardWrapper,
     'div',
-    'row-hints-wrapper'
+    'row-hints-wrapper',
   );
 
   for (let i = 0; i < size; i++) {
@@ -116,7 +116,7 @@ export function drawBoard(size, map) {
         rowWrapper,
         'div',
         'hint-item grid-item',
-        content
+        content,
       );
       hintItem.style.width = `${module}px`;
       hintItem.style.height = `${module}px`;
