@@ -15,7 +15,7 @@ Here is a collection of badges I earned from completing Microsoft Learn's TypeSc
 
 ## Reflections
 
-### Get Started with TypeScript Module reflection
+### "Get Started with TypeScript Module" Reflection
 
 #### 📝 Description
 
@@ -51,7 +51,7 @@ In this module I got a brief overview of TypeScript and its most basic key conce
 - Eases development of complex applications with a large code base.
 - Great for OOP style programming.
 
-### Declare Variable Types in TypeScript
+### "Declare Variable Types in TypeScript" Module Reflection
 
 #### 📝 Description
 
@@ -79,3 +79,171 @@ In this module I got a brief overview of types classification and their syntax i
 #### 🛠 Practiсal Usage in Real-World Application
 
 In real-world applications, TypeScript's variable declaration capabilities offer clarity, reliability, and maintainability. By explicitly specifying types or relying on type inference, developers ensure code robustness. Declaring variables with primitive types like boolean, number, or string minimizes runtime errors, while object types such as class or interface enforce clear data structures. Union and intersection types enable modeling complex data scenarios accurately. Leveraging TypeScript enhances code safety and scalability, meeting real-world application needs efficiently.
+
+### "Implement Interfaces in TypeScript" Module Reflection
+
+#### 📝 Description
+
+In this module I got a brief overview of ... Personal reflections were written down based on the material covered.
+
+#### 💡 Key Insights
+
+- 
+-
+-
+
+#### 🎓 Key Learnings
+
+- 
+-
+-
+
+#### 👩‍💻 Skills Gained
+
+- 
+-
+-
+
+#### 🛠 Practiсal Usage in Real-World Application
+
+...
+
+### "Develop Typed Functions in TypeScript" Module Reflection
+
+#### 📝 Description
+
+In this module I got a brief overview of ... Personal reflections were written down based on the material covered.
+
+#### 💡 Key Insights
+
+- 
+-
+-
+
+#### 🎓 Key Learnings
+
+- 
+-
+-
+
+#### 👩‍💻 Skills Gained
+
+- 
+-
+-
+
+#### 🛠 Practiсal Usage in Real-World Application
+
+...
+
+### "Declare and Instantiate Classes in TypeScript" Module Reflection
+
+#### 📝 Description
+
+In this module I got a brief overview of ... Personal reflections were written down based on the material covered.
+
+#### 💡 Key Insights
+
+- 
+-
+-
+
+#### 🎓 Key Learnings
+
+- 
+-
+-
+
+#### 👩‍💻 Skills Gained
+
+- 
+-
+-
+
+#### 🛠 Practiсal Usage in Real-World Application
+
+...
+
+### "Generics in TypeScript" Module Reflection
+
+#### 📝 Description
+
+In this module I got a brief overview of ... Personal reflections were written down based on the material covered.
+
+#### 💡 Key Insights
+
+- 
+-
+-
+
+#### 🎓 Key Learnings
+
+- 
+-
+-
+
+#### 👩‍💻 Skills Gained
+
+- 
+-
+-
+
+#### 🛠 Practiсal Usage in Real-World Application
+
+...
+
+### "Work with External Libraries in TypeScript" Module Reflection
+
+#### 📝 Description
+
+In this module I got a brief overview of ... Personal reflections were written down based on the material covered.
+
+#### 💡 Key Insights
+
+- 
+-
+-
+
+#### 🎓 Key Learnings
+
+- 
+-
+-
+
+#### 👩‍💻 Skills Gained
+
+- 
+-
+-
+
+#### 🛠 Practiсal Usage in Real-World Application
+
+...
+
+### "Organize Code with Namespaces in TypeScript" Module Reflection
+
+#### 📝 Description
+
+In this module I got a brief overview of ... Personal reflections were written down based on the material covered.
+
+#### 💡 Key Insights
+
+- 
+-
+-
+
+#### 🎓 Key Learnings
+
+- 
+-
+-
+
+#### 👩‍💻 Skills Gained
+
+- 
+-
+-
+
+#### 🛠 Practiсal Usage in Real-World Application
+
+...
