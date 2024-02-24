@@ -34,6 +34,7 @@ module.exports = {
       'warn',
       {
         endOfLine: 'auto',
+        useTabs: false,
       },
     ],
   },
