@@ -7,7 +7,7 @@ Here is a collection of badges I earned from completing Microsoft Learn's TypeSc
 1. **Get Started with TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/marblehands-1714/YVH7TL3R?sharingId=A6472D01C26EF99E)
 2. **Declare Variable Types in TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/marblehands-1714/24Y8ECUV?sharingId=A6472D01C26EF99E)
 3. **Implement Interfaces in TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/marblehands-1714/K5MAH28B?sharingId=A6472D01C26EF99E)
-4. **Develop Typed Functions in TypeScript**: [Badge](badge-link)
+4. **Develop Typed Functions in TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/marblehands-1714/J6P22BMT?sharingId=A6472D01C26EF99E)
 5. **Declare and Instantiate Classes in TypeScript**: [Badge](badge-link)
 6. **Generics in TypeScript**: [Badge](badge-link)
 7. **Work with External Libraries in TypeScript**: [Badge](badge-link)
@@ -132,29 +132,35 @@ In this module I got a brief overview of interfaces in TypeScript. Personal refl
 
 #### 📝 Description
 
-In this module I got a brief overview of ... Personal reflections were written down based on the material covered.
+In this module I got a brief overview of typed functions in TypeScript. Personal reflections were written down based on the material covered.
 
 #### 💡 Key Insights
 
-- 
--
--
+- In TypeScript there are named functions (function declarations), anonymous functions (function expressions) and arrow functions as in JavaScript. The difference is that we can provide clear types for parameters and return values of the function.
+- The TypeScript compiler assumes, by default, that all parameters defined in a function are required.
+- We can define functions with optional, default, and rest parameters, as well as deconstructed object parameters.
+- Function parameters are positional, that means that parameters should be passed in the order in which they're defined in the function.
 
 #### 🎓 Key Learnings
 
-- 
--
--
+- Behavior and syntax of named, anonymous and arrow functions.
+- Defining functions' parameters:
+  - Optional parameters are defined by appending a question mark (?) to the end of the parameter name.
+  - The optional or default parameter must come after any required parameters in the parameter list.
+  - Use rest parameters if we do not know how many parameters will be passed or if we want to work with parameters as with an array.
+  - We can use a technique called deconstructed object parameters. This technique enables to use an interface to define named, rather than positional, parameters in the functions.
+  - We can use typed functions for defining types to another functions.
 
 #### 👩‍💻 Skills Gained
 
-- 
--
--
+- Define typed function with required, optional, default and rest parameters.
+- Define typed function using type aliases, interfaces and other functions as a type signature.
 
 #### 🛠 Practiсal Usage in Real-World Application
 
-...
+TypeScript simplifies the development of functions and makes them easier to troubleshoot by enabling to type parameters and return values. TypeScript also adds new options for parameters. For example, while all parameters are optional in JavaScript functions, you can choose to make parameters required or optional in TypeScript.
+
+Adding types to functions helps prevent from passing values that shouldn't be passed to the functions. Typed functions are especially important working with larger code bases or functions developed by others developers.
 
 ### "Declare and Instantiate Classes in TypeScript" Module Reflection
 
