@@ -1,4 +1,4 @@
-import { Response } from '../../types/index';
+import { sourceResponse } from '../../types/index';
 
 class Loader {
   constructor(baseLink, options) {
