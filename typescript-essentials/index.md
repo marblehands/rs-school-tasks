@@ -15,6 +15,17 @@ Here is a collection of badges I earned from completing Microsoft Learn's TypeSc
 
 ## Reflections
 
+### Table of Content
+
+1. **Get Started with TypeScript**: [Reflection](https://rolling-scopes-school.github.io/marblehands-JSFE2023Q4/typescript-essentials/#declare-variable-types-in-typescript-module-reflection)
+2. **Declare Variable Types in TypeScript**: [Reflection](https://rolling-scopes-school.github.io/marblehands-JSFE2023Q4/typescript-essentials/#implement-interfaces-in-typescript-module-reflection)
+3. **Implement Interfaces in TypeScript**: [Reflection](https://rolling-scopes-school.github.io/marblehands-JSFE2023Q4/typescript-essentials/#implement-interfaces-in-typescript-module-reflection)
+4. **Develop Typed Functions in TypeScript**: [Reflection](https://rolling-scopes-school.github.io/marblehands-JSFE2023Q4/typescript-essentials/#develop-typed-functions-in-typescript-module-reflection)
+5. **Declare and Instantiate Classes in TypeScript**: [Reflection](https://rolling-scopes-school.github.io/marblehands-JSFE2023Q4/typescript-essentials/#declare-and-instantiate-classes-in-typescript-module-reflection)
+6. **Generics in TypeScript**: [Reflection](https://rolling-scopes-school.github.io/marblehands-JSFE2023Q4/typescript-essentials/#generics-in-typescript-module-reflection)
+7. **Work with External Libraries in TypeScript**: [Reflection](https://rolling-scopes-school.github.io/marblehands-JSFE2023Q4/typescript-essentials/#work-with-external-libraries-in-typescript-module-reflection)
+8. **Organize Code with Namespaces in TypeScript**: [Reflection](https://rolling-scopes-school.github.io/marblehands-JSFE2023Q4/typescript-essentials/#organize-code-with-namespaces-in-typescript-module-reflection)
+
 ### "Get Started with TypeScript Module" Reflection
 
 #### 📝 Description
