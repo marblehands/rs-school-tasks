@@ -1,16 +1,14 @@
 // Source interfaces
 
 export interface Source {
-  id: string;
-  name: string;
-  description: string;
-  url: string;
   category: string;
-  language: string;
   country: string;
+  description: string;
+  id: string;
+  language: string;
+  name: string;
+  url: string;
 }
-
-// Article interfaces
 
 export interface Article {
   source: ArticleSource;
@@ -34,5 +32,12 @@ export interface Response {
   status: 'ok' | 'error';
   code?: string;
   message?: string;
-  sources: (Article | Source)[];
+}
+
+export interface SourceResponse extends Response {
+  sources: Source;
+}
+
+interface ArticleResponse extends Response {
+  sources: Article;
 }
