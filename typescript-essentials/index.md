@@ -29,10 +29,6 @@ Here is a collection of badges I earned from completing Microsoft Learn's TypeSc
 
 ### "Get Started with TypeScript Module" Reflection
 
-#### 📝 Description
-
-In this module I got a brief overview of TypeScript and its most basic key concepts. Personal reflections were written down based on the material covered.
-
 #### 💡 Key Insights
 
 - TypeScript is a strict superset of ES6. That is why all JavaScript code is also TypeScript code, and a TypeScript program can seamlessly consume JavaScript.
@@ -63,6 +59,8 @@ In this module I got a brief overview of TypeScript and its most basic key conce
 - Eases development of complex applications with a large code base.
 - Great for OOP style programming.
 
+[Back to Table of Content](https://rolling-scopes-school.github.io/marblehands-JSFE2023Q4/typescript-essentials/#table-of-content)
+
 
 ### "Declare Variable Types in TypeScript" Module Reflection
 
@@ -88,6 +86,8 @@ In this module I got a brief overview of TypeScript and its most basic key conce
 #### 🛠 Practiсal Usage in Real-World Application
 
 In real-world applications, TypeScript's variable declaration capabilities offer clarity, reliability, and maintainability. By explicitly specifying types or relying on type inference, developers ensure code robustness. Declaring variables with primitive types like boolean, number, or string minimizes runtime errors, while object types such as class or interface enforce clear data structures. Union and intersection types enable modeling complex data scenarios accurately. Leveraging TypeScript enhances code safety and scalability, meeting real-world application needs efficiently.
+
+[Back to Table of Content](https://rolling-scopes-school.github.io/marblehands-JSFE2023Q4/typescript-essentials/#table-of-content)
 
 
 ### "Implement Interfaces in TypeScript" Module Reflection
@@ -123,6 +123,8 @@ In real-world applications, TypeScript's variable declaration capabilities offer
 - Interfaces are particularly useful for documenting and validating the required shape of properties, objects passed as parameters, and objects returned from functions. This enables to catch errors and make sure that the right parameters were passed at compile time, rather than waiting to find out about them at runtime.
 - Interfaces are used to describe existing JavaScript APIs and clarify function parameters and return types.
 
+[Back to Table of Content](https://rolling-scopes-school.github.io/marblehands-JSFE2023Q4/typescript-essentials/#table-of-content)
+
 
 ### "Develop Typed Functions in TypeScript" Module Reflection
 
@@ -154,6 +156,8 @@ TypeScript simplifies the development of functions and makes them easier to trou
 
 Adding types to functions helps prevent from passing values that shouldn't be passed to the functions. Typed functions are especially important working with larger code bases or functions developed by others developers.
 
+[Back to Table of Content](https://rolling-scopes-school.github.io/marblehands-JSFE2023Q4/typescript-essentials/#table-of-content)
+
 
 ### "Declare and Instantiate Classes in TypeScript" Module Reflection
 
@@ -183,6 +187,8 @@ Adding types to functions helps prevent from passing values that shouldn't be pa
 #### 🛠 Practiсal Usage in Real-World Application
 
 Classes in TypeScript, as in other object-oriented languages, provide a way to create reusable and structured code. For example, frontend frameworks like Angular, React, and Vue use classes to create reusable UI components. Each component can be defined as a class, define its behavior and logic. This approach promotes code organization, reusability, and maintainability.
+
+[Back to Table of Content](https://rolling-scopes-school.github.io/marblehands-JSFE2023Q4/typescript-essentials/#table-of-content)
 
 
 ### "Generics in TypeScript" Module Reflection
@@ -246,6 +252,8 @@ Generics can:
 - Enable code reuse.
 - Reduce the need to use the any type.
 
+[Back to Table of Content](https://rolling-scopes-school.github.io/marblehands-JSFE2023Q4/typescript-essentials/#table-of-content)
+
 
 ### "Work with External Libraries in TypeScript" Module Reflection
 
@@ -299,3 +307,5 @@ Generics can:
 #### 🛠 Practiсal Usage in Real-World Application
 
 Namespaces allow to group variables, functions, interfaces, or classes related to business rules in one namespace and security in another. This placement can help avoid naming conflicts between components in the global namespace and can be beneficial when working with distributed development teams that may use similar component names.
+
+[Back to Table of Content](https://rolling-scopes-school.github.io/marblehands-JSFE2023Q4/typescript-essentials/#table-of-content)
