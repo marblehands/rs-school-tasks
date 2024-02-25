@@ -10,8 +10,8 @@ Here is a collection of badges I earned from completing Microsoft Learn's TypeSc
 4. **Develop Typed Functions in TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/marblehands-1714/J6P22BMT?sharingId=A6472D01C26EF99E)
 5. **Declare and Instantiate Classes in TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/marblehands-1714/HY6LNSD8?sharingId=A6472D01C26EF99E)
 6. **Generics in TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/marblehands-1714/HY6L7S98?sharingId=A6472D01C26EF99E)
-7. **Work with External Libraries in TypeScript**: [Badge](badge-link)
-8. **Organize Code with Namespaces in TypeScript**: [Badge](badge-link)
+7. **Work with External Libraries in TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/marblehands-1714/QD7R5Q3E?sharingId=A6472D01C26EF99E)
+8. **Organize Code with Namespaces in TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/marblehands-1714/24YFT27V?sharingId=A6472D01C26EF99E)
 
 ## Reflections
 
@@ -232,9 +232,6 @@ interface ProcessIdentity<T, U> {
 ```
 - We can also declare a generic class without an interface.
 
-
-
-
 #### 👩‍💻 Skills Gained
 
 - Define a generic function.
@@ -254,47 +251,51 @@ Generics can:
 
 #### 💡 Key Insights
 
-- 
--
--
+- We can export any declaration (such as a variable, function, class, type alias, or interface) by adding the `export` keyword or import it by using the import keyword. Any file containing a top-level `import` or `export` statement is considered a module.
 
 #### 🎓 Key Learnings
 
-- 
--
--
+- To export a module component, use the `export` keyword. To use the exported components from a module, use the `import` statement.
+- Several forms of import:
+  - Single import `import { <component name> } from '<module name>'`
+  - Rename import with `as` keyword: `import { <component name> as <new name> } from '<module name>'``
+  - Entire module import `import * as <variable name> from '<module name>'`
 
 #### 👩‍💻 Skills Gained
 
-- 
--
--
+- Organize code using modules.
+- Import an external type library.
 
 #### 🛠 Practiсal Usage in Real-World Application
 
-...
+- TypeScript allows developers to organize their code into modules, which helps in breaking down large codebases into smaller, more manageable pieces. This facilitates better code organization and improves readability.
+- External libraries often include reusable components or modules that can be easily integrated into TypeScript projects. This promotes code reusability and reduces duplication across projects.
+- We compile a single file namespace the same way that compile any other TypeScript file, because namespaces are a TypeScript-only construct.
 
 
 ### "Organize Code with Namespaces in TypeScript" Module Reflection
 
 #### 💡 Key Insights
 
-- 
--
--
+- Namespaces are a TypeScript-specific way to organize code.
+- Code inside a namespace is pulled from the global scope and into the scope of the namespace. 
+- If we want to make a function or class available to code outside of the namespace, we cab add the `export` keyword before its name. If omit it, the component is only available inside the namespace.
+- Namespaces can be nested for more options for organizing code.
+- It is not recommended to combine namespaces and modules in the same project.
 
 #### 🎓 Key Learnings
 
-- 
--
--
+- Namespace syntax is `namespace <namespace-name> {}`
+- To use a class or function within a namespace, prefix the component name with the namespace name. Example: `Greetings.returnGreeting('Bonjour'); ` where `Greetings` is the name of the namespace and `returnGreeting` is the function, defined within it.
+- To define *namespace alias* use keyword `import`. Example: `import greet = AllGreetings.Greetings;` We need it for convenience when chains of nested namespace become too long.
+- To inform TypeScript of the relationship between `interfaces.ts` and `functions.ts`, we add a `reference` to `interfaces.ts` using the triple slash `///` syntax to the top of `functions.ts`. Example: `/// <reference path ='interfaces.ts>`
+- Comparison between modules and namespaces.
 
 #### 👩‍💻 Skills Gained
 
-- 
--
--
+- Implement single-file namespaces.
+- Implement multi-file namespaces.
 
 #### 🛠 Practiсal Usage in Real-World Application
 
-...
+Namespaces allow to group variables, functions, interfaces, or classes related to business rules in one namespace and security in another. This placement can help avoid naming conflicts between components in the global namespace and can be beneficial when working with distributed development teams that may use similar component names.
