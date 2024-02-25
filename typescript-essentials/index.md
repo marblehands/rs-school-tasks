@@ -9,7 +9,7 @@ Here is a collection of badges I earned from completing Microsoft Learn's TypeSc
 3. **Implement Interfaces in TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/marblehands-1714/K5MAH28B?sharingId=A6472D01C26EF99E)
 4. **Develop Typed Functions in TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/marblehands-1714/J6P22BMT?sharingId=A6472D01C26EF99E)
 5. **Declare and Instantiate Classes in TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/marblehands-1714/HY6LNSD8?sharingId=A6472D01C26EF99E)
-6. **Generics in TypeScript**: [Badge](badge-link)
+6. **Generics in TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/marblehands-1714/HY6L7S98?sharingId=A6472D01C26EF99E)
 7. **Work with External Libraries in TypeScript**: [Badge](badge-link)
 8. **Organize Code with Namespaces in TypeScript**: [Badge](badge-link)
 
@@ -25,6 +25,7 @@ Here is a collection of badges I earned from completing Microsoft Learn's TypeSc
 6. **Generics in TypeScript**: [Reflection](https://rolling-scopes-school.github.io/marblehands-JSFE2023Q4/typescript-essentials/#generics-in-typescript-module-reflection)
 7. **Work with External Libraries in TypeScript**: [Reflection](https://rolling-scopes-school.github.io/marblehands-JSFE2023Q4/typescript-essentials/#work-with-external-libraries-in-typescript-module-reflection)
 8. **Organize Code with Namespaces in TypeScript**: [Reflection](https://rolling-scopes-school.github.io/marblehands-JSFE2023Q4/typescript-essentials/#organize-code-with-namespaces-in-typescript-module-reflection)
+
 
 ### "Get Started with TypeScript Module" Reflection
 
@@ -62,11 +63,8 @@ In this module I got a brief overview of TypeScript and its most basic key conce
 - Eases development of complex applications with a large code base.
 - Great for OOP style programming.
 
+
 ### "Declare Variable Types in TypeScript" Module Reflection
-
-#### 📝 Description
-
-In this module I got a brief overview of types classification and their syntax in TypeScript and its most basic usage cases. Personal reflections were written down based on the material covered.
 
 #### 💡 Key Insights
 
@@ -91,11 +89,8 @@ In this module I got a brief overview of types classification and their syntax i
 
 In real-world applications, TypeScript's variable declaration capabilities offer clarity, reliability, and maintainability. By explicitly specifying types or relying on type inference, developers ensure code robustness. Declaring variables with primitive types like boolean, number, or string minimizes runtime errors, while object types such as class or interface enforce clear data structures. Union and intersection types enable modeling complex data scenarios accurately. Leveraging TypeScript enhances code safety and scalability, meeting real-world application needs efficiently.
 
+
 ### "Implement Interfaces in TypeScript" Module Reflection
-
-#### 📝 Description
-
-In this module I got a brief overview of interfaces in TypeScript. Personal reflections were written down based on the material covered.
 
 #### 💡 Key Insights
 
@@ -128,11 +123,8 @@ In this module I got a brief overview of interfaces in TypeScript. Personal refl
 - Interfaces are particularly useful for documenting and validating the required shape of properties, objects passed as parameters, and objects returned from functions. This enables to catch errors and make sure that the right parameters were passed at compile time, rather than waiting to find out about them at runtime.
 - Interfaces are used to describe existing JavaScript APIs and clarify function parameters and return types.
 
+
 ### "Develop Typed Functions in TypeScript" Module Reflection
-
-#### 📝 Description
-
-In this module I got a brief overview of typed functions in TypeScript. Personal reflections were written down based on the material covered.
 
 #### 💡 Key Insights
 
@@ -162,11 +154,8 @@ TypeScript simplifies the development of functions and makes them easier to trou
 
 Adding types to functions helps prevent from passing values that shouldn't be passed to the functions. Typed functions are especially important working with larger code bases or functions developed by others developers.
 
+
 ### "Declare and Instantiate Classes in TypeScript" Module Reflection
-
-#### 📝 Description
-
-In this module I got a brief overview of classes in TypeScript. Personal reflections were written down based on the material covered.
 
 #### 💡 Key Insights
 
@@ -195,40 +184,74 @@ In this module I got a brief overview of classes in TypeScript. Personal reflect
 
 Classes in TypeScript, as in other object-oriented languages, provide a way to create reusable and structured code. For example, frontend frameworks like Angular, React, and Vue use classes to create reusable UI components. Each component can be defined as a class, define its behavior and logic. This approach promotes code organization, reusability, and maintainability.
 
+
 ### "Generics in TypeScript" Module Reflection
-
-#### 📝 Description
-
-In this module I got a brief overview of ... Personal reflections were written down based on the material covered.
 
 #### 💡 Key Insights
 
-- 
--
--
+- Create generic functions when your code is a function or class that:
+  - Works with a variety of data types.
+  - Uses that data type in several places
+- `<T>`is a type variable, or generic parameter. It is common name, but we can use any other name.
+- We can use multiple generic parameters.
+- `typeof`parameter can be used in a *type guards* to help identify the exact type of type variable.
+Example:
+
+```ts
+function identity<T extends ValidTypes, U> (value: T, message: U) {
+
+let typeValue: string = typeof value;
+
+if (typeof value === 'number') {}
+
+}
+```
 
 #### 🎓 Key Learnings
 
-- 
--
--
+- Generics are code templates that you can define and reuse throughout your codebase.
+- Generics define one or more *type variables* to identify the type or types that will be passed to the component, enclosed in angle brackets `< >`. 
+- To call the function and pass a type to it, append `<type>` to the function name. For example, `getArray<number>`.
+- *Generic constraint* limit possible types which could be passed.
+- `keyof` operator takes an object type and produces a string or numeric literal union of its keys. Example: `getPets<T, K extends keyof T>(pet: T, key: K)`.
+- `typeof` type guard is for primitive types, and `instanceOf` type guard – for objects and classes.
+- We can also declare a generic interface as a function type. Example:
+```ts
+interface ProcessIdentity<T, U> {
+    (value: T, message: U): T;
+}
+```
+- We can declare a generic interface and implement it in a class.
+Example:
+```ts
+interface ProcessIdentity<T, U> {
+    value: T;
+    message: U;
+    process(): T;
+}
+```
+- We can also declare a generic class without an interface.
+
+
+
 
 #### 👩‍💻 Skills Gained
 
-- 
--
--
+- Define a generic function.
+- Declare a generic interface.
+- Declare a generic class.
+- Implement generic constraints.
 
 #### 🛠 Practiсal Usage in Real-World Application
 
-...
+Generics can:
+- Provide more flexibility when working with types.
+- Enable code reuse.
+- Reduce the need to use the any type.
+
 
 ### "Work with External Libraries in TypeScript" Module Reflection
 
-#### 📝 Description
-
-In this module I got a brief overview of ... Personal reflections were written down based on the material covered.
-
 #### 💡 Key Insights
 
 - 
@@ -251,11 +274,8 @@ In this module I got a brief overview of ... Personal reflections were written d
 
 ...
 
+
 ### "Organize Code with Namespaces in TypeScript" Module Reflection
-
-#### 📝 Description
-
-In this module I got a brief overview of ... Personal reflections were written down based on the material covered.
 
 #### 💡 Key Insights
 
