@@ -8,7 +8,7 @@ Here is a collection of badges I earned from completing Microsoft Learn's TypeSc
 2. **Declare Variable Types in TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/marblehands-1714/24Y8ECUV?sharingId=A6472D01C26EF99E)
 3. **Implement Interfaces in TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/marblehands-1714/K5MAH28B?sharingId=A6472D01C26EF99E)
 4. **Develop Typed Functions in TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/marblehands-1714/J6P22BMT?sharingId=A6472D01C26EF99E)
-5. **Declare and Instantiate Classes in TypeScript**: [Badge](badge-link)
+5. **Declare and Instantiate Classes in TypeScript**: [Badge](https://learn.microsoft.com/api/achievements/share/en-us/marblehands-1714/HY6LNSD8?sharingId=A6472D01C26EF99E)
 6. **Generics in TypeScript**: [Badge](badge-link)
 7. **Work with External Libraries in TypeScript**: [Badge](badge-link)
 8. **Organize Code with Namespaces in TypeScript**: [Badge](badge-link)
@@ -166,29 +166,34 @@ Adding types to functions helps prevent from passing values that shouldn't be pa
 
 #### 📝 Description
 
-In this module I got a brief overview of ... Personal reflections were written down based on the material covered.
+In this module I got a brief overview of classes in TypeScript. Personal reflections were written down based on the material covered.
 
 #### 💡 Key Insights
 
-- 
--
--
+- With TypeScript, we can implement an object-oriented approach because TypeScript has full support for classes. A class provides the pattern by which an object is created, contains methods that can be called on the class instance or on the class constructor.
+- Typically a class contains properties, a constructor function, accessors (get and set) and methods. Fields must be typed. Constructor parameters must also be typed.
+- By default, properties and methods have the `public` access property, that is, they can be accessed from anywhere in the program. There are also `private`, or `protected` access types. Private members cannot be accessed outside the class. Protected members can be accessed from derived classes only. In addition, properties can be made readonly by using the `readonly` modifier.
+- Methods and properties can be `static`, which means that they can be accessed only on the base class constructor.
+- We can use an interface to establish a "code contract" that describe the required properties of an object and their types.
+- An interface can only describe the public-facing side of the class and may not include private members.
 
 #### 🎓 Key Learnings
 
-- 
--
--
+- What is class and how to declare it.
+- Key structure of a class: properties, constructor, accessors and methods.
+- Classes can be extended from other classes.
+- We can describe the shape of the instance of a class by using an interface.
 
 #### 👩‍💻 Skills Gained
 
-- 
--
--
+- Declare, instantiate, extend a class.
+- Apply access modifiers to a class.
+- Define static properties in a class.
+- Declare an interface to ensure class shape.
 
 #### 🛠 Practiсal Usage in Real-World Application
 
-...
+Classes in TypeScript, as in other object-oriented languages, provide a way to create reusable and structured code. For example, frontend frameworks like Angular, React, and Vue use classes to create reusable UI components. Each component can be defined as a class, define its behavior and logic. This approach promotes code organization, reusability, and maintainability.
 
 ### "Generics in TypeScript" Module Reflection
 
