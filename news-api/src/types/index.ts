@@ -1,5 +1,6 @@
-//Source interfaces
-interface Source {
+// Source interfaces
+
+export interface Source {
   id: string;
   name: string;
   description: string;
@@ -9,8 +10,9 @@ interface Source {
   country: string;
 }
 
-//Article interfaces
-interface Article {
+// Article interfaces
+
+export interface Article {
   source: ArticleSource;
   author: string | null;
   title: string;
@@ -21,12 +23,13 @@ interface Article {
   content: string;
 }
 
-interface ArticleSource {
+export interface ArticleSource {
   id: string | null;
   name: string;
 }
 
-//API Response interface
+// API Response interface
+
 export interface Response {
   status: 'ok' | 'error';
   code?: string;

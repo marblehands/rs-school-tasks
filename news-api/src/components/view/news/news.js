@@ -1,13 +1,17 @@
 import './news.css';
+import { Response } from '../../../types/index';
 
 class News {
   draw(data) {
     const news = data.length >= 10 ? data.filter((_item, idx) => idx < 10) : data;
 
     const fragment = document.createDocumentFragment();
-    const newsItemTemp = document.querySelector('#newsItemTemp');
+    const newsItemTemp = document.querySelector < HTMLTemplateElement > '#newsItemTemp';
 
     news.forEach((item, idx) => {
+      if (newsItemTemp === null) {
+        return;
+      }
       const newsClone = newsItemTemp.content.cloneNode(true);
 
       if (idx % 2) newsClone.querySelector('.news__item').classList.add('alt');

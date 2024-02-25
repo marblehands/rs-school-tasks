@@ -12,9 +12,9 @@ export class AppView {
     this.news.draw(values);
   }
 
-  drawSources(data) {
+  static drawSources(data) {
     const values = data?.sources ? data?.sources : [];
-    this.sources.draw(values);
+    Sources.draw(values);
   }
 }
 
