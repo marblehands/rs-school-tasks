@@ -3,7 +3,7 @@ import type { Source } from '../../../types/index';
 
 class Sources {
   static draw(data: Source[]) {
-    const fragment = document.createDocumentFragment();
+    const fragment: DocumentFragment = document.createDocumentFragment();
     const sourceItemTemp = document.querySelector<HTMLTemplateElement>('#sourceItemTemp');
 
     if (sourceItemTemp && sourceItemTemp instanceof HTMLTemplateElement) {
