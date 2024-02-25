@@ -35,10 +35,9 @@ export interface Response {
 }
 
 export interface SourceResponse extends Response {
-  sources: Source;
+  sources: Source[];
 }
 
-// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-interface ArticleResponse extends Response {
-  sources: Article;
+export interface ArticleResponse extends Response {
+  articles: Article[];
 }
