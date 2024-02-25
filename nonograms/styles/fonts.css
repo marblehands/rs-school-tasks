@@ -1,0 +1,6 @@
+@font-face {
+  font-family: 'Helvetica';
+  src: url('../assets/fonts/Helvetica.ttf') format('ttf'),
+    url('../assets/fonts/Helvetica.woff') format('woff');
+  font-weight: normal;
+}

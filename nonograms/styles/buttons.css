@@ -1,0 +1,43 @@
+@import url('variables.css');
+@import url('fonts.css');
+
+.link {
+  text-decoration: none;
+  color: var(--primary-dark);
+  background-color: transparent;
+  display: block;
+  border: none;
+  font: 24px Helvetica, sans-serif;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: text-decoration 0.5s ease;
+  flex-basis: 270px;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.link:nth-child(2) {
+  text-align: center;
+}
+
+@media (max-width: 1200px) {
+  .link {
+    /* width: calc(50% - 20px); */
+    flex-grow: 1;
+    width: 240px;
+    padding: 16px;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    border: 1px solid var(--primary-dark);
+    transition: background-color 0.5s ease, color 0.5s ease;
+    &:hover {
+      text-decoration: none;
+      background-color: var(--primary-dark);
+      color: var(--primary-light);
+    }
+  }
+}

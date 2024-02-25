@@ -32,7 +32,9 @@ a:visited {
 
   & svg {
     position: absolute;
-    right: 64px;
+    width: 22px;
+    height: 22px;
+    right: 63px;
     opacity: 0;
     user-select: none;
     transition: opacity 0.5s ease;
@@ -49,13 +51,13 @@ a:visited {
       opacity: 1;
     }
     & span {
-      margin-right: 32px;
+      margin-right: 28px;
     }
   }
 }
 
 .btn-secondary {
-  padding: 10px 78px;
+  padding: 9px 78px;
   border: 1px solid var(--border-default);
   color: var(--text-default);
   transition: background-color 0.5s ease, color 0.5s ease;
@@ -71,7 +73,7 @@ a:visited {
   gap: 8px;
   width: 200px;
   height: 64px;
-  padding: 14px 20px;
+  padding: 12px 19px;
   border: 1px solid var(--border-default);
   color: var(--text-default);
   transition: background-color 0.5s ease, color 0.5s ease;
@@ -134,6 +136,62 @@ a:visited {
   }
 }
 
+@media (max-width:768px) {
+
+  .btn-burger {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--border-default);
+    transition: background-color 0.5s ease;
+  }
+
+  @media (hover:hover) {
+    .btn-burger:hover {
+      background-color: var(--border-default);
+
+      & span {
+        background-color: var(--text-inverse);
+      }
+    }
+  }
+
+  .btn-burger-line {
+    position: absolute;
+    display: block;
+    width: 16px;
+    height: 1.5px;
+    border-radius: 10px;
+    background-color: var(--text-default);
+    transition: all 0.7s ease;
+  }
+
+  .btn-burger-line:first-child {
+    top: 16px;
+  }
+
+  .btn-burger-line:last-child {
+    top: 26px;
+  }
+}
+
+.burger-open {
+  & .btn-burger-line:first-child {
+    transform: rotate(45deg);
+    top: 50%;
+  }
+
+  & .btn-burger-line:last-child {
+    transform: rotate(-45deg);
+    top: 50%;
+  }
+}
+
 .link-animated {
   position: relative;
   cursor: pointer;
@@ -158,6 +216,8 @@ a:visited {
   }
 }
 
+@media (min-width: 769px) {
+
 .link-active {
   position: relative;
 
@@ -168,13 +228,67 @@ a:visited {
     height: 2px;
     background-color: var(--text-default);
     position: absolute;
-    bottom: -20%;
+    bottom: 0;
     left: 0;
   }
+}
 }
 
 .contact-item {
   &::before {
     background-color: var(--text-inverse);
+  }
+}
+
+@media (hover:none) {
+  .btn-primary {
+    & svg {
+      opacity: 1;
+    }
+    & span {
+      margin-right: 28px;
+    }
+  }
+  .btn-secondary {
+    &:hover {
+      background-color: var(--border-default);
+      color: var(--text-default);
+    }
+  }
+  .btn-tretiary {
+    &:hover {
+      background-color: transparent;
+      color: var(--text-default);
+  
+      & svg {
+        fill: var(--text-default);
+      }
+    }
+  }
+  .btn-icon-dark {
+    &:hover {
+      background-color: transparent;
+      border: 1px solid var(--border-default);
+  
+      & svg {
+        stroke: var(--text-default);
+      }
+    }
+  }
+  .btn-icon-light {
+    &:hover {
+      background-color: transparent;
+      border: 1px solid var(--border-inverse);
+  
+      & svg {
+        stroke: var(--text-inverse);
+      }
+    }
+  }
+  .link-animated {
+    &:hover::before {
+      width: 0;
+      opacity: 0;
+    }
   }
 }

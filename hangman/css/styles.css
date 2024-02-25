@@ -1,0 +1,498 @@
+:root {
+  --bg-body: #19192f;
+  --bg-section: #322b50;
+  --text-color: #ece8fb;
+  --text-success: #11d3a4;
+  --text-accent: #d391c5;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a:link,
+a:visited,
+a:active,
+a:focus {
+  color: var(--text-accent);
+  text-decoration: none;
+  transition: text-decoration 0.7s ease;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.body {
+  background-color: var(--bg-body);
+  background-image: url(../assets/svg/lines.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 60px 0 20px;
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  font: 26px/100% 'Dongle', sans-serif;
+  gap: 20px;
+}
+
+.main {
+  flex-grow: 1;
+  justify-content: flex-start;
+}
+
+.header,
+.main,
+.footer {
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+}
+
+.header {
+  margin-bottom: 20px;
+}
+
+.global-wrapper {
+  display: grid;
+  grid-template-columns: 220px 450px;
+  grid-template-rows: auto auto auto;
+  gap: 10px;
+  align-self: start;
+}
+
+.question-wrapper,
+.info-wrapper {
+  grid-column: span 2;
+}
+
+.global-wrapper > * {
+  border-radius: 8px;
+  background-color: var(--bg-section);
+  display: flex;
+  padding: 24px;
+}
+
+.quiz-wrapper {
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 36px;
+}
+
+.word-wrapper {
+  display: flex;
+  gap: 4px;
+}
+
+.keyboard-wrapper {
+  max-width: 340px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* 
+Secret Word */
+
+.letter {
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: 20px/100% 'Mochiy Pop One', sans-serif;
+}
+
+.letter::after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  border-radius: 4px;
+  left: 0;
+  bottom: -8px;
+}
+
+.letter-default {
+  color: var(--text-accent);
+  background-color: rgba(211, 145, 197, 0.2);
+
+  &::after {
+    background-color: var(--text-accent);
+  }
+}
+
+.letter-success {
+  color: var(--text-success);
+  background-color: rgba(17, 211, 164, 0.2);
+
+  &::after {
+    display: none;
+  }
+}
+
+.letter-hidden {
+  opacity: 0;
+  user-select: none;
+}
+
+/* Buttons */
+
+.key-char {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: 20px/100% 'Mochiy Pop One', sans-serif;
+}
+
+.key-char:hover {
+  cursor: pointer;
+}
+
+.disabled {
+  user-select: none;
+}
+
+.disabled:hover {
+  cursor: default;
+}
+/* 
+Btn Highlight Correct */
+
+.btn-correct {
+  position: relative;
+  /* color: #FBA347; */
+
+  &::after {
+    content: '';
+    width: 56px;
+    height: 56px;
+    position: absolute;
+    display: block;
+    left: -50%;
+    top: -42%;
+  }
+}
+
+.btn-correct-1 {
+  &::after {
+    background: url(../assets/svg/circle-1.svg) no-repeat center;
+  }
+}
+
+.btn-correct-2 {
+  &::after {
+    background: url(../assets/svg/circle-2.svg) no-repeat center;
+  }
+}
+
+.btn-correct-3 {
+  &::after {
+    background: url(../assets/svg/circle-3.svg) no-repeat center;
+  }
+}
+
+/* Btn Highlight Wrong */
+
+.btn-wrong {
+  position: relative;
+
+  &::after {
+    content: '';
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    display: block;
+  }
+}
+
+.btn-wrong-1 {
+  &::after {
+    background: url(../assets/svg/cross-1.svg) no-repeat center;
+  }
+}
+
+.btn-wrong-2 {
+  &::after {
+    background: url(../assets/svg/cross-2.svg) no-repeat center;
+  }
+}
+
+.btn-wrong-3 {
+  &::after {
+    background: url(../assets/svg/cross-3.svg) no-repeat center;
+  }
+}
+
+/* Question */
+
+.question-wrapper {
+  text-align: center;
+  justify-content: center;
+}
+
+/* Gallow */
+
+.hangman-wrapper {
+  width: 100%;
+  height: 100%;
+  background: url(../assets/svg/hangman-template.svg) center no-repeat;
+  position: relative;
+}
+
+.head,
+.manbody,
+.left-hand,
+.right-hand,
+.left-foot,
+.right-foot {
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+
+.head {
+  width: 40px;
+  height: 40px;
+  background: url(../assets/svg/head.svg) center no-repeat;
+  top: 24%;
+  right: 17%;
+}
+
+.manbody {
+  width: 4px;
+  height: 54px;
+  background: url(../assets/svg/manbody.svg) center no-repeat;
+  top: 42%;
+  right: 28%;
+}
+
+.left-hand {
+  width: 30px;
+  height: 30px;
+  background: url(../assets/svg/lefthand.svg) center no-repeat;
+  top: 38%;
+  right: 31%;
+}
+
+.right-hand {
+  width: 30px;
+  height: 30px;
+  background: url(../assets/svg/righthand.svg) center no-repeat;
+  top: 38%;
+  right: 9%;
+}
+
+.left-foot {
+  width: 30px;
+  height: 44px;
+  background: url(../assets/svg/leftfoot.svg) center no-repeat;
+  top: 63%;
+  right: 28%;
+}
+
+.right-foot {
+  width: 30px;
+  height: 44px;
+  background: url(../assets/svg/rightfoot.svg) center no-repeat;
+  top: 63%;
+  right: 13%;
+}
+
+/* Lifes */
+
+.info-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.lifes-wrapper {
+  display: flex;
+  gap: 4px;
+}
+
+.heart {
+  width: 20px;
+  height: 20px;
+  transition: opacity 0.7s ease;
+}
+
+.heart-1 {
+  background: url(../assets/svg/heart-1.svg);
+}
+
+.heart-2 {
+  background: url(../assets/svg/heart-2.svg);
+}
+
+.heart-3 {
+  background: url(../assets/svg/heart-3.svg);
+}
+
+/* Modal */
+
+.modal-wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  background-color: rgba(25, 25, 47, 0.9);
+  z-index: 1;
+  top: 0;
+  left: 0;
+  font: 26px/100% 'Dongle', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 36px;
+  padding: 16px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.modal-wrapper.show {
+  opacity: 1;
+}
+
+.game-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  background-color: var(--bg-section);
+  border-radius: 16px;
+  padding: 40px 80px;
+  opacity: 0;
+  transform: translateY(-100px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.game-info.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.text-btn-wrapper,
+.text-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.text-btn-wrapper {
+  gap: 40px;
+}
+
+.text-wrapper {
+  gap: 16px;
+}
+
+.game-info-title {
+  font: 20px/100% 'Mochiy Pop One', sans-serif;
+}
+
+.btn-play-again {
+  width: fit-content;
+  background-color: transparent;
+  border: none;
+  color: var(--text-color);
+  /* height: 44px; */
+  padding: 14px 16px;
+  font: 16px/120% 'Mochiy Pop One', sans-serif;
+  border: 3px solid rgba(211, 145, 197, 0.3);
+  display: block;
+  border-radius: 8px;
+  transition: border 0.5s ease;
+
+  &:hover {
+    cursor: pointer;
+    /* color: var(--text-accent); */
+    border: 3px solid var(--text-accent);
+  }
+}
+
+/* Footer */
+
+.footer {
+  gap: 12px;
+}
+
+/* Media Queries */
+
+@media (max-width: 768px) {
+  .body {
+    background-image: none;
+    padding: 60px 40px 20px;
+  }
+  .global-wrapper {
+    grid-template-columns: 1fr;
+  }
+  .gallow-wrapper {
+    min-height: 280px;
+  }
+  .gallow-wrapper {
+    grid-column: span 2;
+    grid-row: 3;
+    justify-content: center;
+  }
+  .quiz-wrapper {
+    grid-column: span 2;
+    grid-row: 2;
+  }
+  .hangman-wrapper {
+    width: 170px;
+    height: 250px;
+  }
+}
+
+@media (max-width: 680px) {
+  .body {
+    padding: 16px;
+    gap: 16px;
+  }
+  .header {
+    margin-bottom: 0;
+  }
+  .global-wrapper > * {
+    padding: 16px 24px;
+  }
+  .quiz-wrapper {
+    gap: 16px;
+  }
+  .question-wrapper {
+    font: 20px/100% 'Dongle', sans-serif;
+  }
+  .word-wrapper {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .letter {
+    margin-bottom: 16px;
+  }
+  .keyboard-wrapper {
+    gap: 16px;
+  }
+  .info-wrapper {
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 16px;
+  }
+  .img-logo {
+    width: 188px;
+    height: 52px;
+  }
+}

@@ -1,0 +1,17 @@
+@import url('variables.css');
+
+.footer {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0 24px 24px 24px;
+  gap: 20px;
+}
+
+@media (max-width: 1200px) {
+  .footer {
+    padding: 0px 16px 16 16px;
+    gap: 16px;
+  }
+}

@@ -1,0 +1,52 @@
+@import url('variables.css');
+
+.toggle__label {
+  display: block;
+  width: 108px;
+  height: 60px;
+  border-radius: 30px;
+  background-color: transparent;
+  border: 1px solid var(--primary-dark);
+  cursor: pointer;
+  position: relative;
+  transition: background 0.5s ease;
+}
+
+.toggle__label:after {
+  content: '';
+  position: absolute;
+  display: block;
+  top: 6px;
+  right: 6px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: url(../assets/svg/sun.svg) center/50% no-repeat
+    var(--primary-dark);
+  transition: right 0.5s ease, transform 0.5s ease, background 0.5s ease;
+}
+
+.toggle__input {
+  display: none;
+}
+
+.toggle__input:checked + .toggle__label:after {
+  right: 100px;
+  background: url(../assets/svg/moon.svg) center/50% no-repeat
+    var(--primary-dark);
+  transform: translateX(100%);
+}
+
+@media (max-width: 640px) {
+  .toggle__label {
+    width: 96px;
+    height: 48px;
+  }
+  .toggle__label:after {
+    width: 36px;
+    height: 36px;
+  }
+  .toggle__input:checked + .toggle__label:after {
+    right: 88px;
+  }
+}

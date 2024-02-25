@@ -16,7 +16,7 @@
   --text-accent: #b0907a;
   --back-body: #e1d4c9;
   --back-container: #665f55;
-  --back-overlay: #403f3d;
+  --back-overlay: rgba(64, 63, 61, 0.80);
   --border-default: #665f55;
   --border-inverse: #c1b6ad;
   --main-font: "Inter", sans-serif;
@@ -26,4 +26,11 @@
   --body-default: 400 16px/150% var(--main-font);
   --body-caption: 600 10px/140% var(--main-font);
   --link-default: 600 16px/150% var(--main-font);
+}
+
+@media (max-width: 767px) {
+  :root {
+    --title-l: 600 42px/115% var(--main-font);
+    --title-m: 600 32px/125% var(--main-font);
+  }
 }

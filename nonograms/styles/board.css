@@ -1,0 +1,63 @@
+@import url('variables.css');
+
+.board-wrapper {
+  display: grid;
+}
+
+.column-hints-wrapper {
+  display: flex;
+}
+
+.row-hints-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.grid-wrapper {
+  display: grid;
+  width: fit-content;
+}
+
+.btn-get-matrix {
+  width: 100px;
+  height: 40px;
+}
+
+.column-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.row-wrapper {
+  display: flex;
+}
+
+/* Border settings */
+.board-wrapper,
+.column-hints-wrapper,
+.grid-wrapper,
+.row-hints-wrapper,
+.img-preview {
+  border: 1px solid var(--borders);
+}
+
+.grid-item {
+  border: 0.2px solid var(--borders);
+}
+
+.hint-item {
+  background-color: var(--primary-hint);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--primary-dark);
+  font: 120% DotGothic16;
+}
+
+.grid-item-checked {
+  background: url(../assets/svg/cross.svg) center/80% no-repeat;
+}
+
+.grid-item-coloured {
+  background-color: var(--grid-item-coloured);
+}

@@ -7,9 +7,6 @@
   height: 24px;
   fill: none;
   stroke: var(--text-default);
-  &:hover {
-    fill: var(--text-inverse);
-  }
 }
 
 .svg-coffee-cup {
@@ -49,9 +46,6 @@
   height: 36px;
   fill: var(--text-default);
   transition: fill 0.5s ease;
-  &:hover {
-    fill: var(--text-inverse);
-  }
 }
 
 .svg-gplay {
@@ -59,9 +53,6 @@
   height: 36px;
   fill: var(--text-default);
   transition: stroke 0.5s ease;
-  &:hover {
-    fill: var(--text-inverse);
-  }
 }
 
 .svg-social-fb {
@@ -70,9 +61,6 @@
   fill: none;
   stroke: var(--text-inverse);
   transition: stroke 0.5s ease;
-  &:hover {
-    stroke: var(--text-default);
-  }
 }
 
 .svg-social-inst {
@@ -81,9 +69,6 @@
   fill: none;
   stroke: var(--text-inverse);
   transition: stroke 0.5s ease;
-  &:hover {
-    stroke: var(--text-default);
-  }
 }
 
 .svg-social-tw {
@@ -92,7 +77,12 @@
   fill: none;
   stroke: var(--text-inverse);
   transition: stroke 0.5s ease;
-  &:hover {
-    stroke: var(--text-default);
-  }
+}
+
+.svg-refresh {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: var(--text-default);
+  transition: stroke 0.5s ease;
 }

@@ -46,3 +46,15 @@ body {
   font: var(--link-default);
   text-decoration: none;
 }
+
+/* Headline in About section crutch */
+
+.font-adjust {
+  font-size: 59.9px;
+}
+
+@media (max-width:380px) {
+  .font-adjust {
+    font: var(--title-m);
+  }
+}
