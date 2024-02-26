@@ -18,10 +18,11 @@ class AppController extends AppLoader {
     const { currentTarget: newsContainer }: { currentTarget: EventTarget | null } = e;
     assertElementIsNull(newsContainer);
 
-    if (target instanceof HTMLElement && newsContainer instanceof HTMLElement) {
-      while (target !== newsContainer) {
+    while (target !== newsContainer) {
+      if (target instanceof HTMLElement && newsContainer instanceof HTMLElement) {
         if (target && target.classList.contains('source__item')) {
-          const sourceId = target.getAttribute('data-source-id');
+          const sourceId: string | null = target.getAttribute('data-source-id');
+          assertElementIsNull(sourceId);
           if (newsContainer.getAttribute('data-source') !== sourceId) {
             newsContainer.setAttribute('data-source', sourceId);
             super.getResp(
