@@ -1,14 +1,18 @@
-import { Response } from '../../types/index';
+import { Endpoints, ApiConfig, CallbackFunction } from '../../types/index';
 
 class Loader {
-  constructor(baseLink, options) {
+  private baseLink: string;
+
+  private options: ApiConfig;
+
+  constructor(baseLink: string, options: ApiConfig) {
     this.baseLink = baseLink;
     this.options = options;
   }
 
   getResp(
-    { endpoint, options = {} },
-    callback = () => {
+    { endpoint, options = {} }: { endpoint: Endpoints; options: ApiConfig },
+    callback: CallbackFunction = () => {
       console.error('No callback for GET response');
     }
   ) {
@@ -25,7 +29,7 @@ class Loader {
     return res;
   }
 
-  makeUrl(options, endpoint) {
+  makeUrl(options: ApiConfig, endpoint) {
     const urlOptions = { ...this.options, ...options };
     let url = `${this.baseLink}${endpoint}?`;
 

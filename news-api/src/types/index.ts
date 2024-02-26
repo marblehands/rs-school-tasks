@@ -41,3 +41,26 @@ export interface SourceResponse extends Response {
 export interface ArticleResponse extends Response {
   articles: Article[];
 }
+
+// Endpoints, options
+
+export enum Endpoints {
+  sources = 'mocks/sources',
+  articles = 'mocks/everything',
+}
+
+export type ApiConfig = {
+  apiKey?: string;
+};
+
+// Callback
+
+export type CallbackFunction = () => void;
+
+// Assertion Function
+
+export function assertElementIsNull<T>(item?: T): asserts item {
+  if (item === null) {
+    throw new Error('element is equal null');
+  }
+}
