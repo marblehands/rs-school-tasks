@@ -1,11 +1,11 @@
 import { Endpoints, ApiConfig, CallbackFunction } from '../../types/index';
 
 class Loader {
-  private baseLink: string;
+  private baseLink: string | undefined;
 
   private options: ApiConfig;
 
-  constructor(baseLink: string, options: ApiConfig) {
+  constructor(baseLink: string | undefined, options: ApiConfig) {
     this.baseLink = baseLink;
     this.options = options;
   }
@@ -33,6 +33,9 @@ class Loader {
 
   makeUrl(options: ApiConfig, endpoint: Endpoints): string {
     const urlOptions: ApiConfig = { ...this.options, ...options };
+    if (this.baseLink === undefined) {
+      throw new Error('baselink is not defined');
+    }
     let url: string = `${this.baseLink}${endpoint}?`;
 
     Object.entries(urlOptions).forEach(([key, value]: [string, string]) => {

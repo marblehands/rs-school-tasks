@@ -50,7 +50,7 @@ export enum Endpoints {
 }
 
 export type ApiConfig = {
-  apiKey?: string;
+  apiKey?: string | undefined;
 };
 
 // Callback
