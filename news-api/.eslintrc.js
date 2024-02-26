@@ -25,7 +25,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
-    project: '**/tsconfig.json',
+    project: '**/**/tsconfig.json',
   },
   plugins: ['prettier', '@typescript-eslint'],
   rules: {
@@ -112,9 +112,13 @@ module.exports = {
     //   'error',
     //   {
     //     selector: 'default',
-    //     format: ['strictCamelCase'],
+    //     format: ['strictCamelCase', 'PascalCase'],
     //     leadingUnderscore: 'forbid',
     //     trailingUnderscore: 'forbid',
+    //   },
+    //   {
+    //     selector: 'import',
+    //     format: ['camelCase', 'PascalCase'],
     //   },
     //   {
     //     selector: 'variable',
@@ -168,7 +172,7 @@ module.exports = {
     //     leadingUnderscore: 'forbid',
     //     trailingUnderscore: 'forbid',
     //   },
-    // ],
+    // ]
     // '@typescript-eslint/no-explicit-any': 'error',
     // '@typescript-eslint/prefer-includes': 'error',
     // '@typescript-eslint/no-base-to-string': 'error',
@@ -217,7 +221,7 @@ module.exports = {
     //   },
     // ],
     // '@typescript-eslint/return-await': 'error',
-    // '@stylistic/padding-line-between-statements': [
+    // '@stylistic/ts/padding-line-between-statements': [
     //   'error',
     //   {
     //     blankLine: 'always',
