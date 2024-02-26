@@ -13,7 +13,7 @@ class News {
       const newsClone = newsItemTemp.content.cloneNode(true);
       assertElementIsNull(newsClone);
 
-      if (newsClone instanceof HTMLTemplateElement) {
+      if (newsClone instanceof DocumentFragment) {
         if (idx % 2) {
           const newsItem = newsClone.querySelector<HTMLDivElement>('.news__item');
           assertElementIsNull(newsItem);

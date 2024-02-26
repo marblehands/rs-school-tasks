@@ -12,7 +12,7 @@ class Sources {
       const sourceClone = sourceItemTemp.content.cloneNode(true);
       assertElementIsNull(sourceClone);
 
-      if (sourceClone instanceof HTMLTemplateElement) {
+      if (sourceClone instanceof DocumentFragment) {
         const sourceNameElement = sourceClone.querySelector<HTMLSpanElement>('.source__item-name');
         const sourceItemElement = sourceClone.querySelector<HTMLDivElement>('.source__item');
 
