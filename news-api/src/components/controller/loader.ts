@@ -10,9 +10,9 @@ class Loader {
     this.options = options;
   }
 
-  getResp(
+  getResp<T>(
     { endpoint, options = {} }: { endpoint: Endpoints; options: ApiConfig },
-    callback: CallbackFunction = () => {
+    callback: CallbackFunction<T> = () => {
       // eslint-disable-next-line no-console
       console.error('No callback for GET response');
     }
@@ -31,20 +31,20 @@ class Loader {
     return res;
   }
 
-  makeUrl(options: ApiConfig, endpoint: Endpoints) {
-    const urlOptions: { apiKey?: string | undefined } = { ...this.options, ...options };
+  makeUrl(options: ApiConfig, endpoint: Endpoints): string {
+    const urlOptions: ApiConfig = { ...this.options, ...options };
     let url: string = `${this.baseLink}${endpoint}?`;
 
-    Object.keys(urlOptions).forEach((key) => {
-      if (urlOptions[key]) {
-        url += `${key}=${urlOptions[key]}&`;
+    Object.entries(urlOptions).forEach(([key, value]: [string, string]) => {
+      if (value) {
+        url += `${key}=${value}&`;
       }
     });
 
     return url.slice(0, -1);
   }
 
-  load(method, endpoint, callback, options = {}) {
+  load<T>(method: string, endpoint: Endpoints, callback: CallbackFunction<T>, options = {}) {
     fetch(this.makeUrl(options, endpoint), { method })
       .then((res) => Loader.errorHandler(res))
       .then((res) => res.json())

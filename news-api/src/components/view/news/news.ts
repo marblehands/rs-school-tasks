@@ -41,7 +41,7 @@ class News {
         const descriptionContent = newsClone.querySelector<HTMLParagraphElement>('.news__description-content');
         assertElementIsNull(descriptionContent);
 
-        const readMoreLink = newsClone.querySelector<HTMLAnchorElement>('.n.news__read-more a');
+        const readMoreLink = newsClone.querySelector<HTMLAnchorElement>('.news__read-more a');
         assertElementIsNull(readMoreLink);
 
         descriptionTitle.textContent = item.title;

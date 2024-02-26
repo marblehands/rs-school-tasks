@@ -55,7 +55,7 @@ export type ApiConfig = {
 
 // Callback
 
-export type CallbackFunction = () => void;
+export type CallbackFunction<T> = (argument?: T) => void;
 
 // Assertion Function
 
