@@ -1,8 +1,10 @@
 import './sources.css';
-import { Source, assertElementIsNull } from '../../../types/index';
+import { assertElementIsNull } from '../../../types/functions';
+
+import type { Source } from '../../../types/interfaces';
 
 class Sources {
-  static draw(data: Source[]) {
+  public static draw(data: Source[]): void {
     const fragment: DocumentFragment = document.createDocumentFragment();
     const sourceItemTemp = document.querySelector<HTMLTemplateElement>('#sourceItemTemp');
 

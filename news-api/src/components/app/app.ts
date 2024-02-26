@@ -1,25 +1,31 @@
 import AppController from '../controller/controller';
 import { AppView } from '../view/appView';
-import { ArticleResponse, SourceResponse, assertElementIsNull } from '../../types/index';
+import { assertElementIsNull } from '../../types/functions';
+
+import type { ArticleResponse, SourceResponse } from '../../types/interfaces';
 
 class App {
-  controller;
+  private controller;
 
-  view;
+  private view;
 
   constructor() {
     this.controller = new AppController();
     this.view = new AppView();
   }
 
-  start() {
+  public start(): void {
     const sourceWrapper = document.querySelector<HTMLDivElement>('.sources');
     assertElementIsNull(sourceWrapper);
 
-    sourceWrapper.addEventListener('click', (e) =>
-      this.controller.getNews(e, (data?: ArticleResponse) => AppView.drawNews(data))
-    );
-    this.controller.getSources((data?: SourceResponse) => AppView.drawSources(data));
+    sourceWrapper.addEventListener('click', (e) => {
+      this.controller.getNews(e, (data?: ArticleResponse) => {
+        AppView.drawNews(data);
+      });
+    });
+    this.controller.getSources((data?: SourceResponse) => {
+      AppView.drawSources(data);
+    });
   }
 }
 

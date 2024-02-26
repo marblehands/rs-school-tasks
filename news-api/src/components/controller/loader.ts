@@ -1,4 +1,6 @@
-import { Endpoints, ApiConfig, CallbackFunction } from '../../types/index';
+import type { Endpoints } from '../../types/enum';
+import type { CallbackFunction } from '../../types/types';
+import type { ApiConfig } from '../../types/interfaces';
 
 class Loader {
   private baseLink: string | undefined;
@@ -10,32 +12,36 @@ class Loader {
     this.options = options;
   }
 
-  getResp<T>(
+  public getResp<T>(
     { endpoint, options = {} }: { endpoint: Endpoints; options: ApiConfig },
-    callback: CallbackFunction<T> = () => {
+    callback: CallbackFunction<T> = (): void => {
       // eslint-disable-next-line no-console
       console.error('No callback for GET response');
     }
-  ) {
+  ): void {
     this.load('GET', endpoint, callback, options);
   }
 
-  static errorHandler(res: Response): Response {
+  private static errorHandler(res: Response): Response {
     if (!res.ok) {
-      if (res.status === 401 || res.status === 404)
+      if (res.status === 401 || res.status === 404) {
         // eslint-disable-next-line no-console
         console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
+      }
+
       throw Error(res.statusText);
     }
 
     return res;
   }
 
-  makeUrl(options: ApiConfig, endpoint: Endpoints): string {
+  private makeUrl(options: ApiConfig, endpoint: Endpoints): string {
     const urlOptions: ApiConfig = { ...this.options, ...options };
+
     if (this.baseLink === undefined) {
       throw new Error('baselink is not defined');
     }
+
     let url: string = `${this.baseLink}${endpoint}?`;
 
     Object.entries(urlOptions).forEach(([key, value]: [string, string]) => {
@@ -47,13 +53,17 @@ class Loader {
     return url.slice(0, -1);
   }
 
-  load<T>(method: string, endpoint: Endpoints, callback: CallbackFunction<T>, options = {}) {
+  public load<T>(method: string, endpoint: Endpoints, callback: CallbackFunction<T>, options = {}): void {
     fetch(this.makeUrl(options, endpoint), { method })
       .then((res) => Loader.errorHandler(res))
       .then((res) => res.json())
-      .then((data) => callback(data))
-      // eslint-disable-next-line no-console
-      .catch((err) => console.error(err));
+      .then((data) => {
+        callback(data);
+      })
+      .catch((err) => {
+        // eslint-disable-next-line no-console
+        console.error(err);
+      });
   }
 }
 

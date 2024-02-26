@@ -5,7 +5,12 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitAny": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "paths": {
+      "myTypes": ["./././types"]
+    }
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]

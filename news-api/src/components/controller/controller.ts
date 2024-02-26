@@ -1,18 +1,21 @@
 import AppLoader from './appLoader';
-import { Endpoints, CallbackFunction, assertElementIsNull } from '../../types/index';
+import { Endpoints } from '../../types/enum';
+import { assertElementIsNull } from '../../types/functions';
+
+import type { CallbackFunction } from '../../types/types';
 
 class AppController extends AppLoader {
-  getSources<T>(callback: CallbackFunction<T>) {
+  public getSources<T>(callback: CallbackFunction<T>): void {
     super.getResp(
       {
-        endpoint: Endpoints.sources,
+        endpoint: Endpoints.SOURCES,
         options: {},
       },
       callback
     );
   }
 
-  getNews<T>(e: Event, callback: CallbackFunction<T>) {
+  public getNews<T>(e: Event, callback: CallbackFunction<T>): void {
     let { target }: { target: EventTarget | null } = e;
     assertElementIsNull(target);
     const { currentTarget: newsContainer }: { currentTarget: EventTarget | null } = e;
@@ -20,21 +23,22 @@ class AppController extends AppLoader {
 
     while (target !== newsContainer) {
       if (target instanceof HTMLElement && newsContainer instanceof HTMLElement) {
-        if (target && target.classList.contains('source__item')) {
-          const sourceId: string | null = target.getAttribute('data-source-id');
-          assertElementIsNull(sourceId);
-          if (newsContainer.getAttribute('data-source') !== sourceId) {
-            newsContainer.setAttribute('data-source', sourceId);
-            super.getResp(
-              {
-                endpoint: Endpoints.articles,
-                options: {},
-              },
-              callback
-            );
-          }
+        const sourceId: string | null = target.getAttribute('data-source-id');
+        assertElementIsNull(sourceId);
+
+        if (newsContainer.getAttribute('data-source') !== sourceId) {
+          newsContainer.setAttribute('data-source', sourceId);
+          super.getResp(
+            {
+              endpoint: Endpoints.ARTICLES,
+              options: {},
+            },
+            callback
+          );
+
           return;
         }
+
         target = target.parentNode;
       }
     }

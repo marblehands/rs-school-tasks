@@ -1,10 +1,11 @@
 import './news.css';
-import { Article, assertElementIsNull } from '../../../types/index';
+import { assertElementIsNull } from '../../../types/functions';
+
+import type { Article } from '../../../types/interfaces';
 
 class News {
-  static draw(data: Article[]) {
+  public static draw(data: Article[]): void {
     const news: Article[] = data.length >= 10 ? data.filter((_item: Article, idx: number) => idx < 10) : data;
-
     const fragment: DocumentFragment = document.createDocumentFragment();
     const newsItemTemp = document.querySelector<HTMLTemplateElement>('#newsItemTemp');
     assertElementIsNull(newsItemTemp);
@@ -22,11 +23,11 @@ class News {
 
         const newsMetaPhoto = newsClone.querySelector<HTMLDivElement>('.news__meta-photo');
         assertElementIsNull(newsMetaPhoto);
-        newsMetaPhoto.style.backgroundImage = `url(${item.urlToImage || 'img/news_placeholder.jpg'})`;
+        newsMetaPhoto.style.backgroundImage = `url(${item.urlToImage ?? 'img/news_placeholder.jpg'})`;
 
         const newsMetaAuthor = newsClone.querySelector<HTMLLIElement>('.news__meta-author');
         assertElementIsNull(newsMetaAuthor);
-        newsMetaAuthor.textContent = item.author || item.source.name;
+        newsMetaAuthor.textContent = item.author ?? item.source.name;
 
         const newsMetaDate = newsClone.querySelector<HTMLLIElement>('.news__meta-date');
         assertElementIsNull(newsMetaDate);

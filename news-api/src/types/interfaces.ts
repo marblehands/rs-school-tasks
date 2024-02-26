@@ -16,7 +16,7 @@ export interface Article {
   title: string;
   description: string;
   url: string;
-  urlToImage: string;
+  urlToImage?: string;
   publishedAt: string;
   content: string;
 }
@@ -42,25 +42,6 @@ export interface ArticleResponse extends Response {
   articles: Article[];
 }
 
-// Endpoints, options
-
-export enum Endpoints {
-  sources = 'mocks/sources',
-  articles = 'mocks/everything',
-}
-
-export type ApiConfig = {
+export interface ApiConfig {
   apiKey?: string | undefined;
-};
-
-// Callback
-
-export type CallbackFunction<T> = (argument?: T) => void;
-
-// Assertion Function
-
-export function assertElementIsNull<T>(item?: T): asserts item {
-  if (item === null) {
-    throw new Error('element is equal null');
-  }
 }
