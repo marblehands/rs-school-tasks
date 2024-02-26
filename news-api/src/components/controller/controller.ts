@@ -24,19 +24,20 @@ class AppController extends AppLoader {
     while (target !== newsContainer) {
       if (target instanceof HTMLElement && newsContainer instanceof HTMLElement) {
         const sourceId: string | null = target.getAttribute('data-source-id');
-        assertElementIsNull(sourceId);
 
-        if (newsContainer.getAttribute('data-source') !== sourceId) {
-          newsContainer.setAttribute('data-source', sourceId);
-          super.getResp(
-            {
-              endpoint: Endpoints.ARTICLES,
-              options: {},
-            },
-            callback
-          );
+        if (sourceId) {
+          if (newsContainer.getAttribute('data-source') !== sourceId) {
+            newsContainer.setAttribute('data-source', sourceId);
+            super.getResp(
+              {
+                endpoint: Endpoints.ARTICLES,
+                options: {},
+              },
+              callback
+            );
 
-          return;
+            return;
+          }
         }
 
         target = target.parentNode;
