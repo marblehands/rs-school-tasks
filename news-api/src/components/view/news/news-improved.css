@@ -186,6 +186,12 @@
   transform: scale(1.1) rotate(2deg);
 }
 
+.news__empty-state {
+  width: 100%;
+  opacity: 0.5;
+  color: #fff;
+}
+
 @media (max-width: 900px) {
   .news__item:first-child {
     flex-direction: column;
