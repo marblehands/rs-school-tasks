@@ -1,35 +1,88 @@
-body {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.body {
   color: #fff;
-  background: #17181c;
+  background: #1a1a1d;
   font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
 }
 
-header {
-  padding: 10px 30px;
+.wrapper {
+  max-width: 80%;
+  margin: 0 auto;
+  margin-bottom: 2em;
 }
 
-header h1 {
-  font-size: 40px;
-  font-weight: 800;
+.header {
+  padding: 2em 0;
 }
 
-footer {
-  height: 100px;
+.header__title {
+  font:
+    4em 'Gloock',
+    sans-serif;
+  text-transform: uppercase;
+  position: relative;
+  padding-left: 1.5em;
+}
+
+.header__title::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1.2em;
+  height: 1.2em;
+  background: url(./img/svg/logo.svg) 100% / cover no-repeat;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.footer {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  border-bottom: 1px #fff solid;
+  border-top: 1px #fff solid;
+  padding: 1.5em 1em;
 }
-footer .copyright {
-  font-size: 14px;
-  color: #333;
+.footer .copyright {
+  font:
+    700 1em 'IBM Plex Sans',
+    sans-serif;
+  font-size: 16px;
+  color: #fff;
   text-align: center;
 }
-footer .copyright a {
-  color: #444;
+.footer .copyright a {
+  display: inline-block;
+  text-decoration: none;
+  margin-left: 0.5em;
+  text-transform: uppercase;
+  color: #fff;
+  transition: 0.25s;
 }
-footer .copyright a:hover {
-  color: #555;
+.footer .copyright a:hover {
+  color: #86b6fd;
 }
-footer .copyright:before {
+.footer .copyright:before {
   content: '©';
+}
+
+.footer__logo {
+  display: block;
+  width: 120px;
+  height: 45px;
+  background: url(./img/svg/rs-logo.svg) 100% / cover no-repeat;
+  cursor: pointer;
 }
