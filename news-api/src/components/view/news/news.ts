@@ -1,26 +1,20 @@
-import './news.css';
+import './news-improved.css';
 import { assertElementIsNull } from '../../../types/functions';
 
 import type { Article } from '../../../types/interfaces';
 
 class News {
   public static draw(data: Article[]): void {
-    const news: Article[] = data.length >= 10 ? data.filter((_item: Article, idx: number) => idx < 10) : data;
+    const news: Article[] = data.length >= 10 ? data.filter((_item: Article, idx: number) => idx < 11) : data;
     const fragment: DocumentFragment = document.createDocumentFragment();
     const newsItemTemp = document.querySelector<HTMLTemplateElement>('#newsItemTemp');
     assertElementIsNull(newsItemTemp);
 
-    news.forEach((item: Article, idx: number) => {
+    news.forEach((item: Article) => {
       const newsClone = newsItemTemp.content.cloneNode(true);
       assertElementIsNull(newsClone);
 
       if (newsClone instanceof DocumentFragment) {
-        if (idx % 2) {
-          const newsItem = newsClone.querySelector<HTMLDivElement>('.news__item');
-          assertElementIsNull(newsItem);
-          newsItem.classList.add('alt');
-        }
-
         const newsMetaPhoto = newsClone.querySelector<HTMLDivElement>('.news__meta-photo');
         assertElementIsNull(newsMetaPhoto);
         newsMetaPhoto.style.backgroundImage = `url(${item.urlToImage ?? 'img/news_placeholder.jpg'})`;
