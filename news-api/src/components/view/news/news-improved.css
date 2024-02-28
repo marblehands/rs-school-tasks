@@ -186,8 +186,8 @@
   transform: scale(1.1) rotate(2deg);
 }
 
-.news__empty-state {
-  width: 100%;
+.news__empty-state,
+.search__label {
   opacity: 0.5;
   color: #fff;
 }
