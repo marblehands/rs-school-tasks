@@ -73,6 +73,21 @@
   cursor: pointer;
 }
 
+.news__empty-state-wrapper {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+}
+
+.news__empty-img {
+  width: 400px;
+  height: 300px;
+  background: url(./img/svg/empty-state-img.svg) 100% / cover no-repeat;
+}
+
 .footer {
   display: flex;
   align-items: center;
@@ -140,6 +155,11 @@
 
   .search__input {
     min-width: 100%;
+  }
+
+  .news__empty-img {
+    width: 280px;
+    height: 210px;
   }
 
   .footer {

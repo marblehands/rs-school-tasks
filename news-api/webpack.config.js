@@ -20,7 +20,7 @@ const baseConfig = {
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif|ico)$/i,
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
       },
     ],
@@ -31,6 +31,7 @@ const baseConfig = {
   output: {
     filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, './dist'),
+    assetModuleFilename: 'img/[hash][ext]',
     clean: true,
   },
   plugins: [

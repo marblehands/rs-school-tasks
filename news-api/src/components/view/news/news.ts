@@ -17,7 +17,7 @@ class News {
       if (newsClone instanceof DocumentFragment) {
         const newsMetaPhoto = newsClone.querySelector<HTMLDivElement>('.news__meta-photo');
         assertElementIsNull(newsMetaPhoto);
-        newsMetaPhoto.style.backgroundImage = `url(${item.urlToImage ?? 'img/news_placeholder.jpg'})`;
+        newsMetaPhoto.style.backgroundImage = `url(${item.urlToImage ?? './img/jpg/news_placeholder.jpg'})`;
 
         const newsMetaAuthor = newsClone.querySelector<HTMLLIElement>('.news__meta-author');
         assertElementIsNull(newsMetaAuthor);
