@@ -19,14 +19,19 @@ const baseConfig = {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif|ico)$/i,
+        type: 'asset/resource',
+      },
     ],
   },
   resolve: {
     extensions: ['.ts', '.js'],
   },
   output: {
-    filename: 'index.js',
+    filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, './dist'),
+    clean: true,
   },
   plugins: [
     new DotenvWebpackPlugin(),
