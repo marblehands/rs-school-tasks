@@ -30,7 +30,7 @@ class AppController extends AppLoader {
             newsContainer.setAttribute('data-source', sourceId);
             super.getResp(
               {
-                endpoint: Endpoints.ARTICLES,
+                endpoint: Endpoints.EVERYTHING,
                 options: {},
               },
               callback
