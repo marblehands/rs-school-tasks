@@ -3,14 +3,10 @@ import type { LoaderCallback } from '../../types/types';
 import type { Options } from '../../types/interfaces';
 
 class Loader {
-  private baseLink: string | undefined;
-
-  private options: Options;
-
-  constructor(baseLink: string | undefined, options: Options) {
-    this.baseLink = baseLink;
-    this.options = options;
-  }
+  constructor(
+    private baseLink: string | undefined,
+    private options: Options
+  ) {}
 
   public getResp<T>(
     { endpoint, options }: { endpoint: Endpoints; options?: Options },
