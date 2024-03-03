@@ -25,7 +25,7 @@ class App {
     assertElementIsNull(searchInput);
 
     function eventHandler(event: Event): void {
-      const { target } = event;
+      const { target }: { target: EventTarget | null } = event;
 
       if (target instanceof HTMLInputElement) {
         const value = target.value.toLowerCase();
