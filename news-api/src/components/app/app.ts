@@ -6,7 +6,6 @@ import type { EverythingResponses, SourceResponses } from '../../types/interface
 
 class App {
   private controller: AppController = new AppController();
-  private view: AppView = new AppView();
 
   public start(): void {
     const sourceWrapper = document.querySelector<HTMLDivElement>('.sources');
