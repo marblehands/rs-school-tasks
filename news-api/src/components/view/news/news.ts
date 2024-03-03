@@ -7,36 +7,39 @@ class News {
   public static draw(data: Article[]): void {
     const news: Article[] = data.length >= 10 ? data.filter((_item: Article, idx: number) => idx < 11) : data;
     const fragment: DocumentFragment = document.createDocumentFragment();
-    const newsItemTemp = document.querySelector<HTMLTemplateElement>('#newsItemTemp');
+    const newsItemTemp: HTMLTemplateElement | null = document.querySelector<HTMLTemplateElement>('#newsItemTemp');
     assertElementIsNull(newsItemTemp);
 
     news.forEach((item: Article) => {
-      const newsClone = newsItemTemp.content.cloneNode(true);
+      const newsClone: Node = newsItemTemp.content.cloneNode(true);
       assertElementIsNull(newsClone);
 
       if (newsClone instanceof DocumentFragment) {
-        const newsMetaPhoto = newsClone.querySelector<HTMLDivElement>('.news__meta-photo');
+        const newsMetaPhoto: HTMLDivElement | null = newsClone.querySelector<HTMLDivElement>('.news__meta-photo');
         assertElementIsNull(newsMetaPhoto);
         newsMetaPhoto.style.backgroundImage = `url(${item.urlToImage ?? './img/jpg/news_placeholder.jpg'})`;
 
-        const newsMetaAuthor = newsClone.querySelector<HTMLLIElement>('.news__meta-author');
+        const newsMetaAuthor: HTMLLIElement | null = newsClone.querySelector<HTMLLIElement>('.news__meta-author');
         assertElementIsNull(newsMetaAuthor);
         newsMetaAuthor.textContent = item.author ?? item.source.name;
 
-        const newsMetaDate = newsClone.querySelector<HTMLLIElement>('.news__meta-date');
+        const newsMetaDate: HTMLLIElement | null = newsClone.querySelector<HTMLLIElement>('.news__meta-date');
         assertElementIsNull(newsMetaDate);
         newsMetaDate.textContent = item.publishedAt.slice(0, 10).split('-').reverse().join('-');
 
-        const descriptionTitle = newsClone.querySelector<HTMLHeadingElement>('.news__description-title');
+        const descriptionTitle: HTMLHeadingElement | null =
+          newsClone.querySelector<HTMLHeadingElement>('.news__description-title');
         assertElementIsNull(descriptionTitle);
 
-        const descriptionSource = newsClone.querySelector<HTMLHeadingElement>('.news__description-source');
+        const descriptionSource: HTMLHeadingElement | null =
+          newsClone.querySelector<HTMLHeadingElement>('.news__description-source');
         assertElementIsNull(descriptionSource);
 
-        const descriptionContent = newsClone.querySelector<HTMLParagraphElement>('.news__description-content');
+        const descriptionContent: HTMLParagraphElement | null =
+          newsClone.querySelector<HTMLParagraphElement>('.news__description-content');
         assertElementIsNull(descriptionContent);
 
-        const readMoreLink = newsClone.querySelector<HTMLAnchorElement>('.news__read-more a');
+        const readMoreLink: HTMLAnchorElement | null = newsClone.querySelector<HTMLAnchorElement>('.news__read-more a');
         assertElementIsNull(readMoreLink);
 
         descriptionTitle.textContent = item.title;
@@ -48,7 +51,7 @@ class News {
       }
     });
 
-    const newsWrapper = document.querySelector<HTMLDivElement>('.news');
+    const newsWrapper: HTMLDivElement | null = document.querySelector<HTMLDivElement>('.news');
     assertElementIsNull(newsWrapper);
 
     newsWrapper.innerHTML = '';
