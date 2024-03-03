@@ -1,5 +1,5 @@
 import './news-improved.css';
-import { assertElementIsNull } from '../../../types/functions';
+import { assertElementIsNull } from '../../../types/utils';
 
 import type { Article } from '../../../types/interfaces';
 

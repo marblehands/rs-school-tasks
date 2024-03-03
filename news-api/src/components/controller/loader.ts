@@ -1,5 +1,5 @@
 import type { Endpoints } from '../../types/enum';
-import type { CallbackFunction } from '../../types/types';
+import type { LoaderCallback } from '../../types/types';
 import type { ApiConfig } from '../../types/interfaces';
 
 class Loader {
@@ -14,7 +14,7 @@ class Loader {
 
   public getResp<T>(
     { endpoint, options = {} }: { endpoint: Endpoints; options: ApiConfig },
-    callback: CallbackFunction<T> = (): void => {
+    callback: LoaderCallback<T> = (): void => {
       // eslint-disable-next-line no-console
       console.error('No callback for GET response');
     }
@@ -53,7 +53,7 @@ class Loader {
     return url.slice(0, -1);
   }
 
-  public load<T>(method: string, endpoint: Endpoints, callback: CallbackFunction<T>, options = {}): void {
+  public load<T>(method: string, endpoint: Endpoints, callback: LoaderCallback<T>, options = {}): void {
     fetch(this.makeUrl(options, endpoint), { method })
       .then((res) => Loader.errorHandler(res))
       .then((res) => res.json())

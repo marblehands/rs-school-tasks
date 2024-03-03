@@ -34,12 +34,13 @@ export interface Response {
   message?: string;
 }
 
-export interface SourceResponse extends Response {
+export interface SourceResponses extends Response {
   sources: Source[];
 }
 
-export interface ArticleResponse extends Response {
+export interface EverythingResponses extends Response {
   articles: Article[];
+  totalResults: number;
 }
 
 export interface ApiConfig {

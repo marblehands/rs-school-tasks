@@ -1,5 +1,5 @@
 import './sources.css';
-import { assertElementIsNull } from '../../../types/functions';
+import { assertElementIsNull } from '../../../types/utils';
 
 import type { Source } from '../../../types/interfaces';
 

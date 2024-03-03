@@ -1,8 +1,8 @@
 import AppController from '../controller/controller';
 import { AppView } from '../view/appView';
-import { assertElementIsNull } from '../../types/functions';
+import { assertElementIsNull } from '../../types/utils';
 
-import type { ArticleResponse, SourceResponse } from '../../types/interfaces';
+import type { EverythingResponses, SourceResponses } from '../../types/interfaces';
 
 class App {
   private controller;
@@ -19,11 +19,11 @@ class App {
     assertElementIsNull(sourceWrapper);
 
     sourceWrapper.addEventListener('click', (e) => {
-      this.controller.getNews(e, (data?: ArticleResponse) => {
+      this.controller.getNews(e, (data?: EverythingResponses) => {
         AppView.drawNews(data);
       });
     });
-    this.controller.getSources((data?: SourceResponse) => {
+    this.controller.getSources((data?: SourceResponses) => {
       AppView.drawSources(data);
     });
 

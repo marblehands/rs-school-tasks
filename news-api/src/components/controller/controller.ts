@@ -1,11 +1,11 @@
 import AppLoader from './appLoader';
 import { Endpoints } from '../../types/enum';
-import { assertElementIsNull } from '../../types/functions';
+import { assertElementIsNull } from '../../types/utils';
 
-import type { CallbackFunction } from '../../types/types';
+import type { LoaderCallback } from '../../types/types';
 
 class AppController extends AppLoader {
-  public getSources<T>(callback: CallbackFunction<T>): void {
+  public getSources<T>(callback: LoaderCallback<T>): void {
     super.getResp(
       {
         endpoint: Endpoints.SOURCES,
@@ -15,7 +15,7 @@ class AppController extends AppLoader {
     );
   }
 
-  public getNews<T>(e: Event, callback: CallbackFunction<T>): void {
+  public getNews<T>(e: Event, callback: LoaderCallback<T>): void {
     let { target }: { target: EventTarget | null } = e;
     assertElementIsNull(target);
     const { currentTarget: newsContainer }: { currentTarget: EventTarget | null } = e;
