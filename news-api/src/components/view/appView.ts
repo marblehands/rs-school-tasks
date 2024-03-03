@@ -5,12 +5,12 @@ import type { SourceResponses, EverythingResponses, Article, Source } from '../.
 
 export class AppView {
   public static drawNews(data: EverythingResponses): void {
-    const values: Article[] = data.articles ?? [];
+    const values: Article[] = data.articles;
     News.draw(values);
   }
 
   public static drawSources(data: SourceResponses): void {
-    const values: Source[] = data.sources ? data.sources : [];
+    const values: Source[] = data.sources;
     Sources.draw(values);
   }
 }

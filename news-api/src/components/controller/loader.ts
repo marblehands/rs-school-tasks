@@ -1,4 +1,5 @@
-import { Endpoints, Status } from '../../types/enum';
+import { type Endpoints, Status } from '../../types/enum';
+
 import type { LoaderCallback } from '../../types/types';
 import type { Options } from '../../types/interfaces';
 
@@ -19,8 +20,10 @@ class Loader {
 
   private static errorHandler(res: Response): Response {
     if (!res.ok) {
-      if (res.status === Status.UNAUTHORIZED || res.status === Status.NOT_FOUND) {
-        console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
+      const { status }: { status: Status } = res;
+
+      if ([Status.UNAUTHORIZED, Status.NOT_FOUND].includes(status)) {
+        console.error(`Sorry, but there is ${status} error: ${res.statusText}`);
       }
 
       throw Error(res.statusText);

@@ -34,9 +34,7 @@ module.exports = {
     //     skipComments: true,
     //   },
     // ],
-    'no-console': {
-      allow: ['warn', 'error'],
-    },
+    'no-console': ['error', { allow: ['warn', 'error'] }],
     'no-return-await': 'off',
     'padding-line-between-statements': [
       'error',
