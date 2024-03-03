@@ -32,10 +32,6 @@ class Loader {
   private makeUrl(endpoint: Endpoints, options?: Options): string {
     const urlOptions: Options = { ...this.options, ...options };
 
-    if (this.baseLink === undefined) {
-      throw new Error('baselink is not defined');
-    }
-
     let url: string = `${this.baseLink}${endpoint}?`;
 
     Object.entries(urlOptions).forEach(([key, value]: [string, string]) => {
