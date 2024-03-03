@@ -45,12 +45,12 @@ class Loader {
 
   private load<T>(method: string, endpoint: Endpoints, callback: LoaderCallback<T>, options?: Options): void {
     fetch(this.makeUrl(endpoint, options), { method })
-      .then((res) => Loader.errorHandler(res))
-      .then((res) => res.json())
-      .then((data) => {
+      .then((res: Response): Response => Loader.errorHandler(res))
+      .then((res: Response): Promise<T> => res.json())
+      .then((data: T): void => {
         callback(data);
       })
-      .catch((err) => {
+      .catch((err: Error): void => {
         console.error(err);
       });
   }
