@@ -8,10 +8,10 @@ class App {
   private controller: AppController = new AppController();
 
   public start(): void {
-    const sourceWrapper = document.querySelector<HTMLDivElement>('.sources');
+    const sourceWrapper: HTMLDivElement | null = document.querySelector<HTMLDivElement>('.sources');
     assertElementIsNull(sourceWrapper);
 
-    sourceWrapper.addEventListener('click', (e) => {
+    sourceWrapper.addEventListener('click', (e: MouseEvent) => {
       this.controller.getNews(e, (data: EverythingResponses) => {
         AppView.drawNews(data);
       });
@@ -27,16 +27,17 @@ class App {
       const { target }: { target: EventTarget | null } = event;
 
       if (target instanceof HTMLInputElement) {
-        const value = target.value.toLowerCase();
-        const titles = document.querySelectorAll<HTMLDivElement>('.news__description-title');
+        const value: string = target.value.toLowerCase();
+        const titles: NodeListOf<HTMLDivElement> =
+          document.querySelectorAll<HTMLDivElement>('.news__description-title');
         assertElementIsNull(titles);
-        const cards = document.querySelectorAll<HTMLDivElement>('.news__item');
+        const cards: NodeListOf<HTMLDivElement> = document.querySelectorAll<HTMLDivElement>('.news__item');
         assertElementIsNull(cards);
 
         titles.forEach((title, index) => {
-          const newsItem = cards[index];
+          const newsItem: HTMLDivElement = cards[index];
 
-          const titleText = title.textContent;
+          const titleText: string | null = title.textContent;
 
           if (titleText && titleText.toLowerCase().includes(value.toLowerCase())) {
             newsItem.style.display = 'flex';
