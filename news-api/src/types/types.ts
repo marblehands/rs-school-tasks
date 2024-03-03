@@ -1,3 +1,3 @@
 // Callback
 
-export type LoaderCallback<T> = (data?: T) => void;
+export type LoaderCallback<T> = (data: T) => void;

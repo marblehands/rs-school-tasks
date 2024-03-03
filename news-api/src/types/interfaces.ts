@@ -11,7 +11,7 @@ export interface Source {
 }
 
 export interface Article {
-  source: ArticleSource;
+  source: Pick<Source, 'id' | 'name'>;
   author: string | null;
   title: string;
   description: string;
@@ -19,11 +19,6 @@ export interface Article {
   urlToImage?: string;
   publishedAt: string;
   content: string;
-}
-
-export interface ArticleSource {
-  id: string | null;
-  name: string;
 }
 
 // API Response interface

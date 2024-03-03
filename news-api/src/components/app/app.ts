@@ -13,15 +13,15 @@ class App {
     assertElementIsNull(sourceWrapper);
 
     sourceWrapper.addEventListener('click', (e) => {
-      this.controller.getNews(e, (data?: EverythingResponses) => {
+      this.controller.getNews(e, (data: EverythingResponses) => {
         AppView.drawNews(data);
       });
     });
-    this.controller.getSources((data?: SourceResponses) => {
+    this.controller.getSources((data: SourceResponses) => {
       AppView.drawSources(data);
     });
 
-    const searchInput = document.querySelector<HTMLInputElement>('.search__input');
+    const searchInput: HTMLInputElement | null = document.querySelector<HTMLInputElement>('.search__input');
     assertElementIsNull(searchInput);
 
     function eventHandler(event: Event): void {
