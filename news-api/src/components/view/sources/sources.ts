@@ -6,17 +6,18 @@ import type { Source } from '../../../types/interfaces';
 class Sources {
   public static draw(data: Source[]): void {
     const fragment: DocumentFragment = document.createDocumentFragment();
-    const sourceItemTemp = document.querySelector<HTMLTemplateElement>('#sourceItemTemp');
+    const sourceItemTemp: HTMLTemplateElement | null = document.querySelector<HTMLTemplateElement>('#sourceItemTemp');
 
     assertElementIsNull(sourceItemTemp);
 
     data.forEach((item) => {
-      const sourceClone = sourceItemTemp.content.cloneNode(true);
+      const sourceClone: Node = sourceItemTemp.content.cloneNode(true);
       assertElementIsNull(sourceClone);
 
       if (sourceClone instanceof DocumentFragment) {
-        const sourceNameElement = sourceClone.querySelector<HTMLSpanElement>('.source__item-name');
-        const sourceItemElement = sourceClone.querySelector<HTMLDivElement>('.source__item');
+        const sourceNameElement: HTMLSpanElement | null =
+          sourceClone.querySelector<HTMLSpanElement>('.source__item-name');
+        const sourceItemElement: HTMLDivElement | null = sourceClone.querySelector<HTMLDivElement>('.source__item');
 
         assertElementIsNull(sourceNameElement);
         assertElementIsNull(sourceItemElement);
@@ -28,7 +29,7 @@ class Sources {
       }
     });
 
-    const sourceWrapper = document.querySelector<HTMLDivElement>('.sources');
+    const sourceWrapper: HTMLDivElement | null = document.querySelector<HTMLDivElement>('.sources');
     assertElementIsNull(sourceWrapper);
     sourceWrapper.append(fragment);
   }
