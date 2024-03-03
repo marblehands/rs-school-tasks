@@ -11,7 +11,6 @@ class Loader {
   protected getResp<T>(
     { endpoint, options }: { endpoint: Endpoints; options?: Options },
     callback: LoaderCallback<T> = (): void => {
-      // eslint-disable-next-line no-console
       console.error('No callback for GET response');
     }
   ): void {
@@ -21,7 +20,6 @@ class Loader {
   private static errorHandler(res: Response): Response {
     if (!res.ok) {
       if (res.status === 401 || res.status === 404) {
-        // eslint-disable-next-line no-console
         console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
       }
 
@@ -57,7 +55,6 @@ class Loader {
         callback(data);
       })
       .catch((err) => {
-        // eslint-disable-next-line no-console
         console.error(err);
       });
   }
