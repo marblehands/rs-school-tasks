@@ -1,19 +1,19 @@
 import type { Endpoints } from '../../types/enum';
 import type { LoaderCallback } from '../../types/types';
-import type { ApiConfig } from '../../types/interfaces';
+import type { Options } from '../../types/interfaces';
 
 class Loader {
   private baseLink: string | undefined;
 
-  private options: ApiConfig;
+  private options: Options;
 
-  constructor(baseLink: string | undefined, options: ApiConfig) {
+  constructor(baseLink: string | undefined, options: Options) {
     this.baseLink = baseLink;
     this.options = options;
   }
 
   public getResp<T>(
-    { endpoint, options = {} }: { endpoint: Endpoints; options: ApiConfig },
+    { endpoint, options }: { endpoint: Endpoints; options?: Options },
     callback: LoaderCallback<T> = (): void => {
       // eslint-disable-next-line no-console
       console.error('No callback for GET response');
@@ -35,8 +35,8 @@ class Loader {
     return res;
   }
 
-  private makeUrl(options: ApiConfig, endpoint: Endpoints): string {
-    const urlOptions: ApiConfig = { ...this.options, ...options };
+  private makeUrl(endpoint: Endpoints, options?: Options): string {
+    const urlOptions: Options = { ...this.options, ...options };
 
     if (this.baseLink === undefined) {
       throw new Error('baselink is not defined');
@@ -53,8 +53,8 @@ class Loader {
     return url.slice(0, -1);
   }
 
-  public load<T>(method: string, endpoint: Endpoints, callback: LoaderCallback<T>, options = {}): void {
-    fetch(this.makeUrl(options, endpoint), { method })
+  public load<T>(method: string, endpoint: Endpoints, callback: LoaderCallback<T>, options?: Options): void {
+    fetch(this.makeUrl(endpoint, options), { method })
       .then((res) => Loader.errorHandler(res))
       .then((res) => res.json())
       .then((data) => {

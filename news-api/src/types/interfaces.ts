@@ -43,6 +43,6 @@ export interface EverythingResponses extends Response {
   totalResults: number;
 }
 
-export interface ApiConfig {
-  apiKey?: string | undefined;
+export interface Options {
+  apiKey: string | undefined;
 }
