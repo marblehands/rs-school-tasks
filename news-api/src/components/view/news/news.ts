@@ -5,7 +5,7 @@ import type { Article } from '../../../types/interfaces';
 
 class News {
   public static draw(data: Article[]): void {
-    const news: Article[] = data.length >= 10 ? data.filter((_item: Article, idx: number) => idx < 11) : data;
+    const news: Article[] = data.slice(0, 10);
     const fragment: DocumentFragment = document.createDocumentFragment();
     const newsItemTemp: HTMLTemplateElement | null = document.querySelector<HTMLTemplateElement>('#newsItemTemp');
     assertElementIsNull(newsItemTemp);
