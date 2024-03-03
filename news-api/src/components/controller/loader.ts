@@ -43,7 +43,7 @@ class Loader {
     return url.slice(0, -1);
   }
 
-  public load<T>(method: string, endpoint: Endpoints, callback: LoaderCallback<T>, options?: Options): void {
+  private load<T>(method: string, endpoint: Endpoints, callback: LoaderCallback<T>, options?: Options): void {
     fetch(this.makeUrl(endpoint, options), { method })
       .then((res) => Loader.errorHandler(res))
       .then((res) => res.json())
