@@ -8,7 +8,7 @@ class Loader {
     private options: Options
   ) {}
 
-  public getResp<T>(
+  protected getResp<T>(
     { endpoint, options }: { endpoint: Endpoints; options?: Options },
     callback: LoaderCallback<T> = (): void => {
       // eslint-disable-next-line no-console
