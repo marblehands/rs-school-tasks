@@ -5,14 +5,8 @@ import { assertElementIsNull } from '../../types/utils';
 import type { EverythingResponses, SourceResponses } from '../../types/interfaces';
 
 class App {
-  private controller;
-
-  private view;
-
-  constructor() {
-    this.controller = new AppController();
-    this.view = new AppView();
-  }
+  private controller: AppController = new AppController();
+  private view: AppView = new AppView();
 
   public start(): void {
     const sourceWrapper = document.querySelector<HTMLDivElement>('.sources');
