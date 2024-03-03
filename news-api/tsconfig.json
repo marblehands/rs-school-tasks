@@ -7,10 +7,7 @@
     "noImplicitAny": true,
     "skipLibCheck": true,
     "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "paths": {
-      "myTypes": ["./././types"]
-    }
+    "moduleResolution": "NodeNext"
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
