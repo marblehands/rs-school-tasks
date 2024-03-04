@@ -4,9 +4,13 @@ class AppLoader extends Loader {
   constructor() {
     if (!process.env.API_KEY && !process.env.API_URL) {
       throw new Error('API Key and API URL are not defined');
-    } else if (!process.env.API_KEY) {
+    }
+
+    if (!process.env.API_KEY) {
       throw new Error('API Key is not defined');
-    } else if (!process.env.API_URL) {
+    }
+
+    if (!process.env.API_URL) {
       throw new Error('API URL is not defined');
     }
 
