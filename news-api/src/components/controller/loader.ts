@@ -5,7 +5,7 @@ import type { Options } from '../../types/interfaces';
 
 class Loader {
   constructor(
-    private baseLink: string | undefined,
+    private baseLink: string,
     private options: Partial<Options>
   ) {}
 
