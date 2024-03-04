@@ -39,5 +39,6 @@ export interface EverythingResponses extends Response {
 }
 
 export interface Options {
-  apiKey: string | undefined;
+  apiKey: string;
+  sources: string;
 }

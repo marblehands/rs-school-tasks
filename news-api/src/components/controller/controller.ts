@@ -30,7 +30,7 @@ class AppController extends AppLoader {
             super.getResp(
               {
                 endpoint: Endpoints.EVERYTHING,
-                options: { apiKey: process.env.API_KEY },
+                options: { sources: sourceId },
               },
               callback
             );
