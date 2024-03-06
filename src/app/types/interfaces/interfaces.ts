@@ -5,3 +5,7 @@ export interface BaseComponentParams {
   event?: string;
   callback?: (event: Event) => void;
 }
+
+export interface LinkParams extends BaseComponentParams {
+  href: string;
+}

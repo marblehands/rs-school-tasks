@@ -1,6 +1,18 @@
-import BaseComponent from '../../components/baseComponent/baseComponent';
+import BaseComponent from '../../components/baseComponents/baseComponent';
+import Link from '../../components/baseComponents/link/link';
 
-import type { BaseComponentParams } from '../../types/interfaces/interfaces';
+const params = {
+  FOOTER: {
+    tag: 'footer',
+    classes: ['footer'],
+  },
+  LINK: {
+    tag: 'a',
+    content: 'GitHub',
+    classes: ['link'],
+    href: 'https://github.com/marblehands',
+  },
+};
 
 export default class FooterView {
   private footer: BaseComponent | null;
@@ -11,11 +23,12 @@ export default class FooterView {
   }
 
   private createFooter(): void {
-    const params: BaseComponentParams = {
-      tag: 'footer',
-      classes: ['footer'],
-    };
-    const footer = new BaseComponent(params);
+    const footer = new BaseComponent(params.FOOTER);
+
+    const link = new Link(params.LINK);
+    const linkNode = link.getElement();
+
+    footer.append(linkNode);
     this.footer = footer;
   }
 

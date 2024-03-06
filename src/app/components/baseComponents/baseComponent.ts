@@ -5,6 +5,8 @@ import type { BaseComponentParams } from '../../types/interfaces/interfaces';
 export default class BaseComponent {
   protected element: HTMLElement | null;
 
+  protected children: HTMLElement[] = [];
+
   constructor(params: BaseComponentParams) {
     this.element = null;
     this.createElement(params);
@@ -52,5 +54,13 @@ export default class BaseComponent {
     assertElementIsNull(this.element);
 
     return this.element;
+  }
+
+  public append(child: HTMLElement): void {
+    this.children.push(child);
+
+    if (this.element) {
+      this.element.append(child);
+    }
   }
 }
