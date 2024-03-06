@@ -1,13 +1,15 @@
+import '../styles/global.css';
+
+import FooterView from './view/footer/footer';
+
 export default class App {
-  private header: Header;
+  public static createApp(): void {
+    const footer = new FooterView();
 
-  private main: Main;
+    const footerNode = footer.getFooter();
 
-  private footer: Footer;
-
-  constructor() {
-    this.header = null;
-    this.main = null;
-    this.footer = null;
+    document.body.append(footerNode.element);
   }
 }
+
+App.createApp();
