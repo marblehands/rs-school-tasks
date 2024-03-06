@@ -13,7 +13,8 @@
   ],
   "rules": {
     "prettier/prettier": true,
-    "declaration-block-no-duplicate-properties": true
+    "declaration-block-no-duplicate-properties": true,
+    "selector-class-pattern": null
   },
   "plugins": ["stylelint-order", "stylelint-prettier"]
 }
