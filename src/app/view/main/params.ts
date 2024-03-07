@@ -3,18 +3,14 @@ const params = {
     tag: 'main',
     classes: ['main'],
   },
-  DIV_LOGIN_WRAPPER: {
+  DIV_WRAPPER: {
     classes: ['login__wrapper'],
   },
-  DIV_LEFT_ASIDE: {
+  DIV_LEFT: {
     classes: ['login__left-aside'],
   },
-  DIV_FORM_WRAPPER: {
+  DIV_RIGHT: {
     classes: ['login__form-wrapper'],
-  },
-  P: {
-    classes: ['logo-title'],
-    content: 'English Puzzles',
   },
 };
 
