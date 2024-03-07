@@ -5,21 +5,19 @@ import Header from './view/header/header';
 import Main from './view/main/main';
 
 export default class App {
-  public static createApp(): void {
-    const footers = new Footer();
-    const headers = new Header();
-    const main = new Main();
+  private footer = new Footer().footer;
 
-    const headerNode = headers.getHeader();
-    const mainNode = main.getMain();
-    const footerNode = footers.getFooter();
+  private header = new Header().header;
 
-    if (headerNode && footerNode && mainNode) {
-      document.body.append(headerNode.element);
-      document.body.append(mainNode.element);
-      document.body.append(footerNode.element);
-    }
+  private main = new Main().main;
+
+  public createApp(): void {
+    const headerNode = this.header.element;
+    const mainNode = this.main.element;
+    const footerNode = this.footer.element;
+
+    document.body.append(headerNode);
+    document.body.append(mainNode);
+    document.body.append(footerNode);
   }
 }
-
-App.createApp();

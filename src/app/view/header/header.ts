@@ -7,25 +7,18 @@ import params from './params';
 const { HEADER, DIV, P } = params;
 
 export default class Header {
-  private header: BaseComponent | null;
+  public header: BaseComponent;
 
   constructor() {
-    this.header = null;
+    this.header = new BaseComponent(HEADER);
     this.createHeader();
   }
 
   private createHeader(): void {
-    const header = new BaseComponent(HEADER);
-    const wrapper = div(DIV.classes).getElement();
-    const paragraph = p(P.classes, P.content).getElement();
+    const wrapper = div(DIV.classes).element;
+    const paragraph = p(P.classes, P.content).element;
 
     wrapper.append(paragraph);
-    header.append(wrapper);
-
-    this.header = header;
-  }
-
-  public getHeader(): BaseComponent | null {
-    return this.header;
+    this.header.append(wrapper);
   }
 }

@@ -1,15 +1,12 @@
-import { assertElementIsNull } from '../../types/utils/utils';
-
-import type { BaseComponentParams } from '../../types/interfaces/interfaces';
+import type { BaseComponentParams } from './interfaces';
 
 export default class BaseComponent {
-  protected element: HTMLElement | null;
+  public element: HTMLElement;
 
   protected children: HTMLElement[] = [];
 
   constructor(params: BaseComponentParams) {
-    this.element = null;
-    this.createElement(params);
+    this.element = document.createElement(params.tag);
 
     if (params.classes) {
       this.addStyles(params.classes);
@@ -22,55 +19,54 @@ export default class BaseComponent {
     if (params.content) {
       this.addContent(params.content);
     }
+
+    if (params.attributes) {
+      this.setAttributes(Object.entries(params.attributes));
+    }
   }
 
-  private createElement(params: BaseComponentParams): void {
-    this.element = document.createElement(params.tag);
-  }
-
-  private addStyles(classes: string[]): void {
+  public addStyles(classes: string[]): void {
     classes.forEach((className) => {
-      assertElementIsNull(this.element);
       this.element.classList.add(className);
     });
   }
 
   private addContent(text: string): void {
-    assertElementIsNull(this.element);
     this.element.textContent = text;
   }
 
   private addListener(event: string, callback: (event: Event) => void): void {
-    assertElementIsNull(this.element);
     this.element.addEventListener(event, callback);
   }
 
   public removeListener(event: string, listener: (event: Event) => void): void {
-    assertElementIsNull(this.element);
     this.element.removeEventListener(event, listener);
-  }
-
-  public getElement(): HTMLElement {
-    assertElementIsNull(this.element);
-
-    return this.element;
   }
 
   public append(child: HTMLElement): void {
     this.children.push(child);
-
-    if (this.element) {
-      this.element.append(child);
-    }
+    this.element.append(child);
   }
 
   public appendChildren(children: HTMLElement[]): void {
     this.children.push(...children);
 
     children.forEach((child) => {
-      if (this.element) {
-        this.element.append(child);
-      }
+      this.element.append(child);
     });
+  }
+
+  public setAttribute([attribute, value]: [attribute: string, value: string]): void {
+    this.element.setAttribute(attribute, value);
+  }
+
+  public setAttributes(attributes: string[][]): void {
+    attributes.forEach(([attribute, value]) => {
+      this.element.setAttribute(attribute, value);
+    });
+  }
+
+  public removeAttribute(attribute: string): void {
+    this.element.removeAttribute(attribute);
   }
 }

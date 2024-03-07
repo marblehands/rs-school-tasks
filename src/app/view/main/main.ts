@@ -2,29 +2,28 @@ import './main.css';
 import BaseComponent from '../../components/baseComponents/baseComponent';
 import params from './params';
 import { div } from '../../components/baseComponents/tags/tags';
+import LoginForm from '../../components/loginForm/loginForm';
 
 const { MAIN, DIV_WRAPPER, DIV_LEFT, DIV_RIGHT } = params;
 export default class Main {
-  private main: BaseComponent | null;
+  public main: BaseComponent;
+
+  public form: LoginForm;
 
   constructor() {
-    this.main = null;
+    this.main = new BaseComponent(MAIN);
+    this.form = new LoginForm();
     this.createMain();
   }
 
   private createMain(): void {
-    const main = new BaseComponent(MAIN);
-    const wrapper = div(DIV_WRAPPER.classes).getElement();
-    const left = div(DIV_LEFT.classes).getElement();
-    const right = div(DIV_RIGHT.classes).getElement();
+    const wrapper = div(DIV_WRAPPER.classes).element;
+    const left = div(DIV_LEFT.classes).element;
+    const right = div(DIV_RIGHT.classes).element;
+
+    right.append(this.form.element);
 
     wrapper.append(left, right);
-    main.append(wrapper);
-
-    this.main = main;
-  }
-
-  public getMain(): BaseComponent | null {
-    return this.main;
+    this.main.append(wrapper);
   }
 }

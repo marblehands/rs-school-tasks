@@ -6,7 +6,9 @@ const params = {
   LINK: {
     content: 'GitHub',
     classes: ['link'],
-    href: 'https://github.com/marblehands',
+    attributes: {
+      href: 'https://github.com/marblehands',
+    },
   },
   DIV: {
     classes: ['footer__info-wrapper'],
