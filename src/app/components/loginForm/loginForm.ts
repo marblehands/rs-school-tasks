@@ -16,12 +16,19 @@ export default class LoginForm extends BaseComponent {
 
   public labelSurname = label(LABEL_SURNAME.classes, LABEL_SURNAME.content, LABEL_SURNAME.attributes);
 
+  private isNameNotEmpty: boolean;
+
+  private isSurnameNotEmpty: boolean;
+
   constructor() {
     super(FORM);
+    this.isNameNotEmpty = false;
+    this.isSurnameNotEmpty = false;
+    this.addListeners();
     this.createLoginForm();
   }
 
-  public createLoginForm(): void {
+  private createLoginForm(): void {
     this.appendChildren([
       this.labelName.element,
       this.inputName.element,
@@ -29,5 +36,35 @@ export default class LoginForm extends BaseComponent {
       this.inputSurname.element,
       this.buttonLogin.element,
     ]);
+  }
+
+  private addListeners(): void {
+    this.inputSurname.element.addEventListener('input', (e) => {
+      this.handleInputChange('surname', e);
+    });
+
+    this.inputName.element.addEventListener('input', (e) => {
+      this.handleInputChange('name', e);
+    });
+  }
+
+  private handleInputChange(type: string, e: Event): void {
+    if (type === 'surname') {
+      if (e.target !== null && e.target instanceof HTMLInputElement) {
+        this.isSurnameNotEmpty = Boolean(e.target.value.trim());
+      }
+    } else if (type === 'name') {
+      if (e.target !== null && e.target instanceof HTMLInputElement) {
+        this.isNameNotEmpty = Boolean(e.target.value.trim());
+      }
+    }
+
+    if (this.isNameNotEmpty && this.isSurnameNotEmpty) {
+      this.buttonLogin.removeAttribute('disabled');
+      this.buttonLogin.removeClass('disabled');
+    } else {
+      this.buttonLogin.setAttribute('disabled', 'disabled');
+      this.buttonLogin.addClass('disabled');
+    }
   }
 }

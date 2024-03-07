@@ -31,11 +31,23 @@ export default class BaseComponent {
     });
   }
 
+  public removeClass(className: string): void {
+    this.element.classList.remove(className);
+  }
+
+  public addClass(className: string): void {
+    this.element.classList.add(className);
+  }
+
+  public toggleClass(className: string): void {
+    this.element.classList.toggle(className);
+  }
+
   private addContent(text: string): void {
     this.element.textContent = text;
   }
 
-  private addListener(event: string, callback: (event: Event) => void): void {
+  public addListener(event: string, callback: (event: Event) => void): void {
     this.element.addEventListener(event, callback);
   }
 
@@ -56,7 +68,7 @@ export default class BaseComponent {
     });
   }
 
-  public setAttribute([attribute, value]: [attribute: string, value: string]): void {
+  public setAttribute(attribute: string, value: string): void {
     this.element.setAttribute(attribute, value);
   }
 
