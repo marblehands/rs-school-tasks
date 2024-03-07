@@ -63,4 +63,14 @@ export default class BaseComponent {
       this.element.append(child);
     }
   }
+
+  public appendChildren(children: HTMLElement[]): void {
+    this.children.push(...children);
+
+    children.forEach((child) => {
+      if (this.element) {
+        this.element.append(child);
+      }
+    });
+  }
 }

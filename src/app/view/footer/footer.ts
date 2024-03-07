@@ -1,18 +1,8 @@
 import BaseComponent from '../../components/baseComponents/baseComponent';
-import Link from '../../components/baseComponents/link/link';
+import { a, div, span } from '../../components/baseComponents/tags/tags';
+import params from './params';
 
-const params = {
-  FOOTER: {
-    tag: 'footer',
-    classes: ['footer'],
-  },
-  LINK: {
-    tag: 'a',
-    content: 'GitHub',
-    classes: ['link'],
-    href: 'https://github.com/marblehands',
-  },
-};
+const { FOOTER, LINK, DIV, P, RSS_LOGO } = params;
 
 export default class FooterView {
   private footer: BaseComponent | null;
@@ -23,12 +13,15 @@ export default class FooterView {
   }
 
   private createFooter(): void {
-    const footer = new BaseComponent(params.FOOTER);
+    const footer = new BaseComponent(FOOTER);
+    const wrapper = div(DIV.classes).getElement();
+    const copyright = span(P.classes, P.content).getElement();
+    const githubLink = a(LINK.classes, LINK.content, LINK.href).getElement();
+    const rssLogo = div(RSS_LOGO.classes).getElement();
 
-    const link = new Link(params.LINK);
-    const linkNode = link.getElement();
+    wrapper.append(copyright, githubLink);
+    footer.appendChildren([wrapper, rssLogo]);
 
-    footer.append(linkNode);
     this.footer = footer;
   }
 
