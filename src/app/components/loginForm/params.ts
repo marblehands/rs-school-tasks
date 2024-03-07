@@ -22,6 +22,8 @@ const params = {
       name: 'name',
       id: 'name',
       required: 'required',
+      minlength: '3',
+      pattern: '^[A-Z][a-z]*$',
     },
   },
   LABEL_SURNAME: {
@@ -39,6 +41,8 @@ const params = {
       name: 'surname',
       id: 'surname',
       required: 'required',
+      minlength: '4',
+      pattern: '^[A-Z][a-z]*$',
     },
   },
   BUTTON_LOGIN: {
