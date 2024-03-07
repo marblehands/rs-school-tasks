@@ -20,10 +20,13 @@ export default class LoginForm extends BaseComponent {
 
   private isSurnameNotEmpty: boolean;
 
+  private isFormValid: boolean;
+
   constructor() {
     super(FORM);
     this.isNameNotEmpty = false;
     this.isSurnameNotEmpty = false;
+    this.isFormValid = false;
     this.addListeners();
     this.createLoginForm();
   }
@@ -46,25 +49,64 @@ export default class LoginForm extends BaseComponent {
     this.inputName.element.addEventListener('input', (e) => {
       this.handleInputChange('name', e);
     });
+
+    this.element.addEventListener('submit', (e) => {
+      this.handleFormSubmit(e);
+    });
   }
 
   private handleInputChange(type: string, e: Event): void {
-    if (type === 'surname') {
-      if (e.target !== null && e.target instanceof HTMLInputElement) {
-        this.isSurnameNotEmpty = Boolean(e.target.value.trim());
-      }
-    } else if (type === 'name') {
-      if (e.target !== null && e.target instanceof HTMLInputElement) {
-        this.isNameNotEmpty = Boolean(e.target.value.trim());
+    if (e.target !== null && e.target instanceof HTMLInputElement) {
+      const inputValue = e.target.value.trim();
+
+      if (type === 'surname') {
+        this.isSurnameNotEmpty = Boolean(inputValue);
+      } else if (type === 'name') {
+        this.isNameNotEmpty = Boolean(inputValue);
       }
     }
 
-    if (this.isNameNotEmpty && this.isSurnameNotEmpty) {
-      this.buttonLogin.removeAttribute('disabled');
-      this.buttonLogin.removeClass('disabled');
+    if (this.element instanceof HTMLFormElement) this.isFormValid = this.element.reportValidity();
+
+    if (this.isFormValid) {
+      this.enableButtonLogin();
+      this.markInputsAsValid();
     } else {
-      this.buttonLogin.setAttribute('disabled', 'disabled');
-      this.buttonLogin.addClass('disabled');
+      this.markInputsAsError();
+      this.disableButtonLogin();
     }
+  }
+
+  private handleFormSubmit(e: Event): void {
+    e.preventDefault();
+
+    if (this.element instanceof HTMLFormElement) {
+      this.isFormValid = this.element.reportValidity();
+
+      if (this.isFormValid) {
+        this.inputName.removeClass('error');
+        this.inputSurname.removeClass('error');
+      }
+    }
+  }
+
+  private enableButtonLogin(): void {
+    this.buttonLogin.removeAttribute('disabled');
+    this.buttonLogin.removeClass('disabled');
+  }
+
+  private disableButtonLogin(): void {
+    this.buttonLogin.setAttribute('disabled', 'disabled');
+    this.buttonLogin.addClass('disabled');
+  }
+
+  private markInputsAsError(): void {
+    this.inputName.addClass('error');
+    this.inputSurname.addClass('error');
+  }
+
+  private markInputsAsValid(): void {
+    this.inputName.removeClass('error');
+    this.inputSurname.removeClass('error');
   }
 }

@@ -66,7 +66,7 @@
   }
 }
 
-.login__input-text .error {
+.login__input-text.error {
   background-color: var(--input-bg-error);
   border: 1px solid var(--input-stroke-error);
 }

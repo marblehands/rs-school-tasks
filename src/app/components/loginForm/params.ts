@@ -24,6 +24,7 @@ const params = {
       required: 'required',
       minlength: '3',
       pattern: '^[A-Z][a-z]*$',
+      title: 'Minimum 3 Latin letters, first letter is uppercase',
     },
   },
   LABEL_SURNAME: {
@@ -43,6 +44,7 @@ const params = {
       required: 'required',
       minlength: '4',
       pattern: '^[A-Z][a-z]*$',
+      title: 'Minimum 4 Latin letters, first letter is uppercase',
     },
   },
   BUTTON_LOGIN: {
