@@ -9,7 +9,7 @@ const params = {
   },
   LABEL_NAME: {
     classes: ['login__label'],
-    content: 'Name:',
+    content: 'First Name:',
     attributes: {
       for: 'name',
     },
@@ -17,7 +17,7 @@ const params = {
   INPUT_NAME: {
     classes: ['login__input-text'],
     attributes: {
-      placeholder: 'Your Name',
+      placeholder: 'Type your name',
       type: 'text',
       name: 'name',
       id: 'name',
@@ -34,7 +34,7 @@ const params = {
   INPUT_SURNAME: {
     classes: ['login__input-text'],
     attributes: {
-      placeholder: 'Your Surname',
+      placeholder: 'Type your surname',
       type: 'text',
       name: 'surname',
       id: 'surname',
@@ -46,6 +46,7 @@ const params = {
     content: 'Login Now',
     attributes: {
       type: 'submit',
+      disabled: 'disabled',
     },
   },
 };
