@@ -1,0 +1,104 @@
+@import url('variables.css');
+@import url('normalize.css');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: none;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: 100vh;
+
+  font:
+    400 1em Poppins,
+    sans-serif;
+  color: var(--body-text-inverse);
+
+  background-color: var(--body-bg-dark);
+}
+
+/* Link */
+
+.link,
+.link:active,
+.link:focus {
+  color: var(--body-bg-inverse);
+  text-decoration: underline;
+  opacity: 0.6;
+  transition: opacity 0.5s ease;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+/* Input */
+
+.login__input-text {
+  display: flex;
+
+  margin-bottom: 1em;
+  padding: 20px;
+
+  font:
+    400 14px/20px Poppins,
+    sans-serif;
+  color: var(--input-text-default);
+
+  background-color: var(--input-bg-default);
+  border: 1px solid var(--input-stroke-default);
+  border-radius: 8px;
+
+  transition:
+    border 0.5s ease,
+    background-color 0.5s ease;
+
+  &:focus,
+  &:active,
+  &:focus-visible {
+    border: 1px solid var(--input-stroke-active);
+  }
+}
+
+.login__input-text .error {
+  background-color: var(--input-bg-error);
+  border: 1px solid var(--input-stroke-error);
+}
+
+/* Button */
+
+.button-primary {
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+
+  padding: 20px;
+
+  font:
+    500 16px/20px Poppins,
+    sans-serif;
+  color: var(--btn-text-default);
+
+  background-color: var(--btn-bg-default);
+  border: none;
+  border-radius: 8px;
+
+  transition: background-color 0.5s ease;
+
+  &:hover {
+    background-color: var(--btn-bg-hover);
+  }
+}
+
+.button-primary.disabled {
+  cursor: default;
+  color: var(--btn-text-disabled);
+  background-color: var(--btn-bg-disabled);
+}

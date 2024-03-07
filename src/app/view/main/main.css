@@ -1,0 +1,23 @@
+.main {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.login__wrapper {
+  display: flex;
+
+  min-width: 800px;
+  min-height: 478px;
+
+  color: var(--body-text-default);
+
+  background-color: var(--body-bg-light);
+  border-radius: 24px;
+}
+
+.login__left-aside {
+  min-width: 50%;
+  background: url('../../../assets/svg/login-form-img.svg') left center / 90% no-repeat;
+}

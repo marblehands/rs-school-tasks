@@ -1,0 +1,23 @@
+.footer {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 20px 40px;
+
+  font-size: 14px;
+}
+
+.copyright_rss-logo {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+
+  width: 88px;
+  height: 48px;
+
+  background: url('../../../assets/svg/rss-logo.svg') center / 80% no-repeat #31424a;
+  border-radius: 8px;
+}

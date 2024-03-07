@@ -1,0 +1,19 @@
+:root {
+  --body-bg-light: #fff;
+  --body-bg-dark: #1b2d36;
+  --body-text-default: #1b2d36;
+  --body-text-inverse: #fff;
+  --body-text-error: #1b2d36;
+  --btn-bg-default: #3fc8a7;
+  --btn-bg-hover: #08d47f;
+  --btn-bg-disabled: #d3e8e3;
+  --btn-text-disabled: #66988d;
+  --btn-text-default: #fff;
+  --input-bg-default: #fff;
+  --input-bg-active: #f5fbf8;
+  --input-bg-error: #fffbf8;
+  --input-stroke-default: #b3c3bb;
+  --input-stroke-active: #82938a;
+  --input-stroke-error: #e8bec3;
+  --heading3: 500 1.2em poppins, sans-serif;
+}
