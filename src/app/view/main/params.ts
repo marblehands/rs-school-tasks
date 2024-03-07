@@ -12,6 +12,10 @@ const params = {
   DIV_RIGHT: {
     classes: ['login__form-wrapper'],
   },
+  H2: {
+    classes: ['login__form-title'],
+    content: 'Login & Welcome 🧩',
+  },
 };
 
 export default params;

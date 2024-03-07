@@ -3,7 +3,7 @@ import type { BaseComponentParams } from './interfaces';
 export default class BaseComponent {
   public element: HTMLElement;
 
-  protected children: HTMLElement[] = [];
+  public children: HTMLElement[] = [];
 
   constructor(params: BaseComponentParams) {
     this.element = document.createElement(params.tag);

@@ -5,16 +5,16 @@ import Header from './view/header/header';
 import Main from './view/main/main';
 
 export default class App {
-  private footer = new Footer().footer;
+  private footer = new Footer();
 
-  private header = new Header().header;
+  private header = new Header();
 
-  private main = new Main().main;
+  private main = new Main();
 
   public createApp(): void {
-    const headerNode = this.header.element;
-    const mainNode = this.main.element;
-    const footerNode = this.footer.element;
+    const headerNode = this.header.header.element;
+    const mainNode = this.main.main.element;
+    const footerNode = this.footer.footer.element;
 
     document.body.append(headerNode);
     document.body.append(mainNode);

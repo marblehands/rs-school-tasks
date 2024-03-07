@@ -8,6 +8,7 @@ const params = {
     classes: ['link'],
     attributes: {
       href: 'https://github.com/marblehands',
+      target: '_blank',
     },
   },
   DIV: {

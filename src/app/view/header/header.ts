@@ -1,7 +1,7 @@
 import './header.css';
 
-import BaseComponent from '../../components/baseComponents/baseComponent';
-import { div, p } from '../../components/baseComponents/tags/tags';
+import BaseComponent from '../../components/baseComponent/baseComponent';
+import { div, p } from '../../components/tags/tags';
 import params from './params';
 
 const { HEADER, DIV, P } = params;

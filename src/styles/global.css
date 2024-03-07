@@ -45,6 +45,7 @@
 .login__input-text {
   display: flex;
 
+  margin-bottom: 1em;
   padding: 20px;
 
   font:

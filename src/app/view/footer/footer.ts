@@ -1,6 +1,6 @@
 import './footer.css';
-import BaseComponent from '../../components/baseComponents/baseComponent';
-import { a, div, span } from '../../components/baseComponents/tags/tags';
+import BaseComponent from '../../components/baseComponent/baseComponent';
+import { a, div, span } from '../../components/tags/tags';
 import params from './params';
 
 const { FOOTER, LINK, DIV, P, RSS_LOGO } = params;
