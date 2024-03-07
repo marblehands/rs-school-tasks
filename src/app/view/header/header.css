@@ -1,3 +1,11 @@
 .header {
   display: flex;
+  height: 10%;
+  padding: 30px 40px;
+}
+
+.logo-title {
+  font:
+    600 20px Poppins,
+    sans-serif;
 }

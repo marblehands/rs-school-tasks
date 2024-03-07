@@ -1,10 +1,11 @@
+import './footer.css';
 import BaseComponent from '../../components/baseComponents/baseComponent';
 import { a, div, span } from '../../components/baseComponents/tags/tags';
 import params from './params';
 
 const { FOOTER, LINK, DIV, P, RSS_LOGO } = params;
 
-export default class FooterView {
+export default class Footer {
   private footer: BaseComponent | null;
 
   constructor() {

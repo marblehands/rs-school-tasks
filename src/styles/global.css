@@ -38,89 +38,7 @@
   }
 }
 
-/* Header */
-
-.header {
-  display: flex;
-  height: 10%;
-  padding: 30px 40px;
-}
-
-.logo-title {
-  font:
-    600 20px Poppins,
-    sans-serif;
-}
-
 /* Main */
-
-.main {
-  display: flex;
-  flex-grow: 1;
-  align-items: center;
-  justify-content: center;
-}
-
-.login__wrapper {
-  display: flex;
-
-  min-width: 800px;
-  min-height: 478px;
-
-  color: var(--body-text-default);
-
-  background-color: var(--body-bg-light);
-  border-radius: 24px;
-}
-
-.login__left-aside {
-  min-width: 50%;
-  background: url('../assets/svg/login-form-img.svg') left center / 90% no-repeat;
-}
-
-.login__form-wrapper,
-.login__form {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  justify-content: center;
-}
-
-.login__form-wrapper {
-  width: 50%;
-  padding: 0 60px 0 18px;
-}
-
-.login__form-title {
-  font:
-    500 22px Poppins,
-    sans-serif;
-  letter-spacing: -2%;
-}
-
-@media (width <= 840px) {
-  .login__wrapper {
-    min-width: 60%;
-    height: auto;
-    min-height: auto;
-    padding: 60px 40px;
-  }
-
-  .login__form-wrapper {
-    width: 100%;
-    padding: 0;
-  }
-
-  .login__left-aside {
-    display: none;
-  }
-}
-
-@media (width <= 640px) {
-  .login__wrapper {
-    min-width: 80%;
-  }
-}
 
 /* Input */
 
@@ -180,27 +98,3 @@
 }
 
 /* Footer */
-
-.footer {
-  position: relative;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 20px 40px;
-
-  font-size: 14px;
-}
-
-.copyright_rss-logo {
-  position: absolute;
-  right: 20px;
-  bottom: 20px;
-
-  width: 88px;
-  height: 48px;
-
-  background: url('../assets/svg/rss-logo.svg') center / 80% no-repeat #31424a;
-  border-radius: 8px;
-}

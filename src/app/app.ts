@@ -1,14 +1,20 @@
 import '../styles/global.css';
 
-import FooterView from './view/footer/footer';
+import Footer from './view/footer/footer';
+import Header from './view/header/header';
 
 export default class App {
   public static createApp(): void {
-    const footer = new FooterView();
+    const footers = new Footer();
+    const headers = new Header();
 
-    const footerNode = footer.getFooter();
+    const headerNode = headers.getHeader();
+    const footerNode = footers.getFooter();
 
-    document.body.append(footerNode.element);
+    if (headerNode && footerNode) {
+      document.body.append(headerNode.element);
+      document.body.append(footerNode.element);
+    }
   }
 }
 
