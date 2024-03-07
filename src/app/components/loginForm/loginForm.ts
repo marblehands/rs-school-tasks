@@ -66,7 +66,7 @@ export default class LoginForm extends BaseComponent {
       }
     }
 
-    if (this.element instanceof HTMLFormElement) this.isFormValid = this.element.reportValidity();
+    this.reportFormValidity();
 
     if (this.isFormValid) {
       this.enableButtonLogin();
@@ -80,13 +80,17 @@ export default class LoginForm extends BaseComponent {
   private handleFormSubmit(e: Event): void {
     e.preventDefault();
 
+    this.reportFormValidity();
+
+    if (this.isFormValid) {
+      this.inputName.removeClass('error');
+      this.inputSurname.removeClass('error');
+    }
+  }
+
+  private reportFormValidity(): void {
     if (this.element instanceof HTMLFormElement) {
       this.isFormValid = this.element.reportValidity();
-
-      if (this.isFormValid) {
-        this.inputName.removeClass('error');
-        this.inputSurname.removeClass('error');
-      }
     }
   }
 
