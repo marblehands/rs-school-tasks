@@ -2,6 +2,7 @@ import './loginForm.css';
 import BaseComponent from '../baseComponent/baseComponent';
 import { button, input, label } from '../tags/tags';
 import params from './params';
+import LocalStorageService from '../../helpers/localStorage';
 
 const { FORM, INPUT_NAME, INPUT_SURNAME, BUTTON_LOGIN, LABEL_NAME, LABEL_SURNAME } = params;
 
@@ -16,16 +17,18 @@ export default class LoginForm extends BaseComponent {
 
   public labelSurname = label(LABEL_SURNAME.classes, LABEL_SURNAME.content, LABEL_SURNAME.attributes);
 
-  private isNameNotEmpty: boolean;
+  // private isNameNotEmpty: boolean;
 
-  private isSurnameNotEmpty: boolean;
+  // private isSurnameNotEmpty: boolean;
 
   private isFormValid: boolean;
 
+  private localStorageHelper = new LocalStorageService('user');
+
   constructor() {
     super(FORM);
-    this.isNameNotEmpty = false;
-    this.isSurnameNotEmpty = false;
+    // this.isNameNotEmpty = false;
+    // this.isSurnameNotEmpty = false;
     this.isFormValid = false;
     this.addListeners();
     this.createLoginForm();
@@ -42,30 +45,20 @@ export default class LoginForm extends BaseComponent {
   }
 
   private addListeners(): void {
-    this.inputSurname.element.addEventListener('input', (e) => {
-      this.handleInputChange('surname', e);
+    this.inputSurname.element.addEventListener('input', () => {
+      this.handleInputChange();
     });
 
-    this.inputName.element.addEventListener('input', (e) => {
-      this.handleInputChange('name', e);
+    this.inputName.element.addEventListener('input', () => {
+      this.handleInputChange();
     });
 
-    this.element.addEventListener('submit', (e) => {
+    this.element.addEventListener('submit', (e: Event) => {
       this.handleFormSubmit(e);
     });
   }
 
-  private handleInputChange(type: string, e: Event): void {
-    if (e.target !== null && e.target instanceof HTMLInputElement) {
-      const inputValue = e.target.value.trim();
-
-      if (type === 'surname') {
-        this.isSurnameNotEmpty = Boolean(inputValue);
-      } else if (type === 'name') {
-        this.isNameNotEmpty = Boolean(inputValue);
-      }
-    }
-
+  private handleInputChange(): void {
     this.reportFormValidity();
 
     if (this.isFormValid) {
@@ -79,12 +72,15 @@ export default class LoginForm extends BaseComponent {
 
   private handleFormSubmit(e: Event): void {
     e.preventDefault();
-
     this.reportFormValidity();
 
     if (this.isFormValid) {
       this.inputName.removeClass('error');
       this.inputSurname.removeClass('error');
+
+      if (this.inputName.element instanceof HTMLInputElement && this.inputSurname.element instanceof HTMLInputElement) {
+        this.createUser(this.inputName.element.value, this.inputSurname.element.value);
+      }
     }
   }
 
@@ -112,5 +108,9 @@ export default class LoginForm extends BaseComponent {
   private markInputsAsValid(): void {
     this.inputName.removeClass('error');
     this.inputSurname.removeClass('error');
+  }
+
+  private createUser(name: string, surname: string): void {
+    this.localStorageHelper.setUser({ name, surname });
   }
 }
