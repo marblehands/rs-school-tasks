@@ -1,0 +1,13 @@
+.button-logout {
+  padding: 12px 24px;
+  font:
+    500 14px/20px Poppins,
+    sans-serif;
+  color: var(--btn-text-default);
+  background-color: var(--btn-bg-default);
+
+  &:hover {
+    color: var(--body-text-default);
+    background-color: var(--btn-bg-hover);
+  }
+}

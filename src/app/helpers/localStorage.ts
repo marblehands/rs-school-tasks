@@ -1,31 +1,45 @@
+import type { User } from './interfaces';
+
 const PREFIX = 'marblehands';
 
-export default class LocalStorageService {
-  private key: string;
-
-  private prefix: string;
-
-  constructor(key: string) {
-    this.key = key;
-    this.prefix = PREFIX;
+export default class LocalStorageHelper {
+  public static setItem(item: string, value: unknown): void {
+    localStorage.setItem(`${item}-${PREFIX}`, JSON.stringify(value));
   }
 
-  public setUser(user: Record<string, string>): void {
-    localStorage.setItem(`${this.key}-${this.prefix}`, JSON.stringify(user));
-  }
+  public static getItem(key: string): unknown {
+    const item: string | null = localStorage.getItem(`${key}-${PREFIX}`);
 
-  public getUser<T>(): T | null {
-    const user: string | null = localStorage.getItem(`${this.key}-${this.prefix}`);
-
-    if (user) {
-      try {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-        return JSON.parse(user);
-      } catch (e) {
-        return null;
-      }
+    if (item !== null) {
+      return JSON.parse(item);
     }
 
     return null;
+  }
+
+  public static removeItem(key: string): void {
+    localStorage.removeItem(key);
+  }
+
+  public static getUser(): User | null {
+    const user = LocalStorageHelper.getItem('user');
+
+    if (!user) {
+      return null;
+    }
+
+    if (LocalStorageHelper.isUser(user)) {
+      return user;
+    }
+
+    throw new Error('unknown value stored with key user');
+  }
+
+  private static isUser(value: unknown): value is User {
+    if (value !== null) {
+      return Boolean(value) && typeof value === 'object' && 'name' in value && 'surname' in value;
+    }
+
+    return false;
   }
 }

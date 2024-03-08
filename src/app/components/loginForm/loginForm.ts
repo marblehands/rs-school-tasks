@@ -2,7 +2,7 @@ import './loginForm.css';
 import BaseComponent from '../baseComponent/baseComponent';
 import { button, input, label } from '../tags/tags';
 import params from './params';
-import LocalStorageService from '../../helpers/localStorage';
+import LocalStorageHelper from '../../helpers/localStorage';
 
 const { FORM, INPUT_NAME, INPUT_SURNAME, BUTTON_LOGIN, LABEL_NAME, LABEL_SURNAME } = params;
 
@@ -22,8 +22,6 @@ export default class LoginForm extends BaseComponent {
   // private isSurnameNotEmpty: boolean;
 
   private isFormValid: boolean;
-
-  private localStorageHelper = new LocalStorageService('user');
 
   constructor() {
     super(FORM);
@@ -79,7 +77,9 @@ export default class LoginForm extends BaseComponent {
       this.inputSurname.removeClass('error');
 
       if (this.inputName.element instanceof HTMLInputElement && this.inputSurname.element instanceof HTMLInputElement) {
-        this.createUser(this.inputName.element.value, this.inputSurname.element.value);
+        const name = this.inputName.element.value;
+        const surname = this.inputSurname.element.value;
+        LocalStorageHelper.setItem('user', { name, surname });
       }
     }
   }
@@ -108,9 +108,5 @@ export default class LoginForm extends BaseComponent {
   private markInputsAsValid(): void {
     this.inputName.removeClass('error');
     this.inputSurname.removeClass('error');
-  }
-
-  private createUser(name: string, surname: string): void {
-    this.localStorageHelper.setUser({ name, surname });
   }
 }
