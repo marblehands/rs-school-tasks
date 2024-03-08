@@ -73,6 +73,19 @@
 
 /* Button */
 
+.button {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+
+  border: none;
+  border-radius: 8px;
+
+  transition:
+    color 0.5s ease,
+    background-color 0.5s ease;
+}
+
 .button-primary {
   cursor: pointer;
 

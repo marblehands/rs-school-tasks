@@ -17,6 +17,10 @@ export default class LocalStorageHelper {
     return null;
   }
 
+  public static removeItem(key: string): void {
+    localStorage.removeItem(key);
+  }
+
   public static getUser(): User | null {
     const user = LocalStorageHelper.getItem('user');
 
