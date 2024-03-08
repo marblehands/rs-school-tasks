@@ -1,0 +1,25 @@
+.button-start {
+  display: block;
+
+  width: 240px;
+  padding: 24px;
+
+  font:
+    500 22px/24px Poppins,
+    sans-serif;
+  color: var(--body-text-default);
+
+  background-color: var(--btn-bg-accent);
+  border-radius: 12px;
+
+  transition:
+    box-shadow 0.5s ease,
+    transform 0.5s ease;
+
+  &:hover {
+    transform: scale(1.02);
+
+    background-color: var(--btn-bg-accent-hover);
+    box-shadow: 3px 35px 60px 1px rgb(18 30 36 / 81%);
+  }
+}
