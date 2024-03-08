@@ -1,17 +1,20 @@
 import './start.css';
 
 import BaseComponent from '../../components/baseComponent/baseComponent';
-import { div, h1, span } from '../../components/tags/tags';
+import { div, h1, p, span } from '../../components/tags/tags';
 import StartButton from '../../components/startButton/startButton';
+import LocalStorageHelper from '../../helpers/localStorage';
 
 export default class StartPageView extends BaseComponent {
-  // private greeting;
+  private greeting: string;
 
   private buttonStart: StartButton;
 
   constructor() {
     super({ tag: 'div' });
     this.buttonStart = new StartButton();
+    this.greeting = '';
+    this.getGreetingText();
     this.createPage();
   }
 
@@ -19,7 +22,7 @@ export default class StartPageView extends BaseComponent {
     const contentWrapper = div(['content-wrapper']);
     const textWrapper = div(['text-wrapper']);
     const headline1 = h1(['game-title'], 'English Puzzles');
-    // const greeting;
+    const greetingText = p(['greeting'], `${this.greeting}`);
     const greetingInfo = span(
       ['greeting-info'],
       'Welcome to the "English Puzzle" game! Improve your English skills by solving puzzles to form sentences. Ready to start learning? Press "Start"!',
@@ -29,24 +32,19 @@ export default class StartPageView extends BaseComponent {
     const bgImage1 = div(['bg-wave']);
     const bgImage2 = div(['start-bg']);
 
-    textWrapper.appendChildren([headline1.element, greetingInfo.element]);
+    textWrapper.appendChildren([headline1.element, greetingText.element, greetingInfo.element]);
     contentWrapper.appendChildren([textWrapper.element, this.buttonStart.element, startImage.element]);
 
     this.appendChildren([contentWrapper.element, bgImage1.element, bgImage2.element]);
+  }
 
-    //   <div class="content-wrapper">
-    //   <div class="text-wrapper">
-    //     <h1 class="game-title">English Puzzles</h1>
-    //     <p class="greeting">Hello, John Doe! 🧩</p>
-    //     <span class="greeting-info"
-    //       >Welcome to the 'English Puzzle' game! Improve your English skills by solving puzzles to form sentences.
-    //       Ready to start learning? Press "Start"!</span
-    //     >
-    //   </div>
-    //   <button class="button-start">Start</button>
-    //   <div class="start-img"></div>
-    // </div>
-    // <div class="bg-wave"></div>
-    // <div class="start-bg"></div>
+  private getGreetingText(): void {
+    const user = LocalStorageHelper.getUser();
+
+    if (!user) {
+      throw new Error('user is not defined');
+    }
+
+    this.greeting = `Hello, ${user.name} ${user.surname} 🧩`;
   }
 }
