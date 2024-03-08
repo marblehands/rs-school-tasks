@@ -2,16 +2,16 @@ import './start.css';
 
 import BaseComponent from '../../components/baseComponent/baseComponent';
 import { div, h1, span } from '../../components/tags/tags';
+import StartButton from '../../components/startButton/startButton';
 
 export default class StartPageView extends BaseComponent {
-  // private logout;
-
   // private greeting;
 
-  // private buttonStart;
+  private buttonStart: StartButton;
 
   constructor() {
     super({ tag: 'div' });
+    this.buttonStart = new StartButton();
     this.createPage();
   }
 
@@ -24,14 +24,13 @@ export default class StartPageView extends BaseComponent {
       ['greeting-info'],
       'Welcome to the "English Puzzle" game! Improve your English skills by solving puzzles to form sentences. Ready to start learning? Press "Start"!',
     );
-    // const startGameButton;
     // const logOutButton
     const startImage = div(['start-img']);
     const bgImage1 = div(['bg-wave']);
     const bgImage2 = div(['start-bg']);
 
     textWrapper.appendChildren([headline1.element, greetingInfo.element]);
-    contentWrapper.appendChildren([textWrapper.element, startImage.element]);
+    contentWrapper.appendChildren([textWrapper.element, this.buttonStart.element, startImage.element]);
 
     this.appendChildren([contentWrapper.element, bgImage1.element, bgImage2.element]);
 
