@@ -1,4 +1,3 @@
-import './login.css';
 import BaseComponent from '../../components/baseComponent/baseComponent';
 import LoginForm from '../../components/loginForm/loginForm';
 import { div, headline2 } from '../../components/tags/tags';
