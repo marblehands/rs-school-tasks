@@ -14,17 +14,17 @@ export default class LocalStorageService {
     localStorage.setItem(`${this.key}-${this.prefix}`, JSON.stringify(user));
   }
 
-  public getUser<T>(): T | null {
-    const user: string | null = localStorage.getItem(this.key);
+  // public getUser<T>(): T | null {
+  //   const user: string | null = localStorage.getItem(this.key);
 
-    if (user) {
-      try {
-        return JSON.parse(user) as T;
-      } catch (e) {
-        return null;
-      }
-    }
+  //   if (user) {
+  //     try {
+  //       return JSON.parse(user);
+  //     } catch (e) {
+  //       return null;
+  //     }
+  //   }
 
-    return null;
-  }
+  //   return null;
+  // }
 }
