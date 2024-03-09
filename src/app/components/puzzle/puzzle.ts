@@ -23,9 +23,11 @@ export default class Puzzle extends BaseComponent {
 
   private calculatePuzzleWidth(): number {
     const windowSize = window.innerWidth;
-    const boardWidth = windowSize > 840 ? LINE_MAX_WIDTH : LINE_MIN_WIDTH;
+    const lineWidth = windowSize > 840 ? LINE_MAX_WIDTH : LINE_MIN_WIDTH;
 
-    return Math.floor((boardWidth - MIN_PADDING * WORDS_NUM) / CHARS_NUM) * this.word.length + MIN_PADDING;
+    const width = Math.floor((lineWidth - MIN_PADDING * WORDS_NUM) / CHARS_NUM) * this.word.length + MIN_PADDING;
+
+    return width;
   }
 
   private handleResize(): void {

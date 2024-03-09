@@ -1,7 +1,7 @@
 import BaseComponent from '../../baseComponent/baseComponent';
 
 const LINE_MAX_WIDTH = 760;
-const LINE_MIN_WIDTH = 680;
+const LINE_MIN_WIDTH = 658; // TO DO Find out with the formula, why it counts like 658
 
 export default class ResultLine extends BaseComponent {
   public width: number;

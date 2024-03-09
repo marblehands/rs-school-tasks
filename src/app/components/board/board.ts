@@ -18,14 +18,9 @@ export default class GameBoard extends BaseComponent {
     const resultsWrapper = div(['result-block-wrapper']);
     const resultArea = new ResultLine();
     const sourceArea = div(['source-block']);
-    this.puzzleClickHandler(resultArea.element);
+    this.puzzleClickHandler(sourceArea.element, resultArea.element);
 
-    this.puzzles.forEach((puzzle, index) => {
-      const puzzleWidth = this.calculatePuzzleWidth(index);
-      const link = { ...puzzle };
-
-      link.element.style.width = `${puzzleWidth}px`;
-
+    this.puzzles.forEach((puzzle) => {
       sourceArea.append(puzzle.element);
     });
 
@@ -41,28 +36,15 @@ export default class GameBoard extends BaseComponent {
       .sort(() => Math.random() - 0.5);
   }
 
-  private puzzleClickHandler(resultArea: HTMLElement): void {
+  private puzzleClickHandler(sourceArea: HTMLElement, resultArea: HTMLElement): void {
     this.puzzles.forEach((puzzle) => {
       puzzle.addListener('click', () => {
-        resultArea.appendChild(puzzle.element);
-        // sourceArea.removeChild(puzzle.element);
+        if (puzzle.element.parentNode === resultArea) {
+          sourceArea.appendChild(puzzle.element);
+        } else {
+          resultArea.appendChild(puzzle.element);
+        }
       });
     });
-  }
-
-  private calculatePuzzleWidth(index: number): number {
-    const WORDS_NUM = SENTENCE.split(' ').length;
-    const CHARS_NUM = SENTENCE.split(' ').join('').length;
-    const MIN_PADDING = 2 * 12;
-
-    const LINE_MAX_WIDTH = 760;
-    const LINE_MIN_WIDTH = 680;
-
-    const windowSize = window.innerWidth;
-    const boardWidth = windowSize > 840 ? LINE_MAX_WIDTH : LINE_MIN_WIDTH;
-
-    return (
-      Math.floor((boardWidth - MIN_PADDING * WORDS_NUM) / CHARS_NUM) * this.puzzles[index].word.length + MIN_PADDING
-    );
   }
 }
