@@ -13,7 +13,7 @@ export default class GameBoard extends BaseComponent {
   private createGameBoard(): void {
     const resultsWrapper = div(['result-block-wrapper']);
     const resultArea = div(['result-block']);
-    const sourceArea = div(['result-block']);
+    const sourceArea = div(['source-block']);
     const puzzles: Puzzle[] = GameBoard.generatePuzzles(SENTENCE);
     puzzles.forEach((puzzle) => {
       sourceArea.append(puzzle.element);

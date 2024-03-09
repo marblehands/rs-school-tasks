@@ -37,3 +37,12 @@
   height: 60px;
   gap: -1em;
 }
+
+@media (max-width: 1024px) {
+  .game-wrapper {
+    flex-direction: column;
+  }
+  .source-block {
+    width: 100%;
+  }
+}
