@@ -1,10 +1,9 @@
 import BaseComponent from '../baseComponent/baseComponent';
+import ResultLine from './resultLine/resultLine';
 import Puzzle from '../puzzle/puzzle';
 import { div } from '../tags/tags';
 
 const SENTENCE = 'There was a red apple among the green ones';
-const BOARD_MAX_WIDTH = 760;
-const BOARD_MIN_WIDTH = 680;
 
 export default class GameBoard extends BaseComponent {
   private puzzles: Puzzle[];
@@ -17,18 +16,14 @@ export default class GameBoard extends BaseComponent {
 
   private createGameBoard(): void {
     const resultsWrapper = div(['result-block-wrapper']);
-    const resultArea = div(['result-block']);
+    const resultArea = new ResultLine();
     const sourceArea = div(['source-block']);
     this.puzzleClickHandler(resultArea.element);
 
     this.puzzles.forEach((puzzle, index) => {
-      const puzzleMinWidth = this.calculatePuzzleWidth(index, BOARD_MIN_WIDTH);
-      const puzzleMaxWidth = this.calculatePuzzleWidth(index, BOARD_MAX_WIDTH);
+      const puzzleWidth = this.calculatePuzzleWidth(index, resultArea.width);
 
-      console.log(puzzleMinWidth, puzzleMaxWidth);
-
-      puzzle.element.style.minWidth = `${puzzleMaxWidth}px`;
-      // puzzle.element.style.maxWidth = `${puzzleMaxWidth}px`;
+      puzzle.element.style.width = `${puzzleWidth}px`;
 
       sourceArea.append(puzzle.element);
     });
