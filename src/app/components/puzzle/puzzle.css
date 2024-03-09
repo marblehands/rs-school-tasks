@@ -1,0 +1,17 @@
+.puzzle-item {
+  width: fit-content;
+  height: 46px;
+  background-color: var(--board-results-bg);
+  border: 1px solid black;
+  box-sizing: border-box;
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--body-text-default);
+  transition: background-color 0.5s ease;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--board-wrapper-bg);
+  }
+}

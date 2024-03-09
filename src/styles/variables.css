@@ -18,4 +18,6 @@
   --input-stroke-active: #82938a;
   --input-stroke-error: #e8bec3;
   --heading3: 500 1.2em poppins, sans-serif;
+  --board-wrapper-bg: #a4cac1;
+  --board-results-bg: #bfdad4;
 }

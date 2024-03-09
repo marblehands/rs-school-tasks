@@ -2,22 +2,27 @@ import './main.css';
 import BaseComponent from '../../components/baseComponent/baseComponent';
 // import LoginPageView from '../../pages/login/login';
 import StartPageView from '../../pages/start/start';
+import GamePageView from '../../pages/game/game';
 
-export default class Main {
-  public main: BaseComponent;
+// Draw Start Page
 
-  public startPage: StartPageView;
+// export default class Main {
+//   public main: BaseComponent;
 
-  constructor() {
-    this.main = new BaseComponent({ tag: 'main', classes: ['main'] });
-    this.startPage = new StartPageView();
-    this.createMain();
-  }
+//   public startPage: StartPageView;
 
-  private createMain(): void {
-    this.main.append(this.startPage.element);
-  }
-}
+//   constructor() {
+//     this.main = new BaseComponent({ tag: 'main', classes: ['main'] });
+//     this.startPage = new StartPageView();
+//     this.createMain();
+//   }
+
+//   private createMain(): void {
+//     this.main.append(this.startPage.element);
+//   }
+// }
+
+// Draw Login Page
 
 // export default class Main {
 //   public main: BaseComponent;
@@ -34,3 +39,21 @@ export default class Main {
 //     this.main.append(this.loginPage.element);
 //   }
 // }
+
+// Draw Game Page
+
+export default class Main {
+  public main: BaseComponent;
+
+  public gamePage: GamePageView;
+
+  constructor() {
+    this.main = new BaseComponent({ tag: 'main', classes: ['main'] });
+    this.gamePage = new GamePageView();
+    this.createMain();
+  }
+
+  private createMain(): void {
+    this.main.append(this.gamePage.element);
+  }
+}
