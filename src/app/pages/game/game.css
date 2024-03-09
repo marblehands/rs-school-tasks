@@ -18,8 +18,8 @@
 }
 
 .result-block {
-  width: clamp(42.5rem, 6.667vw + 39.5rem, 47.5rem);
-  height: calc(clamp(25.75rem, 4vw + 23.95rem, 28.75rem) / 10);
+  min-width: 765px;
+  height: 46px;
   background-color: var(--board-results-bg);
   display: flex;
 }

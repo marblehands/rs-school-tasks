@@ -1,8 +1,11 @@
-import './puzzle.css'
+import './puzzle.css';
 import BaseComponent from '../baseComponent/baseComponent';
 
 export default class Puzzle extends BaseComponent {
+  public word: string;
+
   constructor(word: string) {
     super({ tag: 'div', classes: ['puzzle-item'], content: word });
+    this.word = word;
   }
 }

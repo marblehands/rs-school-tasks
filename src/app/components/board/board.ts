@@ -3,6 +3,8 @@ import Puzzle from '../puzzle/puzzle';
 import { div } from '../tags/tags';
 
 const SENTENCE = 'There was a red apple among the green ones';
+const BOARD_MAX_WIDTH = 760;
+const BOARD_MIN_WIDTH = 680;
 
 export default class GameBoard extends BaseComponent {
   private puzzles: Puzzle[];
@@ -19,7 +21,15 @@ export default class GameBoard extends BaseComponent {
     const sourceArea = div(['source-block']);
     this.puzzleClickHandler(resultArea.element);
 
-    this.puzzles.forEach((puzzle) => {
+    this.puzzles.forEach((puzzle, index) => {
+      const puzzleMinWidth = this.calculatePuzzleWidth(index, BOARD_MIN_WIDTH);
+      const puzzleMaxWidth = this.calculatePuzzleWidth(index, BOARD_MAX_WIDTH);
+
+      console.log(puzzleMinWidth, puzzleMaxWidth);
+
+      puzzle.element.style.minWidth = `${puzzleMaxWidth}px`;
+      // puzzle.element.style.maxWidth = `${puzzleMaxWidth}px`;
+
       sourceArea.append(puzzle.element);
     });
 
@@ -42,5 +52,15 @@ export default class GameBoard extends BaseComponent {
         // sourceArea.removeChild(puzzle.element);
       });
     });
+  }
+
+  private calculatePuzzleWidth(index: number, boardWidth: number): number {
+    const WORDS_NUM = SENTENCE.split(' ').length;
+    const CHARS_NUM = SENTENCE.split(' ').join('').length;
+    const MIN_PADDING = 2 * 12;
+
+    return (
+      Math.floor((boardWidth - MIN_PADDING * WORDS_NUM) / CHARS_NUM) * this.puzzles[index].word.length + MIN_PADDING
+    );
   }
 }

@@ -1,5 +1,4 @@
 .puzzle-item {
-  width: fit-content;
   height: 46px;
   background-color: var(--board-results-bg);
   border: 1px solid black;
