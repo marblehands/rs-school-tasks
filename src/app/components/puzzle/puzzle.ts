@@ -1,3 +1,4 @@
+import './puzzle.css'
 import BaseComponent from '../baseComponent/baseComponent';
 
 export default class Puzzle extends BaseComponent {

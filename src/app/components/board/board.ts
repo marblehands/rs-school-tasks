@@ -17,7 +17,7 @@ export default class GameBoard extends BaseComponent {
     const resultsWrapper = div(['result-block-wrapper']);
     const resultArea = div(['result-block']);
     const sourceArea = div(['source-block']);
-    this.puzzleClickHandler(sourceArea.element, resultArea.element);
+    this.puzzleClickHandler(resultArea.element);
 
     this.puzzles.forEach((puzzle) => {
       sourceArea.append(puzzle.element);
@@ -35,11 +35,11 @@ export default class GameBoard extends BaseComponent {
       .sort(() => Math.random() - 0.5);
   }
 
-  private puzzleClickHandler(sourceArea: HTMLElement, resultArea: HTMLElement): void {
+  private puzzleClickHandler(resultArea: HTMLElement): void {
     this.puzzles.forEach((puzzle) => {
       puzzle.addListener('click', () => {
         resultArea.appendChild(puzzle.element);
-        sourceArea.removeChild(puzzle.element);
+        // sourceArea.removeChild(puzzle.element);
       });
     });
   }
