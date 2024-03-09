@@ -5,8 +5,11 @@ import { div } from '../tags/tags';
 const SENTENCE = 'There was a red apple among the green ones';
 
 export default class GameBoard extends BaseComponent {
+  private puzzles: Puzzle[];
+
   constructor() {
     super({ tag: 'div', classes: ['game-wrapper'] });
+    this.puzzles = GameBoard.generatePuzzles(SENTENCE);
     this.createGameBoard();
   }
 
@@ -14,8 +17,9 @@ export default class GameBoard extends BaseComponent {
     const resultsWrapper = div(['result-block-wrapper']);
     const resultArea = div(['result-block']);
     const sourceArea = div(['source-block']);
-    const puzzles: Puzzle[] = GameBoard.generatePuzzles(SENTENCE);
-    puzzles.forEach((puzzle) => {
+    this.puzzleClickHandler(sourceArea.element, resultArea.element);
+
+    this.puzzles.forEach((puzzle) => {
       sourceArea.append(puzzle.element);
     });
 
@@ -29,5 +33,14 @@ export default class GameBoard extends BaseComponent {
       .split(' ')
       .map((word) => new Puzzle(word))
       .sort(() => Math.random() - 0.5);
+  }
+
+  private puzzleClickHandler(sourceArea: HTMLElement, resultArea: HTMLElement): void {
+    this.puzzles.forEach((puzzle) => {
+      puzzle.addListener('click', () => {
+        resultArea.appendChild(puzzle.element);
+        sourceArea.removeChild(puzzle.element);
+      });
+    });
   }
 }
