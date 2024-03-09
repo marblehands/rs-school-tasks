@@ -1,0 +1,39 @@
+.game-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+.result-block-wrapper {
+  width: clamp(43.75rem, 8.333vw + 40rem, 50rem);
+  height: clamp(27.5rem, 5vw + 25.25rem, 31.25rem);
+  border-radius: 24px;
+  background-color: var(--board-wrapper-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.result-block {
+  width: clamp(42.5rem, 6.667vw + 39.5rem, 47.5rem);
+  height: clamp(25.75rem, 4vw + 23.95rem, 28.75rem);
+  background-color: var(--board-results-bg);
+}
+
+.source-block {
+  width: 20%;
+  padding: 1em;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.puzzle-item {
+  background-color: lightblue;
+  border: 1px solid black;
+  box-sizing: border-box;
+  width: 120px;
+  height: 60px;
+  gap: -1em;
+}
