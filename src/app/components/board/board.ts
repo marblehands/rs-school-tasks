@@ -1,11 +1,11 @@
 import BaseComponent from '../baseComponent/baseComponent';
 import ResultLine from './resultLine/resultLine';
-import Puzzle from '../puzzle/puzzle';
 import { div } from '../tags/tags';
 import { isDescendant } from '../../utils/utils';
 import SourceLine from './sourceLine/sourceLine';
+import Puzzle from '../puzzle/puzzleItem';
 
-const SENTENCE = 'There was a red apple among the green ones';
+const SENTENCE = 'There was a red There was a red There was a red';
 
 const WORDS_NUM = SENTENCE.split(' ').length;
 

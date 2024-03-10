@@ -1,7 +1,7 @@
 import './puzzle.css';
 import BaseComponent from '../baseComponent/baseComponent';
 
-const SENTENCE = 'There was a red apple among the green ones';
+const SENTENCE = 'There was a red There was a red There was a red';
 const WORDS_NUM = SENTENCE.split(' ').length;
 const CHARS_NUM = SENTENCE.split(' ').join('').length;
 const MIN_PADDING = 2 * 12;
@@ -9,11 +9,11 @@ const MIN_PADDING = 2 * 12;
 const LINE_MAX_WIDTH = 760;
 const LINE_MIN_WIDTH = 680;
 
-export default class Puzzle extends BaseComponent {
+export default class BasePuzzle extends BaseComponent {
   public word: string;
 
-  constructor(word: string) {
-    super({ tag: 'div', classes: ['puzzle-item'], content: word });
+  constructor(word: string, classes: string) {
+    super({ tag: 'div', classes: [classes], content: word });
     this.word = word;
     this.element.style.width = `${this.calculatePuzzleWidth()}px`;
     window.addEventListener('resize', () => {

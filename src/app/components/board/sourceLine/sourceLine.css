@@ -10,11 +10,3 @@
   gap: 2px;
   box-sizing: content-box;
 }
-
-.empty-place {
-  min-width: 2.2em;
-  height: 46px;
-  background-color: #d9ece8;
-  position: relative;
-  border-radius: 4px;
-}
