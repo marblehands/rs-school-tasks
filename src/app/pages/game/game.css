@@ -17,12 +17,6 @@
   align-items: center;
 }
 
-.result-block {
-  height: 46px;
-  background-color: var(--board-results-bg);
-  display: flex;
-}
-
 .source-block {
   height: 46px;
   padding: 1em;

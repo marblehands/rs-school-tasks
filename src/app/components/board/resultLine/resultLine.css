@@ -1,0 +1,15 @@
+.result-block {
+  height: 46px;
+  background-color: var(--board-results-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.empty-puzzle {
+  min-width: 2em;
+  height: 46px;
+  background-color: #d9ece8;
+  border-radius: 6px;
+}
