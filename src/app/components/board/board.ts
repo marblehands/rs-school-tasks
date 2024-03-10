@@ -1,37 +1,46 @@
 import BaseComponent from '../baseComponent/baseComponent';
 import ResultLine from './resultLine/resultLine';
-import Puzzle from '../puzzle/puzzle';
 import { div } from '../tags/tags';
+import { isDescendant } from '../../utils/utils';
+import SourceLine from './sourceLine/sourceLine';
+import Puzzle from '../puzzle/puzzleItem';
 
-export const SENTENCE = 'There was a red apple among the green ones';
+const SENTENCE = 'There was a red There was a red There was a red';
+
+const WORDS_NUM = SENTENCE.split(' ').length;
 
 export default class GameBoard extends BaseComponent {
   private puzzles: Puzzle[];
 
+  private resultLine: ResultLine;
+
+  private sourceLine: SourceLine;
+
+  private isEmptyPlaceInResult: number[];
+
+  private isEmptyPlaceInSource: number[];
+
   constructor() {
     super({ tag: 'div', classes: ['game-wrapper'] });
+    this.resultLine = new ResultLine(WORDS_NUM, ['result-block']);
+    this.sourceLine = new SourceLine(WORDS_NUM, ['source-block']);
     this.puzzles = GameBoard.generatePuzzles(SENTENCE);
     this.createGameBoard();
+    this.isEmptyPlaceInResult = Array<number>(WORDS_NUM).fill(1);
+    this.isEmptyPlaceInSource = Array<number>(WORDS_NUM).fill(0);
   }
 
   private createGameBoard(): void {
     const resultsWrapper = div(['result-block-wrapper']);
-    const resultArea = new ResultLine();
-    const sourceArea = div(['source-block']);
-    this.puzzleClickHandler(resultArea.element);
+    this.puzzleClickHandler(this.resultLine.element);
 
-    this.puzzles.forEach((puzzle, index) => {
-      const puzzleWidth = this.calculatePuzzleWidth(index);
-      const link = { ...puzzle };
+    for (let i = 0; i < WORDS_NUM; i += 1) {
+      this.sourceLine.emptyPlaces[i].append(this.puzzles[i].element);
+    }
 
-      link.element.style.width = `${puzzleWidth}px`;
+    resultsWrapper.append(this.resultLine.element);
 
-      sourceArea.append(puzzle.element);
-    });
-
-    resultsWrapper.append(resultArea.element);
-
-    this.appendChildren([resultsWrapper.element, sourceArea.element]);
+    this.appendChildren([resultsWrapper.element, this.sourceLine.element]);
   }
 
   private static generatePuzzles(phrase: string): Puzzle[] {
@@ -44,25 +53,59 @@ export default class GameBoard extends BaseComponent {
   private puzzleClickHandler(resultArea: HTMLElement): void {
     this.puzzles.forEach((puzzle) => {
       puzzle.addListener('click', () => {
-        resultArea.appendChild(puzzle.element);
-        // sourceArea.removeChild(puzzle.element);
+        if (isDescendant(puzzle.element, resultArea)) {
+          GameBoard.movePuzzleOnClick(
+            puzzle.element,
+            this.isEmptyPlaceInSource,
+            this.isEmptyPlaceInResult,
+            this.sourceLine.emptyPlaces,
+            this.resultLine.emptyPlaces,
+          );
+        } else {
+          GameBoard.movePuzzleOnClick(
+            puzzle.element,
+            this.isEmptyPlaceInResult,
+            this.isEmptyPlaceInSource,
+            this.resultLine.emptyPlaces,
+            this.sourceLine.emptyPlaces,
+          );
+        }
       });
     });
   }
 
-  private calculatePuzzleWidth(index: number): number {
-    const WORDS_NUM = SENTENCE.split(' ').length;
-    const CHARS_NUM = SENTENCE.split(' ').join('').length;
-    const MIN_PADDING = 2 * 12;
+  private static movePuzzleOnClick(
+    puzzle: HTMLElement,
+    isEmptyPlaceInTarget: number[],
+    isEmptyPlaceInCurrent: number[],
+    targetEmptyPlaces: BaseComponent[],
+    currentEmptyPlaces: BaseComponent[],
+  ): void {
+    let currentIndex = 0;
 
-    const LINE_MAX_WIDTH = 760;
-    const LINE_MIN_WIDTH = 680;
+    currentIndex = GameBoard.definePuzzleIndexOnClick(puzzle, currentEmptyPlaces) ?? 0;
 
-    const windowSize = window.innerWidth;
-    const boardWidth = windowSize > 840 ? LINE_MAX_WIDTH : LINE_MIN_WIDTH;
+    const link1 = isEmptyPlaceInCurrent;
+    link1[currentIndex] = 1;
 
-    return (
-      Math.floor((boardWidth - MIN_PADDING * WORDS_NUM) / CHARS_NUM) * this.puzzles[index].word.length + MIN_PADDING
-    );
+    const targetIndex = isEmptyPlaceInTarget.indexOf(1);
+    const link2 = isEmptyPlaceInTarget;
+    link2[targetIndex] = 0;
+
+    const elem = targetEmptyPlaces[targetIndex];
+    elem.append(puzzle);
+  }
+
+  private static definePuzzleIndexOnClick(puzzle: HTMLElement, emptyPlaces: BaseComponent[]): number | undefined {
+    let targetIndex;
+
+    for (let i = 0; i < WORDS_NUM; i += 1) {
+      if (puzzle instanceof HTMLElement && puzzle.parentNode === emptyPlaces[i].element) {
+        targetIndex = i;
+        break;
+      }
+    }
+
+    return targetIndex;
   }
 }
