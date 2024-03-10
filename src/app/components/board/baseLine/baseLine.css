@@ -1,11 +1,3 @@
-.result-block {
-  height: 46px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2px;
-}
-
 .empty-place {
   min-width: 2.2em;
   height: 46px;

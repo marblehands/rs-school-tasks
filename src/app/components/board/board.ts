@@ -3,6 +3,7 @@ import ResultLine from './resultLine/resultLine';
 import Puzzle from '../puzzle/puzzle';
 import { div } from '../tags/tags';
 import { isDescendant } from '../../utils/utils';
+import SourceLine from './sourceLine/sourceLine';
 
 const SENTENCE = 'There was a red apple among the green ones';
 
@@ -17,7 +18,7 @@ export default class GameBoard extends BaseComponent {
 
   constructor() {
     super({ tag: 'div', classes: ['game-wrapper'] });
-    this.resultLine = new ResultLine(WORDS_NUM);
+    this.resultLine = new ResultLine(WORDS_NUM, ['result-block']);
     this.puzzles = GameBoard.generatePuzzles(SENTENCE);
     this.createGameBoard();
     this.isEmpty = Array(WORDS_NUM).fill(1);
@@ -25,7 +26,7 @@ export default class GameBoard extends BaseComponent {
 
   private createGameBoard(): void {
     const resultsWrapper = div(['result-block-wrapper']);
-    const sourceArea = div(['source-block']);
+    const sourceArea = new SourceLine(WORDS_NUM, ['source-block']);
     this.puzzleClickHandler(sourceArea.element, this.resultLine.element);
 
     this.puzzles.forEach((puzzle) => {
@@ -54,7 +55,7 @@ export default class GameBoard extends BaseComponent {
             const { target } = event;
 
             for (let i = 0; i < WORDS_NUM; i += 1) {
-              if (target instanceof HTMLElement && target.parentNode === this.resultLine.emptyPuzzles[i].element) {
+              if (target instanceof HTMLElement && target.parentNode === this.resultLine.emptyPlaces[i].element) {
                 targetIndex = i;
                 break;
               }
@@ -67,7 +68,7 @@ export default class GameBoard extends BaseComponent {
         } else {
           const index = this.isEmpty.indexOf(1);
           this.isEmpty[index] = 0;
-          const elem = this.resultLine.emptyPuzzles[index];
+          const elem = this.resultLine.emptyPlaces[index];
           elem.append(puzzle.element);
         }
       });
