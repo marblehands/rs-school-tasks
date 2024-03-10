@@ -38,7 +38,7 @@ export default class ResultLine extends BaseComponent {
 
   private setLineWidth(): void {
     const windowSize = window.innerWidth;
-    this.width = windowSize > 840 ? LINE_MAX_WIDTH + 50 : LINE_MIN_WIDTH + 50;
+    this.width = windowSize > 840 ? LINE_MAX_WIDTH + 16 : LINE_MIN_WIDTH + 16;
   }
 
   private handleResize(): void {

@@ -7,10 +7,8 @@
 }
 
 .result-block-wrapper {
-  /* width: clamp(43.75rem, 8.333vw + 40rem, 50rem);
-  height: clamp(27.5rem, 5vw + 25.25rem, 31.25rem); */
-  padding: 1em;
-  border-radius: 24px;
+  padding: 0.6em;
+  border-radius: 8px;
   background-color: var(--board-wrapper-bg);
   display: flex;
   justify-content: center;
