@@ -8,11 +8,13 @@
   align-items: center;
   justify-content: center;
   color: var(--body-text-default);
+  border-radius: 4px;
   transition:
     background-color 0.3s ease,
     border 0.3s ease,
     color 0.3s ease;
   cursor: pointer;
+  font-weight: 500;
   &:hover {
     background-color: var(--btn-bg-default);
     color: var(--body-text-inverse);
