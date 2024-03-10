@@ -14,28 +14,30 @@ export default class GameBoard extends BaseComponent {
 
   private resultLine: ResultLine;
 
+  private sourceLine: SourceLine;
+
   private isEmpty: number[];
 
   constructor() {
     super({ tag: 'div', classes: ['game-wrapper'] });
     this.resultLine = new ResultLine(WORDS_NUM, ['result-block']);
+    this.sourceLine = new SourceLine(WORDS_NUM, ['source-block']);
     this.puzzles = GameBoard.generatePuzzles(SENTENCE);
     this.createGameBoard();
-    this.isEmpty = Array(WORDS_NUM).fill(1);
+    this.isEmpty = Array<number>(WORDS_NUM).fill(1);
   }
 
   private createGameBoard(): void {
     const resultsWrapper = div(['result-block-wrapper']);
-    const sourceArea = new SourceLine(WORDS_NUM, ['source-block']);
-    this.puzzleClickHandler(sourceArea.element, this.resultLine.element);
+    this.puzzleClickHandler(this.sourceLine.element, this.resultLine.element);
 
-    this.puzzles.forEach((puzzle) => {
-      sourceArea.append(puzzle.element);
-    });
+    for (let i = 0; i < WORDS_NUM; i += 1) {
+      this.sourceLine.emptyPlaces[i].append(this.puzzles[i].element);
+    }
 
     resultsWrapper.append(this.resultLine.element);
 
-    this.appendChildren([resultsWrapper.element, sourceArea.element]);
+    this.appendChildren([resultsWrapper.element, this.sourceLine.element]);
   }
 
   private static generatePuzzles(phrase: string): Puzzle[] {

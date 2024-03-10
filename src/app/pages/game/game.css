@@ -14,19 +14,3 @@
   justify-content: center;
   align-items: center;
 }
-
-.source-block {
-  height: 46px;
-  padding: 1em;
-  display: flex;
-  justify-content: center;
-  min-height: 60px;
-}
-
-.empty-place {
-  min-width: 2.2em;
-  height: 46px;
-  background-color: #d9ece8;
-  position: relative;
-  border-radius: 4px;
-}
