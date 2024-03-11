@@ -10,7 +10,7 @@ import ContinueButton from '../continueButton/continueButton';
 import type ResultLine from './resultLine/resultLine';
 
 export default class GameBoard extends BaseComponent {
-  private level: number;
+  // private level: number;
 
   private round: number;
 
@@ -38,7 +38,7 @@ export default class GameBoard extends BaseComponent {
 
   constructor() {
     super({ tag: 'div', classes: ['game-wrapper'] });
-    this.level = 1;
+    // this.level = 1;
     this.round = 1;
     const data = new GetData(this.round);
     this.allSentence = data.sentences;
@@ -81,8 +81,7 @@ export default class GameBoard extends BaseComponent {
     this.puzzles.forEach((puzzle) => {
       puzzle.addListener('click', () => {
         if (isDescendant(puzzle.element, resultArea)) {
-          this.deleteWordFromSequence(puzzle.word);
-          console.log(this.wordSequence);
+          this.deleteWordFromSequence(puzzle.element, this.resultLine.emptyPlaces);
           this.movePuzzleOnClick(
             puzzle.element,
             this.isEmptyPlaceInSource,
@@ -90,9 +89,10 @@ export default class GameBoard extends BaseComponent {
             this.sourceLine.emptyPlaces,
             this.resultLine.emptyPlaces,
           );
+          console.log(this.wordSequence);
+
+          console.log(this.wordSequence);
         } else {
-          this.wordSequence.push(puzzle.word);
-          console.log(this.wordSequence);
           this.movePuzzleOnClick(
             puzzle.element,
             this.isEmptyPlaceInResult,
@@ -100,6 +100,9 @@ export default class GameBoard extends BaseComponent {
             this.resultLine.emptyPlaces,
             this.sourceLine.emptyPlaces,
           );
+          console.log(this.wordSequence);
+          this.addWordToSequence(puzzle.element, this.resultLine.emptyPlaces, puzzle.word);
+          console.log(this.wordSequence);
         }
 
         this.toggleContinueButton(this.checkWordSequence());
@@ -154,12 +157,15 @@ export default class GameBoard extends BaseComponent {
     }
   }
 
-  private deleteWordFromSequence(word: string): void {
-    const index = this.wordSequence.indexOf(word);
+  private deleteWordFromSequence(puzzle: HTMLElement, emptyPlaces: BaseComponent[]): void {
+    const index = this.definePuzzleIndexOnClick(puzzle, emptyPlaces) ?? 0;
+    console.log(index);
+    this.wordSequence[index] = '0';
+  }
 
-    if (index !== -1) {
-      this.wordSequence.splice(index, 1);
-    }
+  private addWordToSequence(puzzle: HTMLElement, emptyPlaces: BaseComponent[], word: string): void {
+    const index = this.definePuzzleIndexOnClick(puzzle, emptyPlaces) ?? 0;
+    this.wordSequence[index] = word;
   }
 
   // private continueButtonClickHandler():void {}
