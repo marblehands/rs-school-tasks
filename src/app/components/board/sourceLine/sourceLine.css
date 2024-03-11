@@ -7,6 +7,6 @@
   border-radius: 8px;
   background-color: var(--board-wrapper-bg);
   align-items: center;
-  gap: 2px;
+  gap: 1px;
   box-sizing: content-box;
 }

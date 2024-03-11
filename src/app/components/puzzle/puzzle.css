@@ -1,7 +1,7 @@
 .puzzle-item {
   height: 46px;
   background-color: var(--body-text-inverse);
-  border: 1px solid var(--body-text-inverse);
+  /* border: 1px solid var(--body-text-inverse); */
   box-sizing: border-box;
   padding: 1em;
   display: flex;
@@ -15,9 +15,34 @@
     color 0.3s ease;
   cursor: pointer;
   font-weight: 500;
+  -webkit-mask-image: url(../../../assets/svg/mask-left.svg);
+  -webkit-mask-size: auto, contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-image: url(../../../assets/svg/mask-left.svg);
+  mask-size: auto, contain;
+  mask-repeat: no-repeat;
+  position: relative;
+
   &:hover {
     background-color: var(--btn-bg-default);
     color: var(--body-text-inverse);
     border: 1px solid var(--btn-bg-default);
   }
 }
+
+/* .source-block .empty-place:not(:first-child)::before {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 46px;
+  top: 15px;
+  right: 0;
+  background-color: var(--body-text-inverse);
+  -webkit-mask-image: url(../../../assets/svg/mask-psevdo.svg);
+  -webkit-mask-size: auto, contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-image: url(../../../assets/svg/mask-psevdo.svg);
+  mask-size: auto, contain;
+  mask-repeat: no-repeat;
+} */

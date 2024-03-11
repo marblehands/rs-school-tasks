@@ -1,7 +1,7 @@
 import './main.css';
 import BaseComponent from '../../components/baseComponent/baseComponent';
 // import LoginPageView from '../../pages/login/login';
-import StartPageView from '../../pages/start/start';
+// import StartPageView from '../../pages/start/start';
 import GamePageView from '../../pages/game/game';
 
 // Draw Start Page

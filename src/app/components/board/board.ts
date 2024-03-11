@@ -1,16 +1,30 @@
 import BaseComponent from '../baseComponent/baseComponent';
-import ResultLine from './resultLine/resultLine';
 import { div } from '../tags/tags';
 import { isDescendant } from '../../utils/utils';
 import SourceLine from './sourceLine/sourceLine';
 import Puzzle from '../puzzle/puzzleItem';
+import GetData from '../../helpers/getData';
+import LevelResults from './resultLines';
+import ContinueButton from '../continueButton/continueButton';
 
-const SENTENCE = 'There was a red There was a red There was a red';
-
-const WORDS_NUM = SENTENCE.split(' ').length;
+import type ResultLine from './resultLine/resultLine';
 
 export default class GameBoard extends BaseComponent {
+  private level: number;
+
+  private round: number;
+
+  private allSentence: string[];
+
+  private currentSentence: string;
+
+  private wordSequence: string[];
+
+  private wordNum: number;
+
   private puzzles: Puzzle[];
+
+  private resultLines: ResultLine[];
 
   private resultLine: ResultLine;
 
@@ -20,27 +34,40 @@ export default class GameBoard extends BaseComponent {
 
   private isEmptyPlaceInSource: number[];
 
+  private continueButton: ContinueButton;
+
   constructor() {
     super({ tag: 'div', classes: ['game-wrapper'] });
-    this.resultLine = new ResultLine(WORDS_NUM, ['result-block']);
-    this.sourceLine = new SourceLine(WORDS_NUM, ['source-block']);
-    this.puzzles = GameBoard.generatePuzzles(SENTENCE);
+    this.level = 1;
+    this.round = 1;
+    const data = new GetData(this.round);
+    this.allSentence = data.sentences;
+    [this.currentSentence] = data.sentences;
+    this.wordSequence = [];
+    const levelResults = new LevelResults(this.allSentence);
+    this.resultLines = levelResults.resultLines;
+    [this.resultLine] = this.resultLines;
+    this.wordNum = this.currentSentence.split(' ').length;
+    this.sourceLine = new SourceLine(this.wordNum, ['source-block']);
+    this.puzzles = GameBoard.generatePuzzles(this.currentSentence);
+    this.continueButton = new ContinueButton();
     this.createGameBoard();
-    this.isEmptyPlaceInResult = Array<number>(WORDS_NUM).fill(1);
-    this.isEmptyPlaceInSource = Array<number>(WORDS_NUM).fill(0);
+    this.isEmptyPlaceInResult = Array<number>(this.wordNum).fill(1);
+    this.isEmptyPlaceInSource = Array<number>(this.wordNum).fill(0);
   }
 
   private createGameBoard(): void {
     const resultsWrapper = div(['result-block-wrapper']);
     this.puzzleClickHandler(this.resultLine.element);
 
-    for (let i = 0; i < WORDS_NUM; i += 1) {
+    for (let i = 0; i < this.wordNum; i += 1) {
       this.sourceLine.emptyPlaces[i].append(this.puzzles[i].element);
     }
 
-    resultsWrapper.append(this.resultLine.element);
-
-    this.appendChildren([resultsWrapper.element, this.sourceLine.element]);
+    this.resultLines.forEach((line) => {
+      resultsWrapper.append(line.element);
+    });
+    this.appendChildren([resultsWrapper.element, this.sourceLine.element, this.continueButton.element]);
   }
 
   private static generatePuzzles(phrase: string): Puzzle[] {
@@ -54,7 +81,9 @@ export default class GameBoard extends BaseComponent {
     this.puzzles.forEach((puzzle) => {
       puzzle.addListener('click', () => {
         if (isDescendant(puzzle.element, resultArea)) {
-          GameBoard.movePuzzleOnClick(
+          this.deleteWordFromSequence(puzzle.word);
+          console.log(this.wordSequence);
+          this.movePuzzleOnClick(
             puzzle.element,
             this.isEmptyPlaceInSource,
             this.isEmptyPlaceInResult,
@@ -62,7 +91,9 @@ export default class GameBoard extends BaseComponent {
             this.resultLine.emptyPlaces,
           );
         } else {
-          GameBoard.movePuzzleOnClick(
+          this.wordSequence.push(puzzle.word);
+          console.log(this.wordSequence);
+          this.movePuzzleOnClick(
             puzzle.element,
             this.isEmptyPlaceInResult,
             this.isEmptyPlaceInSource,
@@ -70,11 +101,13 @@ export default class GameBoard extends BaseComponent {
             this.sourceLine.emptyPlaces,
           );
         }
+
+        this.toggleContinueButton(this.checkWordSequence());
       });
     });
   }
 
-  private static movePuzzleOnClick(
+  private movePuzzleOnClick(
     puzzle: HTMLElement,
     isEmptyPlaceInTarget: number[],
     isEmptyPlaceInCurrent: number[],
@@ -83,7 +116,7 @@ export default class GameBoard extends BaseComponent {
   ): void {
     let currentIndex = 0;
 
-    currentIndex = GameBoard.definePuzzleIndexOnClick(puzzle, currentEmptyPlaces) ?? 0;
+    currentIndex = this.definePuzzleIndexOnClick(puzzle, currentEmptyPlaces) ?? 0;
 
     const link1 = isEmptyPlaceInCurrent;
     link1[currentIndex] = 1;
@@ -96,10 +129,10 @@ export default class GameBoard extends BaseComponent {
     elem.append(puzzle);
   }
 
-  private static definePuzzleIndexOnClick(puzzle: HTMLElement, emptyPlaces: BaseComponent[]): number | undefined {
+  private definePuzzleIndexOnClick(puzzle: HTMLElement, emptyPlaces: BaseComponent[]): number | undefined {
     let targetIndex;
 
-    for (let i = 0; i < WORDS_NUM; i += 1) {
+    for (let i = 0; i < this.wordNum; i += 1) {
       if (puzzle instanceof HTMLElement && puzzle.parentNode === emptyPlaces[i].element) {
         targetIndex = i;
         break;
@@ -108,4 +141,26 @@ export default class GameBoard extends BaseComponent {
 
     return targetIndex;
   }
+
+  private checkWordSequence(): boolean {
+    return this.currentSentence === this.wordSequence.join(' ');
+  }
+
+  private toggleContinueButton(check: boolean): void {
+    if (check) {
+      this.continueButton.removeClass('disabled');
+    } else {
+      this.continueButton.addClass('disabled');
+    }
+  }
+
+  private deleteWordFromSequence(word: string): void {
+    const index = this.wordSequence.indexOf(word);
+
+    if (index !== -1) {
+      this.wordSequence.splice(index, 1);
+    }
+  }
+
+  // private continueButtonClickHandler():void {}
 }
