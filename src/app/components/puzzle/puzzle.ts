@@ -12,8 +12,8 @@ const LINE_MIN_WIDTH = 680;
 export default class BasePuzzle extends BaseComponent {
   public word: string;
 
-  constructor(word: string, classes: string) {
-    super({ tag: 'div', classes: [classes], content: word });
+  constructor(word: string, classes: string[]) {
+    super({ tag: 'div', classes, content: word });
     this.word = word;
     this.element.style.width = `${this.calculatePuzzleWidth()}px`;
     window.addEventListener('resize', () => {

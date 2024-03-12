@@ -14,6 +14,8 @@ export default class GameBoard extends BaseComponent {
 
   private round: number;
 
+  private currentSentenceIndex: number;
+
   private allSentence: string[];
 
   private currentSentence: string;
@@ -39,17 +41,18 @@ export default class GameBoard extends BaseComponent {
   constructor() {
     super({ tag: 'div', classes: ['game-wrapper'] });
     // this.level = 1;
-    this.round = 1;
+    this.round = 0;
+    this.currentSentenceIndex = 0;
     const data = new GetData(this.round);
     this.allSentence = data.sentences;
-    [this.currentSentence] = data.sentences;
+    this.currentSentence = data.sentences[this.currentSentenceIndex];
     this.wordSequence = [];
     const levelResults = new LevelResults(this.allSentence);
     this.resultLines = levelResults.resultLines;
-    [this.resultLine] = this.resultLines;
+    this.resultLine = this.resultLines[this.currentSentenceIndex];
     this.wordNum = this.currentSentence.split(' ').length;
     this.sourceLine = new SourceLine(this.wordNum, ['source-block']);
-    this.puzzles = GameBoard.generatePuzzles(this.currentSentence);
+    this.puzzles = this.generatePuzzles(this.currentSentence);
     this.continueButton = new ContinueButton();
     this.createGameBoard();
     this.isEmptyPlaceInResult = Array<number>(this.wordNum).fill(1);
@@ -58,54 +61,59 @@ export default class GameBoard extends BaseComponent {
 
   private createGameBoard(): void {
     const resultsWrapper = div(['result-block-wrapper']);
-    this.puzzleClickHandler(this.resultLine.element);
 
-    for (let i = 0; i < this.wordNum; i += 1) {
-      this.sourceLine.emptyPlaces[i].append(this.puzzles[i].element);
-    }
-
+    this.createSourceLine(this.wordNum);
+    this.continueButtonClickHandler();
     this.resultLines.forEach((line) => {
       resultsWrapper.append(line.element);
     });
     this.appendChildren([resultsWrapper.element, this.sourceLine.element, this.continueButton.element]);
   }
 
-  private static generatePuzzles(phrase: string): Puzzle[] {
+  private createSourceLine(wordNum: number): void {
+    const line = new SourceLine(wordNum, ['source-block']);
+    this.sourceLine = line;
+    this.puzzles = this.generatePuzzles(this.currentSentence);
+    for (let i = 0; i < this.wordNum; i += 1) {
+      this.sourceLine.emptyPlaces[i].append(this.puzzles[i].element);
+    }
+
+    this.puzzleClickHandler(this.resultLine.element);
+  }
+
+  private generatePuzzles(phrase: string): Puzzle[] {
     return phrase
       .split(' ')
-      .map((word) => new Puzzle(word))
+      .map((word) => new Puzzle(word, this.currentSentenceIndex))
       .sort(() => Math.random() - 0.5);
   }
 
   private puzzleClickHandler(resultArea: HTMLElement): void {
     this.puzzles.forEach((puzzle) => {
       puzzle.addListener('click', () => {
-        if (isDescendant(puzzle.element, resultArea)) {
-          this.deleteWordFromSequence(puzzle.element, this.resultLine.emptyPlaces);
-          this.movePuzzleOnClick(
-            puzzle.element,
-            this.isEmptyPlaceInSource,
-            this.isEmptyPlaceInResult,
-            this.sourceLine.emptyPlaces,
-            this.resultLine.emptyPlaces,
-          );
-          console.log(this.wordSequence);
+        if (puzzle.element.classList.contains(`level-${this.currentSentenceIndex}`)) {
+          if (isDescendant(puzzle.element, resultArea)) {
+            this.deleteWordFromSequence(puzzle.element, this.resultLine.emptyPlaces);
+            this.movePuzzleOnClick(
+              puzzle.element,
+              this.isEmptyPlaceInSource,
+              this.isEmptyPlaceInResult,
+              this.sourceLine.emptyPlaces,
+              this.resultLine.emptyPlaces,
+            );
+          } else {
+            this.movePuzzleOnClick(
+              puzzle.element,
+              this.isEmptyPlaceInResult,
+              this.isEmptyPlaceInSource,
+              this.resultLine.emptyPlaces,
+              this.sourceLine.emptyPlaces,
+            );
+            this.addWordToSequence(puzzle.element, this.resultLine.emptyPlaces, puzzle.word);
+          }
 
-          console.log(this.wordSequence);
-        } else {
-          this.movePuzzleOnClick(
-            puzzle.element,
-            this.isEmptyPlaceInResult,
-            this.isEmptyPlaceInSource,
-            this.resultLine.emptyPlaces,
-            this.sourceLine.emptyPlaces,
-          );
-          console.log(this.wordSequence);
-          this.addWordToSequence(puzzle.element, this.resultLine.emptyPlaces, puzzle.word);
-          console.log(this.wordSequence);
+          this.toggleContinueButton(this.checkWordSequence());
         }
-
-        this.toggleContinueButton(this.checkWordSequence());
       });
     });
   }
@@ -159,7 +167,6 @@ export default class GameBoard extends BaseComponent {
 
   private deleteWordFromSequence(puzzle: HTMLElement, emptyPlaces: BaseComponent[]): void {
     const index = this.definePuzzleIndexOnClick(puzzle, emptyPlaces) ?? 0;
-    console.log(index);
     this.wordSequence[index] = '0';
   }
 
@@ -167,6 +174,41 @@ export default class GameBoard extends BaseComponent {
     const index = this.definePuzzleIndexOnClick(puzzle, emptyPlaces) ?? 0;
     this.wordSequence[index] = word;
   }
+
+  private continueButtonClickHandler(): void {
+    this.continueButton.element.addEventListener('click', () => {
+      // console.log(this.checkWordSequence());
+
+      if (this.checkWordSequence()) {
+        this.currentSentenceIndex += 1;
+        this.currentSentence = this.allSentence[this.currentSentenceIndex];
+        this.resultLine = this.resultLines[this.currentSentenceIndex];
+        this.wordNum = this.currentSentence.split(' ').length;
+        this.createSourceLine(this.wordNum);
+        this.replaceSourceLine();
+        this.wordSequence = [];
+        this.isEmptyPlaceInResult = Array<number>(this.wordNum).fill(1);
+        this.isEmptyPlaceInSource = Array<number>(this.wordNum).fill(0);
+      }
+    });
+  }
+
+  private replaceSourceLine(): void {
+    const secondChild = this.children[1];
+
+    // console.log(this.element, this.children[0], this.children[1], this.children[2]);
+    this.element.replaceChild(this.sourceLine.element, secondChild);
+    this.children[1] = this.sourceLine.element;
+    // console.log(this.element, this.children[0], this.children[1], this.children[2]);
+    // this.element.insertBefore(this.sourceLine.element, secondChild);
+    // this.element.removeChild(secondChild);
+  }
+
+  // private checkButtonClickHandler(check: boolean) {
+  //   if (check) {
+
+  //   }
+  // }
 
   // private continueButtonClickHandler():void {}
 }
