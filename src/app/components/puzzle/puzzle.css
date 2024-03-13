@@ -1,7 +1,6 @@
 .puzzle-item {
   height: 46px;
   background-color: var(--body-text-inverse);
-  border: 1px solid var(--body-text-inverse);
   box-sizing: border-box;
   padding: 1em;
   display: flex;
@@ -15,9 +14,47 @@
     color 0.3s ease;
   cursor: pointer;
   font-weight: 500;
+  position: relative;
+
   &:hover {
     background-color: var(--btn-bg-default);
     color: var(--body-text-inverse);
-    border: 1px solid var(--btn-bg-default);
   }
+}
+
+.empty-place:not(:first-child) .puzzle-item::before {
+  content: '';
+  display: block;
+  background-color: #fff;
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  top: 16px;
+  left: -5px;
+  position: absolute;
+  transition: background-color 0.3s ease;
+}
+
+.empty-place:not(:first-child):hover .puzzle-item::before {
+  content: '';
+  display: block;
+  background-color: var(--btn-bg-default);
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  top: 15px;
+  left: -5px;
+  position: absolute;
+}
+
+.empty-place:not(:last-child) .puzzle-item::after {
+  content: '';
+  display: block;
+  background-color: var(--board-wrapper-bg);
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  top: 15px;
+  right: -11px;
+  position: absolute;
 }

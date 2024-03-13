@@ -2,7 +2,7 @@ import './baseLine.css';
 import BaseComponent from '../../baseComponent/baseComponent';
 import { div } from '../../tags/tags';
 
-const LINE_MAX_WIDTH = 760;
+const LINE_MAX_WIDTH = 800;
 const LINE_MIN_WIDTH = 658; // TO DO Find out with the formula, why it counts like 658
 
 export default class BaseLine extends BaseComponent {
