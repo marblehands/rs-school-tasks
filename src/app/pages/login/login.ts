@@ -2,12 +2,17 @@ import BaseComponent from '../../components/baseComponent/baseComponent';
 import LoginForm from '../../components/loginForm/loginForm';
 import { div, headline2 } from '../../components/tags/tags';
 
+import type Routes from '../router/types';
+
 export default class LoginPageView extends BaseComponent {
   private loginForm: LoginForm;
 
-  constructor() {
+  constructor(
+    private navigateTo: (location: Routes) => void,
+    private renderLogOut: () => void,
+  ) {
     super({ tag: 'div', classes: ['login__wrapper'] });
-    this.loginForm = new LoginForm();
+    this.loginForm = new LoginForm(this.navigateTo, this.renderLogOut);
     this.createLoginPage();
   }
 

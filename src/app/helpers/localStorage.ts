@@ -18,7 +18,7 @@ export default class LocalStorageHelper {
   }
 
   public static removeItem(key: string): void {
-    localStorage.removeItem(key);
+    localStorage.removeItem(`${key}-${PREFIX}`);
   }
 
   public static getUser(): User | null {

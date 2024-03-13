@@ -5,14 +5,16 @@ import { div, h1, p, span } from '../../components/tags/tags';
 import StartButton from '../../components/startButton/startButton';
 import LocalStorageHelper from '../../helpers/localStorage';
 
+import type Routes from '../router/types';
+
 export default class StartPageView extends BaseComponent {
   private greeting: string;
 
   private buttonStart: StartButton;
 
-  constructor() {
+  constructor(private navigateTo: (location: Routes) => void) {
     super({ tag: 'div' });
-    this.buttonStart = new StartButton();
+    this.buttonStart = new StartButton(this.navigateTo);
     this.greeting = '';
     this.getGreetingText();
     this.createPage();

@@ -3,6 +3,7 @@ import BaseComponent from '../baseComponent/baseComponent';
 import { button, input, label } from '../tags/tags';
 import params from './params';
 import LocalStorageHelper from '../../helpers/localStorage';
+import Routes from '../../pages/router/types';
 
 const { FORM, INPUT_NAME, INPUT_SURNAME, BUTTON_LOGIN, LABEL_NAME, LABEL_SURNAME } = params;
 
@@ -23,7 +24,10 @@ export default class LoginForm extends BaseComponent {
 
   private isFormValid: boolean;
 
-  constructor() {
+  constructor(
+    private navigateTo: (location: Routes) => void,
+    private renderLogOut: () => void,
+  ) {
     super(FORM);
     // this.isNameNotEmpty = false;
     // this.isSurnameNotEmpty = false;
@@ -81,6 +85,9 @@ export default class LoginForm extends BaseComponent {
         const surname = this.inputSurname.element.value;
         LocalStorageHelper.setItem('user', { name, surname });
       }
+
+      this.navigateTo(Routes.START);
+      this.renderLogOut();
     }
   }
 

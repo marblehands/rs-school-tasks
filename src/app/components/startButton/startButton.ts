@@ -1,19 +1,17 @@
 import './startButton.css';
 import BaseComponent from '../baseComponent/baseComponent';
-
-function startButtonHandler(): void {
-  // eslint-disable-next-line no-console
-  console.log('redirect to game page');
-}
+import Routes from '../../pages/router/types';
 
 export default class StartButton extends BaseComponent {
-  constructor() {
+  constructor(private navigateTo: (location: Routes) => void) {
     super({
       tag: 'button',
       classes: ['button', 'button-start'],
       content: 'Start',
       event: 'click',
-      callback: startButtonHandler,
+      callback: () => {
+        this.navigateTo(Routes.GAME);
+      },
     });
   }
 }

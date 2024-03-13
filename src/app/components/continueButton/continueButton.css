@@ -12,7 +12,7 @@
   }
 }
 
-.disabled {
+.button-continue.disabled {
   opacity: 0.5;
   user-select: none;
   cursor: default;
