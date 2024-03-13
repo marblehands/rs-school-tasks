@@ -270,8 +270,12 @@ export default class GameBoard extends BaseComponent {
 
   private markAllPuzzlesAsCorrect(): void {
     Array.from(this.resultLine.element.children).forEach((child) => {
-      child.firstChild.classList.remove('wrong');
-      child.firstChild.classList.add('correct');
+      const puzzle = child.firstChild;
+
+      if (puzzle && puzzle instanceof HTMLElement) {
+        puzzle.classList.remove('wrong');
+        puzzle.classList.add('correct');
+      }
     });
   }
 }
