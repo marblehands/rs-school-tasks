@@ -15,7 +15,6 @@ export default class Router {
   public handleLocation = (): void => {
     this.user = Router.isUser();
     const currentPage = window.location.pathname;
-    console.log(currentPage);
 
     let location: Routes;
 

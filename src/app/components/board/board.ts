@@ -65,18 +65,15 @@ export default class GameBoard extends BaseComponent {
 
   private createGameBoard(): void {
     const resultsWrapper = div(['result-block-wrapper']);
+    const buttonsWrapper = div(['buttons-wrapper']);
+    buttonsWrapper.appendChildren([this.continueButton.element, this.checkButton.element]);
 
     this.createSourceLine(this.wordNum);
     this.continueButtonClickHandler();
     this.resultLines.forEach((line) => {
       resultsWrapper.append(line.element);
     });
-    this.appendChildren([
-      resultsWrapper.element,
-      this.sourceLine.element,
-      this.continueButton.element,
-      this.checkButton.element,
-    ]);
+    this.appendChildren([resultsWrapper.element, this.sourceLine.element, buttonsWrapper.element]);
   }
 
   private createSourceLine(wordNum: number): void {
@@ -121,7 +118,7 @@ export default class GameBoard extends BaseComponent {
 
           this.toggleContinueButton();
           this.toggleCheckButton();
-          // this.handleCheckButtonState();
+          this.handleCheckButtonState();
         }
       });
     });
@@ -209,7 +206,7 @@ export default class GameBoard extends BaseComponent {
         this.isEmptyPlaceInSource = Array<number>(this.wordNum).fill(0);
         this.toggleContinueButton();
         this.toggleCheckButton();
-        // this.handleCheckButtonState();
+        this.handleCheckButtonState();
       }
     });
   }
@@ -258,4 +255,24 @@ export default class GameBoard extends BaseComponent {
       });
     }
   };
+
+  private handleCheckButtonState(): void {
+    if (this.checkWordSequence()) {
+      this.markAllPuzzlesAsCorrect();
+      this.checkButton.element.style.display = 'none';
+    } else {
+      this.checkButton.element.style.display = 'block';
+    }
+  }
+
+  private markAllPuzzlesAsCorrect(): void {
+    Array.from(this.resultLine.element.children).forEach((child) => {
+      const puzzle = child.firstChild;
+
+      if (puzzle && puzzle instanceof HTMLElement) {
+        puzzle.classList.remove('wrong');
+        puzzle.classList.add('correct');
+      }
+    });
+  }
 }
