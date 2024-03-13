@@ -2,7 +2,7 @@ import './main.css';
 import BaseComponent from '../../components/baseComponent/baseComponent';
 // import LoginPageView from '../../pages/login/login';
 // import StartPageView from '../../pages/start/start';
-import GamePageView from '../../pages/game/game';
+// import GamePageView from '../../pages/game/game';
 
 // Draw Start Page
 
@@ -42,18 +42,34 @@ import GamePageView from '../../pages/game/game';
 
 // Draw Game Page
 
-export default class Main {
-  public main: BaseComponent;
+// export default class Main {
+//   public main: BaseComponent;
 
-  public gamePage: GamePageView;
+//   public gamePage: GamePageView;
 
+//   constructor() {
+//     this.main = new BaseComponent({ tag: 'main', classes: ['main'] });
+//     this.gamePage = new GamePageView();
+//     this.createMain();
+//   }
+
+//   private createMain(): void {
+//     this.main.append(this.gamePage.element);
+//   }
+// }
+
+// Router
+
+export default class Main extends BaseComponent {
   constructor() {
-    this.main = new BaseComponent({ tag: 'main', classes: ['main'] });
-    this.gamePage = new GamePageView();
-    this.createMain();
+    super({ tag: 'main', classes: ['main'] });
   }
 
-  private createMain(): void {
-    this.main.append(this.gamePage.element);
+  public setContent(section: BaseComponent): void {
+    if (this.element.children.length === 0) {
+      this.append(section.element);
+    } else {
+      this.element.replaceChildren(section.element);
+    }
   }
 }

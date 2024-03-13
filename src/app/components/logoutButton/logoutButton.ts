@@ -1,21 +1,23 @@
 import './logoutButton.css';
 import BaseComponent from '../baseComponent/baseComponent';
 import LocalStorageHelper from '../../helpers/localStorage';
-
-function logOutHandler(): void {
-  LocalStorageHelper.removeItem('user');
-  // eslint-disable-next-line no-console
-  console.log('logout');
-}
+import Routes from '../../pages/router/types';
 
 export default class LogoutButton extends BaseComponent {
-  constructor() {
+  constructor(
+    private navigateTo: (location: Routes) => void,
+    private renderLogOut: () => void,
+  ) {
     super({
       tag: 'button',
       classes: ['button', 'button-logout'],
       content: 'Log Out',
       event: 'click',
-      callback: logOutHandler,
+      callback: () => {
+        this.navigateTo(Routes.LOGIN);
+        LocalStorageHelper.removeItem('user');
+        this.renderLogOut();
+      },
     });
   }
 }
