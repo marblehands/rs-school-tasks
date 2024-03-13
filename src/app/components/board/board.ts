@@ -121,7 +121,7 @@ export default class GameBoard extends BaseComponent {
 
           this.toggleContinueButton();
           this.toggleCheckButton();
-          // this.handleCheckButtonState();
+          this.handleCheckButtonState();
         }
       });
     });
@@ -209,7 +209,7 @@ export default class GameBoard extends BaseComponent {
         this.isEmptyPlaceInSource = Array<number>(this.wordNum).fill(0);
         this.toggleContinueButton();
         this.toggleCheckButton();
-        // this.handleCheckButtonState();
+        this.handleCheckButtonState();
       }
     });
   }
@@ -258,4 +258,20 @@ export default class GameBoard extends BaseComponent {
       });
     }
   };
+
+  private handleCheckButtonState(): void {
+    if (this.checkWordSequence()) {
+      this.markAllPuzzlesAsCorrect();
+      this.checkButton.element.style.display = 'none';
+    } else {
+      this.checkButton.element.style.display = 'block';
+    }
+  }
+
+  private markAllPuzzlesAsCorrect(): void {
+    Array.from(this.resultLine.element.children).forEach((child) => {
+      child.firstChild.classList.remove('wrong');
+      child.firstChild.classList.add('correct');
+    });
+  }
 }
