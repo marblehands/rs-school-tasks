@@ -180,7 +180,16 @@ export default class GameBoard extends BaseComponent {
       // console.log(this.checkWordSequence());
 
       if (this.checkWordSequence()) {
-        this.currentSentenceIndex += 1;
+        if (this.currentSentenceIndex === this.allSentence.length - 1) {
+          this.round += 1;
+          this.currentSentenceIndex = 0;
+          const data = new GetData(this.round);
+          this.allSentence = data.sentences;
+          this.replaceResultLines();
+        } else {
+          this.currentSentenceIndex += 1;
+        }
+
         this.currentSentence = this.allSentence[this.currentSentenceIndex];
         this.resultLine = this.resultLines[this.currentSentenceIndex];
         this.wordNum = this.currentSentence.split(' ').length;
@@ -195,20 +204,20 @@ export default class GameBoard extends BaseComponent {
 
   private replaceSourceLine(): void {
     const secondChild = this.children[1];
-
-    // console.log(this.element, this.children[0], this.children[1], this.children[2]);
     this.element.replaceChild(this.sourceLine.element, secondChild);
     this.children[1] = this.sourceLine.element;
-    // console.log(this.element, this.children[0], this.children[1], this.children[2]);
-    // this.element.insertBefore(this.sourceLine.element, secondChild);
-    // this.element.removeChild(secondChild);
   }
 
-  // private checkButtonClickHandler(check: boolean) {
-  //   if (check) {
-
-  //   }
-  // }
-
-  // private continueButtonClickHandler():void {}
+  private replaceResultLines(): void {
+    const levelResults = new LevelResults(this.allSentence);
+    this.resultLines = levelResults.resultLines;
+    const currentResultLines = this.children[0].children;
+    Array.from(currentResultLines).forEach((line) => {
+      line.remove();
+    });
+    this.resultLines.forEach((line) => {
+      this.children[0].append(line.element);
+    });
+    this.children[1] = this.sourceLine.element;
+  }
 }

@@ -81,4 +81,16 @@ export default class BaseComponent {
   public removeAttribute(attribute: string): void {
     this.element.removeAttribute(attribute);
   }
+
+  public destroyChildren(): void {
+    this.children.forEach((child) => {
+      child.remove();
+    });
+    this.children.length = 0;
+  }
+
+  public destroy(): void {
+    this.destroyChildren();
+    this.element.remove();
+  }
 }
