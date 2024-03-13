@@ -119,8 +119,9 @@ export default class GameBoard extends BaseComponent {
             this.addWordToSequence(puzzle.element, this.resultLine.emptyPlaces, puzzle.word);
           }
 
-          this.toggleContinueButton(this.checkWordSequence());
+          this.toggleContinueButton();
           this.toggleCheckButton();
+          // this.handleCheckButtonState();
         }
       });
     });
@@ -165,8 +166,8 @@ export default class GameBoard extends BaseComponent {
     return this.currentSentence === this.wordSequence.join(' ');
   }
 
-  private toggleContinueButton(check: boolean): void {
-    if (check) {
+  private toggleContinueButton(): void {
+    if (this.checkWordSequence()) {
       this.continueButton.removeClass('disabled');
     } else {
       this.continueButton.addClass('disabled');
@@ -206,6 +207,9 @@ export default class GameBoard extends BaseComponent {
         this.wordSequence = [];
         this.isEmptyPlaceInResult = Array<number>(this.wordNum).fill(1);
         this.isEmptyPlaceInSource = Array<number>(this.wordNum).fill(0);
+        this.toggleContinueButton();
+        this.toggleCheckButton();
+        // this.handleCheckButtonState();
       }
     });
   }
@@ -238,16 +242,20 @@ export default class GameBoard extends BaseComponent {
   }
 
   public checkButtonClickHandler = (): void => {
-    this.wordSequence.forEach((word, index) => {
-      const currentPuzzleElement = this.resultLine.element.children[index].firstChild;
+    if (!this.checkButton.element.classList.contains('disabled')) {
+      this.wordSequence.forEach((word, index) => {
+        const currentPuzzleElement = this.resultLine.element.children[index].firstChild;
 
-      if (currentPuzzleElement && currentPuzzleElement instanceof HTMLElement) {
-        if (word === this.currentSentence[index]) {
-          currentPuzzleElement.classList.add('correct');
-        } else {
-          currentPuzzleElement.classList.add('wrong');
+        if (currentPuzzleElement && currentPuzzleElement instanceof HTMLElement) {
+          if (word === this.currentSentence.split(' ')[index]) {
+            currentPuzzleElement.classList.remove('wrong');
+            currentPuzzleElement.classList.add('correct');
+          } else {
+            currentPuzzleElement.classList.remove('correct');
+            currentPuzzleElement.classList.add('wrong');
+          }
         }
-      }
-    });
+      });
+    }
   };
 }
