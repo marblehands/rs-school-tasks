@@ -6,6 +6,7 @@ import Puzzle from '../puzzle/puzzleItem';
 import GetData from '../../helpers/getData';
 import LevelResults from './resultLines';
 import ContinueButton from '../continueButton/continueButton';
+import CheckButton from './checkButton/checkButton';
 
 import type ResultLine from './resultLine/resultLine';
 
@@ -38,6 +39,8 @@ export default class GameBoard extends BaseComponent {
 
   private continueButton: ContinueButton;
 
+  private checkButton: CheckButton;
+
   constructor() {
     super({ tag: 'div', classes: ['game-wrapper'] });
     // this.level = 1;
@@ -54,6 +57,7 @@ export default class GameBoard extends BaseComponent {
     this.sourceLine = new SourceLine(this.wordNum, ['source-block']);
     this.puzzles = this.generatePuzzles(this.currentSentence);
     this.continueButton = new ContinueButton();
+    this.checkButton = new CheckButton(this.checkButtonClickHandler);
     this.createGameBoard();
     this.isEmptyPlaceInResult = Array<number>(this.wordNum).fill(1);
     this.isEmptyPlaceInSource = Array<number>(this.wordNum).fill(0);
@@ -67,13 +71,19 @@ export default class GameBoard extends BaseComponent {
     this.resultLines.forEach((line) => {
       resultsWrapper.append(line.element);
     });
-    this.appendChildren([resultsWrapper.element, this.sourceLine.element, this.continueButton.element]);
+    this.appendChildren([
+      resultsWrapper.element,
+      this.sourceLine.element,
+      this.continueButton.element,
+      this.checkButton.element,
+    ]);
   }
 
   private createSourceLine(wordNum: number): void {
     const line = new SourceLine(wordNum, ['source-block']);
     this.sourceLine = line;
     this.puzzles = this.generatePuzzles(this.currentSentence);
+    this.puzzles.sort(() => Math.random() - 0.5);
     for (let i = 0; i < this.wordNum; i += 1) {
       this.sourceLine.emptyPlaces[i].append(this.puzzles[i].element);
     }
@@ -82,10 +92,7 @@ export default class GameBoard extends BaseComponent {
   }
 
   private generatePuzzles(phrase: string): Puzzle[] {
-    return phrase
-      .split(' ')
-      .map((word) => new Puzzle(word, this.currentSentenceIndex))
-      .sort(() => Math.random() - 0.5);
+    return phrase.split(' ').map((word) => new Puzzle(word, this.currentSentenceIndex));
   }
 
   private puzzleClickHandler(resultArea: HTMLElement): void {
@@ -113,6 +120,7 @@ export default class GameBoard extends BaseComponent {
           }
 
           this.toggleContinueButton(this.checkWordSequence());
+          this.toggleCheckButton();
         }
       });
     });
@@ -220,4 +228,26 @@ export default class GameBoard extends BaseComponent {
     });
     this.children[1] = this.sourceLine.element;
   }
+
+  private toggleCheckButton(): void {
+    if (this.wordSequence.includes('0') || this.wordSequence.length < this.wordNum) {
+      this.checkButton.addClass('disabled');
+    } else {
+      this.checkButton.removeClass('disabled');
+    }
+  }
+
+  public checkButtonClickHandler = (): void => {
+    this.wordSequence.forEach((word, index) => {
+      const currentPuzzleElement = this.resultLine.element.children[index].firstChild;
+
+      if (currentPuzzleElement && currentPuzzleElement instanceof HTMLElement) {
+        if (word === this.currentSentence[index]) {
+          currentPuzzleElement.classList.add('correct');
+        } else {
+          currentPuzzleElement.classList.add('wrong');
+        }
+      }
+    });
+  };
 }
