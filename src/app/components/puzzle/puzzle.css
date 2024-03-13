@@ -35,6 +35,25 @@
   transition: background-color 0.3s ease;
 }
 
+.empty-place:not(:first-child):has(.puzzle-item.wrong) .puzzle-item::before {
+  background-color: #d79b9b;
+  &:hover {
+    background-color: #e85f5f;
+  }
+}
+
+.empty-place:not(:first-child):has(.puzzle-item.wrong):hover .puzzle-item::before {
+  background-color: #e85f5f;
+}
+
+.empty-place:not(:first-child):has(.puzzle-item.correct) .puzzle-item::before {
+  background-color: #54b59e;
+}
+
+.empty-place:not(:first-child):has(.puzzle-item.correct):hover .puzzle-item::before {
+  background-color: var(--btn-bg-default);
+}
+
 .empty-place:not(:first-child):hover .puzzle-item::before {
   content: '';
   display: block;
@@ -57,4 +76,18 @@
   top: 15px;
   right: -11px;
   position: absolute;
+}
+
+.puzzle-item.wrong {
+  background-color: #d79b9b;
+  &:hover {
+    background-color: #e85f5f;
+  }
+}
+
+.puzzle-item.correct {
+  background-color: #54b59e;
+  &:hover {
+    background-color: var(--btn-bg-default);
+  }
 }
