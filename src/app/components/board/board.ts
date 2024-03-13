@@ -65,18 +65,15 @@ export default class GameBoard extends BaseComponent {
 
   private createGameBoard(): void {
     const resultsWrapper = div(['result-block-wrapper']);
+    const buttonsWrapper = div(['buttons-wrapper']);
+    buttonsWrapper.appendChildren([this.continueButton.element, this.checkButton.element]);
 
     this.createSourceLine(this.wordNum);
     this.continueButtonClickHandler();
     this.resultLines.forEach((line) => {
       resultsWrapper.append(line.element);
     });
-    this.appendChildren([
-      resultsWrapper.element,
-      this.sourceLine.element,
-      this.continueButton.element,
-      this.checkButton.element,
-    ]);
+    this.appendChildren([resultsWrapper.element, this.sourceLine.element, buttonsWrapper.element]);
   }
 
   private createSourceLine(wordNum: number): void {
