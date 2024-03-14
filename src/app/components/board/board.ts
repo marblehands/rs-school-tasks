@@ -98,7 +98,7 @@ export default class GameBoard extends BaseComponent {
   }
 
   private generatePuzzles(phrase: string): Puzzle[] {
-    return phrase.split(' ').map((word) => new Puzzle(word, this.currentSentenceIndex));
+    return phrase.split(' ').map((word) => new Puzzle(word, this.currentSentence, this.currentSentenceIndex));
   }
 
   private puzzleClickHandler(resultArea: HTMLElement): void {

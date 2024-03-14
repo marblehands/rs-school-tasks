@@ -3,7 +3,7 @@ import BaseComponent from '../../baseComponent/baseComponent';
 import { div } from '../../tags/tags';
 
 const LINE_MAX_WIDTH = 800;
-const LINE_MIN_WIDTH = 658; // TO DO Find out with the formula, why it counts like 658
+const LINE_MIN_WIDTH = 680; // TO DO Find out with the formula, why it counts like 658
 
 export default class BaseLine extends BaseComponent {
   public emptyPlaces: BaseComponent[];
@@ -38,7 +38,7 @@ export default class BaseLine extends BaseComponent {
 
   private setLineWidth(): void {
     const windowSize = window.innerWidth;
-    this.width = windowSize > 840 ? LINE_MAX_WIDTH + 16 : LINE_MIN_WIDTH + 16;
+    this.width = windowSize > 840 ? LINE_MAX_WIDTH : LINE_MIN_WIDTH;
   }
 
   private handleResize(): void {

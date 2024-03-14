@@ -5,7 +5,9 @@ enum Routes {
 }
 
 export function isRoute(value: string): value is Routes {
-  return value in Routes;
+  const routes: string[] = Object.values(Routes);
+
+  return Object.values(routes).includes(value);
 }
 
 export default Routes;
