@@ -6,7 +6,8 @@ import Puzzle from '../puzzle/puzzleItem';
 import GetData from '../../helpers/getData';
 import LevelResults from './resultLines';
 import ContinueButton from '../continueButton/continueButton';
-import CheckButton from './checkButton/checkButton';
+import CheckButton from '../checkButton/checkButton';
+import AutoCompleteButton from '../autoCompleteButton/autoCompleteButton';
 
 import type ResultLine from './resultLine/resultLine';
 
@@ -41,6 +42,8 @@ export default class GameBoard extends BaseComponent {
 
   private checkButton: CheckButton;
 
+  private autoCompleteButton: AutoCompleteButton;
+
   constructor() {
     super({ tag: 'div', classes: ['game-wrapper'] });
     // this.level = 1;
@@ -58,6 +61,7 @@ export default class GameBoard extends BaseComponent {
     this.puzzles = this.generatePuzzles(this.currentSentence);
     this.continueButton = new ContinueButton();
     this.checkButton = new CheckButton(this.checkButtonClickHandler);
+    this.autoCompleteButton = new AutoCompleteButton(this.autoCompleteButtonClickHandler);
     this.createGameBoard();
     this.isEmptyPlaceInResult = Array<number>(this.wordNum).fill(1);
     this.isEmptyPlaceInSource = Array<number>(this.wordNum).fill(0);
@@ -66,7 +70,11 @@ export default class GameBoard extends BaseComponent {
   private createGameBoard(): void {
     const resultsWrapper = div(['result-block-wrapper']);
     const buttonsWrapper = div(['buttons-wrapper']);
-    buttonsWrapper.appendChildren([this.continueButton.element, this.checkButton.element]);
+    buttonsWrapper.appendChildren([
+      this.continueButton.element,
+      this.checkButton.element,
+      this.autoCompleteButton.element,
+    ]);
 
     this.createSourceLine(this.wordNum);
     this.continueButtonClickHandler();
@@ -80,9 +88,10 @@ export default class GameBoard extends BaseComponent {
     const line = new SourceLine(wordNum, ['source-block']);
     this.sourceLine = line;
     this.puzzles = this.generatePuzzles(this.currentSentence);
-    this.puzzles.sort(() => Math.random() - 0.5);
+    const copyPuzzles = this.puzzles.slice();
+    copyPuzzles.sort(() => Math.random() - 0.5);
     for (let i = 0; i < this.wordNum; i += 1) {
-      this.sourceLine.emptyPlaces[i].append(this.puzzles[i].element);
+      this.sourceLine.emptyPlaces[i].append(copyPuzzles[i].element);
     }
 
     this.puzzleClickHandler(this.resultLine.element);
@@ -275,4 +284,17 @@ export default class GameBoard extends BaseComponent {
       }
     });
   }
+
+  public autoCompleteButtonClickHandler = (): void => {
+    this.resultLine.emptyPlaces.forEach((empty, index) => {
+      empty.element.firstChild?.remove();
+      empty.append(this.puzzles[index].element);
+      this.wordSequence = this.currentSentence.split(' ');
+      this.isEmptyPlaceInResult = Array<number>(this.wordNum).fill(0);
+      this.isEmptyPlaceInSource = Array<number>(this.wordNum).fill(1);
+      this.toggleContinueButton();
+      this.toggleCheckButton();
+      this.handleCheckButtonState();
+    });
+  };
 }

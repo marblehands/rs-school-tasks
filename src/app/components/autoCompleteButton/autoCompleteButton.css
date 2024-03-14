@@ -1,4 +1,4 @@
-.button-check {
+.button-autocomplete {
   padding: 12px 24px;
   font:
     500 14px/20px Poppins,
@@ -12,10 +12,11 @@
   }
 }
 
-.button-check.disabled {
-  opacity: 0.5;
-  user-select: none;
+.button-autocomplete.disabled {
   cursor: default;
+  user-select: none;
+  opacity: 0.5;
+
   &:hover {
     color: var(--btn-text-default);
     background-color: var(--btn-bg-default);
