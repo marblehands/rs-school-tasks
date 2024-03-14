@@ -1,5 +1,5 @@
 import './checkButton.css';
-import BaseComponent from '../../baseComponent/baseComponent';
+import BaseComponent from '../baseComponent/baseComponent';
 
 export default class CheckButton extends BaseComponent {
   constructor(private checkButtonClickHandler: () => void) {
