@@ -12,8 +12,6 @@ import AutoCompleteButton from '../autoCompleteButton/autoCompleteButton';
 import type ResultLine from './resultLine/resultLine';
 
 export default class GameBoard extends BaseComponent {
-  // private level: number;
-
   private round: number;
 
   private currentSentenceIndex: number;
@@ -46,14 +44,13 @@ export default class GameBoard extends BaseComponent {
 
   constructor() {
     super({ tag: 'div', classes: ['game-wrapper'] });
-    // this.level = 1;
     this.round = 0;
     this.currentSentenceIndex = 0;
     const data = new GetData(this.round);
     this.allSentence = data.sentences;
     this.currentSentence = data.sentences[this.currentSentenceIndex];
     this.wordSequence = [];
-    const levelResults = new LevelResults(this.allSentence, this.round);
+    const levelResults = new LevelResults(this.allSentence);
     this.resultLines = levelResults.resultLines;
     this.resultLine = this.resultLines[this.currentSentenceIndex];
     this.wordNum = this.currentSentence.split(' ').length;
@@ -227,7 +224,7 @@ export default class GameBoard extends BaseComponent {
   }
 
   private replaceResultLines(): void {
-    const levelResults = new LevelResults(this.allSentence, this.round);
+    const levelResults = new LevelResults(this.allSentence);
     this.resultLines = levelResults.resultLines;
     const currentResultLines = this.children[0].children;
     Array.from(currentResultLines).forEach((line) => {
@@ -297,26 +294,4 @@ export default class GameBoard extends BaseComponent {
       this.handleCheckButtonState();
     });
   };
-
-  private dragOverHandler(): void {
-    this.resultLine.emptyPlaces.forEach((item) => {
-      item.element.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        const puzzle = document.querySelector('.dragging');
-
-        if (
-          e.target &&
-          e.target instanceof HTMLElement &&
-          puzzle &&
-          e.target.classList.contains(`level${this.round}`)
-        ) {
-          e.target.append(puzzle);
-        }
-      });
-    });
-  }
-
-  // private calculateBackgroundPositions() {
-  //   this.puzzles.forEach(());
-  // }
 }
