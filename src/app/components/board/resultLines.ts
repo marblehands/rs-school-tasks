@@ -17,11 +17,10 @@ export default class LevelResults extends BaseComponent {
   }
 
   private generateResultLines(): void {
-    let count = 0;
     this.sentences.forEach((sentence: string) => {
       const wordNum = sentence.split(' ').length;
-      const resultLine = new ResultLine(wordNum, count, ['result-block']);
-      count += 1;
+      const resultLine = new ResultLine(wordNum, this.round, ['result-block']);
+      this.round += 1;
       this.resultLines.push(resultLine);
     });
   }

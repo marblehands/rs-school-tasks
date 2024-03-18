@@ -297,26 +297,4 @@ export default class GameBoard extends BaseComponent {
       this.handleCheckButtonState();
     });
   };
-
-  private dragOverHandler(): void {
-    this.resultLine.emptyPlaces.forEach((item) => {
-      item.element.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        const puzzle = document.querySelector('.dragging');
-
-        if (
-          e.target &&
-          e.target instanceof HTMLElement &&
-          puzzle &&
-          e.target.classList.contains(`level${this.round}`)
-        ) {
-          e.target.append(puzzle);
-        }
-      });
-    });
-  }
-
-  // private calculateBackgroundPositions() {
-  //   this.puzzles.forEach(());
-  // }
 }
