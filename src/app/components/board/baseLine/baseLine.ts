@@ -3,7 +3,7 @@ import BaseComponent from '../../baseComponent/baseComponent';
 import { div } from '../../tags/tags';
 
 const LINE_MAX_WIDTH = 800;
-const LINE_MIN_WIDTH = 658; // TO DO Find out with the formula, why it counts like 658
+const LINE_MIN_WIDTH = 680; // TO DO Find out with the formula, why it counts like 658
 
 export default class BaseLine extends BaseComponent {
   public emptyPlaces: BaseComponent[];
@@ -12,8 +12,12 @@ export default class BaseLine extends BaseComponent {
 
   private wordsNum: number;
 
-  constructor(wordsNum: number, classes: string[]) {
+  private round: number;
+
+  constructor(wordsNum: number, round: number, classes: string[]) {
     super({ tag: 'div', classes: [...classes] });
+    this.round = round;
+    this.addClass(`level${round}`);
     this.wordsNum = wordsNum;
     this.width = LINE_MAX_WIDTH;
     this.setLineWidth();
@@ -30,6 +34,7 @@ export default class BaseLine extends BaseComponent {
 
     while (count) {
       const shadow = div(['empty-place']);
+      shadow.addClass(`level${this.round}`);
       this.emptyPlaces.push(shadow);
       this.element.append(shadow.element);
       count -= 1;
@@ -38,7 +43,7 @@ export default class BaseLine extends BaseComponent {
 
   private setLineWidth(): void {
     const windowSize = window.innerWidth;
-    this.width = windowSize > 840 ? LINE_MAX_WIDTH + 16 : LINE_MIN_WIDTH + 16;
+    this.width = windowSize > 840 ? LINE_MAX_WIDTH : LINE_MIN_WIDTH;
   }
 
   private handleResize(): void {

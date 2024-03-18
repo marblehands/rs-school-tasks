@@ -1,7 +1,8 @@
 .result-block {
-  height: 46px;
   display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 2px;
+  align-items: center;
+  justify-content: center;
+
+  height: 46px;
 }

@@ -53,11 +53,11 @@ export default class GameBoard extends BaseComponent {
     this.allSentence = data.sentences;
     this.currentSentence = data.sentences[this.currentSentenceIndex];
     this.wordSequence = [];
-    const levelResults = new LevelResults(this.allSentence);
+    const levelResults = new LevelResults(this.allSentence, this.round);
     this.resultLines = levelResults.resultLines;
     this.resultLine = this.resultLines[this.currentSentenceIndex];
     this.wordNum = this.currentSentence.split(' ').length;
-    this.sourceLine = new SourceLine(this.wordNum, ['source-block']);
+    this.sourceLine = new SourceLine(this.wordNum, this.round, ['source-block']);
     this.puzzles = this.generatePuzzles(this.currentSentence);
     this.continueButton = new ContinueButton();
     this.checkButton = new CheckButton(this.checkButtonClickHandler);
@@ -85,7 +85,7 @@ export default class GameBoard extends BaseComponent {
   }
 
   private createSourceLine(wordNum: number): void {
-    const line = new SourceLine(wordNum, ['source-block']);
+    const line = new SourceLine(wordNum, this.round, ['source-block']);
     this.sourceLine = line;
     this.puzzles = this.generatePuzzles(this.currentSentence);
     const copyPuzzles = this.puzzles.slice();
@@ -98,7 +98,7 @@ export default class GameBoard extends BaseComponent {
   }
 
   private generatePuzzles(phrase: string): Puzzle[] {
-    return phrase.split(' ').map((word) => new Puzzle(word, this.currentSentenceIndex));
+    return phrase.split(' ').map((word) => new Puzzle(word, this.currentSentence, this.currentSentenceIndex));
   }
 
   private puzzleClickHandler(resultArea: HTMLElement): void {
@@ -227,7 +227,7 @@ export default class GameBoard extends BaseComponent {
   }
 
   private replaceResultLines(): void {
-    const levelResults = new LevelResults(this.allSentence);
+    const levelResults = new LevelResults(this.allSentence, this.round);
     this.resultLines = levelResults.resultLines;
     const currentResultLines = this.children[0].children;
     Array.from(currentResultLines).forEach((line) => {
@@ -297,4 +297,26 @@ export default class GameBoard extends BaseComponent {
       this.handleCheckButtonState();
     });
   };
+
+  private dragOverHandler(): void {
+    this.resultLine.emptyPlaces.forEach((item) => {
+      item.element.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        const puzzle = document.querySelector('.dragging');
+
+        if (
+          e.target &&
+          e.target instanceof HTMLElement &&
+          puzzle &&
+          e.target.classList.contains(`level${this.round}`)
+        ) {
+          e.target.append(puzzle);
+        }
+      });
+    });
+  }
+
+  // private calculateBackgroundPositions() {
+  //   this.puzzles.forEach(());
+  // }
 }
