@@ -12,8 +12,6 @@ import AutoCompleteButton from '../autoCompleteButton/autoCompleteButton';
 import type ResultLine from './resultLine/resultLine';
 
 export default class GameBoard extends BaseComponent {
-  // private level: number;
-
   private round: number;
 
   private currentSentenceIndex: number;
@@ -46,7 +44,6 @@ export default class GameBoard extends BaseComponent {
 
   constructor() {
     super({ tag: 'div', classes: ['game-wrapper'] });
-    // this.level = 1;
     this.round = 0;
     this.currentSentenceIndex = 0;
     const data = new GetData(this.round);
@@ -192,8 +189,6 @@ export default class GameBoard extends BaseComponent {
 
   private continueButtonClickHandler(): void {
     this.continueButton.element.addEventListener('click', () => {
-      // console.log(this.checkWordSequence());
-
       if (this.checkWordSequence()) {
         if (this.currentSentenceIndex === this.allSentence.length - 1) {
           this.round += 1;

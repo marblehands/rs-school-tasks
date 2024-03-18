@@ -29,7 +29,6 @@ export default class StartPageView extends BaseComponent {
       ['greeting-info'],
       'Welcome to the "English Puzzle" game! Improve your English skills by solving puzzles to form sentences. Ready to start learning? Press "Start"!',
     );
-    // const logOutButton
     const startImage = div(['start-img']);
     const bgImage1 = div(['bg-wave']);
     const bgImage2 = div(['start-bg']);

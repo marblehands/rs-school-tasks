@@ -5,8 +5,6 @@ import type { Data } from '../data/interfaces';
 export default class GetData {
   private data: Data;
 
-  // private level: number;
-
   private round: number;
 
   public sentences: string[];
