@@ -6,12 +6,9 @@ export default class LevelResults extends BaseComponent {
 
   public resultLines: ResultLine[];
 
-  private round: number;
-
-  constructor(sentences: string[], round: number) {
+  constructor(sentences: string[]) {
     super({ tag: 'div' });
     this.sentences = sentences;
-    this.round = round;
     this.resultLines = [];
     this.generateResultLines();
   }

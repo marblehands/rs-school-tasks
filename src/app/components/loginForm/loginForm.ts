@@ -18,10 +18,6 @@ export default class LoginForm extends BaseComponent {
 
   public labelSurname = label(LABEL_SURNAME.classes, LABEL_SURNAME.content, LABEL_SURNAME.attributes);
 
-  // private isNameNotEmpty: boolean;
-
-  // private isSurnameNotEmpty: boolean;
-
   private isFormValid: boolean;
 
   constructor(
@@ -29,8 +25,6 @@ export default class LoginForm extends BaseComponent {
     private renderLogOut: () => void,
   ) {
     super(FORM);
-    // this.isNameNotEmpty = false;
-    // this.isSurnameNotEmpty = false;
     this.isFormValid = false;
     this.addListeners();
     this.createLoginForm();
