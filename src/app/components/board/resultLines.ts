@@ -6,18 +6,22 @@ export default class LevelResults extends BaseComponent {
 
   public resultLines: ResultLine[];
 
-  constructor(sentences: string[]) {
+  private round: number;
+
+  constructor(sentences: string[], round: number) {
     super({ tag: 'div' });
     this.sentences = sentences;
+    this.round = round;
     this.resultLines = [];
     this.generateResultLines();
   }
 
   private generateResultLines(): void {
+    let count = 0;
     this.sentences.forEach((sentence: string) => {
       const wordNum = sentence.split(' ').length;
-      const resultLine = new ResultLine(wordNum, ['result-block']);
-      resultLine.setAttribute('draggable', 'true');
+      const resultLine = new ResultLine(wordNum, count, ['result-block']);
+      count += 1;
       this.resultLines.push(resultLine);
     });
   }
