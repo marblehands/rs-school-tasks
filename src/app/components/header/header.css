@@ -1,0 +1,13 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav {
+  display: flex;
+  gap: 0.5em;
+}
+
+.button {
+  cursor: pointer;
+}

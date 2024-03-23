@@ -1,3 +1,4 @@
+import './car.css';
 import BaseComponent from '../baseComponent/baseComponent';
 import { div, span } from '../tags/tags';
 
@@ -11,7 +12,7 @@ export default class Car extends BaseComponent {
   public id: number;
 
   constructor(options: CarOptions) {
-    super({ tag: 'div', classes: ['car__wrapper'] });
+    super({ tag: 'div', classes: ['car-wrapper'] });
     this.color = options.color;
     this.name = options.name;
     this.id = options.id;
@@ -19,7 +20,7 @@ export default class Car extends BaseComponent {
   }
 
   private createCar(): void {
-    const wrapper = div(['car-wrapper']);
+    const wrapper = div(['car']);
     wrapper.setAttribute('id', `${this.id}`);
     const name = span(['car-name'], this.name);
     const svg = div(['car-svg-wrapper']);

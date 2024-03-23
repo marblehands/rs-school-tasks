@@ -1,3 +1,4 @@
+import './main.css';
 import BaseComponent from '../baseComponent/baseComponent';
 
 export default class Main extends BaseComponent {

@@ -1,3 +1,4 @@
+import './garage.css';
 import BaseComponent from '../baseComponent/baseComponent';
 import { p } from '../tags/tags';
 import { getCar } from '../../api/api';

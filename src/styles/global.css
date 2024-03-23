@@ -3,3 +3,13 @@
   margin: 0;
   padding: 0;
 }
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  justify-content: flex-start;
+
+  height: 100vh;
+  padding: 2em;
+}

@@ -1,3 +1,4 @@
+import './header.css';
 import BaseComponent from '../baseComponent/baseComponent';
 import { div, p } from '../tags/tags';
 import Routes from '../../services/router/types';
