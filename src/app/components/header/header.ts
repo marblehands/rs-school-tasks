@@ -1,15 +1,32 @@
 import BaseComponent from '../baseComponent/baseComponent';
-import { button, div, p } from '../tags/tags';
+import { div, p } from '../tags/tags';
+import Routes from '../../services/router/types';
 
 export default class Header extends BaseComponent {
   public buttonGarage: BaseComponent;
 
   public buttonWinners: BaseComponent;
 
-  constructor() {
+  constructor(private navigateTo: (location: Routes) => void) {
     super({ tag: 'header', classes: ['header'] });
-    this.buttonGarage = button(['button', 'button-garage'], 'Garage', { type: 'button' });
-    this.buttonWinners = button(['button', 'button-winners'], 'Garage', { type: 'button' });
+    this.buttonGarage = new BaseComponent({
+      tag: 'button',
+      classes: ['button', 'button-garage'],
+      content: 'Garage',
+      event: 'click',
+      callback: (): void => {
+        this.navigateTo(Routes.GARAGE);
+      },
+    });
+    this.buttonWinners = new BaseComponent({
+      tag: 'button',
+      classes: ['button', 'button-winners'],
+      content: 'Winners',
+      event: 'click',
+      callback: (): void => {
+        this.navigateTo(Routes.WINNERS);
+      },
+    });
     this.createHeader();
   }
 
