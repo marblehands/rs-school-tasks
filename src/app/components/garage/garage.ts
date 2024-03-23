@@ -7,13 +7,19 @@ import Car from '../car/car';
 export default class Garage extends BaseComponent {
   private cars: Car[];
 
+  private carsNum: number;
+
   constructor() {
     super({ tag: 'div', classes: ['garage__wrapper'] });
-    this.createGarage();
     this.cars = [];
-    this.loadCars().catch((error) => {
-      console.error(error);
-    });
+    this.carsNum = 0;
+    this.loadCars()
+      .then(() => {
+        this.renderGarageInfo();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   private async loadCars(): Promise<void> {
@@ -21,14 +27,15 @@ export default class Garage extends BaseComponent {
       const carsData = await getCar();
       this.cars = carsData.map((carData) => new Car(carData));
       this.renderCars();
+      this.carsNum = this.cars.length;
     } catch (error) {
       console.error(error);
     }
   }
 
-  private createGarage(): void {
-    const text = p(['headline2'], 'Garage');
-    this.append(text.element);
+  private renderGarageInfo(): void {
+    const text = p(['headline2'], `Garage: ${this.carsNum}`);
+    this.prepend(text.element);
   }
 
   private renderCars(): void {

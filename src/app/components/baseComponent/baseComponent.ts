@@ -60,6 +60,11 @@ export default class BaseComponent {
     this.element.append(child);
   }
 
+  public prepend(child: HTMLElement): void {
+    this.children.push(child);
+    this.element.prepend(child);
+  }
+
   public appendChildren(children: HTMLElement[]): void {
     this.children.push(...children);
 
