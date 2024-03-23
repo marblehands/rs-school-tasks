@@ -1,3 +1,4 @@
+import '../styles/global.css';
 import Router from './services/router/router';
 import Routes from './services/router/types';
 import Header from './components/header/header';
