@@ -1,5 +1,6 @@
 import BaseComponent from '../baseComponent/baseComponent';
 import { p } from '../tags/tags';
+import { getCar } from '../../api/api';
 
 export default class Garage extends BaseComponent {
   constructor() {
@@ -10,5 +11,6 @@ export default class Garage extends BaseComponent {
   private createGarage(): void {
     const text = p(['headline2'], 'Garage');
     this.append(text.element);
+    getCar();
   }
 }
