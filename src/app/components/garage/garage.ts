@@ -5,10 +5,10 @@ import { createCar, getCar } from '../../api/api';
 import Car from '../car/car';
 import { generate100Cars } from '../../utils/generateCars';
 
+import type { CarOptions } from '../car/types';
+
 export default class Garage extends BaseComponent {
   private cars: Car[];
-
-  private currentId: number;
 
   private carsNum: number;
 
@@ -20,17 +20,8 @@ export default class Garage extends BaseComponent {
     super({ tag: 'div', classes: ['garage__wrapper'] });
     this.cars = [];
     this.carsNum = 0;
-    this.currentId = 0;
     this.createGenerateButton();
-    this.loadCars()
-      .then(() => {
-        this.renderCars();
-        this.updateCarsNumAndCarsId();
-        this.createGarageInfoElement();
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    this.initGarage();
   }
 
   private createGenerateButton(): void {
@@ -50,6 +41,7 @@ export default class Garage extends BaseComponent {
     try {
       const carsData = await getCar();
       this.cars = carsData.map((carData) => new Car(carData));
+      this.carsNum = this.cars.length;
     } catch (error) {
       console.error(error);
     }
@@ -61,35 +53,47 @@ export default class Garage extends BaseComponent {
     });
   }
 
+  private initGarage(): void {
+    this.loadCars()
+      .then(() => {
+        this.renderCars();
+        this.createGarageInfoElement();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   private createGarageInfoElement(): void {
     this.garageInfoElement = p(['headline2'], `Garage: ${this.carsNum}`);
     this.prepend(this.garageInfoElement.element);
   }
 
   private updateGarageInfoElement(): void {
+    this.carsNum = this.cars.length;
     this.garageInfoElement.element.textContent = `Garage: ${this.carsNum}`;
   }
 
-  private add100Cars(): void {
-    const cars = generate100Cars(this.currentId);
-    cars.forEach((data) => {
-      const car = new Car(data);
-      createCar(car.name, car.color).catch((error) => {
-        console.error(error);
-      });
-      this.cars.push(car);
-    });
+  private async add100Cars(): Promise<void> {
+    const cars = generate100Cars();
+
+    await Promise.all(
+      cars.map(async (data) => {
+        const carData: CarOptions = await createCar(data.name, data.color);
+        const car = new Car(carData);
+        this.cars.push(car);
+      }),
+    );
   }
 
   private generateCarsButtonClickHandler(): void {
-    this.add100Cars();
-    this.renderCars();
-    this.updateCarsNumAndCarsId();
-    this.updateGarageInfoElement();
-  }
-
-  private updateCarsNumAndCarsId(): void {
-    this.carsNum = this.cars.length;
-    this.currentId = this.carsNum + 1;
+    this.add100Cars()
+      .then(() => {
+        this.renderCars();
+        this.updateGarageInfoElement();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
 }
