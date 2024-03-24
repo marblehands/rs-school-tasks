@@ -1,0 +1,20 @@
+.track {
+  position: relative;
+  margin: 1em 0;
+}
+
+.road {
+  width: 100%;
+  border-bottom: 2px solid black;
+}
+
+.finish {
+  position: absolute;
+  right: 0.5em;
+  bottom: 0.5em;
+
+  width: 32px;
+  height: 32px;
+
+  background: url("../../../assets/finish.svg") center/cover no-repeat;
+}

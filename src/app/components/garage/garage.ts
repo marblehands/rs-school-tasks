@@ -3,12 +3,15 @@ import BaseComponent from '../baseComponent/baseComponent';
 import { p } from '../tags/tags';
 import { createCar, getCar } from '../../api/api';
 import Car from '../car/car';
+import Track from '../track/track';
 import { generate100Cars } from '../../utils/generateCars';
 
 import type { CarOptions } from '../car/types';
 
 export default class Garage extends BaseComponent {
   private cars: Car[];
+
+  private tracks: Track[];
 
   private carsNum: number;
 
@@ -19,6 +22,7 @@ export default class Garage extends BaseComponent {
   constructor() {
     super({ tag: 'div', classes: ['garage__wrapper'] });
     this.cars = [];
+    this.tracks = [];
     this.carsNum = 0;
     this.createGenerateButton();
     this.initGarage();
@@ -49,7 +53,9 @@ export default class Garage extends BaseComponent {
 
   private renderCars(): void {
     this.cars.forEach((car) => {
-      this.append(car.element);
+      const track = new Track(car);
+      this.tracks.push(track);
+      this.append(track.element);
     });
   }
 
