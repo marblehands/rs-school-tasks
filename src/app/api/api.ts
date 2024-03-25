@@ -4,7 +4,7 @@ export function getCar(): Promise<CarOptions[]> {
   return fetch('http://127.0.0.1:3000/garage/')
     .then((response) => {
       if (!response.ok) {
-        throw new Error('error');
+        throw new Error(`getCar is not successful ${response.status}`);
       }
 
       // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
@@ -12,7 +12,7 @@ export function getCar(): Promise<CarOptions[]> {
     })
     .catch((error) => {
       console.error(error);
-      throw new Error('error');
+      throw new Error();
     });
 }
 
@@ -29,7 +29,7 @@ export function createCar(name: string, color: string): Promise<CarOptions> {
   return fetch(url, options)
     .then((response) => {
       if (!response.ok) {
-        throw new Error('error');
+        throw new Error(`createCar is not successful ${response.status}`);
       }
 
       // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
@@ -37,7 +37,7 @@ export function createCar(name: string, color: string): Promise<CarOptions> {
     })
     .catch((error) => {
       console.error(error);
-      throw new Error('error');
+      throw new Error();
     });
 }
 
@@ -51,11 +51,11 @@ export function deleteCar(id: number): Promise<void> {
   return fetch(url, options)
     .then((response) => {
       if (!response.ok) {
-        throw new Error('error');
+        throw new Error(`deleteCar is not successful ${response.status}`);
       }
     })
     .catch((error) => {
       console.error(error);
-      throw new Error('error');
+      throw new Error();
     });
 }
