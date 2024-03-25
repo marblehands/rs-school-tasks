@@ -1,5 +1,6 @@
 import './track.css';
 import BaseComponent from '../baseComponent/baseComponent';
+import eventEmitter from '../../services/eventEmitter/eventEmitter';
 
 import type Car from '../car/car';
 
@@ -40,7 +41,10 @@ export default class Track extends BaseComponent {
       classes: ['button', 'button-delete'],
       content: 'Delete',
       event: 'click',
-      callback: (): void => {},
+      callback: (): void => {
+        eventEmitter.emit('delete', [this.car.id]);
+        this.destroy();
+      },
     });
     this.prepend(this.buttonDelete.element);
   }

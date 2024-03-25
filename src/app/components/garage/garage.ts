@@ -1,10 +1,12 @@
 import './garage.css';
 import BaseComponent from '../baseComponent/baseComponent';
-import { p } from '../tags/tags';
-import { createCar, getCar } from '../../api/api';
+import { div, p } from '../tags/tags';
+import { createCar, deleteCar, getCar } from '../../api/api';
 import Car from '../car/car';
 import Track from '../track/track';
 import { generate100Cars } from '../../utils/generateCars';
+import eventEmitter from '../../services/eventEmitter/eventEmitter';
+import Form from '../baseForm/form';
 
 import type { CarOptions } from '../car/types';
 
@@ -19,13 +21,39 @@ export default class Garage extends BaseComponent {
 
   private garageInfoElement!: BaseComponent;
 
+  private createCarForm!: BaseComponent;
+
+  private updateCarForm!: BaseComponent;
+
   constructor() {
-    super({ tag: 'div', classes: ['garage__wrapper'] });
+    super({ tag: 'div', classes: ['wrapper-garage'] });
     this.cars = [];
     this.tracks = [];
     this.carsNum = 0;
     this.createGenerateButton();
     this.initGarage();
+    this.subscribeDelete();
+    this.createEditCarAndCreateCarForms();
+  }
+
+  private subscribeDelete(): void {
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
+    eventEmitter.subscribe('delete', ([id]: number[]) => this.deleteCar(id));
+  }
+
+  private async deleteCar(id: number): Promise<void> {
+    try {
+      await deleteCar(id);
+      const index = this.cars.findIndex((car) => car.id === id);
+
+      if (index !== -1) {
+        this.cars.splice(index, 1);
+        this.tracks.splice(index, 1);
+        this.updateGarageInfoElement();
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   private createGenerateButton(): void {
@@ -101,5 +129,16 @@ export default class Garage extends BaseComponent {
       .catch((err) => {
         console.error(err);
       });
+  }
+
+  private createEditCarAndCreateCarForms(): void {
+    this.createCarForm = new Form('Create');
+    this.updateCarForm = new Form('Update');
+
+    const wrapper = div(['wrapper-forms']);
+
+    wrapper.appendChildren([this.createCarForm.element, this.updateCarForm.element]);
+
+    this.append(wrapper.element);
   }
 }

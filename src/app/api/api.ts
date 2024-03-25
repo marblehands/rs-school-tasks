@@ -40,3 +40,22 @@ export function createCar(name: string, color: string): Promise<CarOptions> {
       throw new Error('error');
     });
 }
+
+export function deleteCar(id: number): Promise<void> {
+  const url = `http://127.0.0.1:3000/garage/${id}`;
+
+  const options = {
+    method: 'DELETE',
+  };
+
+  return fetch(url, options)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('error');
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      throw new Error('error');
+    });
+}
