@@ -5,6 +5,9 @@ import Header from './components/header/header';
 import Main from './components/main/main';
 import Footer from './components/footer/footer';
 
+import type Garage from './components/garage/garage';
+import type Winners from './components/winners/winners';
+
 export default class App {
   private router: Router;
 
@@ -12,20 +15,23 @@ export default class App {
 
   private main: Main;
 
+  private garage: Garage | null;
+
+  private winners: Winners | null;
+
   private footer: Footer;
 
   constructor() {
     this.router = new Router(this.setMainContent);
     this.header = new Header(this.router.navigateTo);
     this.main = new Main();
+    this.garage = null;
+    this.winners = null;
     this.footer = new Footer();
   }
 
   public createApp(): void {
-    document.body.append(this.header.element);
-    document.body.append(this.main.element);
-    document.body.append(this.footer.element);
-
+    document.body.append(this.header.element, this.main.element, this.footer.element);
     this.router.handleLocation();
   }
 
@@ -33,13 +39,23 @@ export default class App {
     switch (location) {
       case Routes.WINNERS: {
         const { default: WINNERS } = await import('./components/winners/winners');
-        this.main.setContent(new WINNERS());
+
+        if (!this.winners) {
+          this.winners = new WINNERS();
+        }
+
+        this.main.setContent(this.winners);
         break;
       }
 
       default: {
         const { default: GARAGE } = await import('./components/garage/garage');
-        this.main.setContent(new GARAGE());
+
+        if (!this.garage) {
+          this.garage = new GARAGE();
+        }
+
+        this.main.setContent(this.garage);
         break;
       }
     }

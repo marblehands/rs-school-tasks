@@ -78,8 +78,11 @@ export default class Winners extends BaseComponent {
   // EventEmitter Subscriptions
 
   private addSubscribes(): void {
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    eventEmitter.subscribe('delete', ([id]: number[]) => this.deleteWinner(id));
+    eventEmitter.subscribe('delete', ([id]: number[]) => {
+      this.deleteWinner(id).catch((error) => {
+        console.error(error);
+      });
+    });
   }
 
   private async deleteWinner(id: number): Promise<void> {

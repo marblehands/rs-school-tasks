@@ -1,4 +1,4 @@
-class EventEmitter<T extends (...params: unknown[]) => void> {
+class EventEmitter<T extends (...params: Parameters<T>[]) => void> {
   private eventsMap: Record<string, T[]> = {};
 
   public subscribe(eventName: string, callback: T): void {
@@ -13,7 +13,7 @@ class EventEmitter<T extends (...params: unknown[]) => void> {
     this.eventsMap[eventName] = this.eventsMap[eventName].filter((cb) => cb !== callback);
   }
 
-  public emit(eventName: string, ...params: unknown[]): void {
+  public emit(eventName: string, ...params: Parameters<T>[]): void {
     this.eventsMap[eventName].forEach((cb) => {
       if (params.length) {
         cb(...params);

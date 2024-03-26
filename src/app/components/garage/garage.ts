@@ -33,14 +33,14 @@ export default class Garage extends BaseComponent {
     this.carsNum = 0;
     this.createGenerateButton();
     this.initGarage();
-    this.addSubscribes();
     this.createEditCarAndCreateCarForms();
+    this.addSubscribes();
   }
 
   // EventEmitter Subscriptions
 
   private addSubscribes(): void {
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises, @typescript-eslint/no-misused-promises
     eventEmitter.subscribe('delete', ([id]: number[]) => this.deleteCar(id));
     eventEmitter.subscribe('create', ([carName, carColor]: string[]) => {
       this.createCarButtonClickHandler(carName, carColor).catch((err) => {
