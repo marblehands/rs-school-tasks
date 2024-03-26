@@ -55,7 +55,9 @@ export default class Track extends BaseComponent {
       classes: ['button', 'button-edit'],
       content: 'Edit',
       event: 'click',
-      callback: (): void => {},
+      callback: (): void => {
+        eventEmitter.emit('editThisCar', [this.car.id, this.car.name, this.car.color]);
+      },
     });
     this.prepend(this.buttonEdit.element);
   }

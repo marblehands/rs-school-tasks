@@ -6,7 +6,8 @@ import Car from '../car/car';
 import Track from '../track/track';
 import { generate100Cars } from '../../utils/generateCars';
 import eventEmitter from '../../services/eventEmitter/eventEmitter';
-import Form from '../baseForm/form';
+import UpdateForm from '../updateForm/updateForm';
+import CreateForm from '../createForm/createForm';
 
 import type { CarOptions } from '../car/types';
 
@@ -150,8 +151,8 @@ export default class Garage extends BaseComponent {
   }
 
   private createEditCarAndCreateCarForms(): void {
-    this.createCarForm = new Form('Create');
-    this.updateCarForm = new Form('Update', false);
+    this.createCarForm = new CreateForm();
+    this.updateCarForm = new UpdateForm();
 
     const wrapper = div(['wrapper-forms']);
 

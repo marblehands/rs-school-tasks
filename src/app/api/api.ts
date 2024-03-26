@@ -59,3 +59,28 @@ export function deleteCar(id: number): Promise<void> {
       throw new Error();
     });
 }
+
+export function updateCar(id: number, name: string, color: string): Promise<CarOptions> {
+  const url = `http://127.0.0.1:3000/garage/${id}`;
+  const options = {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ name, color }),
+  };
+
+  return fetch(url, options)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`updateCar is not successful ${response.status}, car id: ${id}`);
+      }
+
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      return response.json() as Promise<CarOptions>;
+    })
+    .catch((error) => {
+      console.error(error);
+      throw new Error();
+    });
+}
