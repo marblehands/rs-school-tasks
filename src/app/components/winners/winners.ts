@@ -1,10 +1,11 @@
 import './winners.css';
-import { getCar, getWinners } from '../../api/api';
+import { deleteWinner, getCar, getWinners } from '../../api/api';
 import BaseComponent from '../baseComponent/baseComponent';
 import { p, tr } from '../tags/tags';
 import Winner from './winner';
 import Car from '../car/car';
 import WinnerRow from './winnerRow';
+import eventEmitter from '../../services/eventEmitter/eventEmitter';
 
 import type { WinnerObjOptions } from './types';
 
@@ -23,6 +24,7 @@ export default class Winners extends BaseComponent {
     this.winnersNum = 0;
     this.winnersRows = [];
     this.initWinners();
+    this.addSubscribes();
   }
 
   private async loadWinners(): Promise<void> {
@@ -68,10 +70,33 @@ export default class Winners extends BaseComponent {
     this.prepend(this.winnersInfoElement.element);
   }
 
-  // private updateWinnersInfoElement(): void {
-  //   this.winnersNum = this.winners.length;
-  //   this.winnersInfoElement.element.textContent = `Winners: ${this.winnersNum}`;
-  // }
+  private updateWinnersInfoElement(): void {
+    this.winnersNum = this.winners.length;
+    this.winnersInfoElement.element.textContent = `Winners: ${this.winnersNum}`;
+  }
+
+  // EventEmitter Subscriptions
+
+  private addSubscribes(): void {
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
+    eventEmitter.subscribe('delete', ([id]: number[]) => this.deleteWinner(id));
+  }
+
+  private async deleteWinner(id: number): Promise<void> {
+    try {
+      const index = this.winners.findIndex((winner) => winner.id === id);
+
+      if (index !== -1) {
+        await deleteWinner(id);
+        this.winners.splice(index, 1);
+        this.winnersRows[index].destroy();
+        this.winnersRows.splice(index, 1);
+        this.updateWinnersInfoElement();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   // View
 

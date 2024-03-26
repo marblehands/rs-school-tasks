@@ -121,3 +121,22 @@ export function getWinners(): Promise<WinnerOptions[]> {
       throw new Error();
     });
 }
+
+export function deleteWinner(id: number): Promise<void> {
+  const url = `http://127.0.0.1:3000/winners/${id}`;
+
+  const options = {
+    method: 'DELETE',
+  };
+
+  return fetch(url, options)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`deleteWinner is not successful ${response.status}`);
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      throw new Error();
+    });
+}

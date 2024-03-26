@@ -66,10 +66,10 @@ export default class Garage extends BaseComponent {
 
   private async deleteCar(id: number): Promise<void> {
     try {
-      await deleteCar(id);
       const index = this.cars.findIndex((car) => car.id === id);
 
       if (index !== -1) {
+        await deleteCar(id);
         this.cars.splice(index, 1);
         this.tracks.splice(index, 1);
         this.updateGarageInfoElement();
