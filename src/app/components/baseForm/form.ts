@@ -14,11 +14,13 @@ export default class Form extends BaseComponent {
 
   public currentColor!: string;
 
-  constructor(buttonContent: string) {
+  constructor(buttonContent: string, isDisabled: boolean = true) {
     super({ tag: 'form', classes: ['form', `${buttonContent.toLowerCase()}-form`] });
     this.inputName = input(['input-text'], { type: 'text', placeholder: 'Enter Car Name' });
     this.colorPicker = input(['input-text'], { type: 'color' });
     this.submitButton = button(['button', 'button-submit'], buttonContent, { type: 'submit' });
+
+    this.disable(isDisabled);
 
     if (this.inputName.element instanceof HTMLInputElement && this.colorPicker.element instanceof HTMLInputElement) {
       this.currentName = this.inputName.element.value;
@@ -31,6 +33,19 @@ export default class Form extends BaseComponent {
 
   private createForm(): void {
     this.appendChildren([this.inputName.element, this.colorPicker.element, this.submitButton.element]);
+  }
+
+  private disable(isDisabled: boolean): void {
+    if (
+      !isDisabled &&
+      this.inputName.element instanceof HTMLInputElement &&
+      this.colorPicker.element instanceof HTMLInputElement &&
+      this.submitButton.element instanceof HTMLButtonElement
+    ) {
+      this.inputName.element.disabled = true;
+      this.colorPicker.element.disabled = true;
+      this.submitButton.element.disabled = true;
+    }
   }
 
   private addEventListeners(): void {
@@ -46,7 +61,10 @@ export default class Form extends BaseComponent {
     });
     this.submitButton.addListener('click', (e) => {
       e.preventDefault();
-      eventEmitter.emit('create', [this.currentName, this.currentColor]);
+
+      if (this.currentName !== '' && this.currentColor !== '') {
+        eventEmitter.emit('create', [this.currentName, this.currentColor]);
+      }
     });
   }
 }

@@ -151,7 +151,7 @@ export default class Garage extends BaseComponent {
 
   private createEditCarAndCreateCarForms(): void {
     this.createCarForm = new Form('Create');
-    this.updateCarForm = new Form('Update');
+    this.updateCarForm = new Form('Update', false);
 
     const wrapper = div(['wrapper-forms']);
 
