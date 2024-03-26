@@ -15,7 +15,7 @@ export default class Car extends BaseComponent {
 
   public nameElement: BaseComponent;
 
-  private svg: BaseComponent;
+  public svg: BaseComponent;
 
   constructor(options: CarOptions) {
     super({ tag: 'div', classes: ['car-wrapper'] });

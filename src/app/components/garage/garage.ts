@@ -1,7 +1,7 @@
 import './garage.css';
 import BaseComponent from '../baseComponent/baseComponent';
 import { div, p } from '../tags/tags';
-import { createCar, deleteCar, getCar } from '../../api/api';
+import { createCar, deleteCar, getCars } from '../../api/api';
 import Car from '../car/car';
 import Track from '../track/track';
 import { generate100Cars } from '../../utils/generateCars';
@@ -54,7 +54,7 @@ export default class Garage extends BaseComponent {
 
   private async loadCars(): Promise<void> {
     try {
-      const carsData = await getCar();
+      const carsData = await getCars();
       this.cars = carsData.map((carData) => new Car(carData));
       this.carsNum = this.cars.length;
     } catch (error) {

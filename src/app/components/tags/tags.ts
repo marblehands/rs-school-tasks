@@ -26,3 +26,8 @@ export const label = (classes: string[], content: string, attributes: Record<str
 
 export const button = (classes: string[], content: string, attributes: Record<string, string>): BaseComponent =>
   new BaseComponent({ tag: 'button', classes, content, attributes });
+
+export const tr = (classes?: string[]): BaseComponent => new BaseComponent({ tag: 'tr', classes });
+
+export const td = (content: string, classes?: string[]): BaseComponent =>
+  new BaseComponent({ tag: 'td', classes, content });

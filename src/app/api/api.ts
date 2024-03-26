@@ -1,14 +1,33 @@
 import type { CarOptions } from '../components/car/types';
+import type { WinnerOptions } from '../components/winners/types';
 
-export function getCar(): Promise<CarOptions[]> {
+// Cars
+
+export function getCars(): Promise<CarOptions[]> {
   return fetch('http://127.0.0.1:3000/garage/')
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`getCars is not successful ${response.status}`);
+      }
+
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      return response.json() as Promise<CarOptions[]>;
+    })
+    .catch((error) => {
+      console.error(error);
+      throw new Error();
+    });
+}
+
+export function getCar(id: number): Promise<CarOptions> {
+  return fetch(`http://127.0.0.1:3000/garage/${id}`)
     .then((response) => {
       if (!response.ok) {
         throw new Error(`getCar is not successful ${response.status}`);
       }
 
       // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-      return response.json() as Promise<CarOptions[]>;
+      return response.json() as Promise<CarOptions>;
     })
     .catch((error) => {
       console.error(error);
@@ -78,6 +97,24 @@ export function updateCar(id: number, name: string, color: string): Promise<CarO
 
       // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       return response.json() as Promise<CarOptions>;
+    })
+    .catch((error) => {
+      console.error(error);
+      throw new Error();
+    });
+}
+
+// Winners
+
+export function getWinners(): Promise<WinnerOptions[]> {
+  return fetch('http://127.0.0.1:3000/winners/')
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`getWinners is not successful ${response.status}`);
+      }
+
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      return response.json() as Promise<WinnerOptions[]>;
     })
     .catch((error) => {
       console.error(error);
