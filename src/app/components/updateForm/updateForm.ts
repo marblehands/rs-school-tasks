@@ -2,10 +2,14 @@ import eventEmitter from '../../services/eventEmitter/eventEmitter';
 import Form from '../baseForm/form';
 
 export default class UpdateForm extends Form {
+  private carIdToUpdate: string | null;
+
   constructor() {
     super('Update');
+    this.carIdToUpdate = null;
     this.disable(true);
     this.addSubscribes();
+    this.addButtonListener();
   }
 
   private disable(value: boolean): void {
@@ -23,20 +27,35 @@ export default class UpdateForm extends Form {
   private addSubscribes(): void {
     eventEmitter.subscribe('editThisCar', ([id, carName, color]: string[]) => {
       this.disable(false);
-
-      if (this.inputName.element instanceof HTMLInputElement && this.colorPicker.element instanceof HTMLInputElement) {
-        this.inputName.element.value = carName;
-        this.colorPicker.element.value = color;
-      }
-
-      this.addButtonListener(id);
+      this.carIdToUpdate = id;
+      this.updateValues(carName, color);
     });
   }
 
-  public addButtonListener(id: string): void {
+  public addButtonListener(): void {
     this.submitButton.addListener('click', (e) => {
       e.preventDefault();
-      eventEmitter.emit('edit', [id, this.currentName, this.currentColor]);
+      eventEmitter.emit('edit', [this.carIdToUpdate, this.currentName, this.currentColor]);
+      this.resetValues();
+      this.disable(true);
     });
+  }
+
+  private updateValues(carName: string, color: string): void {
+    if (this.inputName.element instanceof HTMLInputElement && this.colorPicker.element instanceof HTMLInputElement) {
+      this.inputName.element.value = carName;
+      this.colorPicker.element.value = color;
+      this.currentName = this.inputName.element.value;
+      this.currentColor = this.colorPicker.element.value;
+    }
+  }
+
+  private resetValues(): void {
+    if (this.inputName.element instanceof HTMLInputElement && this.colorPicker.element instanceof HTMLInputElement) {
+      this.inputName.element.value = '';
+      this.colorPicker.element.value = '#000000';
+      this.currentName = this.inputName.element.value;
+      this.currentColor = this.colorPicker.element.value;
+    }
   }
 }

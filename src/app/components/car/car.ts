@@ -43,10 +43,11 @@ export default class Car extends BaseComponent {
   }
 
   private addSubscribes(): void {
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises, @typescript-eslint/no-unsafe-argument
-    eventEmitter.subscribe('edit', ([id, carName, carColor]) => this.updateCar(id, carName, carColor));
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
+    eventEmitter.subscribe('edit', ([id, carName, carColor]: string[]) => this.updateCar(id, carName, carColor));
   }
 
+  // TODO Fix bug when name input is not updated - the car name should stay the same, it is become empty now
   private async updateCar(id: string, carName: string, carColor: string): Promise<void> {
     if (Number(id) === this.id) {
       const carUpdated = await updateCar(this.id, carName, carColor);
