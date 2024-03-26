@@ -13,6 +13,7 @@ export default class CreateForm extends Form {
 
       if (this.currentName !== '' && this.currentColor !== '') {
         eventEmitter.emit('create', [this.currentName, this.currentColor]);
+        this.resetValues();
       }
     });
   }

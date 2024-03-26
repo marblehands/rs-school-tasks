@@ -49,13 +49,4 @@ export default class UpdateForm extends Form {
       this.currentColor = this.colorPicker.element.value;
     }
   }
-
-  private resetValues(): void {
-    if (this.inputName.element instanceof HTMLInputElement && this.colorPicker.element instanceof HTMLInputElement) {
-      this.inputName.element.value = '';
-      this.colorPicker.element.value = '#000000';
-      this.currentName = this.inputName.element.value;
-      this.currentColor = this.colorPicker.element.value;
-    }
-  }
 }
