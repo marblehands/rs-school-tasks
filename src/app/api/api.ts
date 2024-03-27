@@ -1,6 +1,6 @@
 import type { CarOptions } from '../components/car/types';
 import type { WinnerOptions } from '../components/winners/types';
-import type { EngineOptions, Status } from './types';
+import type { DriveMode, EngineOptions, Status } from './types';
 
 // Cars
 
@@ -121,6 +121,45 @@ export function startCar(id: number, status: Status): Promise<EngineOptions> {
 
       // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       return response.json() as Promise<EngineOptions>;
+    })
+    .catch((error) => {
+      console.error(error);
+      throw new Error();
+    });
+}
+
+export function setDriveMode(id: number, status: Status): Promise<DriveMode> {
+  const url = `http://127.0.0.1:3000/engine/?id=${id}&status=${status}`;
+  const options = {
+    method: 'PATCH',
+  };
+
+  return fetch(url, options)
+    .then((response) => {
+      if (response.status === 500) {
+        throw new Error('500 INTERNAL SERVER ERROR. Car has been stopped suddenly. It"s engine was broken down.');
+      }
+
+      if (response.status === 429) {
+        throw new Error(
+          '429 TOO MANY REQUESTS. Drive already in progress. You can"t run drive for the same car twice while it"s not stopped.',
+        );
+      }
+
+      if (response.status === 404) {
+        throw new Error(
+          '404 NOT FOUND. Engine parameters for car with such id was not found in the garage. Have you tried to set engine status to "started" before?',
+        );
+      }
+
+      if (response.status === 400) {
+        throw new Error(
+          '400 BAD REQUEST. Wrong parameters: "id" should be any positive number, "status" should be "started", "stopped" or "drive"',
+        );
+      }
+
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      return response.json() as Promise<DriveMode>;
     })
     .catch((error) => {
       console.error(error);

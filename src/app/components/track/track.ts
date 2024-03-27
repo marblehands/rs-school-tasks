@@ -2,7 +2,7 @@ import './track.css';
 import BaseComponent from '../baseComponent/baseComponent';
 import eventEmitter from '../../services/eventEmitter/eventEmitter';
 import { Status } from '../../api/types';
-import { startCar } from '../../api/api';
+import { setDriveMode, startCar } from '../../api/api';
 
 import type Car from '../car/car';
 
@@ -36,8 +36,12 @@ export default class Track extends BaseComponent {
       const time = data.distance / data.velocity;
       this.car.svg.element.style.transition = `margin-left ${time / 1000}s linear`;
       this.car.svg.element.classList.add('move');
-    } catch (err) {
-      console.error(err);
+    } finally {
+      setDriveMode(this.car.id, Status.DRIVE).catch(() => {
+        this.car.svg.element.style.marginLeft = window.getComputedStyle(this.car.svg.element).marginLeft;
+        this.car.svg.element.classList.remove('move');
+        this.car.svg.element.style.transition = 'none';
+      });
     }
   }
 
