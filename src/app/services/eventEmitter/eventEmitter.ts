@@ -13,10 +13,10 @@ class EventEmitter<T extends (...params: Parameters<T>[]) => void> {
     this.eventsMap[eventName] = this.eventsMap[eventName].filter((cb) => cb !== callback);
   }
 
-  public emit(eventName: string, ...params: Parameters<T>[]): void {
+  public emit(eventName: string, ...params: unknown[]): void {
     this.eventsMap[eventName].forEach((cb) => {
       if (params.length) {
-        cb(...params);
+        cb(...(params as Parameters<T>));
       } else {
         cb();
       }
