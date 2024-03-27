@@ -3,10 +3,10 @@ import { getRandomColor } from './randomColor';
 
 import type { NewCarOptions } from '../components/car/types';
 
-export function generate100Cars(): NewCarOptions[] {
+export function generateCarObjects(num: number): NewCarOptions[] {
   const newCars = [];
 
-  for (let i = 0; i < 100; i += 1) {
+  for (let i = 0; i < num; i += 1) {
     const name = getRandomName();
     const color = getRandomColor();
     const car = { name, color };

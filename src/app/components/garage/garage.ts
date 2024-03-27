@@ -4,7 +4,7 @@ import { div, p } from '../tags/tags';
 import { createCar, deleteCar, getCars } from '../../api/api';
 import Car from '../car/car';
 import Track from '../track/track';
-import { generate100Cars } from '../../utils/generateCars';
+import { generateCarObjects } from '../../utils/generateCars';
 import eventEmitter from '../../services/eventEmitter/eventEmitter';
 import UpdateForm from '../updateForm/updateForm';
 import CreateForm from '../createForm/createForm';
@@ -93,7 +93,8 @@ export default class Garage extends BaseComponent {
   // Create 100 Cars
 
   private async create100Cars(): Promise<Car[]> {
-    const cars = generate100Cars();
+    const carQuantity = 100;
+    const cars = generateCarObjects(carQuantity);
     const newCars: Car[] = [];
 
     await Promise.all(
