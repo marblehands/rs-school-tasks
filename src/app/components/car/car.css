@@ -1,3 +1,11 @@
 .car {
   margin: 0.5em;
 }
+
+.car-svg-wrapper {
+  margin-left: 0;
+}
+
+.move {
+  margin-left: calc(100% - 48px + 0.5em);
+}

@@ -10,11 +10,11 @@
 
 .finish {
   position: absolute;
-  right: 0.5em;
+  right: 3em;
   bottom: 0.5em;
 
   width: 32px;
   height: 32px;
 
-  background: url("../../../assets/finish.svg") center/cover no-repeat;
+  background: url('../../../assets/finish.svg') center/cover no-repeat;
 }

@@ -1,5 +1,6 @@
 import type { CarOptions } from '../components/car/types';
 import type { WinnerOptions } from '../components/winners/types';
+import type { EngineOptions, Status } from './types';
 
 // Cars
 
@@ -105,6 +106,27 @@ export function updateCar(id: number, name: string, color: string): Promise<CarO
 }
 
 // Engine
+
+export function startCar(id: number, status: Status): Promise<EngineOptions> {
+  const url = `http://127.0.0.1:3000/engine/?id=${id}&status=${status}`;
+  const options = {
+    method: 'PATCH',
+  };
+
+  return fetch(url, options)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`startCar is not successful ${response.status}`);
+      }
+
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      return response.json() as Promise<EngineOptions>;
+    })
+    .catch((error) => {
+      console.error(error);
+      throw new Error();
+    });
+}
 
 // Winners
 

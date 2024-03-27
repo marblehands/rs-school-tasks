@@ -1,6 +1,8 @@
 import './track.css';
 import BaseComponent from '../baseComponent/baseComponent';
 import eventEmitter from '../../services/eventEmitter/eventEmitter';
+import { Status } from '../../api/types';
+import { startCar } from '../../api/api';
 
 import type Car from '../car/car';
 
@@ -26,6 +28,19 @@ export default class Track extends BaseComponent {
     this.initTrack();
   }
 
+  // Engine
+
+  private async startCarClickHandler(): Promise<void> {
+    try {
+      const data = await startCar(this.car.id, Status.STARTED);
+      const time = data.distance / data.velocity;
+      this.car.svg.element.style.transition = `margin-left ${time / 1000}s linear`;
+      this.car.svg.element.classList.add('move');
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   private initTrack(): void {
     this.createStopButton();
     this.createStartButton();
@@ -42,6 +57,7 @@ export default class Track extends BaseComponent {
       content: 'Delete',
       event: 'click',
       callback: (): void => {
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         eventEmitter.emit('delete', [this.car.id]);
         this.destroy();
       },
@@ -68,7 +84,11 @@ export default class Track extends BaseComponent {
       classes: ['button', 'button-start'],
       content: 'Start',
       event: 'click',
-      callback: (): void => {},
+      callback: (): void => {
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
+        this.startCarClickHandler();
+        eventEmitter.emit('start', [this.car.id]);
+      },
     });
     this.prepend(this.buttonStart.element);
   }
