@@ -2,7 +2,7 @@ import './track.css';
 import BaseComponent from '../baseComponent/baseComponent';
 import eventEmitter from '../../services/eventEmitter/eventEmitter';
 import { Status } from '../../api/types';
-import { setDriveMode, startCar } from '../../api/api';
+import { setDriveMode, startStopCar } from '../../api/api';
 
 import type Car from '../car/car';
 
@@ -35,16 +35,25 @@ export default class Track extends BaseComponent {
     Track.disableButton(this.buttonStart, true);
 
     try {
-      const data = await startCar(this.car.id, Status.STARTED);
+      const data = await startStopCar(this.car.id, Status.STARTED);
       const time = data.distance / data.velocity;
-      this.car.svg.element.style.transition = `margin-left ${time / 1000}s linear`;
-      this.car.svg.element.classList.add('move');
+      this.startCarAnimation(time);
     } finally {
       setDriveMode(this.car.id, Status.DRIVE).catch(() => {
-        this.car.svg.element.style.marginLeft = window.getComputedStyle(this.car.svg.element).marginLeft;
-        this.car.svg.element.classList.remove('move');
-        this.car.svg.element.style.transition = 'none';
+        this.abortCarAnimation();
       });
+    }
+  }
+
+  private async stopCarClickHandler(): Promise<void> {
+    Track.disableButton(this.buttonStart, false);
+    Track.disableButton(this.buttonStop, true);
+
+    try {
+      await startStopCar(this.car.id, Status.STOPPED);
+      this.stopCarAnimation();
+    } catch (err) {
+      console.error(err);
     }
   }
 
@@ -104,7 +113,10 @@ export default class Track extends BaseComponent {
       classes: ['button', 'button-stop'],
       content: 'Stop',
       event: 'click',
-      callback: (): void => {},
+      callback: (): void => {
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
+        this.stopCarClickHandler();
+      },
     });
     Track.disableButton(this.buttonStop, true);
     this.prepend(this.buttonStop.element);
@@ -132,5 +144,24 @@ export default class Track extends BaseComponent {
     if (link.element instanceof HTMLButtonElement) {
       link.element.disabled = isDisabled;
     }
+  }
+
+  private startCarAnimation(time: number): void {
+    this.car.svg.element.style.transition = `margin-left ${time / 1000}s linear`;
+    this.car.svg.element.classList.remove('stop');
+    this.car.svg.element.classList.add('move');
+  }
+
+  private stopCarAnimation(): void {
+    this.car.svg.element.classList.remove('move');
+    this.car.svg.element.classList.add('stop');
+    this.car.svg.element.removeAttribute('style');
+  }
+
+  private abortCarAnimation(): void {
+    this.car.svg.element.style.marginLeft = window.getComputedStyle(this.car.svg.element).marginLeft;
+    this.car.svg.element.style.transition = 'none';
+    this.car.svg.element.classList.remove('move');
+    this.car.svg.element.classList.remove('stop');
   }
 }

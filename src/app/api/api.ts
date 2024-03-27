@@ -107,7 +107,7 @@ export function updateCar(id: number, name: string, color: string): Promise<CarO
 
 // Engine
 
-export function startCar(id: number, status: Status): Promise<EngineOptions> {
+export function startStopCar(id: number, status: Status): Promise<EngineOptions> {
   const url = `http://127.0.0.1:3000/engine/?id=${id}&status=${status}`;
   const options = {
     method: 'PATCH',

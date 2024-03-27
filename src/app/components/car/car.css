@@ -2,10 +2,13 @@
   margin: 0.5em;
 }
 
-.car-svg-wrapper {
-  margin-left: 0;
-}
+/* .car-svg-wrapper {
+} */
 
 .move {
   margin-left: calc(100% - 48px + 0.5em);
+}
+
+.stop {
+  margin-left: 0 !important;
 }
