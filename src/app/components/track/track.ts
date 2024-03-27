@@ -57,6 +57,8 @@ export default class Track extends BaseComponent {
     }
   }
 
+  // View
+
   private initTrack(): void {
     this.createStopButton();
     this.createStartButton();
@@ -145,6 +147,8 @@ export default class Track extends BaseComponent {
       link.element.disabled = isDisabled;
     }
   }
+
+  // Car Animation
 
   private startCarAnimation(time: number): void {
     this.car.svg.element.style.transition = `margin-left ${time / 1000}s linear`;

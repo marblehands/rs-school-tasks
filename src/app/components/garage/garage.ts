@@ -20,6 +20,8 @@ export default class Garage extends BaseComponent {
 
   private buttonGenerate!: BaseComponent;
 
+  private buttonRace!: BaseComponent;
+
   private garageInfoElement!: BaseComponent;
 
   private createCarForm!: BaseComponent;
@@ -32,6 +34,7 @@ export default class Garage extends BaseComponent {
     this.tracks = [];
     this.carsNum = 0;
     this.createGenerateButton();
+    this.createRaceButton();
     this.initGarage();
     this.createEditCarAndCreateCarForms();
     this.addSubscribes();
@@ -173,6 +176,17 @@ export default class Garage extends BaseComponent {
       },
     });
     this.append(this.buttonGenerate.element);
+  }
+
+  private createRaceButton(): void {
+    this.buttonRace = new BaseComponent({
+      tag: 'button',
+      classes: ['button', 'button-race'],
+      content: 'Start Race',
+      event: 'click',
+      callback: (): void => {},
+    });
+    this.append(this.buttonRace.element);
   }
 
   private createGarageInfoElement(): void {
