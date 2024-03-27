@@ -31,6 +31,9 @@ export default class Track extends BaseComponent {
   // Engine
 
   private async startCarClickHandler(): Promise<void> {
+    Track.disableButton(this.buttonStop, false);
+    Track.disableButton(this.buttonStart, true);
+
     try {
       const data = await startCar(this.car.id, Status.STARTED);
       const time = data.distance / data.velocity;
@@ -61,7 +64,6 @@ export default class Track extends BaseComponent {
       content: 'Delete',
       event: 'click',
       callback: (): void => {
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         eventEmitter.emit('delete', [this.car.id]);
         this.destroy();
       },
@@ -91,7 +93,6 @@ export default class Track extends BaseComponent {
       callback: (): void => {
         // eslint-disable-next-line @typescript-eslint/no-floating-promises
         this.startCarClickHandler();
-        eventEmitter.emit('start', [this.car.id]);
       },
     });
     this.prepend(this.buttonStart.element);
@@ -105,6 +106,7 @@ export default class Track extends BaseComponent {
       event: 'click',
       callback: (): void => {},
     });
+    Track.disableButton(this.buttonStop, true);
     this.prepend(this.buttonStop.element);
   }
 
@@ -122,5 +124,13 @@ export default class Track extends BaseComponent {
       classes: ['finish'],
     });
     this.append(this.finish.element);
+  }
+
+  private static disableButton(button: BaseComponent, isDisabled: boolean): void {
+    const link = button;
+
+    if (link.element instanceof HTMLButtonElement) {
+      link.element.disabled = isDisabled;
+    }
   }
 }

@@ -38,9 +38,8 @@ export default class App {
   private setMainContent = async (location: Routes): Promise<void> => {
     switch (location) {
       case Routes.WINNERS: {
-        const { default: WINNERS } = await import('./components/winners/winners');
-
         if (!this.winners) {
+          const { default: WINNERS } = await import('./components/winners/winners');
           this.winners = new WINNERS();
         }
 
@@ -49,9 +48,8 @@ export default class App {
       }
 
       default: {
-        const { default: GARAGE } = await import('./components/garage/garage');
-
         if (!this.garage) {
+          const { default: GARAGE } = await import('./components/garage/garage');
           this.garage = new GARAGE();
         }
 
