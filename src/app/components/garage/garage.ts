@@ -1,14 +1,17 @@
 import './garage.css';
 import BaseComponent from '../baseComponent/baseComponent';
 import { div, p } from '../tags/tags';
-import { createCar, deleteCar, getCars } from '../../api/api';
+import { createCar, deleteCar, getCars, setDriveMode, startStopCar } from '../../api/api';
 import Car from '../car/car';
 import Track from '../track/track';
 import { generateCarObjects } from '../../utils/generateCars';
 import eventEmitter from '../../services/eventEmitter/eventEmitter';
 import UpdateForm from '../updateForm/updateForm';
 import CreateForm from '../createForm/createForm';
+import { Status } from '../../api/types';
+import { sortRaceResults } from '../../utils/sortRaceResults';
 
+import type { RaceResult } from './types';
 import type { CarOptions } from '../car/types';
 
 export default class Garage extends BaseComponent {
@@ -50,6 +53,51 @@ export default class Garage extends BaseComponent {
         console.error(err);
       });
     });
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
+    eventEmitter.subscribe('race', async (): Promise<void> => {
+      try {
+        const results = await this.race();
+        const win = sortRaceResults(results);
+        const winnerId = Number(win[0]);
+        const winnerTime = win[1].time;
+        this.tracks.filter((track) => track.car.id === winnerId)[0].showWinMessage(winnerTime);
+      } catch (error) {
+        console.error(error);
+      }
+    });
+  }
+
+  private async race(): Promise<Record<string, RaceResult>> {
+    const results: Record<string, RaceResult> = {};
+
+    try {
+      await Promise.all(
+        this.tracks.map(async (track: Track): Promise<void> => {
+          const data = await startStopCar(track.car.id, Status.STARTED);
+          const time = data.distance / data.velocity;
+          const { id } = track.car;
+          results[id] = { time };
+        }),
+      );
+      this.tracks.map((track: Track): number => {
+        track.startCarAnimation(results[track.car.id].time);
+
+        return 0;
+      });
+
+      await Promise.all(
+        this.tracks.map(async (track: Track): Promise<void> => {
+          const promise = await setDriveMode(track.car.id, Status.DRIVE).catch(() => {
+            track.abortCarAnimation();
+          });
+          results[track.car.id].drive = promise;
+        }),
+      );
+    } catch (err) {
+      console.error(err);
+    }
+
+    return results;
   }
 
   // API requests
@@ -184,7 +232,9 @@ export default class Garage extends BaseComponent {
       classes: ['button', 'button-race'],
       content: 'Start Race',
       event: 'click',
-      callback: (): void => {},
+      callback: (): void => {
+        eventEmitter.emit('race');
+      },
     });
     this.append(this.buttonRace.element);
   }

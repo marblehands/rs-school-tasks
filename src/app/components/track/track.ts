@@ -3,13 +3,14 @@ import BaseComponent from '../baseComponent/baseComponent';
 import eventEmitter from '../../services/eventEmitter/eventEmitter';
 import { Status } from '../../api/types';
 import { setDriveMode, startStopCar } from '../../api/api';
+import { span } from '../tags/tags';
 
 import type Car from '../car/car';
 
 export default class Track extends BaseComponent {
-  private car: Car;
+  public car: Car;
 
-  private buttonStart!: BaseComponent;
+  public buttonStart!: BaseComponent;
 
   private buttonStop!: BaseComponent;
 
@@ -38,10 +39,11 @@ export default class Track extends BaseComponent {
       const data = await startStopCar(this.car.id, Status.STARTED);
       const time = data.distance / data.velocity;
       this.startCarAnimation(time);
-    } finally {
       setDriveMode(this.car.id, Status.DRIVE).catch(() => {
         this.abortCarAnimation();
       });
+    } catch (err) {
+      console.error(err);
     }
   }
 
@@ -150,22 +152,27 @@ export default class Track extends BaseComponent {
 
   // Car Animation
 
-  private startCarAnimation(time: number): void {
+  public startCarAnimation(time: number): void {
     this.car.svg.element.style.transition = `margin-left ${time / 1000}s linear`;
     this.car.svg.element.classList.remove('stop');
     this.car.svg.element.classList.add('move');
   }
 
-  private stopCarAnimation(): void {
+  public stopCarAnimation(): void {
     this.car.svg.element.classList.remove('move');
     this.car.svg.element.classList.add('stop');
     this.car.svg.element.removeAttribute('style');
   }
 
-  private abortCarAnimation(): void {
+  public abortCarAnimation(): void {
     this.car.svg.element.style.marginLeft = window.getComputedStyle(this.car.svg.element).marginLeft;
     this.car.svg.element.style.transition = 'none';
     this.car.svg.element.classList.remove('move');
     this.car.svg.element.classList.remove('stop');
+  }
+
+  public showWinMessage(time: number): void {
+    const message = span(['win-message'], `${this.car.name} wins the race with ${(time / 1000).toFixed(1)}s result`);
+    this.road.append(message.element);
   }
 }
