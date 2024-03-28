@@ -30,7 +30,7 @@ export default class Garage extends BaseComponent {
 
   private updateCarForm!: BaseComponent;
 
-  private isWinner!: boolean;
+  private isWinner!: string;
 
   constructor() {
     super({ tag: 'div', classes: ['wrapper-garage'] });
@@ -89,8 +89,12 @@ export default class Garage extends BaseComponent {
 
             if (promise.success && !this.isWinner) {
               const winnerTime = results[track.car.id].time;
-              this.isWinner = true;
+              this.isWinner = track.car.name;
               track.showWinMessage(winnerTime);
+            }
+
+            if (promise.success && this.isWinner && this.isWinner !== track.car.name) {
+              track.showFinishMessage();
             }
           } catch (error) {
             track.abortCarAnimation();
