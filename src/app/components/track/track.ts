@@ -43,7 +43,7 @@ export default class Track extends BaseComponent {
         this.abortCarAnimation();
       });
     } catch (err) {
-      console.error(err);
+      console.log(err);
     }
   }
 
@@ -55,7 +55,7 @@ export default class Track extends BaseComponent {
       await startStopCar(this.car.id, Status.STOPPED);
       this.stopCarAnimation();
     } catch (err) {
-      console.error(err);
+      console.log(err);
     }
   }
 
@@ -104,8 +104,9 @@ export default class Track extends BaseComponent {
       content: 'Start',
       event: 'click',
       callback: (): void => {
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
-        this.startCarClickHandler();
+        this.startCarClickHandler().catch((err) => {
+          console.log(err);
+        });
       },
     });
     this.prepend(this.buttonStart.element);
@@ -118,8 +119,9 @@ export default class Track extends BaseComponent {
       content: 'Stop',
       event: 'click',
       callback: (): void => {
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
-        this.stopCarClickHandler();
+        this.stopCarClickHandler().catch((err) => {
+          console.log(err);
+        });
       },
     });
     Track.disableButton(this.buttonStop, true);
@@ -172,17 +174,20 @@ export default class Track extends BaseComponent {
   }
 
   public showWinMessage(time: number): void {
-    const message = span(['win-message'], `🏆 ${this.car.name} wins the race with ${(time / 1000).toFixed(1)}s result`);
-    this.road.append(message.element);
+    const message = span(
+      ['race-message'],
+      `🏆 ${this.car.name} wins the race with ${(time / 1000).toFixed(1)}s result`,
+    );
+    this.append(message.element);
   }
 
   public showBrokenMessage(): void {
-    const message = span(['win-message'], `⛔ ${this.car.name} engine was broken`);
-    this.road.append(message.element);
+    const message = span(['race-message'], `⛔ ${this.car.name} engine was broken`);
+    this.append(message.element);
   }
 
   public showFinishMessage(): void {
-    const message = span(['win-message'], `🏁 ${this.car.name} finished`);
-    this.road.append(message.element);
+    const message = span(['race-message'], `🏁 ${this.car.name} finished`);
+    this.append(message.element);
   }
 }

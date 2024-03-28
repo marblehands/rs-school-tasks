@@ -30,7 +30,7 @@ module.exports = {
     ],
     'max-nested-callbacks': ['error', 4],
     'max-statements': ['error', 20],
-    'no-console': ['error', { allow: ['warn', 'error'] }],
+    'no-console': 'off',
     'no-constant-binary-expression': 'error',
     'no-implicit-coercion': 'error',
     'no-negated-condition': 'error',

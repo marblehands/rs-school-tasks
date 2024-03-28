@@ -47,20 +47,24 @@ export default class Garage extends BaseComponent {
   // EventEmitter Subscriptions
 
   private addSubscribes(): void {
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises, @typescript-eslint/no-misused-promises
-    eventEmitter.subscribe('delete', ([id]: number[]) => this.deleteCar(id));
-    eventEmitter.subscribe('create', ([carName, carColor]: string[]) => {
-      this.createCarButtonClickHandler(carName, carColor).catch((err) => {
-        console.error(err);
+    eventEmitter.subscribe('delete', ([id]: number[]) => {
+      this.deleteCar(id).catch((err) => {
+        console.log(err);
       });
     });
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    eventEmitter.subscribe('race', async (): Promise<void> => {
-      try {
+    eventEmitter.subscribe('create', ([carName, carColor]: string[]) => {
+      this.createCarButtonClickHandler(carName, carColor).catch((err) => {
+        console.log(err);
+      });
+    });
+    eventEmitter.subscribe('race', () => {
+      const race = async (): Promise<void> => {
         await this.race();
-      } catch (error) {
-        console.error(error);
-      }
+      };
+
+      race().catch((err) => {
+        console.log(err);
+      });
     });
   }
 
@@ -99,12 +103,12 @@ export default class Garage extends BaseComponent {
           } catch (error) {
             track.abortCarAnimation();
             track.showBrokenMessage();
-            console.error(`${track.car.name} engine was broken and it did not end the race successfully`);
+            console.log(`${track.car.name} engine was broken and it did not end the race successfully`);
           }
         }),
       );
     } catch (err) {
-      console.error(err);
+      console.log(err);
     }
   }
 
@@ -117,7 +121,7 @@ export default class Garage extends BaseComponent {
       this.cars = carsData.map((carData) => new Car(carData));
       this.carsNum = this.cars.length;
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   }
 
@@ -134,7 +138,7 @@ export default class Garage extends BaseComponent {
         this.updateGarageInfoElement();
       }
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   }
 
@@ -174,7 +178,7 @@ export default class Garage extends BaseComponent {
       this.renderCars([car]);
       this.updateGarageInfoElement();
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   }
 
@@ -185,7 +189,7 @@ export default class Garage extends BaseComponent {
         this.updateGarageInfoElement();
       })
       .catch((err) => {
-        console.error(err);
+        console.log(err);
       });
   }
 
@@ -198,7 +202,7 @@ export default class Garage extends BaseComponent {
         this.createGarageInfoElement();
       })
       .catch((error) => {
-        console.error(error);
+        console.log(error);
       });
   }
 

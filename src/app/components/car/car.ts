@@ -43,8 +43,11 @@ export default class Car extends BaseComponent {
   }
 
   private addSubscribes(): void {
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    eventEmitter.subscribe('edit', ([id, carName, carColor]: string[]) => this.updateCar(id, carName, carColor));
+    eventEmitter.subscribe('edit', ([id, carName, carColor]: string[]) => {
+      this.updateCar(id, carName, carColor).catch((err) => {
+        console.log(err);
+      });
+    });
   }
 
   // TODO Fix bug when name input is not updated - the car name should stay the same, it is become empty now

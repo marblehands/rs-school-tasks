@@ -49,7 +49,7 @@ export default class Winners extends BaseComponent {
 
       this.winnersNum = this.winners.length;
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   }
 
@@ -61,7 +61,7 @@ export default class Winners extends BaseComponent {
         this.createWinnersTable();
       })
       .catch((error) => {
-        console.error(error);
+        console.log(error);
       });
   }
 
@@ -80,7 +80,7 @@ export default class Winners extends BaseComponent {
   private addSubscribes(): void {
     eventEmitter.subscribe('delete', ([id]: number[]) => {
       this.deleteWinner(id).catch((error) => {
-        console.error(error);
+        console.log(error);
       });
     });
   }
@@ -97,7 +97,7 @@ export default class Winners extends BaseComponent {
         this.updateWinnersInfoElement();
       }
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   }
 

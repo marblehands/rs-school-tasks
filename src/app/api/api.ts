@@ -15,7 +15,7 @@ export function getCars(): Promise<CarOptions[]> {
       return response.json() as Promise<CarOptions[]>;
     })
     .catch((error) => {
-      console.error(error);
+      console.log(error);
       throw new Error();
     });
 }
@@ -31,7 +31,7 @@ export function getCar(id: number): Promise<CarOptions> {
       return response.json() as Promise<CarOptions>;
     })
     .catch((error) => {
-      console.error(error);
+      console.log(error);
       throw new Error();
     });
 }
@@ -56,7 +56,7 @@ export function createCar(name: string, color: string): Promise<CarOptions> {
       return response.json() as Promise<CarOptions>;
     })
     .catch((error) => {
-      console.error(error);
+      console.log(error);
       throw new Error();
     });
 }
@@ -75,7 +75,7 @@ export function deleteCar(id: number): Promise<void> {
       }
     })
     .catch((error) => {
-      console.error(error);
+      console.log(error);
       throw new Error();
     });
 }
@@ -100,7 +100,7 @@ export function updateCar(id: number, name: string, color: string): Promise<CarO
       return response.json() as Promise<CarOptions>;
     })
     .catch((error) => {
-      console.error(error);
+      console.log(error);
       throw new Error();
     });
 }
@@ -123,7 +123,7 @@ export function startStopCar(id: number, status: Status): Promise<EngineOptions>
       return response.json() as Promise<EngineOptions>;
     })
     .catch((error) => {
-      console.error(error);
+      console.log(error);
       throw new Error();
     });
 }
@@ -162,7 +162,7 @@ export function setDriveMode(id: number, status: Status): Promise<DriveMode> {
       return response.json() as Promise<DriveMode>;
     })
     .catch((error) => {
-      console.error(error);
+      console.log(error);
       throw new Error();
     });
 }
@@ -180,7 +180,7 @@ export function getWinners(): Promise<WinnerOptions[]> {
       return response.json() as Promise<WinnerOptions[]>;
     })
     .catch((error) => {
-      console.error(error);
+      console.log(error);
       throw new Error();
     });
 }
@@ -199,7 +199,7 @@ export function deleteWinner(id: number): Promise<void> {
       }
     })
     .catch((error) => {
-      console.error(error);
+      console.log(error);
       throw new Error();
     });
 }

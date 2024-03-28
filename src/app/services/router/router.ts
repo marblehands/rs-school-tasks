@@ -21,14 +21,14 @@ export default class Router {
     window.history.pushState({}, '', Routes.GARAGE);
 
     this.setMainContent(location).catch((error) => {
-      console.error(error);
+      console.log(error);
     });
   };
 
   public navigateTo = (location: Routes): void => {
     window.history.pushState({}, '', location);
     this.setMainContent(location).catch((error) => {
-      console.error(error);
+      console.log(error);
     });
   };
 }

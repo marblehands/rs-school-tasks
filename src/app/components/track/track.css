@@ -1,6 +1,12 @@
 .track {
   position: relative;
-  margin: 1em 0;
+  margin: 2em 0 3em;
+}
+
+.car-name {
+  display: block;
+  margin: 0.5em 0;
+  font-weight: 600;
 }
 
 .road {
@@ -17,4 +23,10 @@
   height: 32px;
 
   background: url('../../../assets/finish.svg') center/cover no-repeat;
+}
+
+.race-message {
+  position: absolute;
+  bottom: -1.5em;
+  font-size: 0.9em;
 }
