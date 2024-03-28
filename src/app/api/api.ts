@@ -137,12 +137,12 @@ export function setDriveMode(id: number, status: Status): Promise<DriveMode> {
   return fetch(url, options)
     .then((response) => {
       if (response.status === 500) {
-        throw new Error('500 INTERNAL SERVER ERROR. Car has been stopped suddenly. It"s engine was broken down.');
+        throw new Error('500 INTERNAL SERVER ERROR. Car has been stopped suddenly. Its engine was broken down.');
       }
 
       if (response.status === 429) {
         throw new Error(
-          '429 TOO MANY REQUESTS. Drive already in progress. You can"t run drive for the same car twice while it"s not stopped.',
+          '429 TOO MANY REQUESTS. Drive already in progress. You cannot run drive for the same car twice while it is not stopped.',
         );
       }
 

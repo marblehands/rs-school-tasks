@@ -9,7 +9,6 @@ import eventEmitter from '../../services/eventEmitter/eventEmitter';
 import UpdateForm from '../updateForm/updateForm';
 import CreateForm from '../createForm/createForm';
 import { Status } from '../../api/types';
-import { sortRaceResults } from '../../utils/sortRaceResults';
 
 import type { RaceResult } from './types';
 import type { CarOptions } from '../car/types';
@@ -30,6 +29,8 @@ export default class Garage extends BaseComponent {
   private createCarForm!: BaseComponent;
 
   private updateCarForm!: BaseComponent;
+
+  private isWinner!: boolean;
 
   constructor() {
     super({ tag: 'div', classes: ['wrapper-garage'] });
@@ -56,18 +57,14 @@ export default class Garage extends BaseComponent {
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     eventEmitter.subscribe('race', async (): Promise<void> => {
       try {
-        const results = await this.race();
-        const win = sortRaceResults(results);
-        const winnerId = Number(win[0]);
-        const winnerTime = win[1].time;
-        this.tracks.filter((track) => track.car.id === winnerId)[0].showWinMessage(winnerTime);
+        await this.race();
       } catch (error) {
         console.error(error);
       }
     });
   }
 
-  private async race(): Promise<Record<string, RaceResult>> {
+  private async race(): Promise<void> {
     const results: Record<string, RaceResult> = {};
 
     try {
@@ -87,17 +84,24 @@ export default class Garage extends BaseComponent {
 
       await Promise.all(
         this.tracks.map(async (track: Track): Promise<void> => {
-          const promise = await setDriveMode(track.car.id, Status.DRIVE).catch(() => {
+          try {
+            const promise = await setDriveMode(track.car.id, Status.DRIVE);
+
+            if (promise.success && !this.isWinner) {
+              const winnerTime = results[track.car.id].time;
+              this.isWinner = true;
+              track.showWinMessage(winnerTime);
+            }
+          } catch (error) {
             track.abortCarAnimation();
-          });
-          results[track.car.id].drive = promise;
+            track.showBrokenMessage();
+            console.error(`${track.car.name} engine was broken and it did not end the race successfully`);
+          }
         }),
       );
     } catch (err) {
       console.error(err);
     }
-
-    return results;
   }
 
   // API requests

@@ -175,4 +175,9 @@ export default class Track extends BaseComponent {
     const message = span(['win-message'], `${this.car.name} wins the race with ${(time / 1000).toFixed(1)}s result`);
     this.road.append(message.element);
   }
+
+  public showBrokenMessage(): void {
+    const message = span(['win-message'], `${this.car.name} engine was broken`);
+    this.road.append(message.element);
+  }
 }
