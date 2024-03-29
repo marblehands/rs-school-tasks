@@ -12,11 +12,11 @@ export default class Track extends BaseComponent {
 
   public buttonStart!: BaseComponent;
 
-  private buttonStop!: BaseComponent;
+  public buttonStop!: BaseComponent;
 
-  private buttonEdit!: BaseComponent;
+  public buttonEdit!: BaseComponent;
 
-  private buttonDelete!: BaseComponent;
+  public buttonDelete!: BaseComponent;
 
   private road!: BaseComponent;
 
@@ -144,7 +144,7 @@ export default class Track extends BaseComponent {
     this.append(this.finish.element);
   }
 
-  private static disableButton(button: BaseComponent, isDisabled: boolean): void {
+  public static disableButton(button: BaseComponent, isDisabled: boolean): void {
     const link = button;
 
     if (link.element instanceof HTMLButtonElement) {

@@ -169,7 +169,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'error',
     '@typescript-eslint/prefer-includes': 'error',
     '@typescript-eslint/no-base-to-string': 'error',
-    '@typescript-eslint/no-dynamic-delete': 'error',
+    '@typescript-eslint/no-dynamic-delete': 'off',
     '@typescript-eslint/no-invalid-void-type': 'error',
     '@typescript-eslint/prefer-function-type': 'error',
     '@typescript-eslint/prefer-optional-chain': 'error',

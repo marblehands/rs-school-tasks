@@ -2,6 +2,7 @@ import './header.css';
 import BaseComponent from '../baseComponent/baseComponent';
 import { div, p } from '../tags/tags';
 import Routes from '../../services/router/types';
+import eventEmitter from '../../services/eventEmitter/eventEmitter';
 
 export default class Header extends BaseComponent {
   public buttonGarage: BaseComponent;
@@ -29,6 +30,20 @@ export default class Header extends BaseComponent {
       },
     });
     this.createHeader();
+    this.addSubscribes();
+  }
+
+  private addSubscribes(): void {
+    eventEmitter.subscribe('race', () => {
+      if (this.buttonWinners.element instanceof HTMLButtonElement) {
+        this.buttonWinners.element.disabled = true;
+      }
+    });
+    eventEmitter.subscribe('winner', () => {
+      if (this.buttonWinners.element instanceof HTMLButtonElement) {
+        this.buttonWinners.element.disabled = false;
+      }
+    });
   }
 
   private createHeader(): void {

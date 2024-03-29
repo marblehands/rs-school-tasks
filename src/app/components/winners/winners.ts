@@ -84,6 +84,7 @@ export default class Winners extends BaseComponent {
       this.deleteWinner(id).catch((error) => {
         console.log(error);
       });
+      this.updateWinnersInfoElement();
     });
     eventEmitter.subscribe('winner', ([winner]: [WinnerObjOptions]) => {
       this.handleNewWinnerEvent(winner).catch((err) => {
@@ -122,7 +123,7 @@ export default class Winners extends BaseComponent {
     try {
       await createWinner(winner.id, winnerObj.wins, winnerObj.bestTime);
       this.winners[winner.id] = winnerObj;
-      this.winnersNum = Object.keys(this.winners).length;
+      this.updateWinnersInfoElement();
       const row = new WinnerRow(winnerObj, winner.id, this.winnersNum - 1);
       this.winnersRows[winner.id] = row;
       this.table.append(row.element);
@@ -154,10 +155,14 @@ export default class Winners extends BaseComponent {
     try {
       if (id in this.winners) {
         await deleteWinner(id);
-        delete this.winners.id;
+        delete this.winners[id];
         this.winnersRows[id].destroy();
-        delete this.winnersRows.id;
+        delete this.winnersRows[id];
+
         this.updateWinnersInfoElement();
+        console.log(this.winnersNum);
+        console.log(this.winnersRows);
+        console.log(this.winners);
       }
     } catch (err) {
       console.log('deleteWinner was not successful', err);

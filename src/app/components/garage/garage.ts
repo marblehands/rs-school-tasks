@@ -24,11 +24,13 @@ export default class Garage extends BaseComponent {
 
   private buttonRace!: BaseComponent;
 
+  private buttonReset!: BaseComponent;
+
   private garageInfoElement!: BaseComponent;
 
-  private createCarForm!: BaseComponent;
+  private createCarForm!: CreateForm;
 
-  private updateCarForm!: BaseComponent;
+  private updateCarForm!: UpdateForm;
 
   private isWinner!: Record<string, number | string | Car> | null;
 
@@ -40,6 +42,7 @@ export default class Garage extends BaseComponent {
     this.isWinner = null;
     this.createGenerateButton();
     this.createRaceButton();
+    this.createResetButton();
     this.initGarage();
     this.createEditCarAndCreateCarForms();
     this.addSubscribes();
@@ -66,6 +69,7 @@ export default class Garage extends BaseComponent {
       race()
         .then(() => {
           eventEmitter.emit('winner', [this.isWinner]);
+          this.disableControls(false, 'stop');
         })
         .catch((err) => {
           console.log(err);
@@ -75,6 +79,7 @@ export default class Garage extends BaseComponent {
 
   private async race(): Promise<void> {
     const results: Record<string, RaceResult> = {};
+    this.disableControls(true, 'race');
 
     try {
       await Promise.all(
@@ -115,6 +120,29 @@ export default class Garage extends BaseComponent {
     } catch (err) {
       console.log(err);
     }
+  }
+
+  private disableControls(isDisabled: boolean, event: string): void {
+    this.createCarForm.disable(true);
+
+    this.tracks.forEach((track) => {
+      if (event === 'race') {
+        Track.disableButton(track.buttonStart, isDisabled);
+
+        if (
+          this.buttonRace.element instanceof HTMLButtonElement &&
+          this.buttonGenerate.element instanceof HTMLButtonElement
+        ) {
+          this.buttonRace.element.disabled = isDisabled;
+          this.buttonGenerate.element.disabled = isDisabled;
+        }
+
+        Track.disableButton(track.buttonStop, isDisabled);
+      }
+
+      Track.disableButton(track.buttonEdit, isDisabled);
+      Track.disableButton(track.buttonDelete, isDisabled);
+    });
   }
 
   // API requests
@@ -254,6 +282,19 @@ export default class Garage extends BaseComponent {
       },
     });
     this.append(this.buttonRace.element);
+  }
+
+  private createResetButton(): void {
+    this.buttonReset = new BaseComponent({
+      tag: 'button',
+      classes: ['button', 'button-reset'],
+      content: 'Reset Tracks',
+      event: 'click',
+      callback: (): void => {
+        eventEmitter.emit('reset');
+      },
+    });
+    this.append(this.buttonReset.element);
   }
 
   private createGarageInfoElement(): void {

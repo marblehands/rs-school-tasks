@@ -53,4 +53,16 @@ export default class Form extends BaseComponent {
       this.currentColor = this.colorPicker.element.value;
     }
   }
+
+  public disable(value: boolean): void {
+    if (
+      this.inputName.element instanceof HTMLInputElement &&
+      this.colorPicker.element instanceof HTMLInputElement &&
+      this.submitButton.element instanceof HTMLButtonElement
+    ) {
+      this.inputName.element.disabled = value;
+      this.colorPicker.element.disabled = value;
+      this.submitButton.element.disabled = value;
+    }
+  }
 }

@@ -12,18 +12,6 @@ export default class UpdateForm extends Form {
     this.addButtonListener();
   }
 
-  private disable(value: boolean): void {
-    if (
-      this.inputName.element instanceof HTMLInputElement &&
-      this.colorPicker.element instanceof HTMLInputElement &&
-      this.submitButton.element instanceof HTMLButtonElement
-    ) {
-      this.inputName.element.disabled = value;
-      this.colorPicker.element.disabled = value;
-      this.submitButton.element.disabled = value;
-    }
-  }
-
   private addSubscribes(): void {
     eventEmitter.subscribe('editThisCar', ([id, carName, color]: string[]) => {
       this.disable(false);
