@@ -77,74 +77,6 @@ export default class Garage extends BaseComponent {
     });
   }
 
-  private async race(): Promise<void> {
-    const results: Record<string, RaceResult> = {};
-    this.disableControls(true, 'race');
-
-    try {
-      await Promise.all(
-        this.tracks.map(async (track: Track): Promise<void> => {
-          const data = await startStopCar(track.car.id, Status.STARTED);
-          const time = data.distance / data.velocity;
-          const { id } = track.car;
-          results[id] = { time };
-        }),
-      );
-      this.tracks.map((track: Track): number => {
-        track.startCarAnimation(results[track.car.id].time);
-
-        return 0;
-      });
-
-      await Promise.all(
-        this.tracks.map(async (track: Track): Promise<void> => {
-          try {
-            const promise = await setDriveMode(track.car.id, Status.DRIVE);
-
-            if (promise.success && !this.isWinner) {
-              const winnerTime = results[track.car.id].time;
-              this.isWinner = { id: track.car.id, bestTime: winnerTime, name: track.car.name, carInstance: track.car };
-              track.showWinMessage(winnerTime);
-            }
-
-            if (promise.success && this.isWinner && this.isWinner.id !== track.car.id) {
-              track.showFinishMessage();
-            }
-          } catch (error) {
-            track.abortCarAnimation();
-            track.showBrokenMessage();
-            console.log(`${track.car.name} engine was broken and it did not end the race successfully`);
-          }
-        }),
-      );
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  private disableControls(isDisabled: boolean, event: string): void {
-    this.createCarForm.disable(true);
-
-    this.tracks.forEach((track) => {
-      if (event === 'race') {
-        Track.disableButton(track.buttonStart, isDisabled);
-
-        if (
-          this.buttonRace.element instanceof HTMLButtonElement &&
-          this.buttonGenerate.element instanceof HTMLButtonElement
-        ) {
-          this.buttonRace.element.disabled = isDisabled;
-          this.buttonGenerate.element.disabled = isDisabled;
-        }
-
-        Track.disableButton(track.buttonStop, isDisabled);
-      }
-
-      Track.disableButton(track.buttonEdit, isDisabled);
-      Track.disableButton(track.buttonDelete, isDisabled);
-    });
-  }
-
   // API requests
   // GET
 
@@ -203,6 +135,53 @@ export default class Garage extends BaseComponent {
     return newCars;
   }
 
+  // Engine Race
+
+  private async race(): Promise<void> {
+    const results: Record<string, RaceResult> = {};
+    this.disableControls(true, 'race');
+
+    try {
+      await Promise.all(
+        this.tracks.map(async (track: Track): Promise<void> => {
+          const data = await startStopCar(track.car.id, Status.STARTED);
+          const time = data.distance / data.velocity;
+          const { id } = track.car;
+          results[id] = { time };
+        }),
+      );
+      this.tracks.map((track: Track): number => {
+        track.startCarAnimation(results[track.car.id].time);
+
+        return 0;
+      });
+
+      await Promise.all(
+        this.tracks.map(async (track: Track): Promise<void> => {
+          try {
+            const promise = await setDriveMode(track.car.id, Status.DRIVE);
+
+            if (promise.success && !this.isWinner) {
+              const winnerTime = results[track.car.id].time;
+              this.isWinner = { id: track.car.id, bestTime: winnerTime, name: track.car.name, carInstance: track.car };
+              track.showMessage('win', winnerTime);
+            }
+
+            if (promise.success && this.isWinner && this.isWinner.id !== track.car.id) {
+              track.showMessage('finish');
+            }
+          } catch (error) {
+            track.abortCarAnimation();
+            track.showMessage('broken');
+            console.log(`${track.car.name} engine was broken and it did not end the race successfully`);
+          }
+        }),
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   // ClickHandlers
 
   private async createCarButtonClickHandler(carName: string, carColor: string): Promise<void> {
@@ -224,6 +203,17 @@ export default class Garage extends BaseComponent {
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  private resetButtonClickHandler(): void {
+    this.disableControls(false, 'reset');
+    this.tracks.forEach((track) => {
+      track.deleteMessages();
+    });
+
+    if (this.buttonReset.element instanceof HTMLButtonElement) {
+      this.buttonReset.element.disabled = true;
+    }
   }
 
   // Initialization & View
@@ -292,8 +282,14 @@ export default class Garage extends BaseComponent {
       event: 'click',
       callback: (): void => {
         eventEmitter.emit('reset');
+        this.resetButtonClickHandler();
       },
     });
+
+    if (this.buttonReset.element instanceof HTMLButtonElement) {
+      this.buttonReset.element.disabled = true;
+    }
+
     this.append(this.buttonReset.element);
   }
 
@@ -305,5 +301,36 @@ export default class Garage extends BaseComponent {
   private updateGarageInfoElement(): void {
     this.carsNum = this.cars.length;
     this.garageInfoElement.element.textContent = `Garage: ${this.carsNum}`;
+  }
+
+  private disableControls(isDisabled: boolean, event: string): void {
+    this.createCarForm.disable(isDisabled);
+
+    this.tracks.forEach((track) => {
+      if (event === 'race' || event === 'reset') {
+        Track.disableButton(track.buttonStart, isDisabled);
+
+        if (
+          this.buttonRace.element instanceof HTMLButtonElement &&
+          this.buttonGenerate.element instanceof HTMLButtonElement &&
+          this.buttonReset.element instanceof HTMLButtonElement
+        ) {
+          this.buttonRace.element.disabled = isDisabled;
+          this.buttonReset.element.disabled = isDisabled;
+          this.buttonGenerate.element.disabled = isDisabled;
+        }
+
+        if (event === 'race') {
+          Track.disableButton(track.buttonStop, isDisabled);
+        }
+      }
+
+      if (this.buttonReset.element instanceof HTMLButtonElement) {
+        this.buttonReset.element.disabled = isDisabled;
+      }
+
+      Track.disableButton(track.buttonEdit, isDisabled);
+      Track.disableButton(track.buttonDelete, isDisabled);
+    });
   }
 }

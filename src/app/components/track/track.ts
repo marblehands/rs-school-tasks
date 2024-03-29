@@ -27,6 +27,15 @@ export default class Track extends BaseComponent {
     this.car = car;
     this.append(this.car.element);
     this.initTrack();
+    this.addSubscribes();
+  }
+
+  private addSubscribes(): void {
+    eventEmitter.subscribe('reset', () => {
+      this.stopCarClickHandler().catch((err) => {
+        console.log(err);
+      });
+    });
   }
 
   // Engine
@@ -173,21 +182,21 @@ export default class Track extends BaseComponent {
     this.car.svg.element.classList.remove('stop');
   }
 
-  public showWinMessage(time: number): void {
-    const message = span(
-      ['race-message'],
-      `🏆 ${this.car.name} wins the race with ${(time / 1000).toFixed(1)}s result`,
-    );
-    this.append(message.element);
+  public showMessage(event: string, time: number = 0): void {
+    const message: Record<string, string> = {
+      win: `🏆 ${this.car.name} wins the race with ${(time / 1000).toFixed(1)}s result`,
+      finish: `🏁 ${this.car.name} finished`,
+      broken: `⛔ ${this.car.name} engine was broken`,
+    };
+    const messageElement = span(['race-message'], `${message[event]}`);
+    this.append(messageElement.element);
   }
 
-  public showBrokenMessage(): void {
-    const message = span(['race-message'], `⛔ ${this.car.name} engine was broken`);
-    this.append(message.element);
-  }
+  public deleteMessages(): void {
+    const message = this.element.querySelector('.race-message');
 
-  public showFinishMessage(): void {
-    const message = span(['race-message'], `🏁 ${this.car.name} finished`);
-    this.append(message.element);
+    if (message) {
+      message.remove();
+    }
   }
 }
