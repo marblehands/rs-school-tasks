@@ -1,5 +1,5 @@
 import './winners.css';
-import { deleteWinner, getCar, getWinners } from '../../api/api';
+import { createWinner, deleteWinner, getCar, getWinners, updateWinner } from '../../api/api';
 import BaseComponent from '../baseComponent/baseComponent';
 import { p, tr } from '../tags/tags';
 import Winner from './winner';
@@ -12,17 +12,19 @@ import type { WinnerObjOptions } from './types';
 export default class Winners extends BaseComponent {
   private winnersInfoElement!: BaseComponent;
 
-  private winners: WinnerObjOptions[];
+  private winners: Record<string, WinnerObjOptions>;
 
-  private winnersRows: WinnerRow[];
+  private winnersRows: Record<string, WinnerRow>;
 
   private winnersNum: number;
 
+  private table!: BaseComponent;
+
   constructor() {
     super({ tag: 'div', classes: ['wrapper-winners'] });
-    this.winners = [];
+    this.winners = {};
     this.winnersNum = 0;
-    this.winnersRows = [];
+    this.winnersRows = {};
     this.initWinners();
     this.addSubscribes();
   }
@@ -35,7 +37,7 @@ export default class Winners extends BaseComponent {
           const winner = new Winner(winnerData);
           const carData = await getCar(winner.id);
 
-          const winnerObj: WinnerObjOptions = {
+          const winnerObj = {
             id: carData.id,
             name: carData.name,
             carInstance: new Car(carData),
@@ -43,11 +45,11 @@ export default class Winners extends BaseComponent {
             bestTime: winner.bestTime,
           };
 
-          this.winners.push(winnerObj);
+          this.winners[carData.id] = winnerObj;
         }),
       );
 
-      this.winnersNum = this.winners.length;
+      this.winnersNum = Object.keys(this.winners).length;
     } catch (error) {
       console.log(error);
     }
@@ -71,7 +73,7 @@ export default class Winners extends BaseComponent {
   }
 
   private updateWinnersInfoElement(): void {
-    this.winnersNum = this.winners.length;
+    this.winnersNum = Object.keys(this.winners).length;
     this.winnersInfoElement.element.textContent = `Winners: ${this.winnersNum}`;
   }
 
@@ -83,37 +85,98 @@ export default class Winners extends BaseComponent {
         console.log(error);
       });
     });
+    eventEmitter.subscribe('winner', ([winner]: [WinnerObjOptions]) => {
+      this.handleNewWinnerEvent(winner).catch((err) => {
+        console.log(err);
+      });
+    });
+  }
+
+  private async handleNewWinnerEvent(winner: WinnerObjOptions): Promise<void> {
+    if (winner.id in this.winners) {
+      try {
+        await this.updateWinner(winner);
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      try {
+        await this.createWinner(winner);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }
+
+  private async createWinner(winner: WinnerObjOptions): Promise<void> {
+    const newCarInstance = winner.carInstance.clone();
+
+    const winnerObj: WinnerObjOptions = {
+      id: winner.id,
+      name: winner.name,
+      carInstance: newCarInstance,
+      wins: 1,
+      bestTime: Number((winner.bestTime / 1000).toFixed(1)),
+    };
+
+    try {
+      await createWinner(winner.id, winnerObj.wins, winnerObj.bestTime);
+      this.winners[winner.id] = winnerObj;
+      this.winnersNum = Object.keys(this.winners).length;
+      const row = new WinnerRow(winnerObj, winner.id, this.winnersNum - 1);
+      this.winnersRows[winner.id] = row;
+      this.table.append(row.element);
+    } catch (err) {
+      console.log('createWinner was not successful');
+    }
+  }
+
+  private async updateWinner(winner: WinnerObjOptions): Promise<void> {
+    try {
+      const winnerNewTime = winner.bestTime;
+      const winnerPreviousTime = this.winners[winner.id].bestTime * 1000;
+
+      if (winnerPreviousTime > winnerNewTime) {
+        this.winners[winner.id].bestTime = Number((winnerNewTime / 1000).toFixed(1));
+      }
+
+      this.winners[winner.id].wins += 1;
+
+      const result = await updateWinner(winner.id, this.winners[winner.id].wins, this.winners[winner.id].bestTime);
+      this.winnersRows[winner.id].wins.element.textContent = `${result.wins}`;
+      this.winnersRows[winner.id].bestTime.element.textContent = `${result.time}s`;
+    } catch (err) {
+      console.log('updateWinner was not successful', err);
+    }
   }
 
   private async deleteWinner(id: number): Promise<void> {
     try {
-      const index = this.winners.findIndex((winner) => winner.id === id);
-
-      if (index !== -1) {
+      if (id in this.winners) {
         await deleteWinner(id);
-        this.winners.splice(index, 1);
-        this.winnersRows[index].destroy();
-        this.winnersRows.splice(index, 1);
+        delete this.winners.id;
+        this.winnersRows[id].destroy();
+        delete this.winnersRows.id;
         this.updateWinnersInfoElement();
       }
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log('deleteWinner was not successful', err);
     }
   }
 
   // View
 
   private createWinnerRows(): void {
-    this.winners.forEach((winner, index) => {
-      const row = new WinnerRow(winner, index);
-      this.winnersRows.push(row);
+    Object.entries(this.winners).forEach((winner, index) => {
+      const row = new WinnerRow(winner[1], Number(winner[0]), index);
+      this.winnersRows[winner[0]] = row;
     });
   }
 
   private createWinnersTable(): void {
     const table = new BaseComponent({ tag: 'table', classes: ['table', 'table-winners'] });
     const thead = new BaseComponent({ tag: 'thead' });
-    const tbody = new BaseComponent({ tag: 'tbody' });
+    this.table = new BaseComponent({ tag: 'tbody' });
 
     // Render table headlines
 
@@ -130,11 +193,11 @@ export default class Winners extends BaseComponent {
 
     // Render winners rows
 
-    this.winnersRows.forEach((row) => {
-      tbody.append(row.element);
+    Object.values(this.winnersRows).forEach((row) => {
+      this.table.append(row.element);
     });
 
-    table.appendChildren([thead.element, tbody.element]);
+    table.appendChildren([thead.element, this.table.element]);
     this.append(table.element);
   }
 }

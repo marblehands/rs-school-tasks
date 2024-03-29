@@ -203,3 +203,45 @@ export function deleteWinner(id: number): Promise<void> {
       throw new Error();
     });
 }
+
+export function createWinner(id: number, wins: number, time: number): Promise<WinnerOptions> {
+  const url = 'http://127.0.0.1:3000/winners/';
+  const options = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id, wins, time }),
+  };
+
+  return fetch(url, options).then((response) => {
+    if (!response.ok) {
+      throw new Error(`createWinner is not successful ${response.status}`);
+    }
+
+    return response.json() as Promise<WinnerOptions>;
+  });
+}
+
+export function updateWinner(id: number, wins: number, time: number): Promise<WinnerOptions> {
+  const url = `http://127.0.0.1:3000/winners/${id}`;
+  const options = {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ wins, time }),
+  };
+
+  return fetch(url, options)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`updateWinner is not successful ${response.status}, winner id: ${id}`);
+      }
+
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      return response.json() as Promise<WinnerOptions>;
+    })
+    .catch((error) => {
+      console.log(error);
+      throw new Error();
+    });
+}

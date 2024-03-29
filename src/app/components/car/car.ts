@@ -69,4 +69,8 @@ export default class Car extends BaseComponent {
   private updateSvgElement(carColor: string): void {
     this.svg.element.innerHTML = Car.createSvg(carColor);
   }
+
+  public clone(): Car {
+    return new Car({ id: this.id, name: this.name, color: this.color });
+  }
 }

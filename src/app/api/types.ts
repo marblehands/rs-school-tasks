@@ -13,3 +13,9 @@ export interface DriveMode {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   success: boolean;
 }
+
+export interface WinnerUpdateOptions {
+  wins: number;
+
+  time: number;
+}

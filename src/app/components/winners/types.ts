@@ -8,9 +8,7 @@ export interface WinnerOptions {
 
 export interface WinnerObjOptions {
   id: number;
-
   name: string;
-
   carInstance: Car;
   wins: number;
   bestTime: number;

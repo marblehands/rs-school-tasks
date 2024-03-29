@@ -4,9 +4,8 @@ import Routes from './services/router/types';
 import Header from './components/header/header';
 import Main from './components/main/main';
 import Footer from './components/footer/footer';
-
-import type Garage from './components/garage/garage';
-import type Winners from './components/winners/winners';
+import Garage from './components/garage/garage';
+import Winners from './components/winners/winners';
 
 export default class App {
   private router: Router;
@@ -15,18 +14,18 @@ export default class App {
 
   private main: Main;
 
-  private garage: Garage | null;
+  private garage: Garage;
 
-  private winners: Winners | null;
+  private winners: Winners;
 
   private footer: Footer;
 
   constructor() {
     this.router = new Router(this.setMainContent);
     this.header = new Header(this.router.navigateTo);
+    this.garage = new Garage();
+    this.winners = new Winners();
     this.main = new Main();
-    this.garage = null;
-    this.winners = null;
     this.footer = new Footer();
   }
 
@@ -35,24 +34,14 @@ export default class App {
     this.router.handleLocation();
   }
 
-  private setMainContent = async (location: Routes): Promise<void> => {
+  private setMainContent = (location: Routes): void => {
     switch (location) {
       case Routes.WINNERS: {
-        if (!this.winners) {
-          const { default: WINNERS } = await import('./components/winners/winners');
-          this.winners = new WINNERS();
-        }
-
         this.main.setContent(this.winners);
         break;
       }
 
       default: {
-        if (!this.garage) {
-          const { default: GARAGE } = await import('./components/garage/garage');
-          this.garage = new GARAGE();
-        }
-
         this.main.setContent(this.garage);
         break;
       }

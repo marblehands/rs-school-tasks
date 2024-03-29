@@ -30,13 +30,14 @@ export default class Garage extends BaseComponent {
 
   private updateCarForm!: BaseComponent;
 
-  private isWinner!: string;
+  private isWinner!: Record<string, number | string | Car> | null;
 
   constructor() {
     super({ tag: 'div', classes: ['wrapper-garage'] });
     this.cars = [];
     this.tracks = [];
     this.carsNum = 0;
+    this.isWinner = null;
     this.createGenerateButton();
     this.createRaceButton();
     this.initGarage();
@@ -62,9 +63,13 @@ export default class Garage extends BaseComponent {
         await this.race();
       };
 
-      race().catch((err) => {
-        console.log(err);
-      });
+      race()
+        .then(() => {
+          eventEmitter.emit('winner', [this.isWinner]);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     });
   }
 
@@ -93,11 +98,11 @@ export default class Garage extends BaseComponent {
 
             if (promise.success && !this.isWinner) {
               const winnerTime = results[track.car.id].time;
-              this.isWinner = track.car.name;
+              this.isWinner = { id: track.car.id, bestTime: winnerTime, name: track.car.name, carInstance: track.car };
               track.showWinMessage(winnerTime);
             }
 
-            if (promise.success && this.isWinner && this.isWinner !== track.car.name) {
+            if (promise.success && this.isWinner && this.isWinner.id !== track.car.id) {
               track.showFinishMessage();
             }
           } catch (error) {

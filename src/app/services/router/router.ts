@@ -1,7 +1,7 @@
 import Routes, { isRoute } from './types';
 
 export default class Router {
-  constructor(private setMainContent: (location: Routes) => Promise<void>) {
+  constructor(private setMainContent: (location: Routes) => void) {
     window.onpopstate = (): void => {
       this.handleLocation();
     };
@@ -20,15 +20,11 @@ export default class Router {
 
     window.history.pushState({}, '', Routes.GARAGE);
 
-    this.setMainContent(location).catch((error) => {
-      console.log(error);
-    });
+    this.setMainContent(location);
   };
 
   public navigateTo = (location: Routes): void => {
     window.history.pushState({}, '', location);
-    this.setMainContent(location).catch((error) => {
-      console.log(error);
-    });
+    this.setMainContent(location);
   };
 }
