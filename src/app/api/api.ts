@@ -1,3 +1,5 @@
+// import eventEmitter from '../services/eventEmitter/eventEmitter';
+
 import type { CarOptions } from '../components/car/types';
 import type { WinnerOptions } from '../components/winners/types';
 import type { DriveMode, EngineOptions, Status } from './types';
@@ -11,8 +13,40 @@ export function getCars(): Promise<CarOptions[]> {
         throw new Error(`getCars is not successful ${response.status}`);
       }
 
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       return response.json() as Promise<CarOptions[]>;
+    })
+    .catch((error) => {
+      console.log(error);
+      throw new Error();
+    });
+}
+
+export function getCarsWithLimit(limit: number, page: number): Promise<CarOptions[]> {
+  return fetch(`http://127.0.0.1:3000/garage/?_page=${page}&_limit=${limit}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`getCarsWithLimit is not successful ${response.status}`);
+      }
+
+      return response.json() as Promise<CarOptions[]>;
+    })
+    .catch((error) => {
+      console.log(error);
+      throw new Error();
+    });
+}
+
+export function getCarsNum(limit: number, page: number): Promise<number> {
+  return fetch(`http://127.0.0.1:3000/garage/?_page=${page}&_limit=${limit}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`getCarsWithLimit is not successful ${response.status}`);
+      }
+
+      const headerTitle = 'X-Total-Count';
+      const carsNum = Number(response.headers.get(headerTitle));
+
+      return carsNum;
     })
     .catch((error) => {
       console.log(error);
@@ -27,7 +61,6 @@ export function getCar(id: number): Promise<CarOptions> {
         throw new Error(`getCar is not successful ${response.status}`);
       }
 
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       return response.json() as Promise<CarOptions>;
     })
     .catch((error) => {
@@ -52,7 +85,6 @@ export function createCar(name: string, color: string): Promise<CarOptions> {
         throw new Error(`createCar is not successful ${response.status}`);
       }
 
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       return response.json() as Promise<CarOptions>;
     })
     .catch((error) => {
@@ -96,7 +128,6 @@ export function updateCar(id: number, name: string, color: string): Promise<CarO
         throw new Error(`updateCar is not successful ${response.status}, car id: ${id}`);
       }
 
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       return response.json() as Promise<CarOptions>;
     })
     .catch((error) => {
@@ -119,7 +150,6 @@ export function startStopCar(id: number, status: Status): Promise<EngineOptions>
         throw new Error(`startCar is not successful ${response.status}`);
       }
 
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       return response.json() as Promise<EngineOptions>;
     })
     .catch((error) => {
@@ -158,7 +188,6 @@ export function setDriveMode(id: number, status: Status): Promise<DriveMode> {
         );
       }
 
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       return response.json() as Promise<DriveMode>;
     })
     .catch((error) => {
@@ -176,7 +205,6 @@ export function getWinners(): Promise<WinnerOptions[]> {
         throw new Error(`getWinners is not successful ${response.status}`);
       }
 
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       return response.json() as Promise<WinnerOptions[]>;
     })
     .catch((error) => {
@@ -237,7 +265,6 @@ export function updateWinner(id: number, wins: number, time: number): Promise<Wi
         throw new Error(`updateWinner is not successful ${response.status}, winner id: ${id}`);
       }
 
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       return response.json() as Promise<WinnerOptions>;
     })
     .catch((error) => {
