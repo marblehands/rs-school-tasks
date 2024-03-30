@@ -75,6 +75,7 @@ export default class Garage extends BaseComponent {
       race()
         .then(() => {
           eventEmitter.emit('winner', [this.isWinner]);
+          console.log(this.isWinner);
           this.disableControls(false, 'stop');
         })
         .catch((err) => {

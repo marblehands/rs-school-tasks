@@ -1,11 +1,20 @@
 import './winners.css';
-import { createWinner, deleteWinner, getCar, getWinners, updateWinner } from '../../api/api';
+import {
+  createWinner,
+  deleteWinner,
+  getCar,
+  getWinners,
+  getWinnersNum,
+  getWinnersWithLimit,
+  updateWinner,
+} from '../../api/api';
 import BaseComponent from '../baseComponent/baseComponent';
-import { p, tr } from '../tags/tags';
+import { div, p, tr } from '../tags/tags';
 import Winner from './winner';
 import Car from '../car/car';
 import WinnerRow from './winnerRow';
 import eventEmitter from '../../services/eventEmitter/eventEmitter';
+import Pagination from '../pagination/pagination';
 
 import type { WinnerObjOptions } from './types';
 
@@ -20,13 +29,60 @@ export default class Winners extends BaseComponent {
 
   private table!: BaseComponent;
 
+  private pagination: Pagination;
+
   constructor() {
     super({ tag: 'div', classes: ['wrapper-winners'] });
     this.winners = {};
     this.winnersNum = 0;
     this.winnersRows = {};
+    this.pagination = new Pagination(10);
     this.initWinners();
     this.addSubscribes();
+  }
+
+  private async loadWinnersPerPage(): Promise<void> {
+    try {
+      const winnersDataPerPage = await getWinnersWithLimit(this.pagination.limit, this.pagination.currentPageNum);
+      this.winnersNum = await getWinnersNum(this.pagination.limit, this.pagination.currentPageNum);
+      this.pagination.pagesNum = Math.ceil(this.winnersNum / this.pagination.limit);
+      this.winners = {};
+
+      await Promise.all(
+        winnersDataPerPage.map(async (winnerData) => {
+          const winner = new Winner(winnerData);
+          const carData = await getCar(winner.id);
+          const winnerObj = {
+            id: carData.id,
+            name: carData.name,
+            carInstance: new Car(carData),
+            wins: winner.wins,
+            bestTime: winner.bestTime,
+          };
+          this.winners[carData.id] = winnerObj;
+        }),
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  private updateWinners(): void {
+    this.loadWinnersPerPage()
+      .then(() => {
+        Object.values(this.winnersRows).forEach((row) => {
+          row.destroy();
+        });
+        this.winnersRows = {};
+        this.createWinnerRows();
+        console.log(this.winners);
+        Object.values(this.winnersRows).forEach((row) => {
+          this.table.append(row.element);
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   private async loadWinners(): Promise<void> {
@@ -56,7 +112,7 @@ export default class Winners extends BaseComponent {
   }
 
   private initWinners(): void {
-    this.loadWinners()
+    this.loadWinnersPerPage()
       .then(() => {
         this.createWinnersInfoElement();
         this.createWinnerRows();
@@ -67,13 +123,19 @@ export default class Winners extends BaseComponent {
       });
   }
 
+  // private createWinnersInfoElement(): void {
+  //   this.winnersInfoElement = p(['headline2'], `Winners: ${this.winnersNum}`);
+  //   this.prepend(this.winnersInfoElement.element);
+  // }
+
   private createWinnersInfoElement(): void {
+    const wrapper = div(['wrapper-info']);
     this.winnersInfoElement = p(['headline2'], `Winners: ${this.winnersNum}`);
-    this.prepend(this.winnersInfoElement.element);
+    wrapper.appendChildren([this.winnersInfoElement.element, this.pagination.element]);
+    this.prepend(wrapper.element);
   }
 
   private updateWinnersInfoElement(): void {
-    this.winnersNum = Object.keys(this.winners).length;
     this.winnersInfoElement.element.textContent = `Winners: ${this.winnersNum}`;
   }
 
@@ -91,9 +153,15 @@ export default class Winners extends BaseComponent {
         console.log(err);
       });
     });
+    eventEmitter.subscribe('pagination', () => {
+      this.updateWinners();
+    });
   }
 
   private async handleNewWinnerEvent(winner: WinnerObjOptions): Promise<void> {
+    console.log(winner.id, this.winners);
+    console.log(winner.id in this.winners);
+
     if (winner.id in this.winners) {
       try {
         await this.updateWinner(winner);

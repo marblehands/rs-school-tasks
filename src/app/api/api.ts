@@ -213,6 +213,39 @@ export function getWinners(): Promise<WinnerOptions[]> {
     });
 }
 
+export function getWinnersWithLimit(limit: number, page: number): Promise<WinnerOptions[]> {
+  return fetch(`http://127.0.0.1:3000/winners/?_page=${page}&_limit=${limit}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`getWinnersWithLimit is not successful ${response.status}`);
+      }
+
+      return response.json() as Promise<WinnerOptions[]>;
+    })
+    .catch((error) => {
+      console.log(error);
+      throw new Error();
+    });
+}
+
+export function getWinnersNum(limit: number, page: number): Promise<number> {
+  return fetch(`http://127.0.0.1:3000/winners/?_page=${page}&_limit=${limit}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`getWinnersNum is not successful ${response.status}`);
+      }
+
+      const headerTitle = 'X-Total-Count';
+      const winnersNum = Number(response.headers.get(headerTitle));
+
+      return winnersNum;
+    })
+    .catch((error) => {
+      console.log(error);
+      throw new Error();
+    });
+}
+
 export function deleteWinner(id: number): Promise<void> {
   const url = `http://127.0.0.1:3000/winners/${id}`;
 
