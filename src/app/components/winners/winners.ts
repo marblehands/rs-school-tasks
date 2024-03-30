@@ -1,13 +1,5 @@
 import './winners.css';
-import {
-  createWinner,
-  deleteWinner,
-  getCar,
-  getWinners,
-  getWinnersNum,
-  getWinnersWithLimit,
-  updateWinner,
-} from '../../api/api';
+import { createWinner, deleteWinner, getCar, getWinnersNum, getWinnersWithLimit, updateWinner } from '../../api/api';
 import BaseComponent from '../baseComponent/baseComponent';
 import { div, p, tr } from '../tags/tags';
 import Winner from './winner';
@@ -47,6 +39,7 @@ export default class Winners extends BaseComponent {
       this.winnersNum = await getWinnersNum(this.pagination.limit, this.pagination.currentPageNum);
       this.pagination.pagesNum = Math.ceil(this.winnersNum / this.pagination.limit);
       this.winners = {};
+      this.pagination.toggleNextButton();
 
       await Promise.all(
         winnersDataPerPage.map(async (winnerData) => {
@@ -85,32 +78,6 @@ export default class Winners extends BaseComponent {
       });
   }
 
-  private async loadWinners(): Promise<void> {
-    try {
-      const winnersData = await getWinners();
-      await Promise.all(
-        winnersData.map(async (winnerData) => {
-          const winner = new Winner(winnerData);
-          const carData = await getCar(winner.id);
-
-          const winnerObj = {
-            id: carData.id,
-            name: carData.name,
-            carInstance: new Car(carData),
-            wins: winner.wins,
-            bestTime: winner.bestTime,
-          };
-
-          this.winners[carData.id] = winnerObj;
-        }),
-      );
-
-      this.winnersNum = Object.keys(this.winners).length;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   private initWinners(): void {
     this.loadWinnersPerPage()
       .then(() => {
@@ -123,19 +90,17 @@ export default class Winners extends BaseComponent {
       });
   }
 
-  // private createWinnersInfoElement(): void {
-  //   this.winnersInfoElement = p(['headline2'], `Winners: ${this.winnersNum}`);
-  //   this.prepend(this.winnersInfoElement.element);
-  // }
-
   private createWinnersInfoElement(): void {
     const wrapper = div(['wrapper-info']);
     this.winnersInfoElement = p(['headline2'], `Winners: ${this.winnersNum}`);
+    this.pagination.toggleNextButton();
     wrapper.appendChildren([this.winnersInfoElement.element, this.pagination.element]);
     this.prepend(wrapper.element);
   }
 
-  private updateWinnersInfoElement(): void {
+  private async updateWinnersInfoElement(): Promise<void> {
+    this.winnersNum = await getWinnersNum(this.pagination.limit, this.pagination.currentPageNum);
+    this.pagination.toggleNextButton();
     this.winnersInfoElement.element.textContent = `Winners: ${this.winnersNum}`;
   }
 
@@ -146,7 +111,9 @@ export default class Winners extends BaseComponent {
       this.deleteWinner(id).catch((error) => {
         console.log(error);
       });
-      this.updateWinnersInfoElement();
+      this.updateWinnersInfoElement().catch((error) => {
+        console.log(error);
+      });
     });
     eventEmitter.subscribe('winner', ([winner]: [WinnerObjOptions]) => {
       this.handleNewWinnerEvent(winner).catch((err) => {
@@ -190,11 +157,10 @@ export default class Winners extends BaseComponent {
 
     try {
       await createWinner(winner.id, winnerObj.wins, winnerObj.bestTime);
-      this.winners[winner.id] = winnerObj;
-      this.updateWinnersInfoElement();
-      const row = new WinnerRow(winnerObj, winner.id, this.winnersNum - 1);
-      this.winnersRows[winner.id] = row;
-      this.table.append(row.element);
+      this.updateWinners();
+      this.updateWinnersInfoElement().catch((error) => {
+        console.log(error);
+      });
     } catch (err) {
       console.log('createWinner was not successful');
     }
@@ -223,14 +189,13 @@ export default class Winners extends BaseComponent {
     try {
       if (id in this.winners) {
         await deleteWinner(id);
-        delete this.winners[id];
-        this.winnersRows[id].destroy();
-        delete this.winnersRows[id];
-
-        this.updateWinnersInfoElement();
-        console.log(this.winnersNum);
-        console.log(this.winnersRows);
-        console.log(this.winners);
+        // delete this.winners[id];
+        // this.winnersRows[id].destroy();
+        // delete this.winnersRows[id];
+        this.updateWinners();
+        this.updateWinnersInfoElement().catch((error) => {
+          console.log(error);
+        });
       }
     } catch (err) {
       console.log('deleteWinner was not successful', err);
@@ -241,7 +206,8 @@ export default class Winners extends BaseComponent {
 
   private createWinnerRows(): void {
     Object.entries(this.winners).forEach((winner, index) => {
-      const row = new WinnerRow(winner[1], Number(winner[0]), index);
+      const num = index + (this.pagination.currentPageNum - 1) * this.pagination.limit;
+      const row = new WinnerRow(winner[1], Number(winner[0]), num);
       this.winnersRows[winner[0]] = row;
     });
   }

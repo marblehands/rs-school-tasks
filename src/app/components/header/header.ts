@@ -35,13 +35,21 @@ export default class Header extends BaseComponent {
 
   private addSubscribes(): void {
     eventEmitter.subscribe('race', () => {
-      if (this.buttonWinners.element instanceof HTMLButtonElement) {
+      if (
+        this.buttonWinners.element instanceof HTMLButtonElement &&
+        this.buttonGarage.element instanceof HTMLButtonElement
+      ) {
         this.buttonWinners.element.disabled = true;
+        this.buttonGarage.element.disabled = true;
       }
     });
-    eventEmitter.subscribe('winner', () => {
-      if (this.buttonWinners.element instanceof HTMLButtonElement) {
+    eventEmitter.subscribe('reset', () => {
+      if (
+        this.buttonWinners.element instanceof HTMLButtonElement &&
+        this.buttonGarage.element instanceof HTMLButtonElement
+      ) {
         this.buttonWinners.element.disabled = false;
+        this.buttonGarage.element.disabled = false;
       }
     });
   }

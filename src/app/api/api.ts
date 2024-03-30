@@ -147,7 +147,7 @@ export function startStopCar(id: number, status: Status): Promise<EngineOptions>
   return fetch(url, options)
     .then((response) => {
       if (!response.ok) {
-        throw new Error(`startCar is not successful ${response.status}`);
+        throw new Error(`startStopCar with ${status} status  is not successful ${response.status}`);
       }
 
       return response.json() as Promise<EngineOptions>;

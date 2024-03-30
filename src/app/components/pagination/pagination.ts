@@ -4,9 +4,9 @@ import eventEmitter from '../../services/eventEmitter/eventEmitter';
 import { Direction } from './types';
 
 export default class Pagination extends BaseComponent {
-  private buttonNext!: BaseComponent;
+  public buttonNext: BaseComponent;
 
-  private buttonPrev!: BaseComponent;
+  public buttonPrev: BaseComponent;
 
   public limit: number;
 
@@ -21,19 +21,19 @@ export default class Pagination extends BaseComponent {
     this.pagesNum = null;
     this.limit = limit;
     this.currentPageNum = 1;
+    this.buttonNext = this.createNextButton();
+    this.buttonPrev = this.createPrevButton();
     this.createPagination();
   }
 
   // View
   private createPagination(): void {
-    this.createPrevButton();
     this.currentPageElement = span(['current-page'], `Page: ${this.currentPageNum}`);
-    this.append(this.currentPageElement.element);
-    this.createNextButton();
+    this.appendChildren([this.buttonPrev.element, this.currentPageElement.element, this.buttonNext.element]);
   }
 
-  private createPrevButton(): void {
-    this.buttonPrev = new BaseComponent({
+  private createPrevButton(): BaseComponent {
+    const button = new BaseComponent({
       tag: 'button',
       classes: ['button', 'button-prev'],
       content: 'Prev',
@@ -43,15 +43,15 @@ export default class Pagination extends BaseComponent {
       },
     });
 
-    if (this.buttonPrev.element instanceof HTMLButtonElement) {
-      this.buttonPrev.element.disabled = true;
+    if (button.element instanceof HTMLButtonElement) {
+      button.element.disabled = true;
     }
 
-    this.append(this.buttonPrev.element);
+    return button;
   }
 
-  private createNextButton(): void {
-    this.buttonNext = new BaseComponent({
+  private createNextButton(): BaseComponent {
+    const button = new BaseComponent({
       tag: 'button',
       classes: ['button', 'button-next'],
       content: 'Next',
@@ -60,7 +60,8 @@ export default class Pagination extends BaseComponent {
         this.clickHandler(Direction.NEXT);
       },
     });
-    this.append(this.buttonNext.element);
+
+    return button;
   }
 
   private clickHandler(direction: Direction): void {
@@ -72,7 +73,7 @@ export default class Pagination extends BaseComponent {
     }
   }
 
-  private disableButton(isDisabled: boolean, button: string): void {
+  public disableButton(isDisabled: boolean, button: string): void {
     if (button === 'next' && this.buttonNext.element instanceof HTMLButtonElement) {
       this.buttonNext.element.disabled = isDisabled;
     }
@@ -93,6 +94,12 @@ export default class Pagination extends BaseComponent {
       this.currentPageNum -= 1;
       this.currentPageElement.element.textContent = `Page: ${this.currentPageNum}`;
       console.log(this.currentPageNum, this.pagesNum);
+    }
+  }
+
+  public toggleNextButton(): void {
+    if (this.buttonNext.element instanceof HTMLButtonElement) {
+      this.buttonNext.element.disabled = this.currentPageNum === this.pagesNum;
     }
   }
 }

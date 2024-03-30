@@ -75,7 +75,6 @@ export default class Garage extends BaseComponent {
       race()
         .then(() => {
           eventEmitter.emit('winner', [this.isWinner]);
-          console.log(this.isWinner);
           this.disableControls(false, 'stop');
         })
         .catch((err) => {
@@ -155,6 +154,7 @@ export default class Garage extends BaseComponent {
   private async race(): Promise<void> {
     const results: Record<string, RaceResult> = {};
     this.disableControls(true, 'race');
+    this.disablePagination('race');
 
     try {
       await Promise.all(
@@ -220,6 +220,7 @@ export default class Garage extends BaseComponent {
 
   private resetButtonClickHandler(): void {
     this.disableControls(false, 'reset');
+    this.disablePagination('reset');
     this.tracks.forEach((track) => {
       track.deleteMessages();
     });
@@ -328,6 +329,7 @@ export default class Garage extends BaseComponent {
   private createGarageInfoElement(): void {
     const wrapper = div(['wrapper-info']);
     this.garageInfoElement = p(['headline2'], `Garage: ${this.carsNum}`);
+    this.pagination.toggleNextButton();
     wrapper.appendChildren([this.garageInfoElement.element, this.pagination.element]);
     this.prepend(wrapper.element);
   }
@@ -336,27 +338,53 @@ export default class Garage extends BaseComponent {
     try {
       this.carsNum = await getCarsNum(this.pagination.limit, this.pagination.currentPageNum);
       this.garageInfoElement.element.textContent = `Garage: ${this.carsNum}`;
+      this.pagination.toggleNextButton();
     } catch (err) {
       console.log(err);
     }
   }
 
+  private disablePagination(event: string): void {
+    if (event === 'race') {
+      this.pagination.disableButton(true, 'next');
+      this.pagination.disableButton(true, 'prev');
+    }
+
+    if (event === 'reset') {
+      console.log(this.pagination.currentPageNum, this.pagination.pagesNum);
+
+      if (this.pagination.currentPageNum !== this.pagination.pagesNum) {
+        this.pagination.disableButton(false, 'next');
+      }
+
+      if (this.pagination.currentPageNum !== 1) {
+        this.pagination.disableButton(false, 'prev');
+      }
+    }
+  }
+
   private disableControls(isDisabled: boolean, event: string): void {
-    this.createCarForm.disable(isDisabled);
+    if (this.buttonReset.element instanceof HTMLButtonElement) {
+      this.buttonReset.element.disabled = isDisabled;
+    }
+
+    if (event === 'reset' || event === 'race') {
+      this.createCarForm.disable(isDisabled);
+
+      if (
+        this.buttonRace.element instanceof HTMLButtonElement &&
+        this.buttonGenerate.element instanceof HTMLButtonElement &&
+        this.buttonReset.element instanceof HTMLButtonElement
+      ) {
+        this.buttonRace.element.disabled = isDisabled;
+        this.buttonReset.element.disabled = isDisabled;
+        this.buttonGenerate.element.disabled = isDisabled;
+      }
+    }
 
     this.tracks.forEach((track) => {
       if (event === 'race' || event === 'reset') {
         Track.disableButton(track.buttonStart, isDisabled);
-
-        if (
-          this.buttonRace.element instanceof HTMLButtonElement &&
-          this.buttonGenerate.element instanceof HTMLButtonElement &&
-          this.buttonReset.element instanceof HTMLButtonElement
-        ) {
-          this.buttonRace.element.disabled = isDisabled;
-          this.buttonReset.element.disabled = isDisabled;
-          this.buttonGenerate.element.disabled = isDisabled;
-        }
 
         if (event === 'race') {
           Track.disableButton(track.buttonStop, isDisabled);
@@ -368,10 +396,6 @@ export default class Garage extends BaseComponent {
           Track.disableButton(track.buttonEdit, isDisabled);
           Track.disableButton(track.buttonDelete, isDisabled);
         }
-      }
-
-      if (this.buttonReset.element instanceof HTMLButtonElement) {
-        this.buttonReset.element.disabled = isDisabled;
       }
     });
   }
