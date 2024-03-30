@@ -39,7 +39,7 @@ export default class Winners extends BaseComponent {
       this.winnersNum = await getWinnersNum(this.pagination.limit, this.pagination.currentPageNum);
       this.pagination.pagesNum = Math.ceil(this.winnersNum / this.pagination.limit);
       this.winners = {};
-      this.pagination.toggleNextButton();
+      this.pagination.toggleNextPrevButton();
 
       await Promise.all(
         winnersDataPerPage.map(async (winnerData) => {
@@ -93,14 +93,14 @@ export default class Winners extends BaseComponent {
   private createWinnersInfoElement(): void {
     const wrapper = div(['wrapper-info']);
     this.winnersInfoElement = p(['headline2'], `Winners: ${this.winnersNum}`);
-    this.pagination.toggleNextButton();
+    this.pagination.toggleNextPrevButton();
     wrapper.appendChildren([this.winnersInfoElement.element, this.pagination.element]);
     this.prepend(wrapper.element);
   }
 
   private async updateWinnersInfoElement(): Promise<void> {
     this.winnersNum = await getWinnersNum(this.pagination.limit, this.pagination.currentPageNum);
-    this.pagination.toggleNextButton();
+    this.pagination.toggleNextPrevButton();
     this.winnersInfoElement.element.textContent = `Winners: ${this.winnersNum}`;
   }
 

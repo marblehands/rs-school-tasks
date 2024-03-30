@@ -13,3 +13,9 @@ export interface WinnerObjOptions {
   wins: number;
   bestTime: number;
 }
+
+export enum SortIcon {
+  UP = '↑',
+  DOWN = '↓',
+  NONE = '',
+}

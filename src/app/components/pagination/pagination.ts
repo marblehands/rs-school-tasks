@@ -83,23 +83,29 @@ export default class Pagination extends BaseComponent {
     }
   }
 
-  private updateCurrentPageElement(direction: Direction): void {
+  public updateCurrentPageElement(direction: Direction): void {
     if (this.pagesNum && direction === Direction.NEXT && this.currentPageNum < this.pagesNum) {
       this.currentPageNum += 1;
       this.currentPageElement.element.textContent = `Page: ${this.currentPageNum}`;
+      this.toggleNextPrevButton();
       console.log(this.currentPageNum, this.pagesNum);
     }
 
     if (this.pagesNum && direction === Direction.PREV && this.currentPageNum > 1) {
       this.currentPageNum -= 1;
       this.currentPageElement.element.textContent = `Page: ${this.currentPageNum}`;
+      this.toggleNextPrevButton();
       console.log(this.currentPageNum, this.pagesNum);
     }
   }
 
-  public toggleNextButton(): void {
+  public toggleNextPrevButton(): void {
     if (this.buttonNext.element instanceof HTMLButtonElement) {
       this.buttonNext.element.disabled = this.currentPageNum === this.pagesNum;
+    }
+
+    if (this.buttonPrev.element instanceof HTMLButtonElement) {
+      this.buttonPrev.element.disabled = this.currentPageNum === 1;
     }
   }
 }

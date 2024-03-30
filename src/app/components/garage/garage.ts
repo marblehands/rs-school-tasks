@@ -10,6 +10,7 @@ import UpdateForm from '../updateForm/updateForm';
 import CreateForm from '../createForm/createForm';
 import { Status } from '../../api/types';
 import Pagination from '../pagination/pagination';
+import { Direction } from '../pagination/types';
 
 import type { RaceResult } from './types';
 
@@ -101,7 +102,14 @@ export default class Garage extends BaseComponent {
 
   private async loadCarsPerPage(): Promise<void> {
     try {
-      const carsDataPerPage = await getCarsWithLimit(this.pagination.limit, this.pagination.currentPageNum);
+      let carsDataPerPage = await getCarsWithLimit(this.pagination.limit, this.pagination.currentPageNum);
+
+      if (!Object.keys(carsDataPerPage).length) {
+        this.pagination.updateCurrentPageElement(Direction.PREV);
+        this.pagination.toggleNextPrevButton();
+        carsDataPerPage = await getCarsWithLimit(this.pagination.limit, this.pagination.currentPageNum);
+      }
+
       this.carsNum = await getCarsNum(this.pagination.limit, this.pagination.currentPageNum);
       this.pagination.pagesNum = Math.ceil(this.carsNum / this.pagination.limit);
       this.cars = carsDataPerPage.map((carData) => new Car(carData));
@@ -329,7 +337,7 @@ export default class Garage extends BaseComponent {
   private createGarageInfoElement(): void {
     const wrapper = div(['wrapper-info']);
     this.garageInfoElement = p(['headline2'], `Garage: ${this.carsNum}`);
-    this.pagination.toggleNextButton();
+    this.pagination.toggleNextPrevButton();
     wrapper.appendChildren([this.garageInfoElement.element, this.pagination.element]);
     this.prepend(wrapper.element);
   }
@@ -338,7 +346,7 @@ export default class Garage extends BaseComponent {
     try {
       this.carsNum = await getCarsNum(this.pagination.limit, this.pagination.currentPageNum);
       this.garageInfoElement.element.textContent = `Garage: ${this.carsNum}`;
-      this.pagination.toggleNextButton();
+      this.pagination.toggleNextPrevButton();
     } catch (err) {
       console.log(err);
     }
