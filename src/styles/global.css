@@ -1,15 +1,42 @@
+@import url('variables.css');
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+html {
+  font-size: 16px;
+}
+
 .body {
+  position: relative;
+
   display: flex;
   flex-direction: column;
   gap: 1em;
   justify-content: flex-start;
 
-  height: 100vh;
+  min-height: 100vh;
   padding: 2em;
+
+  font: var(--body-text-font);
+  color: var(--text-color-dark);
+}
+
+.body::after {
+  content: '';
+
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  left: 0;
+
+  display: block;
+
+  width: 100vw;
+  height: 100vh;
+
+  background: url('../assets/body-bg.jpg') center/cover no-repeat;
 }

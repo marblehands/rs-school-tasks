@@ -13,7 +13,7 @@ export default class Header extends BaseComponent {
     super({ tag: 'header', classes: ['header'] });
     this.buttonGarage = new BaseComponent({
       tag: 'button',
-      classes: ['button', 'button-garage'],
+      classes: ['button', 'button-primary', 'button-garage'],
       content: 'Garage',
       event: 'click',
       callback: (): void => {
@@ -22,7 +22,7 @@ export default class Header extends BaseComponent {
     });
     this.buttonWinners = new BaseComponent({
       tag: 'button',
-      classes: ['button', 'button-winners'],
+      classes: ['button', 'button-primary', 'button-winners'],
       content: 'Winners',
       event: 'click',
       callback: (): void => {
@@ -57,7 +57,7 @@ export default class Header extends BaseComponent {
   private createHeader(): void {
     const wrapper = div(['wrapper']);
     const nav = new BaseComponent({ tag: 'nav', classes: ['nav'] });
-    const logo = p(['logo'], 'Async Race');
+    const logo = p(['logo', 'logo-gradient'], 'Async Race');
     wrapper.append(logo.element);
     nav.appendChildren([this.buttonGarage.element, this.buttonWinners.element]);
     this.appendChildren([wrapper.element, nav.element]);

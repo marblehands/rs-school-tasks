@@ -1,0 +1,16 @@
+:root {
+  --text-color-dark: #143c3c;
+  --text-color-light: #d2f0cd;
+  --stroke-color: #8ab68e;
+  --button-bg-color: var(--text-color-light);
+  --button-bg-color-hover: var(--text-color-dark);
+  --button-bg-color-disabled: #c1ebba;
+  --button-text-color: var(--text-color-dark);
+  --button-text-color-hover: var(--text-color-light);
+  --button-stroke: 2px solid var(--stroke-color);
+  --button-stroke-hover: 2px solid var(--button-bg-color-hover);
+  --button-primary-font: 600 24px/24px 'Dosis', sans-serif;
+  --logo: 2.25em/2.25em 'Sriracha', cursive;
+  --body-text-font: 600 16px/1.25em 'Dosis', sans-serif;
+  --h1-text-font: 700 1.5em 'Dosis', sans-serif;
+}

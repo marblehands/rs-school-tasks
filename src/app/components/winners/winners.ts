@@ -154,7 +154,7 @@ export default class Winners extends BaseComponent {
   }
 
   private async handleNewWinnerEvent(winner: WinnerObjOptions): Promise<void> {
-    if (winner.id in this.winners) {
+    if (this.winners.has(winner.id)) {
       try {
         await this.updateWinner(winner);
       } catch (err) {
@@ -195,8 +195,12 @@ export default class Winners extends BaseComponent {
     try {
       const winnerNewTime = winner.bestTime;
       const winnerObj = this.winners.get(winner.id);
+      console.log(winnerObj);
 
-      if (winnerObj?.bestTime) {
+      if (winnerObj) {
+        console.log(winner.id);
+        console.log(winnerObj.wins);
+        console.log(winnerObj.bestTime);
         const winnerPreviousTime = winnerObj.bestTime * 1000;
 
         if (winnerPreviousTime > winnerNewTime) {
@@ -205,6 +209,7 @@ export default class Winners extends BaseComponent {
         }
 
         winnerObj.wins += 1;
+
         const result = await updateWinner(winner.id, winnerObj.wins, winnerObj.bestTime);
 
         const row = this.winnersRows.get(winner.id);
@@ -221,7 +226,7 @@ export default class Winners extends BaseComponent {
 
   private async deleteWinner(id: number): Promise<void> {
     try {
-      if (id in this.winners) {
+      if (this.winners.has(id)) {
         await deleteWinner(id);
         this.updateWinners();
         this.updateWinnersInfoElement().catch((error) => {
