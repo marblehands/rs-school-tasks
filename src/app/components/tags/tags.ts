@@ -31,3 +31,6 @@ export const tr = (classes?: string[]): BaseComponent => new BaseComponent({ tag
 
 export const td = (content: string, classes?: string[]): BaseComponent =>
   new BaseComponent({ tag: 'td', classes, content });
+
+export const th = (content: string, classes?: string[]): BaseComponent =>
+  new BaseComponent({ tag: 'th', classes, content });

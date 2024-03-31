@@ -228,6 +228,21 @@ export function getWinnersWithLimit(limit: number, page: number): Promise<Winner
     });
 }
 
+export function getWinnersWithSort(limit: number, page: number, sort: string, order: string): Promise<WinnerOptions[]> {
+  return fetch(`http://127.0.0.1:3000/winners/?_page=${page}&_limit=${limit}&_sort=${sort}&_order=${order}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`getWinnersWithSort is not successful ${response.status}`);
+      }
+
+      return response.json() as Promise<WinnerOptions[]>;
+    })
+    .catch((error) => {
+      console.log(error);
+      throw new Error();
+    });
+}
+
 export function getWinnersNum(limit: number, page: number): Promise<number> {
   return fetch(`http://127.0.0.1:3000/winners/?_page=${page}&_limit=${limit}`)
     .then((response) => {

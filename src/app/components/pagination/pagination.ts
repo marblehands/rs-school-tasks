@@ -88,14 +88,12 @@ export default class Pagination extends BaseComponent {
       this.currentPageNum += 1;
       this.currentPageElement.element.textContent = `Page: ${this.currentPageNum}`;
       this.toggleNextPrevButton();
-      console.log(this.currentPageNum, this.pagesNum);
     }
 
     if (this.pagesNum && direction === Direction.PREV && this.currentPageNum > 1) {
       this.currentPageNum -= 1;
       this.currentPageElement.element.textContent = `Page: ${this.currentPageNum}`;
       this.toggleNextPrevButton();
-      console.log(this.currentPageNum, this.pagesNum);
     }
   }
 

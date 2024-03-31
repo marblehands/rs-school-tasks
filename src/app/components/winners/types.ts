@@ -15,7 +15,18 @@ export interface WinnerObjOptions {
 }
 
 export enum SortIcon {
-  UP = '↑',
-  DOWN = '↓',
+  ASC = '↑',
+  DESC = '↓',
   NONE = '',
+}
+
+export enum Sorting {
+  ID = 'id',
+  WINS = 'wins',
+  TIME = 'time',
+}
+
+export enum Order {
+  ASC = 'ASC',
+  DESC = 'DESC',
 }

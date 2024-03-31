@@ -1,21 +1,41 @@
 import './winners.css';
-import { createWinner, deleteWinner, getCar, getWinnersNum, getWinnersWithLimit, updateWinner } from '../../api/api';
+import {
+  createWinner,
+  deleteWinner,
+  getCar,
+  getWinnersNum,
+  getWinnersWithLimit,
+  getWinnersWithSort,
+  updateWinner,
+} from '../../api/api';
 import BaseComponent from '../baseComponent/baseComponent';
-import { div, p, tr } from '../tags/tags';
+import { div, p, th, tr } from '../tags/tags';
 import Winner from './winner';
 import Car from '../car/car';
 import WinnerRow from './winnerRow';
 import eventEmitter from '../../services/eventEmitter/eventEmitter';
 import Pagination from '../pagination/pagination';
+import { Order, SortIcon, Sorting, type WinnerObjOptions } from './types';
 
-import type { WinnerObjOptions } from './types';
+function getSortIcon(order: Order): SortIcon {
+  switch (order) {
+    case Order.ASC:
+      return SortIcon.ASC;
+
+    case Order.DESC:
+      return SortIcon.DESC;
+
+    default:
+      return SortIcon.NONE;
+  }
+}
 
 export default class Winners extends BaseComponent {
   private winnersInfoElement!: BaseComponent;
 
-  private winners: Record<string, WinnerObjOptions>;
+  private winners: Map<number, WinnerObjOptions>;
 
-  private winnersRows: Record<string, WinnerRow>;
+  private winnersRows: Map<number, WinnerRow>;
 
   private winnersNum: number;
 
@@ -23,12 +43,21 @@ export default class Winners extends BaseComponent {
 
   private pagination: Pagination;
 
+  private sortTimeButton: BaseComponent;
+
+  private sortWinsButton: BaseComponent;
+
+  private sortOrderDefault: Order;
+
   constructor() {
     super({ tag: 'div', classes: ['wrapper-winners'] });
-    this.winners = {};
+    this.winners = new Map();
     this.winnersNum = 0;
-    this.winnersRows = {};
+    this.winnersRows = new Map();
     this.pagination = new Pagination(10);
+    this.sortTimeButton = this.createSortButton(Sorting.TIME);
+    this.sortWinsButton = this.createSortButton(Sorting.WINS);
+    this.sortOrderDefault = Order.DESC;
     this.initWinners();
     this.addSubscribes();
   }
@@ -38,7 +67,7 @@ export default class Winners extends BaseComponent {
       const winnersDataPerPage = await getWinnersWithLimit(this.pagination.limit, this.pagination.currentPageNum);
       this.winnersNum = await getWinnersNum(this.pagination.limit, this.pagination.currentPageNum);
       this.pagination.pagesNum = Math.ceil(this.winnersNum / this.pagination.limit);
-      this.winners = {};
+      this.winners = new Map();
       this.pagination.toggleNextPrevButton();
 
       await Promise.all(
@@ -52,7 +81,7 @@ export default class Winners extends BaseComponent {
             wins: winner.wins,
             bestTime: winner.bestTime,
           };
-          this.winners[carData.id] = winnerObj;
+          this.winners.set(carData.id, winnerObj);
         }),
       );
     } catch (err) {
@@ -63,13 +92,12 @@ export default class Winners extends BaseComponent {
   private updateWinners(): void {
     this.loadWinnersPerPage()
       .then(() => {
-        Object.values(this.winnersRows).forEach((row) => {
+        this.winnersRows.forEach((row) => {
           row.destroy();
         });
-        this.winnersRows = {};
+        this.winnersRows = new Map();
         this.createWinnerRows();
-        console.log(this.winners);
-        Object.values(this.winnersRows).forEach((row) => {
+        this.winnersRows.forEach((row) => {
           this.table.append(row.element);
         });
       })
@@ -126,9 +154,6 @@ export default class Winners extends BaseComponent {
   }
 
   private async handleNewWinnerEvent(winner: WinnerObjOptions): Promise<void> {
-    console.log(winner.id, this.winners);
-    console.log(winner.id in this.winners);
-
     if (winner.id in this.winners) {
       try {
         await this.updateWinner(winner);
@@ -169,17 +194,26 @@ export default class Winners extends BaseComponent {
   private async updateWinner(winner: WinnerObjOptions): Promise<void> {
     try {
       const winnerNewTime = winner.bestTime;
-      const winnerPreviousTime = this.winners[winner.id].bestTime * 1000;
+      const winnerObj = this.winners.get(winner.id);
 
-      if (winnerPreviousTime > winnerNewTime) {
-        this.winners[winner.id].bestTime = Number((winnerNewTime / 1000).toFixed(1));
+      if (winnerObj?.bestTime) {
+        const winnerPreviousTime = winnerObj.bestTime * 1000;
+
+        if (winnerPreviousTime > winnerNewTime) {
+          winnerObj.bestTime = Number((winnerNewTime / 1000).toFixed(1));
+          this.winners.set(winner.id, winnerObj);
+        }
+
+        winnerObj.wins += 1;
+        const result = await updateWinner(winner.id, winnerObj.wins, winnerObj.bestTime);
+
+        const row = this.winnersRows.get(winner.id);
+
+        if (row) {
+          row.wins.element.textContent = `${result.wins}`;
+          row.bestTime.element.textContent = `${result.time}s`;
+        }
       }
-
-      this.winners[winner.id].wins += 1;
-
-      const result = await updateWinner(winner.id, this.winners[winner.id].wins, this.winners[winner.id].bestTime);
-      this.winnersRows[winner.id].wins.element.textContent = `${result.wins}`;
-      this.winnersRows[winner.id].bestTime.element.textContent = `${result.time}s`;
     } catch (err) {
       console.log('updateWinner was not successful', err);
     }
@@ -189,9 +223,6 @@ export default class Winners extends BaseComponent {
     try {
       if (id in this.winners) {
         await deleteWinner(id);
-        // delete this.winners[id];
-        // this.winnersRows[id].destroy();
-        // delete this.winnersRows[id];
         this.updateWinners();
         this.updateWinnersInfoElement().catch((error) => {
           console.log(error);
@@ -205,10 +236,11 @@ export default class Winners extends BaseComponent {
   // View
 
   private createWinnerRows(): void {
-    Object.entries(this.winners).forEach((winner, index) => {
+    this.winners.forEach((winnerObj, winnerId) => {
+      const index = Array.from(this.winners.keys()).indexOf(winnerId);
       const num = index + (this.pagination.currentPageNum - 1) * this.pagination.limit;
-      const row = new WinnerRow(winner[1], Number(winner[0]), num);
-      this.winnersRows[winner[0]] = row;
+      const row = new WinnerRow(winnerObj, Number(winnerId), num);
+      this.winnersRows.set(winnerId, row);
     });
   }
 
@@ -220,23 +252,108 @@ export default class Winners extends BaseComponent {
     // Render table headlines
 
     const trHeaders = tr();
-    const tableHeadlines = ['№', 'Car Preview', 'Car Name', 'Wins', 'Best Time'];
+    const tableHeadlines = ['№', 'Car Preview', 'Car Name'];
 
-    trHeaders.appendChildren(
-      tableHeadlines.map(
-        (text) => new BaseComponent({ tag: 'th', classes: ['table-headlines'], content: text }).element,
-      ),
-    );
+    const winsButtonElement = th('', ['wins-wrapper']);
+    winsButtonElement.append(this.sortWinsButton.element);
+
+    const timeButtonElement = th('', ['time-wrapper']);
+    timeButtonElement.append(this.sortTimeButton.element);
+
+    trHeaders.appendChildren([
+      ...tableHeadlines.map((text) => th(text, ['table-headlines']).element),
+      ...[winsButtonElement.element, timeButtonElement.element],
+    ]);
 
     thead.append(trHeaders.element);
 
     // Render winners rows
 
-    Object.values(this.winnersRows).forEach((row) => {
+    this.winnersRows.forEach((row) => {
       this.table.append(row.element);
     });
 
     table.appendChildren([thead.element, this.table.element]);
     this.append(table.element);
+  }
+
+  // Sorting
+
+  private createSortButton(type: Sorting): BaseComponent {
+    const button = new BaseComponent({
+      tag: 'button',
+      classes: ['button', 'button-sort'],
+      content: `${type[0].toUpperCase() + type.slice(1)}`,
+      event: 'click',
+      callback: (): void => {
+        this.clickHandlerSort(type);
+      },
+    });
+
+    return button;
+  }
+
+  private clickHandlerSort(type: Sorting): void {
+    this.updateSortWinners(type);
+    this.changeSortIcons(type);
+  }
+
+  private changeSortIcons(type: Sorting): void {
+    const icon = getSortIcon(this.sortOrderDefault);
+
+    if (type === Sorting.WINS) {
+      this.sortTimeButton.element.textContent = `Time`;
+      this.sortWinsButton.element.textContent = `Wins ${icon}`;
+    } else {
+      this.sortWinsButton.element.textContent = `Wins`;
+      this.sortTimeButton.element.textContent = `Time ${icon}`;
+    }
+  }
+
+  private async getWinnersWithSort(type: Sorting): Promise<void> {
+    try {
+      const winnersDataSorted = await getWinnersWithSort(
+        this.pagination.limit,
+        this.pagination.currentPageNum,
+        type,
+        this.sortOrderDefault,
+      );
+      this.winners = new Map();
+
+      await Promise.all(
+        winnersDataSorted.map(async (winnerData) => {
+          const winner = new Winner(winnerData);
+          const carData = await getCar(winner.id);
+          const winnerObj = {
+            id: carData.id,
+            name: carData.name,
+            carInstance: new Car(carData),
+            wins: winner.wins,
+            bestTime: winner.bestTime,
+          };
+          this.winners.set(carData.id, winnerObj);
+        }),
+      );
+      this.sortOrderDefault = this.sortOrderDefault === Order.ASC ? Order.DESC : Order.ASC;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  private updateSortWinners(type: Sorting): void {
+    this.getWinnersWithSort(type)
+      .then(() => {
+        this.winnersRows.forEach((row) => {
+          row.destroy();
+        });
+        this.winnersRows = new Map();
+        this.createWinnerRows();
+        this.winnersRows.forEach((row) => {
+          this.table.append(row.element);
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 }

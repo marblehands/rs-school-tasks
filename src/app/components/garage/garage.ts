@@ -90,16 +90,6 @@ export default class Garage extends BaseComponent {
   // API requests
   // GET
 
-  // private async loadCars(): Promise<void> {
-  //   try {
-  //     const carsData = await getCars();
-  //     this.cars = carsData.map((carData) => new Car(carData));
-  //     this.carsNum = this.cars.length;
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
   private async loadCarsPerPage(): Promise<void> {
     try {
       let carsDataPerPage = await getCarsWithLimit(this.pagination.limit, this.pagination.currentPageNum);
@@ -134,15 +124,6 @@ export default class Garage extends BaseComponent {
   }
 
   // POST
-  // Create One Car
-
-  // private async createCar(carName: string, carColor: string): Promise<Car> {
-  //   const carData: CarOptions = await createCar(carName, carColor);
-  //   const car = new Car(carData);
-  //   this.cars.push(car);
-
-  //   return car;
-  // }
 
   // Create 100 Cars
 
@@ -359,8 +340,6 @@ export default class Garage extends BaseComponent {
     }
 
     if (event === 'reset') {
-      console.log(this.pagination.currentPageNum, this.pagination.pagesNum);
-
       if (this.pagination.currentPageNum !== this.pagination.pagesNum) {
         this.pagination.disableButton(false, 'next');
       }
