@@ -49,9 +49,6 @@ export default class Garage extends BaseComponent {
     this.initGarage();
     this.createEditCarAndCreateCarForms();
     this.addSubscribes();
-    this.loadCarsPerPage().catch((err) => {
-      console.log(err);
-    });
   }
 
   // EventEmitter Subscriptions
