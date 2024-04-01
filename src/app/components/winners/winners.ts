@@ -17,6 +17,8 @@ import eventEmitter from '../../services/eventEmitter/eventEmitter';
 import Pagination from '../pagination/pagination';
 import { Order, SortIcon, Sorting, type WinnerObjOptions } from './types';
 
+const LIMIT = 10;
+
 function getSortIcon(order: Order): SortIcon {
   switch (order) {
     case Order.ASC:
@@ -54,7 +56,7 @@ export default class Winners extends BaseComponent {
     this.winners = new Map();
     this.winnersNum = 0;
     this.winnersRows = new Map();
-    this.pagination = new Pagination(10);
+    this.pagination = new Pagination(LIMIT);
     this.sortTimeButton = this.createSortButton(Sorting.TIME);
     this.sortWinsButton = this.createSortButton(Sorting.WINS);
     this.sortOrderDefault = Order.DESC;
@@ -120,7 +122,7 @@ export default class Winners extends BaseComponent {
 
   private createWinnersInfoElement(): void {
     const wrapper = div(['wrapper-info']);
-    this.winnersInfoElement = h2(['headline2'], `Winners: ${this.winnersNum}`);
+    this.winnersInfoElement = h2(['headline2'], `Winners (${this.winnersNum})`);
     this.pagination.toggleNextPrevButton();
     wrapper.appendChildren([this.winnersInfoElement.element, this.pagination.element]);
     this.prepend(wrapper.element);
@@ -129,7 +131,7 @@ export default class Winners extends BaseComponent {
   private async updateWinnersInfoElement(): Promise<void> {
     this.winnersNum = await getWinnersNum(this.pagination.limit, this.pagination.currentPageNum);
     this.pagination.toggleNextPrevButton();
-    this.winnersInfoElement.element.textContent = `Winners: ${this.winnersNum}`;
+    this.winnersInfoElement.element.textContent = `Winners (${this.winnersNum})`;
   }
 
   // EventEmitter Subscriptions

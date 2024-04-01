@@ -1,4 +1,4 @@
-// import eventEmitter from '../services/eventEmitter/eventEmitter';
+import { ServerUrl } from './types';
 
 import type { CarOptions } from '../components/car/types';
 import type { WinnerOptions } from '../components/winners/types';
@@ -7,7 +7,7 @@ import type { DriveMode, EngineOptions, Status } from './types';
 // Cars
 
 export function getCars(): Promise<CarOptions[]> {
-  return fetch('http://127.0.0.1:3000/garage/')
+  return fetch(ServerUrl.GARAGE)
     .then((response) => {
       if (!response.ok) {
         throw new Error(`getCars is not successful ${response.status}`);
@@ -22,7 +22,7 @@ export function getCars(): Promise<CarOptions[]> {
 }
 
 export function getCarsWithLimit(limit: number, page: number): Promise<CarOptions[]> {
-  return fetch(`http://127.0.0.1:3000/garage/?_page=${page}&_limit=${limit}`)
+  return fetch(`${ServerUrl.GARAGE}?_page=${page}&_limit=${limit}`)
     .then((response) => {
       if (!response.ok) {
         throw new Error(`getCarsWithLimit is not successful ${response.status}`);
@@ -37,7 +37,7 @@ export function getCarsWithLimit(limit: number, page: number): Promise<CarOption
 }
 
 export function getCarsNum(limit: number, page: number): Promise<number> {
-  return fetch(`http://127.0.0.1:3000/garage/?_page=${page}&_limit=${limit}`)
+  return fetch(`${ServerUrl.GARAGE}?_page=${page}&_limit=${limit}`)
     .then((response) => {
       if (!response.ok) {
         throw new Error(`getCarsWithLimit is not successful ${response.status}`);
@@ -55,7 +55,7 @@ export function getCarsNum(limit: number, page: number): Promise<number> {
 }
 
 export function getCar(id: number): Promise<CarOptions> {
-  return fetch(`http://127.0.0.1:3000/garage/${id}`)
+  return fetch(`${ServerUrl.GARAGE}${id}`)
     .then((response) => {
       if (!response.ok) {
         throw new Error(`getCar is not successful ${response.status}`);
@@ -70,7 +70,7 @@ export function getCar(id: number): Promise<CarOptions> {
 }
 
 export function createCar(name: string, color: string): Promise<CarOptions> {
-  const url = 'http://127.0.0.1:3000/garage/';
+  const url = `${ServerUrl.GARAGE}`;
   const options = {
     method: 'POST',
     headers: {
@@ -94,7 +94,7 @@ export function createCar(name: string, color: string): Promise<CarOptions> {
 }
 
 export function deleteCar(id: number): Promise<void> {
-  const url = `http://127.0.0.1:3000/garage/${id}`;
+  const url = `${ServerUrl.GARAGE}${id}`;
 
   const options = {
     method: 'DELETE',
@@ -113,7 +113,7 @@ export function deleteCar(id: number): Promise<void> {
 }
 
 export function updateCar(id: number, name: string, color: string): Promise<CarOptions> {
-  const url = `http://127.0.0.1:3000/garage/${id}`;
+  const url = `${ServerUrl.GARAGE}${id}`;
   const options = {
     method: 'PUT',
     headers: {
@@ -139,7 +139,7 @@ export function updateCar(id: number, name: string, color: string): Promise<CarO
 // Engine
 
 export function startStopCar(id: number, status: Status): Promise<EngineOptions> {
-  const url = `http://127.0.0.1:3000/engine/?id=${id}&status=${status}`;
+  const url = `${ServerUrl.ENGINE}?id=${id}&status=${status}`;
   const options = {
     method: 'PATCH',
   };
@@ -159,7 +159,7 @@ export function startStopCar(id: number, status: Status): Promise<EngineOptions>
 }
 
 export function setDriveMode(id: number, status: Status): Promise<DriveMode> {
-  const url = `http://127.0.0.1:3000/engine/?id=${id}&status=${status}`;
+  const url = `${ServerUrl.ENGINE}?id=${id}&status=${status}`;
   const options = {
     method: 'PATCH',
   };
@@ -199,7 +199,7 @@ export function setDriveMode(id: number, status: Status): Promise<DriveMode> {
 // Winners
 
 export function getWinners(): Promise<WinnerOptions[]> {
-  return fetch('http://127.0.0.1:3000/winners/')
+  return fetch(ServerUrl.WINNERS)
     .then((response) => {
       if (!response.ok) {
         throw new Error(`getWinners is not successful ${response.status}`);
@@ -214,7 +214,7 @@ export function getWinners(): Promise<WinnerOptions[]> {
 }
 
 export function getWinnersWithLimit(limit: number, page: number): Promise<WinnerOptions[]> {
-  return fetch(`http://127.0.0.1:3000/winners/?_page=${page}&_limit=${limit}`)
+  return fetch(`${ServerUrl.WINNERS}?_page=${page}&_limit=${limit}`)
     .then((response) => {
       if (!response.ok) {
         throw new Error(`getWinnersWithLimit is not successful ${response.status}`);
@@ -229,7 +229,7 @@ export function getWinnersWithLimit(limit: number, page: number): Promise<Winner
 }
 
 export function getWinnersWithSort(limit: number, page: number, sort: string, order: string): Promise<WinnerOptions[]> {
-  return fetch(`http://127.0.0.1:3000/winners/?_page=${page}&_limit=${limit}&_sort=${sort}&_order=${order}`)
+  return fetch(`${ServerUrl.WINNERS}?_page=${page}&_limit=${limit}&_sort=${sort}&_order=${order}`)
     .then((response) => {
       if (!response.ok) {
         throw new Error(`getWinnersWithSort is not successful ${response.status}`);
@@ -244,7 +244,7 @@ export function getWinnersWithSort(limit: number, page: number, sort: string, or
 }
 
 export function getWinnersNum(limit: number, page: number): Promise<number> {
-  return fetch(`http://127.0.0.1:3000/winners/?_page=${page}&_limit=${limit}`)
+  return fetch(`${ServerUrl.WINNERS}?_page=${page}&_limit=${limit}`)
     .then((response) => {
       if (!response.ok) {
         throw new Error(`getWinnersNum is not successful ${response.status}`);
@@ -262,7 +262,7 @@ export function getWinnersNum(limit: number, page: number): Promise<number> {
 }
 
 export function deleteWinner(id: number): Promise<void> {
-  const url = `http://127.0.0.1:3000/winners/${id}`;
+  const url = `${ServerUrl.WINNERS}${id}`;
 
   const options = {
     method: 'DELETE',
@@ -281,7 +281,7 @@ export function deleteWinner(id: number): Promise<void> {
 }
 
 export function createWinner(id: number, wins: number, time: number): Promise<WinnerOptions> {
-  const url = 'http://127.0.0.1:3000/winners/';
+  const url = ServerUrl.WINNERS;
   const options = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -298,7 +298,7 @@ export function createWinner(id: number, wins: number, time: number): Promise<Wi
 }
 
 export function updateWinner(id: number, wins: number, time: number): Promise<WinnerOptions> {
-  const url = `http://127.0.0.1:3000/winners/${id}`;
+  const url = `${ServerUrl.WINNERS}${id}`;
   const options = {
     method: 'PUT',
     headers: {

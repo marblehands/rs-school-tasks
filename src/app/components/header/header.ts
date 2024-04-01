@@ -57,7 +57,7 @@ export default class Header extends BaseComponent {
   private createHeader(): void {
     const wrapper = div(['wrapper']);
     const nav = new BaseComponent({ tag: 'nav', classes: ['nav'] });
-    const logo = p(['logo', 'logo-gradient'], 'Async Race');
+    const logo = p(['logo', 'logo-gradient'], 'Async Snails');
     wrapper.append(logo.element);
     nav.appendChildren([this.buttonGarage.element, this.buttonWinners.element]);
     this.appendChildren([wrapper.element, nav.element]);

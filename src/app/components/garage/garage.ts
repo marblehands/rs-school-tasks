@@ -14,6 +14,8 @@ import { Direction } from '../pagination/types';
 
 import type { RaceResult } from './types';
 
+const LIMIT = 7;
+
 export default class Garage extends BaseComponent {
   private cars: Car[];
 
@@ -43,7 +45,7 @@ export default class Garage extends BaseComponent {
     this.tracks = [];
     this.carsNum = 0;
     this.isWinner = null;
-    this.pagination = new Pagination(7);
+    this.pagination = new Pagination(LIMIT);
     this.initGarage();
     this.createEditCarAndCreateCarForms();
     this.addSubscribes();
@@ -322,7 +324,7 @@ export default class Garage extends BaseComponent {
 
   private createGarageHeader(): void {
     const wrapper = div(['wrapper-info']);
-    this.garageInfoElement = h2(['headline-2'], `Garage: ${this.carsNum}`);
+    this.garageInfoElement = h2(['headline-2'], `Garage (${this.carsNum})`);
     this.pagination.toggleNextPrevButton();
     const buttons = this.createControls();
     wrapper.appendChildren([this.garageInfoElement.element, buttons.element, this.pagination.element]);
@@ -341,17 +343,17 @@ export default class Garage extends BaseComponent {
 
   private disablePagination(event: string): void {
     if (event === 'race') {
-      this.pagination.disableButton(true, 'next');
-      this.pagination.disableButton(true, 'prev');
+      this.pagination.disableButton(true, Direction.NEXT);
+      this.pagination.disableButton(true, Direction.PREV);
     }
 
     if (event === 'reset') {
       if (this.pagination.currentPageNum !== this.pagination.pagesNum) {
-        this.pagination.disableButton(false, 'next');
+        this.pagination.disableButton(false, Direction.NEXT);
       }
 
       if (this.pagination.currentPageNum !== 1) {
-        this.pagination.disableButton(false, 'prev');
+        this.pagination.disableButton(false, Direction.PREV);
       }
     }
   }
