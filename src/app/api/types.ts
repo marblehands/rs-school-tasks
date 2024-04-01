@@ -4,6 +4,14 @@ export enum ServerUrl {
   WINNERS = 'http://127.0.0.1:3000/winners/',
 }
 
+export enum Method {
+  GET = 'GET',
+  POST = 'POST',
+  PUT = 'PUT',
+  DELETE = 'DELETE',
+  PATCH = 'PATCH',
+}
+
 export enum HttpStatus {
   OK = 200,
   INTERNAL_SERVER_ERROR = 500,

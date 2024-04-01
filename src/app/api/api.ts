@@ -1,4 +1,4 @@
-import { HttpStatus, ServerUrl } from './types';
+import { HttpStatus, Method, ServerUrl } from './types';
 
 import type { CarOptions } from '../components/car/types';
 import type { WinnerOptions } from '../components/winners/types';
@@ -72,7 +72,7 @@ export function getCar(id: number): Promise<CarOptions> {
 export function createCar(name: string, color: string): Promise<CarOptions> {
   const url = `${ServerUrl.GARAGE}`;
   const options = {
-    method: 'POST',
+    method: Method.POST,
     headers: {
       'Content-Type': 'application/json',
     },
@@ -97,7 +97,7 @@ export function deleteCar(id: number): Promise<void> {
   const url = `${ServerUrl.GARAGE}${id}`;
 
   const options = {
-    method: 'DELETE',
+    method: Method.DELETE,
   };
 
   return fetch(url, options)
@@ -115,7 +115,7 @@ export function deleteCar(id: number): Promise<void> {
 export function updateCar(id: number, name: string, color: string): Promise<CarOptions> {
   const url = `${ServerUrl.GARAGE}${id}`;
   const options = {
-    method: 'PUT',
+    method: Method.PUT,
     headers: {
       'Content-Type': 'application/json',
     },
@@ -141,7 +141,7 @@ export function updateCar(id: number, name: string, color: string): Promise<CarO
 export function startStopCar(id: number, status: Status): Promise<EngineOptions> {
   const url = `${ServerUrl.ENGINE}?id=${id}&status=${status}`;
   const options = {
-    method: 'PATCH',
+    method: Method.PATCH,
   };
 
   return fetch(url, options)
@@ -161,7 +161,7 @@ export function startStopCar(id: number, status: Status): Promise<EngineOptions>
 export function setDriveMode(id: number, status: Status): Promise<DriveMode> {
   const url = `${ServerUrl.ENGINE}?id=${id}&status=${status}`;
   const options = {
-    method: 'PATCH',
+    method: Method.PATCH,
   };
 
   return fetch(url, options)
@@ -267,7 +267,7 @@ export function deleteWinner(id: number): Promise<void> {
   const url = `${ServerUrl.WINNERS}${id}`;
 
   const options = {
-    method: 'DELETE',
+    method: Method.DELETE,
   };
 
   return fetch(url, options)
@@ -285,7 +285,7 @@ export function deleteWinner(id: number): Promise<void> {
 export function createWinner(id: number, wins: number, time: number): Promise<WinnerOptions> {
   const url = ServerUrl.WINNERS;
   const options = {
-    method: 'POST',
+    method: Method.POST,
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ id, wins, time }),
   };
@@ -302,7 +302,7 @@ export function createWinner(id: number, wins: number, time: number): Promise<Wi
 export function updateWinner(id: number, wins: number, time: number): Promise<WinnerOptions> {
   const url = `${ServerUrl.WINNERS}${id}`;
   const options = {
-    method: 'PUT',
+    method: Method.PUT,
     headers: {
       'Content-Type': 'application/json',
     },
