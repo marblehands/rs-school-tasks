@@ -1,6 +1,8 @@
 import './form.css';
 import BaseComponent from '../baseComponent/baseComponent';
-import { button, input } from '../tags/tags';
+import { button, div, input } from '../tags/tags';
+import generateSvg from '../../utils/generateSvg';
+import { InitialColor } from './types';
 
 export default class Form extends BaseComponent {
   public inputName: BaseComponent;
@@ -16,12 +18,13 @@ export default class Form extends BaseComponent {
   public previewElement!: BaseComponent;
 
   constructor(buttonContent: string, classes: string[]) {
-    super({ tag: 'form', classes: [...classes] });
+    super({ tag: 'div', classes: ['form-wrapper'] });
+    const form = new BaseComponent({ tag: 'form', classes: [...classes] });
     this.inputName = input(['input-text'], { type: 'text', placeholder: 'Enter Car Name' });
     this.colorPicker = input(['input-color'], { type: 'color' });
 
     if (this.colorPicker.element instanceof HTMLInputElement) {
-      this.colorPicker.element.value = '#5F9863';
+      this.colorPicker.element.value = InitialColor.INPUT;
     }
 
     this.submitButton = button(['button', 'button-secondary', 'button-submit'], buttonContent, { type: 'submit' });
@@ -31,12 +34,12 @@ export default class Form extends BaseComponent {
       this.currentColor = this.colorPicker.element.value;
     }
 
-    this.createForm();
-    this.addEventListeners();
-  }
+    form.appendChildren([this.inputName.element, this.colorPicker.element, this.submitButton.element]);
+    this.append(form.element);
 
-  private createForm(): void {
-    this.appendChildren([this.inputName.element, this.colorPicker.element, this.submitButton.element]);
+    this.createPreview();
+
+    this.addEventListeners();
   }
 
   public addEventListeners(): void {
@@ -47,7 +50,9 @@ export default class Form extends BaseComponent {
     });
     this.colorPicker.addListener('input', () => {
       if (this.colorPicker.element instanceof HTMLInputElement) {
-        this.currentColor = this.colorPicker.element.value;
+        const newColor = this.colorPicker.element.value;
+        this.currentColor = newColor;
+        this.previewElement.element.innerHTML = generateSvg(newColor);
       }
     });
   }
@@ -55,7 +60,8 @@ export default class Form extends BaseComponent {
   public resetValues(): void {
     if (this.inputName.element instanceof HTMLInputElement && this.colorPicker.element instanceof HTMLInputElement) {
       this.inputName.element.value = '';
-      this.colorPicker.element.value = '#5F9863';
+      this.colorPicker.element.value = InitialColor.INPUT;
+      this.previewElement.element.innerHTML = generateSvg(InitialColor.PREVIEW);
       this.currentName = this.inputName.element.value;
       this.currentColor = this.colorPicker.element.value;
     }
@@ -71,5 +77,15 @@ export default class Form extends BaseComponent {
       this.colorPicker.element.disabled = value;
       this.submitButton.element.disabled = value;
     }
+  }
+
+  private createPreview(): void {
+    this.previewElement = div(['preview-wrapper']);
+    const INITIAL_COLOR = '#A5CD9E';
+    const svg = generateSvg(INITIAL_COLOR);
+
+    this.previewElement.element.innerHTML = svg;
+
+    this.append(this.previewElement.element);
   }
 }

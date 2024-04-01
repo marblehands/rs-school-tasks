@@ -1,4 +1,5 @@
 import eventEmitter from '../../services/eventEmitter/eventEmitter';
+import generateSvg from '../../utils/generateSvg';
 import Form from '../baseForm/form';
 
 export default class UpdateForm extends Form {
@@ -33,6 +34,7 @@ export default class UpdateForm extends Form {
     if (this.inputName.element instanceof HTMLInputElement && this.colorPicker.element instanceof HTMLInputElement) {
       this.inputName.element.value = carName;
       this.colorPicker.element.value = color;
+      this.previewElement.element.innerHTML = generateSvg(color);
       this.currentName = this.inputName.element.value;
       this.currentColor = this.colorPicker.element.value;
     }
