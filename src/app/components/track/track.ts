@@ -3,7 +3,7 @@ import BaseComponent from '../baseComponent/baseComponent';
 import eventEmitter from '../../services/eventEmitter/eventEmitter';
 import { Status } from '../../api/types';
 import { setDriveMode, startStopCar } from '../../api/api';
-import { span } from '../tags/tags';
+import { div, span } from '../tags/tags';
 
 import type Car from '../car/car';
 
@@ -71,12 +71,27 @@ export default class Track extends BaseComponent {
   // View
 
   private initTrack(): void {
+    this.createControls();
+    this.createRoad();
+    this.createFinish();
+  }
+
+  private createControls(): void {
+    const wrapper = div(['buttons-track-wrapper']);
+
     this.createStopButton();
     this.createStartButton();
     this.createDeleteButton();
     this.createEditButton();
-    this.createRoad();
-    this.createFinish();
+
+    wrapper.appendChildren([
+      this.buttonDelete.element,
+      this.buttonEdit.element,
+      this.buttonStart.element,
+      this.buttonStop.element,
+    ]);
+
+    this.prepend(wrapper.element);
   }
 
   private createDeleteButton(): void {
@@ -90,7 +105,6 @@ export default class Track extends BaseComponent {
         this.destroy();
       },
     });
-    this.prepend(this.buttonDelete.element);
   }
 
   private createEditButton(): void {
@@ -103,7 +117,6 @@ export default class Track extends BaseComponent {
         eventEmitter.emit('editThisCar', [this.car.id, this.car.name, this.car.color]);
       },
     });
-    this.prepend(this.buttonEdit.element);
   }
 
   private createStartButton(): void {
@@ -118,7 +131,6 @@ export default class Track extends BaseComponent {
         });
       },
     });
-    this.prepend(this.buttonStart.element);
   }
 
   private createStopButton(): void {
@@ -134,7 +146,6 @@ export default class Track extends BaseComponent {
       },
     });
     Track.disableButton(this.buttonStop, true);
-    this.prepend(this.buttonStop.element);
   }
 
   private createRoad(): void {

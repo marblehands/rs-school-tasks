@@ -1,6 +1,6 @@
 import './car.css';
 import BaseComponent from '../baseComponent/baseComponent';
-import { div, span } from '../tags/tags';
+import { div, p } from '../tags/tags';
 import eventEmitter from '../../services/eventEmitter/eventEmitter';
 import { updateCar } from '../../api/api';
 import generateSvg from '../../utils/generateSvg';
@@ -23,7 +23,7 @@ export default class Car extends BaseComponent {
     this.color = options.color;
     this.name = options.name;
     this.id = options.id;
-    this.nameElement = span(['car-name'], this.name);
+    this.nameElement = p(['car-name'], this.name);
     this.svg = div(['car-svg-wrapper']);
     this.createCar();
     this.addSubscribes();

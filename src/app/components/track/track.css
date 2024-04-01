@@ -3,30 +3,45 @@
   margin: 2em 0 3em;
 }
 
+.buttons-track-wrapper {
+  display: flex;
+  gap: 2px;
+}
+
 .car-name {
-  display: block;
-  margin: 0.5em 0;
-  font-weight: 600;
+  margin: 0.8em 0 0.5em;
+  font: var(--h3-text-font);
 }
 
 .road {
   width: 100%;
-  border-bottom: 2px solid black;
+  border-bottom: 4px dotted #366d62;
 }
 
 .finish {
   position: absolute;
-  right: 3em;
+  right: 1.5em;
   bottom: 0.5em;
 
-  width: 32px;
-  height: 32px;
+  width: 60px;
+  height: 90px;
 
   background: url('../../../assets/finish.svg') center/cover no-repeat;
 }
 
 .race-message {
   position: absolute;
-  bottom: -1.5em;
+  bottom: -1.8em;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  display: block;
+
+  padding: 4px 8px;
+
   font-size: 0.9em;
+  color: var(--text-color-light);
+
+  background-color: #366d62;
+  border-radius: 4px;
 }
