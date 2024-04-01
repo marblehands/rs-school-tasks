@@ -40,3 +40,9 @@ html {
 
   background: url('../assets/body-bg.jpg') center/cover no-repeat;
 }
+
+@media (width <= 600px) {
+  .body {
+    padding: 0.8em;
+  }
+}

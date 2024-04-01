@@ -1,6 +1,6 @@
 import './garage.css';
 import BaseComponent from '../baseComponent/baseComponent';
-import { div, p } from '../tags/tags';
+import { div, h2 } from '../tags/tags';
 import { createCar, deleteCar, getCarsNum, getCarsWithLimit, setDriveMode, startStopCar } from '../../api/api';
 import Car from '../car/car';
 import Track from '../track/track';
@@ -44,9 +44,6 @@ export default class Garage extends BaseComponent {
     this.carsNum = 0;
     this.isWinner = null;
     this.pagination = new Pagination(7);
-    this.createGenerateButton();
-    this.createRaceButton();
-    this.createResetButton();
     this.initGarage();
     this.createEditCarAndCreateCarForms();
     this.addSubscribes();
@@ -227,7 +224,7 @@ export default class Garage extends BaseComponent {
     this.loadCarsPerPage()
       .then(() => {
         this.renderCars(this.cars);
-        this.createGarageInfoElement();
+        this.createGarageHeader();
       })
       .catch((error) => {
         console.log(error);
@@ -263,44 +260,54 @@ export default class Garage extends BaseComponent {
     this.createCarForm = new CreateForm();
     this.updateCarForm = new UpdateForm();
 
-    const wrapper = div(['wrapper-forms']);
+    const wrapper = div(['forms-wrapper']);
 
     wrapper.appendChildren([this.createCarForm.element, this.updateCarForm.element]);
 
     this.append(wrapper.element);
   }
 
+  private createControls(): BaseComponent {
+    const wrapper = div(['buttons-wrapper']);
+
+    this.createGenerateButton();
+    this.createRaceButton();
+    this.createResetButton();
+
+    wrapper.appendChildren([this.buttonGenerate.element, this.buttonRace.element, this.buttonReset.element]);
+
+    return wrapper;
+  }
+
   private createGenerateButton(): void {
     this.buttonGenerate = new BaseComponent({
       tag: 'button',
-      classes: ['button', 'button-generate'],
-      content: 'Generate 100 Cars',
+      classes: ['button', 'button-secondary', 'button-generate'],
+      content: '🐌 Add 100 Snails',
       event: 'click',
       callback: (): void => {
         this.generateCarsButtonClickHandler();
       },
     });
-    this.append(this.buttonGenerate.element);
   }
 
   private createRaceButton(): void {
     this.buttonRace = new BaseComponent({
       tag: 'button',
-      classes: ['button', 'button-race'],
-      content: 'Start Race',
+      classes: ['button', 'button-secondary', 'button-race'],
+      content: '🚀 Start Race',
       event: 'click',
       callback: (): void => {
         eventEmitter.emit('race');
       },
     });
-    this.append(this.buttonRace.element);
   }
 
   private createResetButton(): void {
     this.buttonReset = new BaseComponent({
       tag: 'button',
-      classes: ['button', 'button-reset'],
-      content: 'Reset Tracks',
+      classes: ['button', 'button-secondary', 'button-reset'],
+      content: '⛳ Reset Tracks',
       event: 'click',
       callback: (): void => {
         eventEmitter.emit('reset');
@@ -311,22 +318,21 @@ export default class Garage extends BaseComponent {
     if (this.buttonReset.element instanceof HTMLButtonElement) {
       this.buttonReset.element.disabled = true;
     }
-
-    this.append(this.buttonReset.element);
   }
 
-  private createGarageInfoElement(): void {
+  private createGarageHeader(): void {
     const wrapper = div(['wrapper-info']);
-    this.garageInfoElement = p(['headline2'], `Garage: ${this.carsNum}`);
+    this.garageInfoElement = h2(['headline-2'], `Garage: ${this.carsNum}`);
     this.pagination.toggleNextPrevButton();
-    wrapper.appendChildren([this.garageInfoElement.element, this.pagination.element]);
+    const buttons = this.createControls();
+    wrapper.appendChildren([this.garageInfoElement.element, buttons.element, this.pagination.element]);
     this.prepend(wrapper.element);
   }
 
   private async updateGarageInfoElement(): Promise<void> {
     try {
       this.carsNum = await getCarsNum(this.pagination.limit, this.pagination.currentPageNum);
-      this.garageInfoElement.element.textContent = `Garage: ${this.carsNum}`;
+      this.garageInfoElement.element.textContent = `Garage (${this.carsNum})`;
       this.pagination.toggleNextPrevButton();
     } catch (err) {
       console.log(err);

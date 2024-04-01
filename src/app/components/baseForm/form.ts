@@ -13,11 +13,16 @@ export default class Form extends BaseComponent {
 
   public currentColor!: string;
 
-  constructor(buttonContent: string) {
-    super({ tag: 'form', classes: ['form', `${buttonContent.toLowerCase()}-form`] });
+  constructor(buttonContent: string, classes: string[]) {
+    super({ tag: 'form', classes: [...classes] });
     this.inputName = input(['input-text'], { type: 'text', placeholder: 'Enter Car Name' });
-    this.colorPicker = input(['input-text'], { type: 'color' });
-    this.submitButton = button(['button', 'button-submit'], buttonContent, { type: 'submit' });
+    this.colorPicker = input(['input-color'], { type: 'color' });
+
+    if (this.colorPicker.element instanceof HTMLInputElement) {
+      this.colorPicker.element.value = '#5F9863';
+    }
+
+    this.submitButton = button(['button', 'button-secondary', 'button-submit'], buttonContent, { type: 'submit' });
 
     if (this.inputName.element instanceof HTMLInputElement && this.colorPicker.element instanceof HTMLInputElement) {
       this.currentName = this.inputName.element.value;

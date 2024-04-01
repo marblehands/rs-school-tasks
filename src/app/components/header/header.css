@@ -11,6 +11,13 @@
   letter-spacing: -0.5px;
 }
 
+.logo-gradient {
+  background: linear-gradient(to bottom right, #40972e 0%, #1e5b5b 73%);
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
 .nav {
   display: flex;
   gap: 8px;
@@ -26,6 +33,7 @@
 
   background-color: var(--button-bg-color);
   border: var(--button-stroke);
+  border-radius: 6px;
 
   transition:
     color 0.3s ease,
@@ -53,21 +61,24 @@
   }
 }
 
-/* .button:not(:last-child) {
-  margin-right: 0.2em;
-} */
-
 .button-primary {
   height: fit-content;
   padding: 12px 24px;
   font: var(--button-primary-font);
-  border-radius: 6px;
 }
 
-.logo-gradient {
-  background: linear-gradient(to bottom right, #40972e 0%, #1e5b5b 73%);
-  background-clip: text;
-  background-clip: text;
+.button-secondary {
+  height: fit-content;
+  padding: 8px 16px;
+}
 
-  -webkit-text-fill-color: transparent;
+.button-tertiary {
+  height: fit-content;
+  padding: 4px 12px;
+}
+
+@media (width <= 600px) {
+  .logo {
+    font-size: 2em;
+  }
 }

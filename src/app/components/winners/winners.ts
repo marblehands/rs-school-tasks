@@ -287,7 +287,7 @@ export default class Winners extends BaseComponent {
   private createSortButton(type: Sorting): BaseComponent {
     const button = new BaseComponent({
       tag: 'button',
-      classes: ['button', 'button-sort'],
+      classes: ['button', 'button-tertiary', 'button-sort'],
       content: `${type[0].toUpperCase() + type.slice(1)}`,
       event: 'click',
       callback: (): void => {

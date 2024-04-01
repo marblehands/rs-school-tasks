@@ -82,7 +82,7 @@ export default class Track extends BaseComponent {
   private createDeleteButton(): void {
     this.buttonDelete = new BaseComponent({
       tag: 'button',
-      classes: ['button', 'button-delete'],
+      classes: ['button', 'button-tertiary', 'button-delete'],
       content: 'Delete',
       event: 'click',
       callback: (): void => {
@@ -96,7 +96,7 @@ export default class Track extends BaseComponent {
   private createEditButton(): void {
     this.buttonEdit = new BaseComponent({
       tag: 'button',
-      classes: ['button', 'button-edit'],
+      classes: ['button', 'button-tertiary', 'button-edit'],
       content: 'Edit',
       event: 'click',
       callback: (): void => {
@@ -109,7 +109,7 @@ export default class Track extends BaseComponent {
   private createStartButton(): void {
     this.buttonStart = new BaseComponent({
       tag: 'button',
-      classes: ['button', 'button-start'],
+      classes: ['button', 'button-tertiary', 'button-start'],
       content: 'Start',
       event: 'click',
       callback: (): void => {
@@ -124,7 +124,7 @@ export default class Track extends BaseComponent {
   private createStopButton(): void {
     this.buttonStop = new BaseComponent({
       tag: 'button',
-      classes: ['button', 'button-stop'],
+      classes: ['button', 'button-tertiary', 'button-stop'],
       content: 'Stop',
       event: 'click',
       callback: (): void => {

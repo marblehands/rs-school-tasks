@@ -1,4 +1,58 @@
 .form {
   display: flex;
+  flex-grow: 1;
   gap: 0.5em;
+
+  padding: 24px;
+
+  opacity: 0.8;
+  background: linear-gradient(to bottom right, #85bb61 0%, #38766d 78%);
+  border-radius: 8px;
+}
+
+.form-disabled {
+  background: #66a16a;
+}
+
+.button-submit {
+  border: none;
+
+  &:hover {
+    border: none;
+  }
+}
+
+.button-submit:disabled {
+  color: rgb(20 60 20 / 60%);
+  opacity: 1;
+  background-color: #c1ebba;
+  border: none;
+
+  &:hover {
+    color: rgb(20 60 20 / 60%);
+    background-color: #c1ebba;
+    border: none;
+  }
+}
+
+.input-text,
+.input-color {
+  background-color: #d2f0cd;
+  border: none;
+  border-radius: 6px;
+}
+
+.input-text {
+  flex-grow: 1;
+  max-width: 400px;
+  padding-left: 0.5em;
+}
+
+.input-color {
+  height: 100%;
+  padding: 0.2em;
+}
+
+input[type='color' i]::-webkit-color-swatch {
+  border-radius: 4px;
 }

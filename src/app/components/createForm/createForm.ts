@@ -3,7 +3,7 @@ import Form from '../baseForm/form';
 
 export default class CreateForm extends Form {
   constructor() {
-    super('Create');
+    super('Create', ['form', 'create-form']);
     this.addButtonListener();
   }
 

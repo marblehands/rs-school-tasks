@@ -35,7 +35,7 @@ export default class Pagination extends BaseComponent {
   private createPrevButton(): BaseComponent {
     const button = new BaseComponent({
       tag: 'button',
-      classes: ['button', 'button-prev'],
+      classes: ['button', 'button-tertiary', 'button-prev'],
       content: 'Prev',
       event: 'click',
       callback: (): void => {
@@ -53,7 +53,7 @@ export default class Pagination extends BaseComponent {
   private createNextButton(): BaseComponent {
     const button = new BaseComponent({
       tag: 'button',
-      classes: ['button', 'button-next'],
+      classes: ['button', 'button-tertiary', 'button-next'],
       content: 'Next',
       event: 'click',
       callback: (): void => {
