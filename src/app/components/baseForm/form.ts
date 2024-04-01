@@ -81,8 +81,7 @@ export default class Form extends BaseComponent {
 
   private createPreview(): void {
     this.previewElement = div(['preview-wrapper']);
-    const INITIAL_COLOR = '#A5CD9E';
-    const svg = generateSvg(INITIAL_COLOR);
+    const svg = generateSvg(InitialColor.PREVIEW);
 
     this.previewElement.element.innerHTML = svg;
 
