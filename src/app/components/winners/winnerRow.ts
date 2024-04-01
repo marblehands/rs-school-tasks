@@ -20,7 +20,7 @@ export default class WinnerRow extends BaseComponent {
     const tdId = td(`${index + 1}`);
     const tdCarImg = td('');
     tdCarImg.append(this.car.svg.element);
-    const tdCarName = td(`${obj.name}`);
+    const tdCarName = td(`${obj.name}`, ['winner-name']);
     this.wins = td(`${obj.wins}`);
     this.bestTime = td(`${obj.bestTime}s`);
     this.appendChildren([tdId.element, tdCarImg.element, tdCarName.element, this.wins.element, this.bestTime.element]);

@@ -5,7 +5,7 @@ export default class UpdateForm extends Form {
   private carIdToUpdate: string | null;
 
   constructor() {
-    super('Update', ['form', 'update-form', 'form-disabled']);
+    super('Update', ['form', 'update-form']);
     this.carIdToUpdate = null;
     this.disable(true);
     this.addSubscribes();

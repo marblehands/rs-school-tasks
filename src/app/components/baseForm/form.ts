@@ -13,6 +13,8 @@ export default class Form extends BaseComponent {
 
   public currentColor!: string;
 
+  public previewElement!: BaseComponent;
+
   constructor(buttonContent: string, classes: string[]) {
     super({ tag: 'form', classes: [...classes] });
     this.inputName = input(['input-text'], { type: 'text', placeholder: 'Enter Car Name' });

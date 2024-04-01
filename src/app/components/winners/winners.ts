@@ -9,7 +9,7 @@ import {
   updateWinner,
 } from '../../api/api';
 import BaseComponent from '../baseComponent/baseComponent';
-import { div, p, th, tr } from '../tags/tags';
+import { div, h2, th, tr } from '../tags/tags';
 import Winner from './winner';
 import Car from '../car/car';
 import WinnerRow from './winnerRow';
@@ -120,7 +120,7 @@ export default class Winners extends BaseComponent {
 
   private createWinnersInfoElement(): void {
     const wrapper = div(['wrapper-info']);
-    this.winnersInfoElement = p(['headline2'], `Winners: ${this.winnersNum}`);
+    this.winnersInfoElement = h2(['headline2'], `Winners: ${this.winnersNum}`);
     this.pagination.toggleNextPrevButton();
     wrapper.appendChildren([this.winnersInfoElement.element, this.pagination.element]);
     this.prepend(wrapper.element);
