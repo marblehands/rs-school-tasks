@@ -1,4 +1,4 @@
-import { ServerUrl } from './types';
+import { HttpStatus, ServerUrl } from './types';
 
 import type { CarOptions } from '../components/car/types';
 import type { WinnerOptions } from '../components/winners/types';
@@ -166,23 +166,25 @@ export function setDriveMode(id: number, status: Status): Promise<DriveMode> {
 
   return fetch(url, options)
     .then((response) => {
-      if (response.status === 500) {
+      const httpStatus: HttpStatus = response.status;
+
+      if (httpStatus === HttpStatus.INTERNAL_SERVER_ERROR) {
         throw new Error('500 INTERNAL SERVER ERROR. Car has been stopped suddenly. Its engine was broken down.');
       }
 
-      if (response.status === 429) {
+      if (httpStatus === HttpStatus.TOO_MANY_REQUESTS) {
         throw new Error(
           '429 TOO MANY REQUESTS. Drive already in progress. You cannot run drive for the same car twice while it is not stopped.',
         );
       }
 
-      if (response.status === 404) {
+      if (httpStatus === HttpStatus.NOT_FOUND) {
         throw new Error(
           '404 NOT FOUND. Engine parameters for car with such id was not found in the garage. Have you tried to set engine status to "started" before?',
         );
       }
 
-      if (response.status === 400) {
+      if (httpStatus === HttpStatus.BAD_REQUEST) {
         throw new Error(
           '400 BAD REQUEST. Wrong parameters: "id" should be any positive number, "status" should be "started", "stopped" or "drive"',
         );
