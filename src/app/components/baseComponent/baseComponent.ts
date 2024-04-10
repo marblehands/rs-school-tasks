@@ -1,16 +1,9 @@
-interface BaseComponentParams<T> {
-  tag: T;
-  classes?: string[];
-  content?: string;
-  attributes?: Record<string, string>;
-  event?: string;
-  callback?: (event: Event) => void;
-}
+import type BaseComponentParams from './interfaces';
 
 export default class BaseComponent<T extends keyof HTMLElementTagNameMap> {
   public element: HTMLElementTagNameMap[T];
 
-  public children: HTMLElementTagNameMap[T][] = [];
+  public children: HTMLElement[] = [];
 
   constructor(params: BaseComponentParams<T>) {
     this.element = document.createElement(params.tag);
@@ -56,7 +49,7 @@ export default class BaseComponent<T extends keyof HTMLElementTagNameMap> {
     this.element.removeEventListener(event, listener);
   }
 
-  public append(children: HTMLElementTagNameMap[T][]): void {
+  public append(children: HTMLElement[]): void {
     this.children.push(...children);
     this.element.append(...children);
   }
