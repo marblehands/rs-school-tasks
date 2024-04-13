@@ -6,6 +6,7 @@ import Router from './services/router';
 import { Routes } from './services/routes';
 import ChatPage from './pages/chatPage';
 import AboutPage from './pages/aboutPage';
+import eventEmitter from './services/eventEmitter';
 
 export class App {
   private router: Router;
@@ -32,6 +33,15 @@ export class App {
     this.aboutPage = new AboutPage();
 
     this.main = new Main();
+
+    this.addSubscibes();
+  }
+
+  private addSubscibes(): void {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    eventEmitter.subscribe('login', ([login]: string[]) => {
+      this.setMainContent(Routes.CHAT);
+    });
   }
 
   public render(): void {

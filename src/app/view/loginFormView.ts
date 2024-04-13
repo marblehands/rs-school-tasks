@@ -36,7 +36,7 @@ export default class LoginFormView extends BaseComponent<'form'> {
           require: '',
           id: 'password',
           name: 'password',
-          pattern: '^[a-zA-Z0-9]{5}$',
+          pattern: '^[a-zA-Z0-9]{5,}$',
         },
       },
       'Password:',
@@ -61,7 +61,7 @@ export default class LoginFormView extends BaseComponent<'form'> {
     return this;
   }
 
-  public submit(): Record<string, string> {
+  public getSubmitData(): Record<string, string> {
     const username = this.inputName.element.value;
     const password = this.inputPassword.element.value;
 
