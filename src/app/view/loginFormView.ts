@@ -1,5 +1,6 @@
 import Input from './input';
 import BaseComponent from '../components/baseComponent/baseComponent';
+import { Routes } from '../services/routes';
 
 export default class LoginFormView extends BaseComponent<'form'> {
   private inputName: Input;
@@ -8,7 +9,10 @@ export default class LoginFormView extends BaseComponent<'form'> {
 
   private buttonSubmit: BaseComponent<'button'>;
 
-  constructor() {
+  private buttonToAbout: BaseComponent<'button'>;
+
+  // eslint-disable-next-line max-lines-per-function
+  constructor(navigateTo: (location: Routes) => void) {
     super({ tag: 'form', classes: ['login-form'] });
     this.inputName = new Input(
       {
@@ -48,15 +52,32 @@ export default class LoginFormView extends BaseComponent<'form'> {
       content: 'Login',
       attributes: { type: 'submit' },
     });
+
+    this.buttonToAbout = new BaseComponent<'button'>({
+      tag: 'button',
+      classes: ['button'],
+      content: 'About',
+      attributes: { type: 'button' },
+      event: 'click',
+      callback: (): void => {
+        navigateTo(Routes.ABOUT);
+      },
+    });
   }
 
   public render(): LoginFormView {
-    const fieldset = new BaseComponent<'fieldset'>({
-      tag: 'fieldset',
-      classes: ['fieldset'],
+    const h1 = new BaseComponent<'h1'>({
+      tag: 'h1',
+      classes: ['h1-title'],
+      content: 'Login',
     });
-    fieldset.append([this.inputName.element, this.inputPassword.element]);
-    this.append([fieldset.element, this.buttonSubmit.element]);
+    this.append([
+      h1.element,
+      this.inputName.element,
+      this.inputPassword.element,
+      this.buttonSubmit.element,
+      this.buttonToAbout.element,
+    ]);
 
     return this;
   }

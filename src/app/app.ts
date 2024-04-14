@@ -1,5 +1,7 @@
+import './styles/global.css';
+
 import Header from './components/header';
-import Main from './components/main';
+import Main from './components/main/main';
 import Footer from './components/footer';
 import { AuthPage } from './pages/authPage';
 import Router from './services/router';
@@ -7,6 +9,7 @@ import { Routes } from './services/routes';
 import ChatPage from './pages/chatPage';
 import AboutPage from './pages/aboutPage';
 import eventEmitter from './services/eventEmitter';
+import SessionStorage from './services/sessionStorage';
 
 export class App {
   private router: Router;
@@ -29,7 +32,7 @@ export class App {
     this.footer = new Footer();
 
     this.chatPage = new ChatPage();
-    this.authPage = new AuthPage();
+    this.authPage = new AuthPage(this.router.navigateTo);
     this.aboutPage = new AboutPage();
 
     this.main = new Main();
@@ -46,6 +49,10 @@ export class App {
 
   public render(): void {
     document.body.append(this.header.element, this.main.element, this.footer.element);
+
+    if (SessionStorage.getUser()) {
+      this.setMainContent(Routes.CHAT);
+    }
   }
 
   private setMainContent = (location: Routes): void => {

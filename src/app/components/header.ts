@@ -1,14 +1,28 @@
 import { Routes } from '../services/routes';
+import SessionStorage from '../services/sessionStorage';
 import BaseComponent from './baseComponent/baseComponent';
 
 export default class Header extends BaseComponent<'header'> {
-  constructor(private navigateTo: (location: Routes) => void) {
+  private buttonLogOut: BaseComponent<'button'>;
+
+  constructor(navigateTo: (location: Routes) => void) {
     super({ tag: 'header', classes: ['header'] });
+    this.buttonLogOut = new BaseComponent<'button'>({
+      tag: 'button',
+      classes: ['button'],
+      content: 'Log Out',
+      attributes: { type: 'button' },
+      event: 'click',
+      callback: (): void => {
+        navigateTo(Routes.AUTH);
+        SessionStorage.removeItem('user');
+      },
+    });
     this.render(navigateTo);
   }
 
   private render(navigateTo: (location: Routes) => void): void {
-    const span = new BaseComponent<'span'>({ tag: 'span', content: 'Header' });
+    const span = new BaseComponent<'span'>({ tag: 'span', content: 'Fun Chat' });
     const authLink = new BaseComponent<'a'>({
       tag: 'a',
       content: 'Auth',
@@ -34,6 +48,6 @@ export default class Header extends BaseComponent<'header'> {
       },
     });
 
-    this.append([span.element, authLink.element, chatLink.element, aboutLink.element]);
+    this.append([span.element, authLink.element, chatLink.element, aboutLink.element, this.buttonLogOut.element]);
   }
 }

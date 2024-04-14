@@ -29,6 +29,8 @@ export default class SessionStorage {
     }
 
     if (SessionStorage.isUser(user)) {
+      console.log(user);
+
       return user;
     }
 

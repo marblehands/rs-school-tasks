@@ -1,8 +1,10 @@
-import BaseComponent from './baseComponent/baseComponent';
+import './main.css';
 
-import type AboutPage from '../pages/aboutPage';
-import type { AuthPage } from '../pages/authPage';
-import type ChatPage from '../pages/chatPage';
+import BaseComponent from '../baseComponent/baseComponent';
+
+import type AboutPage from '../../pages/aboutPage';
+import type { AuthPage } from '../../pages/authPage';
+import type ChatPage from '../../pages/chatPage';
 
 export default class Main extends BaseComponent<'main'> {
   constructor() {

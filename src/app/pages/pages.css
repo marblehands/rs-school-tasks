@@ -1,0 +1,24 @@
+/* Auth */
+
+.auth-wrapper,
+.about-wrapper {
+  min-width: 50%;
+  padding: 2em;
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  border-radius: 8px;
+}
+
+/* About */
+
+.about-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}

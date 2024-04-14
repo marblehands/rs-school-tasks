@@ -19,12 +19,13 @@ export default class Router {
 
     if (user && isRoute(currentPage)) {
       location = currentPage;
+      window.history.pushState({}, '', currentPage);
     } else {
       location = Routes.AUTH;
       window.history.pushState({}, '', Routes.AUTH);
     }
 
-    if (user) {
+    if (user && !isRoute(currentPage)) {
       location = Routes.CHAT;
       window.history.pushState({}, '', Routes.CHAT);
     }
