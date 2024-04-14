@@ -16,6 +16,7 @@ export default class Header extends BaseComponent<'header'> {
       callback: (): void => {
         navigateTo(Routes.AUTH);
         SessionStorage.removeItem('user');
+        this.removeLogoutButton();
       },
     });
     this.render(navigateTo);
@@ -23,22 +24,22 @@ export default class Header extends BaseComponent<'header'> {
 
   private render(navigateTo: (location: Routes) => void): void {
     const span = new BaseComponent<'span'>({ tag: 'span', content: 'Fun Chat' });
-    const authLink = new BaseComponent<'a'>({
-      tag: 'a',
-      content: 'Auth',
-      event: 'click',
-      callback: (): void => {
-        navigateTo(Routes.AUTH);
-      },
-    });
-    const chatLink = new BaseComponent<'a'>({
-      tag: 'a',
-      content: 'Chat',
-      event: 'click',
-      callback: (): void => {
-        navigateTo(Routes.CHAT);
-      },
-    });
+    // const authLink = new BaseComponent<'a'>({
+    //   tag: 'a',
+    //   content: 'Auth',
+    //   event: 'click',
+    //   callback: (): void => {
+    //     navigateTo(Routes.AUTH);
+    //   },
+    // });
+    // const chatLink = new BaseComponent<'a'>({
+    //   tag: 'a',
+    //   content: 'Chat',
+    //   event: 'click',
+    //   callback: (): void => {
+    //     navigateTo(Routes.CHAT);
+    //   },
+    // });
     const aboutLink = new BaseComponent<'a'>({
       tag: 'a',
       content: 'About',
@@ -48,6 +49,31 @@ export default class Header extends BaseComponent<'header'> {
       },
     });
 
-    this.append([span.element, authLink.element, chatLink.element, aboutLink.element, this.buttonLogOut.element]);
+    this.append([span.element, aboutLink.element]);
+  }
+
+  public renderLogoutButton(): void {
+    this.append([this.buttonLogOut.element]);
+  }
+
+  public removeLogoutButton(): void {
+    this.buttonLogOut.destroy();
+  }
+
+  public renderUserName(userName: string, status: boolean): void {
+    const wrapper = new BaseComponent<'div'>({ tag: 'div', classes: ['user-info-wrapper'] });
+    const userNameSpan = new BaseComponent<'span'>({
+      tag: 'span',
+      classes: ['user-info-login'],
+      content: `${userName}`,
+    });
+    const statusMessage = status ? 'online' : 'offline';
+    const statusSpan = new BaseComponent<'span'>({
+      tag: 'span',
+      classes: ['user-info-status'],
+      content: `${statusMessage}`,
+    });
+    wrapper.append([userNameSpan.element, statusSpan.element]);
+    this.element.prepend(wrapper.element);
   }
 }

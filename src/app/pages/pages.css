@@ -22,3 +22,13 @@
   flex-direction: column;
   gap: 1em;
 }
+
+/* Chat */
+.user-info-wrapper {
+  display: flex;
+  gap: 1em;
+}
+
+.user-info-status {
+  color: green;
+}

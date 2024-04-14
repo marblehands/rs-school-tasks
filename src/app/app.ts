@@ -10,6 +10,7 @@ import ChatPage from './pages/chatPage';
 import AboutPage from './pages/aboutPage';
 import eventEmitter from './services/eventEmitter';
 import SessionStorage from './services/sessionStorage';
+import Modal from './view/modal/modal';
 
 export class App {
   private router: Router;
@@ -44,6 +45,13 @@ export class App {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     eventEmitter.subscribe('login', ([login]: string[]) => {
       this.setMainContent(Routes.CHAT);
+      this.header.renderLogoutButton();
+      this.header.renderUserName(login, true);
+    });
+
+    eventEmitter.subscribe('error', ([message]: string[]) => {
+      const modal = new Modal(message);
+      modal.render();
     });
   }
 
@@ -52,6 +60,8 @@ export class App {
 
     if (SessionStorage.getUser()) {
       this.setMainContent(Routes.CHAT);
+    } else {
+      this.setMainContent(Routes.AUTH);
     }
   }
 

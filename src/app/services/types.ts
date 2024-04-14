@@ -36,7 +36,7 @@ export interface UserLoginResponse {
   };
 }
 
-export interface Error {
+export interface ErrorResponse {
   id: string;
   type: RequestResponseType.ERROR;
   payload: {
