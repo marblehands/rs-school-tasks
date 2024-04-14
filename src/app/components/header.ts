@@ -1,11 +1,11 @@
 import { Routes } from '../services/routes';
-import SessionStorage from '../services/sessionStorage';
 import BaseComponent from './baseComponent/baseComponent';
+import eventEmitter from '../services/eventEmitter';
 
 export default class Header extends BaseComponent<'header'> {
   private buttonLogOut: BaseComponent<'button'>;
 
-  constructor(navigateTo: (location: Routes) => void) {
+  constructor() {
     super({ tag: 'header', classes: ['header'] });
     this.buttonLogOut = new BaseComponent<'button'>({
       tag: 'button',
@@ -14,54 +14,32 @@ export default class Header extends BaseComponent<'header'> {
       attributes: { type: 'button' },
       event: 'click',
       callback: (): void => {
-        navigateTo(Routes.AUTH);
-        SessionStorage.removeItem('user');
-        this.removeLogoutButton();
+        eventEmitter.emit('logout');
       },
     });
-    this.render(navigateTo);
   }
 
-  private render(navigateTo: (location: Routes) => void): void {
-    const span = new BaseComponent<'span'>({ tag: 'span', content: 'Fun Chat' });
-    // const authLink = new BaseComponent<'a'>({
-    //   tag: 'a',
-    //   content: 'Auth',
-    //   event: 'click',
-    //   callback: (): void => {
-    //     navigateTo(Routes.AUTH);
-    //   },
-    // });
-    // const chatLink = new BaseComponent<'a'>({
-    //   tag: 'a',
-    //   content: 'Chat',
-    //   event: 'click',
-    //   callback: (): void => {
-    //     navigateTo(Routes.CHAT);
-    //   },
-    // });
-    const aboutLink = new BaseComponent<'a'>({
-      tag: 'a',
+  public render(navigateTo: (location: Routes) => void, userName: string, status: boolean): void {
+    const appNameSpan = new BaseComponent<'span'>({ tag: 'span', content: 'Fun Chat' });
+    const buttonsWrapper = new BaseComponent<'div'>({ tag: 'div', classes: ['header-buttons-wrapper'] });
+
+    const buttonAbout = new BaseComponent<'button'>({
+      tag: 'button',
+      classes: ['button'],
       content: 'About',
+      attributes: {
+        type: 'button',
+      },
       event: 'click',
       callback: (): void => {
         navigateTo(Routes.ABOUT);
       },
     });
+    buttonsWrapper.append([buttonAbout.element, this.buttonLogOut.element]);
 
-    this.append([span.element, aboutLink.element]);
-  }
+    const wrapper = new BaseComponent<'div'>({ tag: 'div', classes: ['app-info-wrapper'] });
 
-  public renderLogoutButton(): void {
-    this.append([this.buttonLogOut.element]);
-  }
-
-  public removeLogoutButton(): void {
-    this.buttonLogOut.destroy();
-  }
-
-  public renderUserName(userName: string, status: boolean): void {
-    const wrapper = new BaseComponent<'div'>({ tag: 'div', classes: ['user-info-wrapper'] });
+    const userInfoWrapper = new BaseComponent<'div'>({ tag: 'div', classes: ['user-info-wrapper'] });
     const userNameSpan = new BaseComponent<'span'>({
       tag: 'span',
       classes: ['user-info-login'],
@@ -73,7 +51,12 @@ export default class Header extends BaseComponent<'header'> {
       classes: ['user-info-status'],
       content: `${statusMessage}`,
     });
-    wrapper.append([userNameSpan.element, statusSpan.element]);
-    this.element.prepend(wrapper.element);
+    userInfoWrapper.append([userNameSpan.element, statusSpan.element]);
+    wrapper.append([appNameSpan.element, userInfoWrapper.element]);
+    this.append([wrapper.element, buttonsWrapper.element]);
+  }
+
+  public clear(): void {
+    this.destroyChildren();
   }
 }

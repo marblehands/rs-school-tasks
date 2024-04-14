@@ -25,14 +25,24 @@ export interface UserLoginRequest {
   };
 }
 
-export interface UserLoginResponse {
+export interface UserLoginLogoutResponse {
   id: string;
-  type: RequestResponseType.USER_LOGIN;
+  type: RequestResponseType.USER_LOGIN | RequestResponseType.USER_LOGOUT;
   payload: {
-    user: {
-      login: string;
-      isLogined: boolean;
-    };
+    user: User;
+  };
+}
+
+export interface User {
+  login: string;
+  isLogined: boolean;
+}
+
+export interface UsersActiveResponse {
+  id: string;
+  type: RequestResponseType.USER_ACTIVE;
+  payload: {
+    users: User[] | [];
   };
 }
 

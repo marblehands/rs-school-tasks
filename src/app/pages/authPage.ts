@@ -4,8 +4,8 @@ import BaseComponent from '../components/baseComponent/baseComponent';
 import LoginFormController from '../view/loginFormController';
 import LoginFormView from '../view/loginFormView';
 import { socket } from '../services/webSocketClient';
-import UserModel from '../view/userModel';
 
+import type UserModel from '../view/userModel';
 import type { Routes } from '../services/routes';
 
 export class AuthPage extends BaseComponent<'div'> {
@@ -15,10 +15,10 @@ export class AuthPage extends BaseComponent<'div'> {
 
   private loginView: LoginFormView;
 
-  constructor(navigateTo: (location: Routes) => void) {
+  constructor(model: UserModel, navigateTo: (location: Routes) => void) {
     super({ tag: 'div', classes: ['auth-wrapper'] });
 
-    this.userModel = new UserModel();
+    this.userModel = model;
     this.loginView = new LoginFormView(navigateTo);
     this.loginController = new LoginFormController(this.userModel, this.loginView, socket);
 

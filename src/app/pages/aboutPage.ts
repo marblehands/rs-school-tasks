@@ -1,4 +1,5 @@
 import BaseComponent from '../components/baseComponent/baseComponent';
+import Router from '../services/router';
 
 export default class AboutPage extends BaseComponent<'div'> {
   constructor() {
@@ -14,7 +15,15 @@ export default class AboutPage extends BaseComponent<'div'> {
       content: 'GitHub',
       attributes: { href: 'https://github.com/marblehands', target: '_blank' },
     });
-    const buttonToPreviousPage = new BaseComponent<'button'>({ tag: 'button', classes: ['button'], content: 'Back' });
+    const buttonToPreviousPage = new BaseComponent<'button'>({
+      tag: 'button',
+      classes: ['button'],
+      content: 'Back',
+      event: 'click',
+      callback: (): void => {
+        Router.goBack();
+      },
+    });
     this.append([h1.element, span.element, linkToAuthor.element, buttonToPreviousPage.element]);
   }
 }

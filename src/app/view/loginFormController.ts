@@ -6,16 +6,15 @@ import type LoginFormView from './loginFormView';
 
 export default class LoginFormController {
   constructor(
-    private model: UserModel,
+    model: UserModel,
     private view: LoginFormView,
     private socket: WebSocketClient,
   ) {
-    this.model = model;
     this.view = view;
-    this.addSubmitHandler();
+    this.addSubmitHandler(model);
   }
 
-  private addSubmitHandler(): void {
+  private addSubmitHandler(model: UserModel): void {
     this.view.element.addEventListener('submit', (event) => {
       event.preventDefault();
       const formData = this.view.getSubmitData();
@@ -26,9 +25,10 @@ export default class LoginFormController {
         return;
       }
 
-      this.model.setUserData(formData.username, formData.password);
-      SessionStorage.setItem('user', this.model.getUserData());
-      this.socket.authenticateUser(formData.username, formData.password);
+      model.setUserData(formData.username, formData.password);
+      SessionStorage.setItem('user', { username: formData.username, password: formData.password });
+      this.socket.loginUser(formData.username, formData.password);
+      console.log(model);
     });
   }
 }

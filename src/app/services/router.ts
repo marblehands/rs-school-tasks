@@ -17,17 +17,16 @@ export default class Router {
 
     let location: Routes;
 
-    if (user && isRoute(currentPage)) {
-      location = currentPage;
-      window.history.pushState({}, '', currentPage);
+    if (user) {
+      if (isRoute(currentPage)) {
+        location = currentPage;
+      } else {
+        location = Routes.CHAT;
+        window.history.pushState({}, '', Routes.CHAT);
+      }
     } else {
       location = Routes.AUTH;
       window.history.pushState({}, '', Routes.AUTH);
-    }
-
-    if (user && !isRoute(currentPage)) {
-      location = Routes.CHAT;
-      window.history.pushState({}, '', Routes.CHAT);
     }
 
     this.setMainContent(location);
@@ -36,6 +35,10 @@ export default class Router {
   public navigateTo = (location: Routes): void => {
     window.history.pushState({}, '', location);
     this.setMainContent(location);
+  };
+
+  public static goBack = (): void => {
+    window.history.back();
   };
 
   private static isUser(): UserModel | null {

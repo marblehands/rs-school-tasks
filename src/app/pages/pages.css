@@ -24,8 +24,19 @@
 }
 
 /* Chat */
-.user-info-wrapper {
+
+.user-info-wrapper,
+.app-info-wrapper,
+.header-buttons-wrapper {
   display: flex;
+}
+
+.app-info-wrapper {
+  gap: 4em;
+}
+
+.user-info-wrapper,
+.header-buttons-wrapper {
   gap: 1em;
 }
 
