@@ -1,11 +1,11 @@
 import BaseComponent from '../components/baseComponent/baseComponent';
 import LoginFormController from '../view/loginFormController';
-import LoginFormModel from '../view/loginFormModel';
 import LoginFormView from '../view/loginFormView';
 import { socket } from '../services/webSocketClient';
+import UserModel from '../view/userModel';
 
 export class AuthPage extends BaseComponent<'div'> {
-  private loginModel: LoginFormModel;
+  private userModel: UserModel;
 
   private loginController: LoginFormController;
 
@@ -14,10 +14,14 @@ export class AuthPage extends BaseComponent<'div'> {
   constructor() {
     super({ tag: 'div', classes: ['auth-wrapper'] });
 
-    this.loginModel = new LoginFormModel();
+    this.userModel = new UserModel();
     this.loginView = new LoginFormView();
-    this.loginController = new LoginFormController(this.loginModel, this.loginView, socket);
+    this.loginController = new LoginFormController(this.userModel, this.loginView, socket);
 
+    this.render();
+  }
+
+  private render(): void {
     this.append([this.loginView.render().element]);
   }
 }

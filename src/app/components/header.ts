@@ -9,7 +9,7 @@ export default class Header extends BaseComponent<'header'> {
 
   private render(navigateTo: (location: Routes) => void): void {
     const span = new BaseComponent<'span'>({ tag: 'span', content: 'Header' });
-    const link1 = new BaseComponent<'a'>({
+    const authLink = new BaseComponent<'a'>({
       tag: 'a',
       content: 'Auth',
       event: 'click',
@@ -17,7 +17,7 @@ export default class Header extends BaseComponent<'header'> {
         navigateTo(Routes.AUTH);
       },
     });
-    const link2 = new BaseComponent<'a'>({
+    const chatLink = new BaseComponent<'a'>({
       tag: 'a',
       content: 'Chat',
       event: 'click',
@@ -25,7 +25,7 @@ export default class Header extends BaseComponent<'header'> {
         navigateTo(Routes.CHAT);
       },
     });
-    const link3 = new BaseComponent<'a'>({
+    const aboutLink = new BaseComponent<'a'>({
       tag: 'a',
       content: 'About',
       event: 'click',
@@ -34,6 +34,6 @@ export default class Header extends BaseComponent<'header'> {
       },
     });
 
-    this.append([span.element, link1.element, link2.element, link3.element]);
+    this.append([span.element, authLink.element, chatLink.element, aboutLink.element]);
   }
 }

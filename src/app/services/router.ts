@@ -1,4 +1,7 @@
 import { Routes, isRoute } from './routes';
+import SessionStorage from './sessionStorage';
+
+import type UserModel from '../view/userModel';
 
 export default class Router {
   constructor(private setMainContent: (location: Routes) => void) {
@@ -8,17 +11,23 @@ export default class Router {
   }
 
   public handleLocation = (): void => {
+    const user = Router.isUser();
+
     const currentPage = window.location.pathname;
 
     let location: Routes;
 
-    if (isRoute(currentPage)) {
+    if (user && isRoute(currentPage)) {
       location = currentPage;
     } else {
       location = Routes.AUTH;
+      window.history.pushState({}, '', Routes.AUTH);
     }
 
-    window.history.pushState({}, '', Routes.AUTH);
+    if (user) {
+      location = Routes.CHAT;
+      window.history.pushState({}, '', Routes.CHAT);
+    }
 
     this.setMainContent(location);
   };
@@ -27,4 +36,8 @@ export default class Router {
     window.history.pushState({}, '', location);
     this.setMainContent(location);
   };
+
+  private static isUser(): UserModel | null {
+    return SessionStorage.getUser();
+  }
 }

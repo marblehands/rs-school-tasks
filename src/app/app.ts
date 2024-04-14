@@ -34,10 +34,10 @@ export class App {
 
     this.main = new Main();
 
-    this.addSubscibes();
+    this.addSubscribes();
   }
 
-  private addSubscibes(): void {
+  private addSubscribes(): void {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     eventEmitter.subscribe('login', ([login]: string[]) => {
       this.setMainContent(Routes.CHAT);
