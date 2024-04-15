@@ -1,5 +1,5 @@
 import './modal.css';
-import BaseComponent from '../../components/baseComponent/baseComponent';
+import BaseComponent from '../baseComponent/baseComponent';
 
 export default class Modal extends BaseComponent<'div'> {
   constructor(private message: string) {

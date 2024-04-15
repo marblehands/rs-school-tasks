@@ -1,7 +1,7 @@
 import eventEmitter from './eventEmitter';
 import { RequestResponseType } from './types';
 
-import type { ErrorResponse, UserLoginLogoutResponse, UsersActiveResponse } from './types';
+import type { ErrorResponse, GetUsersResponse, UserLoginLogoutResponse } from './types';
 
 const link: string = 'ws://127.0.0.1:4000';
 
@@ -23,7 +23,6 @@ export class WebSocketClient {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       const message = JSON.parse(event.data) as UserLoginLogoutResponse | ErrorResponse;
       WebSocketClient.handleMessage(message);
-      console.log(message);
     };
   }
 
@@ -65,11 +64,11 @@ export class WebSocketClient {
     this.wsClient.send(JSON.stringify(request));
   }
 
-  public getActiveUsers(): void {
+  public getUsers(status: RequestResponseType): void {
     const requestId = generateId();
     const request = {
       id: requestId,
-      type: RequestResponseType.USER_ACTIVE,
+      type: status,
       payload: null,
     };
     this.wsClient.send(JSON.stringify(request));
@@ -87,7 +86,7 @@ export class WebSocketClient {
     }
   }
 
-  private static handleMessage(message: UserLoginLogoutResponse | UsersActiveResponse | ErrorResponse): void {
+  private static handleMessage(message: UserLoginLogoutResponse | GetUsersResponse | ErrorResponse): void {
     if (message.type === RequestResponseType.USER_LOGIN) {
       eventEmitter.emit('login', [message.payload.user.login]);
     }
@@ -101,7 +100,11 @@ export class WebSocketClient {
     }
 
     if (message.type === RequestResponseType.USER_ACTIVE) {
-      eventEmitter.emit('usersActive', [message.payload.users]);
+      eventEmitter.emit('getUsers', message.payload.users);
+    }
+
+    if (message.type === RequestResponseType.USER_INACTIVE) {
+      eventEmitter.emit('getUsers', message.payload.users);
     }
   }
 }

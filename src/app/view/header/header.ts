@@ -1,6 +1,6 @@
-import { Routes } from '../services/routes';
-import BaseComponent from './baseComponent/baseComponent';
-import eventEmitter from '../services/eventEmitter';
+import { Routes } from '../../services/routes';
+import BaseComponent from '../baseComponent/baseComponent';
+import eventEmitter from '../../services/eventEmitter';
 
 export default class Header extends BaseComponent<'header'> {
   private buttonLogOut: BaseComponent<'button'>;

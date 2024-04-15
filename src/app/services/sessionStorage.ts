@@ -1,4 +1,4 @@
-import type UserModel from '../view/userModel';
+import type UserModel from '../model/userModel';
 
 const PREFIX = 'marblehands';
 
@@ -29,8 +29,6 @@ export default class SessionStorage {
     }
 
     if (SessionStorage.isUser(user)) {
-      console.log(user);
-
       return user;
     }
 

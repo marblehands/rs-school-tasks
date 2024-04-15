@@ -1,5 +1,5 @@
 import Input from './input';
-import BaseComponent from '../components/baseComponent/baseComponent';
+import BaseComponent from './baseComponent/baseComponent';
 import { Routes } from '../services/routes';
 
 export default class LoginFormView extends BaseComponent<'form'> {

@@ -1,20 +1,20 @@
-import './styles/global.css';
+import '../styles/global.css';
 
-import Header from './components/header';
-import Main from './components/main/main';
-import Footer from './components/footer';
-import { AuthPage } from './pages/authPage';
-import Router from './services/router';
-import { Routes } from './services/routes';
-import ChatPage from './pages/chatPage';
-import AboutPage from './pages/aboutPage';
-import eventEmitter from './services/eventEmitter';
-import SessionStorage from './services/sessionStorage';
-import Modal from './view/modal/modal';
-import UserModel from './view/userModel';
-import { type WebSocketClient, socket } from './services/webSocketClient';
-
-import type { User } from './services/types';
+import Header from '../view/header/header';
+import Main from '../view/main/main';
+import Footer from '../view/footer/footer';
+import { AuthPage } from '../pages/authPage';
+import Router from '../services/router';
+import { Routes } from '../services/routes';
+import ChatPage from '../pages/chatPage';
+import AboutPage from '../pages/aboutPage';
+import eventEmitter from '../services/eventEmitter';
+import SessionStorage from '../services/sessionStorage';
+import Modal from '../view/modal/modal';
+import UserModel from '../model/userModel';
+import { type WebSocketClient, socket } from '../services/webSocketClient';
+import { RequestResponseType } from '../services/types';
+import ChatController from './chatController';
 
 export class App {
   private router: Router;
@@ -32,6 +32,8 @@ export class App {
   private aboutPage: AboutPage;
 
   public userModel: UserModel;
+
+  public chatController?: ChatController;
 
   private socket: WebSocketClient;
 
@@ -54,11 +56,19 @@ export class App {
   }
 
   private addSubscribes(): void {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     eventEmitter.subscribe('login', ([login]: string[]) => {
       this.router.navigateTo(Routes.CHAT);
       this.header.render(this.router.navigateTo, login, true);
-      this.socket.getActiveUsers();
+      this.socket.getUsers(RequestResponseType.USER_ACTIVE);
+      this.socket.getUsers(RequestResponseType.USER_INACTIVE);
+      const userData = this.userModel.getUserData();
+      this.chatController = new ChatController(userData.username);
+      this.chatController.renderListOfUsers(userData.username);
+      this.chatPage.destroyChildren();
+      this.chatPage.listOfUsers = this.chatController.listOfUsersView;
+      this.chatPage.append([this.chatController.listOfUsersView.element]);
+      this.chatController.dialogView.render();
+      this.chatPage.append([this.chatController.dialogView.element]);
     });
 
     eventEmitter.subscribe('error', ([message]: string[]) => {
@@ -77,10 +87,6 @@ export class App {
       SessionStorage.removeItem('user');
       this.header.clear();
       this.socket.close();
-    });
-
-    eventEmitter.subscribe('usersActive', ([users]: User[]) => {
-      console.log(users);
     });
   }
 

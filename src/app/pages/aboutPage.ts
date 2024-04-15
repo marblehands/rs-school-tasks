@@ -1,4 +1,4 @@
-import BaseComponent from '../components/baseComponent/baseComponent';
+import BaseComponent from '../view/baseComponent/baseComponent';
 import Router from '../services/router';
 
 export default class AboutPage extends BaseComponent<'div'> {

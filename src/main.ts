@@ -1,4 +1,4 @@
-import { App } from './app/app';
+import { App } from './app/controllers/appController';
 
 const app = new App();
 app.render();

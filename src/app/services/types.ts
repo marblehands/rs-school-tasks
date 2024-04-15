@@ -38,9 +38,9 @@ export interface User {
   isLogined: boolean;
 }
 
-export interface UsersActiveResponse {
+export interface GetUsersResponse {
   id: string;
-  type: RequestResponseType.USER_ACTIVE;
+  type: RequestResponseType.USER_ACTIVE | RequestResponseType.USER_INACTIVE;
   payload: {
     users: User[] | [];
   };

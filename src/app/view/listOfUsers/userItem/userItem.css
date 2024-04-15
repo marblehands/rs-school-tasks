@@ -1,0 +1,26 @@
+.user-item-wrapper {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  padding: 0.25em 1em;
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgb(228 228 228);
+  }
+}
+
+.online,
+.offline {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.offline {
+  background-color: black;
+}
+
+.online {
+  background-color: green;
+}

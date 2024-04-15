@@ -1,4 +1,4 @@
-import BaseComponent from './baseComponent/baseComponent';
+import BaseComponent from '../baseComponent/baseComponent';
 
 export default class Footer extends BaseComponent<'footer'> {
   constructor() {

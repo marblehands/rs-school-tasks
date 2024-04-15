@@ -1,11 +1,11 @@
 import './pages.css';
 
-import BaseComponent from '../components/baseComponent/baseComponent';
-import LoginFormController from '../view/loginFormController';
+import BaseComponent from '../view/baseComponent/baseComponent';
+import LoginFormController from '../controllers/loginFormController';
 import LoginFormView from '../view/loginFormView';
 import { socket } from '../services/webSocketClient';
 
-import type UserModel from '../view/userModel';
+import type UserModel from '../model/userModel';
 import type { Routes } from '../services/routes';
 
 export class AuthPage extends BaseComponent<'div'> {

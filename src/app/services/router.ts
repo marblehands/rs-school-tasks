@@ -1,7 +1,7 @@
 import { Routes, isRoute } from './routes';
 import SessionStorage from './sessionStorage';
 
-import type UserModel from '../view/userModel';
+import type UserModel from '../model/userModel';
 
 export default class Router {
   constructor(private setMainContent: (location: Routes) => void) {

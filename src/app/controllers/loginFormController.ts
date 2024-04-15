@@ -1,8 +1,8 @@
 import SessionStorage from '../services/sessionStorage';
 
 import type { WebSocketClient } from '../services/webSocketClient';
-import type UserModel from './userModel';
-import type LoginFormView from './loginFormView';
+import type UserModel from '../model/userModel';
+import type LoginFormView from '../view/loginFormView';
 
 export default class LoginFormController {
   constructor(
@@ -28,7 +28,6 @@ export default class LoginFormController {
       model.setUserData(formData.username, formData.password);
       SessionStorage.setItem('user', { username: formData.username, password: formData.password });
       this.socket.loginUser(formData.username, formData.password);
-      console.log(model);
     });
   }
 }

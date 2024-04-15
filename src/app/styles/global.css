@@ -1,4 +1,4 @@
-@import url("normalize.css");
+@import url('normalize.css');
 
 * {
   box-sizing: border-box;
@@ -13,15 +13,12 @@
   align-items: flex-start;
 
   max-width: 90%;
-  height: 90vh;
-  margin: 2em auto;
+  min-height: 100dvh;
+  margin: 0 auto;
 
   font:
     400 1em Arial,
     sans-serif;
-
-  border: 1px solid black;
-  border-radius: 8px;
 }
 
 .button {
@@ -43,5 +40,10 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 2em;
+  padding: 2em 0;
+}
+
+.border {
+  border: 1px solid black;
+  border-radius: 6px;
 }
