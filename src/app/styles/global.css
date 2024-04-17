@@ -26,6 +26,10 @@
   padding: 0.5em;
 }
 
+.button:disabled {
+  cursor: not-allowed;
+}
+
 .input[type='text'],
 .input[type='password'] {
   padding: 0.5em;

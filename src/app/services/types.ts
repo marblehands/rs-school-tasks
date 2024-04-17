@@ -46,6 +46,27 @@ export interface GetUsersResponse {
   };
 }
 
+export interface Message {
+  id: string;
+  from: string;
+  to: string;
+  text: string;
+  datetime: number;
+  status: {
+    isDelivered: boolean;
+    isReaded: boolean;
+    isEdited: boolean;
+  };
+}
+
+export interface NewMessageSent {
+  id: string;
+  type: RequestResponseType.MSG_SEND;
+  payload: {
+    message: Message;
+  };
+}
+
 export interface ErrorResponse {
   id: string;
   type: RequestResponseType.ERROR;

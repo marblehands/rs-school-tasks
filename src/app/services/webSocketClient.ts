@@ -2,7 +2,7 @@ import UserModel from '../model/userModel';
 import eventEmitter from './eventEmitter';
 import { RequestResponseType } from './types';
 
-import type { ErrorResponse, GetUsersResponse, UserLoginLogoutResponse } from './types';
+import type { ErrorResponse, GetUsersResponse, NewMessageSent, UserLoginLogoutResponse } from './types';
 
 const link: string = 'ws://127.0.0.1:4000';
 
@@ -66,6 +66,22 @@ export class WebSocketClient {
     this.wsClient.send(JSON.stringify(request));
   }
 
+  public sendMessage(login: string, messageText: string): void {
+    const requestId = generateId();
+    const request = {
+      id: requestId,
+      type: RequestResponseType.MSG_SEND,
+      payload: {
+        message: {
+          to: login,
+          text: messageText,
+        },
+      },
+    };
+    console.log(request);
+    this.wsClient.send(JSON.stringify(request));
+  }
+
   public getUsers(status: RequestResponseType): void {
     const requestId = generateId();
     const request = {
@@ -108,9 +124,15 @@ export class WebSocketClient {
       const user = UserModel.getUserData();
       this.logoutUser(user.username, user.password);
     });
+
+    eventEmitter.subscribe('newMessageLoginAndText', ([login, message]: string[]) => {
+      this.sendMessage(login, message);
+    });
   }
 
-  private static handleMessage(message: UserLoginLogoutResponse | GetUsersResponse | ErrorResponse): void {
+  private static handleMessage(
+    message: UserLoginLogoutResponse | GetUsersResponse | NewMessageSent | ErrorResponse,
+  ): void {
     if (message.type === RequestResponseType.USER_LOGIN) {
       eventEmitter.emit('login', [message.payload.user.login]);
     }
@@ -129,6 +151,10 @@ export class WebSocketClient {
 
     if (message.type === RequestResponseType.USER_INACTIVE) {
       eventEmitter.emit('getUsersInactive', message.payload.users);
+    }
+
+    if (message.type === RequestResponseType.MSG_SEND) {
+      eventEmitter.emit('sendNewMessage', message.payload.message);
     }
   }
 }
