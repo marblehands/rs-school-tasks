@@ -1,6 +1,7 @@
 .dialog-wrapper {
   display: flex;
   flex-grow: 1;
+  max-height: 70dvh;
   padding: 1em;
 }
 
@@ -16,4 +17,61 @@
   justify-content: space-between;
   min-height: 5dvh;
   border-bottom: 1px solid black;
+}
+
+.dialog-main {
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 1em;
+  justify-content: flex-end;
+
+  padding: 1em 0;
+}
+
+/* Input Message Area */
+
+.input-area {
+  display: flex;
+  gap: 0.5em;
+  padding-top: 0.5em;
+  border-top: 1px solid black;
+}
+
+.input-message {
+  flex-grow: 1;
+}
+
+/* Message */
+
+.message-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+
+  width: fit-content;
+  min-width: 24em;
+  padding: 0.5em;
+
+  background-color: rgb(230 230 230);
+  border-radius: 8px;
+}
+
+.message-body {
+  padding: 0.5em;
+  background-color: white;
+  border-radius: 4px;
+}
+
+.message-info,
+.message-status {
+  display: flex;
+  gap: 1em;
+  justify-content: space-between;
+  font-size: 0.8em;
+}
+
+.message-sent {
+  align-self: flex-end;
 }
