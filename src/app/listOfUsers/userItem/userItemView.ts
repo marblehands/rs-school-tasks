@@ -1,12 +1,14 @@
 import './userItem.css';
-import BaseComponent from '../../baseComponent/baseComponent';
+import BaseComponent from '../../view/baseComponent/baseComponent';
+import eventEmitter from '../../services/eventEmitter';
 
-import type { User } from '../../../services/types';
+import type { User } from '../../services/types';
 
 export default class UserItem extends BaseComponent<'div'> {
   constructor(private user: User) {
     super({ tag: 'div', classes: ['user-item-wrapper'] });
     this.render();
+    this.addClickHandler();
   }
 
   private render(): void {
@@ -16,5 +18,11 @@ export default class UserItem extends BaseComponent<'div'> {
     const messagesNum = new BaseComponent<'div'>({ tag: 'div', classes: ['messages-number'] });
 
     this.append([isOnline.element, userName.element, messagesNum.element]);
+  }
+
+  private addClickHandler(): void {
+    this.addListener('click', () => {
+      eventEmitter.emit('chooseUser', this.user);
+    });
   }
 }

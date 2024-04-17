@@ -46,8 +46,3 @@
   gap: 1em;
   width: 100%;
 }
-
-.dialog-wrapper {
-  flex-grow: 1;
-  padding: 1em;
-}

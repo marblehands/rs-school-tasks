@@ -1,3 +1,4 @@
+import UserModel from '../model/userModel';
 import eventEmitter from './eventEmitter';
 import { RequestResponseType } from './types';
 
@@ -15,6 +16,7 @@ export class WebSocketClient {
   constructor(url: string) {
     this.wsClient = new WebSocket(url);
     this.addListener();
+    this.addSubscribes();
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   }
 
@@ -74,6 +76,16 @@ export class WebSocketClient {
     this.wsClient.send(JSON.stringify(request));
   }
 
+  public getHistory(status: RequestResponseType): void {
+    const requestId = generateId();
+    const request = {
+      id: requestId,
+      type: status,
+      payload: null,
+    };
+    this.wsClient.send(JSON.stringify(request));
+  }
+
   public close(): void {
     this.wsClient.onmessage = null;
     this.wsClient.close();
@@ -84,6 +96,18 @@ export class WebSocketClient {
       this.wsClient = new WebSocket(link);
       this.addListener();
     }
+  }
+
+  private addSubscribes(): void {
+    eventEmitter.subscribe('login', () => {
+      this.getUsers(RequestResponseType.USER_ACTIVE);
+      this.getUsers(RequestResponseType.USER_INACTIVE);
+    });
+
+    eventEmitter.subscribe('logout', () => {
+      const user = UserModel.getUserData();
+      this.logoutUser(user.username, user.password);
+    });
   }
 
   private static handleMessage(message: UserLoginLogoutResponse | GetUsersResponse | ErrorResponse): void {
@@ -100,11 +124,11 @@ export class WebSocketClient {
     }
 
     if (message.type === RequestResponseType.USER_ACTIVE) {
-      eventEmitter.emit('getUsers', message.payload.users);
+      eventEmitter.emit('getUsersActive', message.payload.users);
     }
 
     if (message.type === RequestResponseType.USER_INACTIVE) {
-      eventEmitter.emit('getUsers', message.payload.users);
+      eventEmitter.emit('getUsersInactive', message.payload.users);
     }
   }
 }

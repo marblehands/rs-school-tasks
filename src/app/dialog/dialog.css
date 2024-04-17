@@ -1,0 +1,19 @@
+.dialog-wrapper {
+  display: flex;
+  flex-grow: 1;
+  padding: 1em;
+}
+
+.dialog {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  min-height: 5dvh;
+  border-bottom: 1px solid black;
+}

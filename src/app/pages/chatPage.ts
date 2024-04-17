@@ -1,7 +1,7 @@
 import BaseComponent from '../view/baseComponent/baseComponent';
-import Dialog from '../view/dialog/dialogView';
+import Dialog from '../dialog/dialogView';
 
-import type ListOfUsersView from '../view/listOfUsers/listView/listView';
+import type ListOfUsersView from '../listOfUsers/view/listOfUsersView';
 
 export default class ChatPage extends BaseComponent<'div'> {
   public listOfUsers?: ListOfUsersView;

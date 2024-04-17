@@ -1,19 +1,14 @@
 export default class UserModel {
-  private username: string;
+  public static username: string;
 
-  private password: string;
+  public static password: string;
 
-  constructor() {
-    this.username = '';
-    this.password = '';
-  }
-
-  public setUserData(username: string, password: string): void {
+  public static setUserData(username: string, password: string): void {
     this.username = username;
     this.password = password;
   }
 
-  public getUserData(): Record<string, string> {
+  public static getUserData(): Record<string, string> {
     return { username: this.username, password: this.password };
   }
 }

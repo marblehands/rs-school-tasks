@@ -5,7 +5,7 @@ import eventEmitter from '../../services/eventEmitter';
 export default class Header extends BaseComponent<'header'> {
   private buttonLogOut: BaseComponent<'button'>;
 
-  constructor() {
+  constructor(navigateTo: (location: Routes) => void) {
     super({ tag: 'header', classes: ['header'] });
     this.buttonLogOut = new BaseComponent<'button'>({
       tag: 'button',
@@ -16,6 +16,13 @@ export default class Header extends BaseComponent<'header'> {
       callback: (): void => {
         eventEmitter.emit('logout');
       },
+    });
+    this.addSubscribes(navigateTo);
+  }
+
+  private addSubscribes(navigateTo: (location: Routes) => void): void {
+    eventEmitter.subscribe('login', (login: string) => {
+      this.render(navigateTo, login, true);
     });
   }
 
