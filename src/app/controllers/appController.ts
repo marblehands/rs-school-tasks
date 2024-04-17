@@ -13,7 +13,6 @@ import SessionStorage from '../services/sessionStorage';
 import Modal from '../view/modal/modal';
 import UserModel from '../model/userModel';
 import { type WebSocketClient, socket } from '../services/webSocketClient';
-import { RequestResponseType } from '../services/types';
 import ChatController from './chatController';
 
 export class App {
@@ -31,8 +30,6 @@ export class App {
 
   private aboutPage: AboutPage;
 
-  public userModel: UserModel;
-
   public chatController?: ChatController;
 
   private socket: WebSocketClient;
@@ -40,14 +37,12 @@ export class App {
   constructor() {
     this.socket = socket;
 
-    this.userModel = new UserModel();
-
     this.router = new Router(this.setMainContent);
-    this.header = new Header();
+    this.header = new Header(this.router.navigateTo);
     this.footer = new Footer();
 
     this.chatPage = new ChatPage();
-    this.authPage = new AuthPage(this.userModel, this.router.navigateTo);
+    this.authPage = new AuthPage(this.router.navigateTo);
     this.aboutPage = new AboutPage();
 
     this.main = new Main();
@@ -56,19 +51,9 @@ export class App {
   }
 
   private addSubscribes(): void {
-    eventEmitter.subscribe('login', ([login]: string[]) => {
+    eventEmitter.subscribe('login', () => {
       this.router.navigateTo(Routes.CHAT);
-      this.header.render(this.router.navigateTo, login, true);
-      this.socket.getUsers(RequestResponseType.USER_ACTIVE);
-      this.socket.getUsers(RequestResponseType.USER_INACTIVE);
-      const userData = this.userModel.getUserData();
-      this.chatController = new ChatController(userData.username);
-      this.chatController.renderListOfUsers(userData.username);
-      this.chatPage.destroyChildren();
-      this.chatPage.listOfUsers = this.chatController.listOfUsersView;
-      this.chatPage.append([this.chatController.listOfUsersView.element]);
-      this.chatController.dialogView.render();
-      this.chatPage.append([this.chatController.dialogView.element]);
+      this.renderChat();
     });
 
     eventEmitter.subscribe('error', ([message]: string[]) => {
@@ -76,14 +61,9 @@ export class App {
       modal.render();
     });
 
-    eventEmitter.subscribe('logout', () => {
-      const user = this.userModel.getUserData();
-      this.socket.logoutUser(user.username, user.password);
-    });
-
     eventEmitter.subscribe('logoutSuccess', () => {
       this.router.navigateTo(Routes.AUTH);
-      this.userModel.setUserData('', '');
+      UserModel.setUserData('', '');
       SessionStorage.removeItem('user');
       this.header.clear();
       this.socket.close();
@@ -98,6 +78,13 @@ export class App {
     } else {
       this.router.navigateTo(Routes.AUTH);
     }
+  }
+
+  private renderChat(): void {
+    this.chatController = new ChatController();
+    this.chatPage.destroyChildren();
+    this.chatPage.append([this.chatController.listOfUsersView.element]);
+    this.chatPage.append([this.chatController.dialogView.element]);
   }
 
   private setMainContent = (location: Routes): void => {

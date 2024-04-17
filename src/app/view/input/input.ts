@@ -1,6 +1,6 @@
-import BaseComponent from './baseComponent/baseComponent';
+import BaseComponent from '../baseComponent/baseComponent';
 
-import type BaseComponentParams from './baseComponent/interfaces';
+import type BaseComponentParams from '../baseComponent/interfaces';
 
 export default class Input extends BaseComponent<'input'> {
   constructor(params: BaseComponentParams<'input'>, labelContent: string) {

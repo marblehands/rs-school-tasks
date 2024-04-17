@@ -1,7 +1,7 @@
-import ListOfUsersModel from '../model/listOfUsersModel';
-import DialogView from '../view/dialog/dialogView';
-import ListOfUsersView from '../view/listOfUsers/listView/listView';
-import ListOfUsersController from './listOfUsersController';
+import ListOfUsersModel from '../listOfUsers/listOfUsersModel';
+import DialogView from '../dialog/dialogView';
+import ListOfUsersView from '../listOfUsers/view/listOfUsersView';
+import ListOfUsersController from '../listOfUsers/listOfUsersController';
 
 export default class ChatController {
   private listOfUsersController: ListOfUsersController;
@@ -10,18 +10,10 @@ export default class ChatController {
 
   public dialogView: DialogView;
 
-  constructor(currentUserLogin: string) {
+  constructor() {
     const listOfUsersModel = new ListOfUsersModel();
     this.listOfUsersView = new ListOfUsersView();
-    this.listOfUsersController = new ListOfUsersController(listOfUsersModel, this.listOfUsersView, currentUserLogin);
+    this.listOfUsersController = new ListOfUsersController(listOfUsersModel, this.listOfUsersView);
     this.dialogView = new DialogView();
-  }
-
-  public renderListOfUsers(currentUserLogin: string): void {
-    this.listOfUsersController.renderListOfUsers(currentUserLogin);
-  }
-
-  public renderDialog(): void {
-    this.dialogView.render();
   }
 }
