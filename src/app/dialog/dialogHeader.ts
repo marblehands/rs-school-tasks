@@ -33,9 +33,5 @@ export default class DialogHeader extends BaseComponent<'div'> {
       const { isLogined } = user;
       this.setContent(username, isLogined);
     });
-    eventEmitter.subscribe('newMessageText', (messageText) => {
-      console.log(this.username.element.textContent, messageText);
-      eventEmitter.emit('newMessageLoginAndText', [this.username.element.textContent, messageText]);
-    });
   }
 }

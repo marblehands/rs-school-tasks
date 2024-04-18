@@ -75,3 +75,7 @@
 .message-sent {
   align-self: flex-end;
 }
+
+.message-received {
+  align-self: flex-start;
+}
