@@ -1,10 +1,23 @@
-// import eventEmitter from '../services/eventEmitter';
 import eventEmitter from '../services/eventEmitter';
 import BaseComponent from '../view/baseComponent/baseComponent';
+import { Status } from './types';
 
 import type { Message } from '../services/types';
 
-// import type { User } from '../services/types';
+function defineStatuses(status: Record<string, boolean>, type: string): Record<string, Status> {
+  let deliveryStatus;
+
+  if (type === 'received') {
+    deliveryStatus = Status.NONE;
+  } else {
+    deliveryStatus = status.isReaded ? Status.READ : Status.NONE;
+    deliveryStatus = status.isDelivered ? Status.DELIVERED : Status.SENT;
+  }
+
+  const editStatus = status.isEdited ? Status.EDITED : Status.NONE;
+
+  return { deliveryStatus, editStatus };
+}
 
 export default class DialogMain extends BaseComponent<'div'> {
   public messagesSent: Map<string, BaseComponent<'div'>>;
@@ -15,25 +28,16 @@ export default class DialogMain extends BaseComponent<'div'> {
     super({ tag: 'div', classes: ['dialog-main'] });
     this.messagesSent = new Map();
     this.messagesReceived = new Map();
-    // this.render();
     this.addSubscribes();
   }
 
-  // public render(): void {
-  //   this.append([this.username.element, this.isLogin.element]);
-  // }
-
-  // public addMessageSent(): void {
-  //   this.append([this.username.element, this.isLogin.element]);
-  // }
-
   private addSubscribes(): void {
-    eventEmitter.subscribe('sendNewMessage', (message: Message) => {
-      this.renderNewMessage(message, 'sent');
+    eventEmitter.subscribe('chooseUser', () => {
+      this.clearMessageFeed();
     });
   }
 
-  private renderNewMessage(message: Message, type: string): void {
+  public renderNewMessage(message: Message, type: string): void {
     const wrapper = new BaseComponent<'div'>({ tag: 'div', classes: ['message-wrapper', `message-${type}`] });
 
     const info = new BaseComponent<'div'>({ tag: 'div', classes: ['message-info'] });
@@ -44,22 +48,24 @@ export default class DialogMain extends BaseComponent<'div'> {
     const date = new BaseComponent<'span'>({
       tag: 'span',
       classes: ['message-date'],
-      content: message.datetime.toLocaleString(),
+      content: new Date(message.datetime).toLocaleString(),
     });
 
     const body = new BaseComponent<'div'>({ tag: 'div', classes: ['message-body'] });
     const text = new BaseComponent<'span'>({ tag: 'span', classes: ['message-text'], content: message.text });
 
+    const statusData = defineStatuses(message.status, type);
+
     const statuses = new BaseComponent<'div'>({ tag: 'div', classes: ['message-status'] });
     const editStatus = new BaseComponent<'span'>({
       tag: 'span',
       classes: ['message-status-edit'],
-      content: message.status.isEdited.toString(),
+      content: statusData.editStatus,
     });
     const deliveryStatus = new BaseComponent<'span'>({
       tag: 'span',
       classes: ['message-status-delivery'],
-      content: message.status.isDelivered.toString(),
+      content: statusData.deliveryStatus,
     });
     info.append([author.element, date.element]);
     body.append([text.element]);
@@ -70,5 +76,9 @@ export default class DialogMain extends BaseComponent<'div'> {
     this.append([wrapper.element]);
 
     this.messagesSent.set(message.to, wrapper);
+  }
+
+  private clearMessageFeed(): void {
+    this.destroyChildren();
   }
 }
