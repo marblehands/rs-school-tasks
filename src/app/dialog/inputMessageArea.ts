@@ -33,10 +33,10 @@ export default class InputMessageArea extends BaseComponent<'form'> {
       content: 'Send Message',
       attributes: { type: 'submit', disabled: '' },
     });
+    this.buttonSubmit.element.onclick = this.addSubmitHandler;
     this.render();
     this.addInputHandler();
     this.addSubscribes();
-    this.addSubmitHandler();
   }
 
   public render(): void {
@@ -66,18 +66,30 @@ export default class InputMessageArea extends BaseComponent<'form'> {
     });
   }
 
-  private addSubmitHandler(): void {
-    this.buttonSubmit.addListener('click', (e) => {
-      e.preventDefault();
-      const messageText = this.inputElement.element.value;
-      console.log(messageText);
-      eventEmitter.emit('newMessageText', messageText);
-    });
-  }
+  private addSubmitHandler = (e: Event): void => {
+    e.preventDefault();
+    const messageText = this.inputElement.element.value;
+    console.log(messageText);
+    console.log('InputMessageArea test addSubmitHandler');
+    eventEmitter.emit('newMessageText', messageText);
+  };
 
-  private disableSubmitButton(): void {
+  // private addSubmitHandler(): void {
+  //   this.buttonSubmit.addListener('click', (e) => {
+  //     e.preventDefault();
+  //     const messageText = this.inputElement.element.value;
+  //     console.log(messageText);
+  //     eventEmitter.emit('newMessageText', messageText);
+  //   });
+  // }
+
+  public disableSubmitButton(): void {
     this.buttonSubmit.setAttributes({ disabled: '' });
     this.buttonSubmit.addStyles(['button-disabled']);
+  }
+
+  public disableInut(): void {
+    this.inputElement.setAttributes({ disabled: '' });
   }
 
   private activateSubmitButton(): void {

@@ -9,7 +9,6 @@ import { Routes } from '../services/routes';
 import ChatPage from '../pages/chatPage';
 import AboutPage from '../pages/aboutPage';
 import eventEmitter from '../services/eventEmitter';
-import SessionStorage from '../services/sessionStorage';
 import Modal from '../view/modal/modal';
 import UserModel from '../model/userModel';
 import { type WebSocketClient, socket } from '../services/webSocketClient';
@@ -30,7 +29,7 @@ export class App {
 
   private aboutPage: AboutPage;
 
-  public chatController?: ChatController;
+  public chatController: ChatController;
 
   private socket: WebSocketClient;
 
@@ -45,7 +44,17 @@ export class App {
     this.authPage = new AuthPage(this.router.navigateTo);
     this.aboutPage = new AboutPage();
 
+    this.chatController = new ChatController();
+
     this.main = new Main();
+
+    // const userObj = sessionStorage.getItem('user-marblehands');
+
+    // if (userObj !== null) {
+    //   const user = JSON.parse(userObj) as Record<string, string>;
+    //   const { username: login, password } = user;
+    //   this.socket.loginUser(login, password);
+    // }
 
     this.addSubscribes();
   }
@@ -63,26 +72,30 @@ export class App {
 
     eventEmitter.subscribe('logoutSuccess', () => {
       this.router.navigateTo(Routes.AUTH);
-      UserModel.setUserData('', '');
-      SessionStorage.removeItem('user');
-      this.header.clear();
-      this.socket.close();
+      this.destroyChat();
     });
   }
 
   public render(): void {
     document.body.append(this.header.element, this.main.element, this.footer.element);
 
-    if (SessionStorage.getUser()) {
+    if (sessionStorage.getItem('user-marblehands')) {
       this.router.navigateTo(Routes.CHAT);
     } else {
       this.router.navigateTo(Routes.AUTH);
     }
   }
 
-  private renderChat(): void {
-    this.chatController = new ChatController();
+  private destroyChat(): void {
+    UserModel.setUserData('', '');
+    this.chatController.dialogView.dialogModel.setDialogData('', false);
+    sessionStorage.removeItem('user-marblehands');
+    this.header.clear();
     this.chatPage.destroyChildren();
+    this.chatController.dialogView.clear();
+  }
+
+  private renderChat(): void {
     this.chatPage.append([this.chatController.listOfUsersView.element]);
     this.chatPage.append([this.chatController.dialogView.element]);
   }

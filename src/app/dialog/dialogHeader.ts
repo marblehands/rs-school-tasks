@@ -27,6 +27,11 @@ export default class DialogHeader extends BaseComponent<'div'> {
     this.isLogin.element.textContent = isLoginText;
   }
 
+  public clear(): void {
+    this.username.element.textContent = '';
+    this.isLogin.element.textContent = '';
+  }
+
   private addSubscribes(): void {
     eventEmitter.subscribe('chooseUser', (user: User) => {
       const username = user.login;

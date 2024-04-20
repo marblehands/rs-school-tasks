@@ -24,20 +24,31 @@ export default class DialogMain extends BaseComponent<'div'> {
 
   public messagesReceived: Map<string, BaseComponent<'div'>>;
 
+  public emptyStateUserNotSelected: BaseComponent<'span'>;
+
+  public emptyStateNoMessages: BaseComponent<'span'>;
+
   constructor() {
     super({ tag: 'div', classes: ['dialog-main'] });
     this.messagesSent = new Map();
     this.messagesReceived = new Map();
+    this.emptyStateUserNotSelected = new BaseComponent<'span'>({ tag: 'span', content: 'Select user for chatting...' });
+    this.emptyStateNoMessages = new BaseComponent<'span'>({ tag: 'span', content: 'Start conversation...' });
+    this.append([this.emptyStateUserNotSelected.element]);
+
     this.addSubscribes();
   }
 
   private addSubscribes(): void {
     eventEmitter.subscribe('chooseUser', () => {
       this.clearMessageFeed();
+      this.addEmptyStateNoMessage();
     });
   }
 
   public renderNewMessage(message: Message, type: string): void {
+    console.log('test renderNewMessage');
+    this.removeEmptyState();
     const wrapper = new BaseComponent<'div'>({ tag: 'div', classes: ['message-wrapper', `message-${type}`] });
 
     const info = new BaseComponent<'div'>({ tag: 'div', classes: ['message-info'] });
@@ -78,7 +89,19 @@ export default class DialogMain extends BaseComponent<'div'> {
     this.messagesSent.set(message.to, wrapper);
   }
 
-  private clearMessageFeed(): void {
+  public clearMessageFeed(): void {
     this.destroyChildren();
+  }
+
+  public addEmptyStateNoMessage(): void {
+    this.append([this.emptyStateNoMessages.element]);
+  }
+
+  public addEmptyStateNoUser(): void {
+    this.append([this.emptyStateUserNotSelected.element]);
+  }
+
+  private removeEmptyState(): void {
+    this.emptyStateNoMessages.destroy();
   }
 }
