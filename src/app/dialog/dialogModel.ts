@@ -3,31 +3,35 @@ import eventEmitter from '../services/eventEmitter';
 import type { User } from '../services/types';
 
 export default class DialogModel {
-  private static username: string;
+  private username: string;
 
-  private static isLogin: boolean;
+  private isLogin: boolean;
 
   constructor() {
-    DialogModel.addSubscribes();
+    this.username = '';
+    this.isLogin = false;
+    this.addSubscribes();
   }
 
-  public static setDialogData(username: string, isLogin: boolean): void {
+  public setDialogData(username: string, isLogin: boolean): void {
     this.username = username;
     this.isLogin = isLogin;
   }
 
-  public static getDialogData(): Record<string, string | boolean> {
+  public getDialogData(): Record<string, string | boolean> {
     return { username: this.username, isLogin: this.isLogin };
   }
 
-  private static addSubscribes(): void {
+  private addSubscribes(): void {
     eventEmitter.subscribe('chooseUser', (user: User) => {
       const username = user.login;
       const { isLogined } = user;
-      DialogModel.setDialogData(username, isLogined);
+      this.setDialogData(username, isLogined);
     });
     eventEmitter.subscribe('newMessageText', (messageText) => {
-      eventEmitter.emit('newMessageLoginAndText', [this.username, messageText]);
+      console.log('DialogModel newMessageText / newMessageLoginAndText');
+      console.log('this.username: ', this.username);
+      eventEmitter.emit('newMessageLoginAndText1', [this.username, messageText]);
     });
   }
 }

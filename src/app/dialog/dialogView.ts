@@ -16,7 +16,7 @@ export default class DialogView extends BaseComponent<'div'> {
 
   private inputMessageArea: InputMessageArea;
 
-  private dialogModel: DialogModel;
+  public dialogModel: DialogModel;
 
   constructor() {
     super({ tag: 'div', classes: ['dialog-wrapper', 'border'] });
@@ -31,14 +31,22 @@ export default class DialogView extends BaseComponent<'div'> {
 
   private addSubscribes(): void {
     eventEmitter.subscribe('sendNewMessage', (message: Message) => {
-      if (message.to === DialogModel.getDialogData().username && message.from === UserModel.username) {
+      if (message.to === this.dialogModel.getDialogData().username && message.from === UserModel.username) {
         this.dialogMain.renderNewMessage(message, 'sent');
       }
 
-      if (message.from === DialogModel.getDialogData().username && message.to === UserModel.username) {
+      if (message.from === this.dialogModel.getDialogData().username && message.to === UserModel.username) {
         this.dialogMain.renderNewMessage(message, 'received');
       }
     });
+  }
+
+  public clear(): void {
+    this.dialogHeader.clear();
+    this.dialogMain.clearMessageFeed();
+    this.dialogMain.addEmptyStateNoUser();
+    this.inputMessageArea.disableSubmitButton();
+    this.inputMessageArea.disableInut();
   }
 
   public render(): void {

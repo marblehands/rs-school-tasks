@@ -1,5 +1,4 @@
 import { Routes, isRoute } from './routes';
-import SessionStorage from './sessionStorage';
 
 import type UserModel from '../model/userModel';
 
@@ -42,6 +41,6 @@ export default class Router {
   };
 
   private static isUser(): UserModel | null {
-    return SessionStorage.getUser();
+    return sessionStorage.getItem('user-marblehands');
   }
 }

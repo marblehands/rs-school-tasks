@@ -23,6 +23,7 @@ export default class SessionStorage {
 
   public static getUser(): UserModel | null {
     const user = sessionStorage.getItem('user');
+    console.log(user);
 
     if (!user) {
       return null;

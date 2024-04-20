@@ -67,6 +67,14 @@ export interface NewMessageSent {
   };
 }
 
+export interface UserHistory {
+  id: string;
+  type: RequestResponseType.MSG_FROM_USER;
+  payload: {
+    messages: [];
+  };
+}
+
 export interface ErrorResponse {
   id: string;
   type: RequestResponseType.ERROR;

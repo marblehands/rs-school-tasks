@@ -1,4 +1,3 @@
-import SessionStorage from '../services/sessionStorage';
 import UserModel from '../model/userModel';
 
 import type { WebSocketClient } from '../services/webSocketClient';
@@ -25,7 +24,10 @@ export default class LoginFormController {
       }
 
       UserModel.setUserData(formData.username, formData.password);
-      SessionStorage.setItem('user', { username: formData.username, password: formData.password });
+      sessionStorage.setItem(
+        'user-marblehands',
+        JSON.stringify({ username: formData.username, password: formData.password }),
+      );
       this.socket.loginUser(formData.username, formData.password);
     });
   }
