@@ -8,7 +8,7 @@ import { socket } from '../services/webSocketClient';
 import type { Routes } from '../services/routes';
 
 export class AuthPage extends BaseComponent<'div'> {
-  private loginController: LoginFormController;
+  public loginController: LoginFormController;
 
   private loginView: LoginFormView;
 

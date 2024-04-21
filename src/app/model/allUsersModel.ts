@@ -84,7 +84,6 @@ export default class AllUsersModel {
       if (user) {
         user.messages = message.payload.messages;
         this.allUsers.set(message.id, user);
-        console.log(this.allUsers);
       }
     });
 
@@ -94,7 +93,6 @@ export default class AllUsersModel {
       if (user) {
         user.messages = message.payload.messages;
         this.allUsers.set(message.id, user);
-        console.log(this.allUsers);
       }
     });
   }

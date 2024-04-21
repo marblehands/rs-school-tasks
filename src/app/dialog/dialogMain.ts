@@ -4,7 +4,7 @@ import { Status } from './types';
 import UserModel from '../model/userModel';
 
 import type { InternalUser } from '../model/allUsersModel';
-import type { Message, User } from '../services/types';
+import type { Message } from '../services/types';
 
 function defineStatuses(status: Record<string, boolean>, type: string): Record<string, Status> {
   let deliveryStatus;
@@ -42,16 +42,12 @@ export default class DialogMain extends BaseComponent<'div'> {
   }
 
   private addSubscribes(): void {
-    eventEmitter.subscribe('chooseUser', (user: User) => {
-      const { login } = user;
-      console.log('dialogMain ', login);
+    eventEmitter.subscribe('chooseUser', () => {
       this.clearMessageFeed();
       this.addEmptyStateNoMessage();
     });
 
     eventEmitter.subscribe('receiveHistoryByLogin', (history: InternalUser) => {
-      console.log('dialogMain ', history);
-
       if (history.messages) {
         this.handleHistory(history.messages);
       }
@@ -59,7 +55,6 @@ export default class DialogMain extends BaseComponent<'div'> {
   }
 
   private handleHistory(history: Message[]): void {
-    console.log('render History with user');
     history.forEach((message) => {
       if (message.from === UserModel.username) {
         this.renderNewMessage(message, 'sent');
@@ -71,7 +66,6 @@ export default class DialogMain extends BaseComponent<'div'> {
   }
 
   public renderNewMessage(message: Message, type: string): void {
-    console.log('test renderNewMessage');
     this.removeEmptyState();
     const wrapper = new BaseComponent<'div'>({ tag: 'div', classes: ['message-wrapper', `message-${type}`] });
 
