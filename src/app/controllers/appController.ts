@@ -33,8 +33,13 @@ export class App {
 
   private socket: WebSocketClient;
 
+  private isConnectionFailed: boolean;
+
+  private modalConnectionFailed?: Modal;
+
   constructor() {
     this.socket = socket;
+    this.isConnectionFailed = false;
 
     this.router = new Router(this.setMainContent);
     this.header = new Header(this.router.navigateTo);
@@ -48,13 +53,15 @@ export class App {
 
     this.main = new Main();
 
-    // const userObj = sessionStorage.getItem('user-marblehands');
+    const userObj = sessionStorage.getItem('user-marblehands');
 
-    // if (userObj !== null) {
-    //   const user = JSON.parse(userObj) as Record<string, string>;
-    //   const { username: login, password } = user;
-    //   this.socket.loginUser(login, password);
-    // }
+    if (userObj !== null) {
+      const user = JSON.parse(userObj) as Record<string, string>;
+      const { username: login, password } = user;
+      UserModel.setUserData(login, password);
+      console.log(UserModel.getUserData());
+      this.socket.loginUser(login, password);
+    }
 
     this.addSubscribes();
   }
@@ -65,14 +72,33 @@ export class App {
       this.renderChat();
     });
 
-    eventEmitter.subscribe('error', ([message]: string[]) => {
-      const modal = new Modal(message);
-      modal.render();
+    eventEmitter.subscribe('wsClientClosed', ([message]: string[]) => {
+      if (!this.isConnectionFailed) {
+        this.isConnectionFailed = true;
+        this.modalConnectionFailed = new Modal(message);
+        this.modalConnectionFailed.render();
+      }
+    });
+
+    eventEmitter.subscribe('wsClientConnected', () => {
+      if (this.isConnectionFailed) {
+        this.isConnectionFailed = false;
+        this.modalConnectionFailed?.destroy();
+      }
     });
 
     eventEmitter.subscribe('logoutSuccess', () => {
       this.router.navigateTo(Routes.AUTH);
       this.destroyChat();
+    });
+
+    eventEmitter.subscribe('error', (message: string) => {
+      if (message[0] === 'a user with this login is already authorized') {
+        sessionStorage.removeItem('user-marblehands');
+      }
+
+      const modal = new Modal(message);
+      modal.render();
     });
   }
 

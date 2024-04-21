@@ -6,6 +6,7 @@ import DialogMain from './dialogMain';
 import DialogModel from './dialogModel';
 import eventEmitter from '../services/eventEmitter';
 import UserModel from '../model/userModel';
+import AllUsersModel from '../model/allUsersModel';
 
 import type { Message } from '../services/types';
 
@@ -33,12 +34,25 @@ export default class DialogView extends BaseComponent<'div'> {
     eventEmitter.subscribe('sendNewMessage', (message: Message) => {
       if (message.to === this.dialogModel.getDialogData().username && message.from === UserModel.username) {
         this.dialogMain.renderNewMessage(message, 'sent');
+        DialogView.addNewMessageToHistory(message.to, message);
       }
 
       if (message.from === this.dialogModel.getDialogData().username && message.to === UserModel.username) {
+        DialogView.addNewMessageToHistory(message.from, message);
         this.dialogMain.renderNewMessage(message, 'received');
       }
     });
+  }
+
+  private static addNewMessageToHistory(login: string, message: Message): void {
+    const data = AllUsersModel.allUsers;
+    const user = [...data.values()].filter((elem) => elem.login === login);
+    const userId = user[0].id;
+
+    if (userId) {
+      const targetUser = AllUsersModel.allUsers.get(userId);
+      targetUser?.messages?.push(message);
+    }
   }
 
   public clear(): void {

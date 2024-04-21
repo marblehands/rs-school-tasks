@@ -7,6 +7,8 @@ export default class DialogModel {
 
   private isLogin: boolean;
 
+  public id?: string;
+
   constructor() {
     this.username = '';
     this.isLogin = false;
@@ -29,7 +31,6 @@ export default class DialogModel {
       this.setDialogData(username, isLogined);
     });
     eventEmitter.subscribe('newMessageText', (messageText) => {
-      console.log('DialogModel newMessageText / newMessageLoginAndText');
       console.log('this.username: ', this.username);
       eventEmitter.emit('newMessageLoginAndText1', [this.username, messageText]);
     });
