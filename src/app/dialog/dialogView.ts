@@ -41,6 +41,8 @@ export default class DialogView extends BaseComponent<'div'> {
         DialogView.addNewMessageToHistory(message.from, message);
         this.dialogMain.renderNewMessage(message, 'received');
       }
+
+      this.dialogMain.element.scrollTop = this.dialogMain.element.scrollHeight;
     });
   }
 
@@ -65,6 +67,9 @@ export default class DialogView extends BaseComponent<'div'> {
 
   public render(): void {
     const wrapper = new BaseComponent<'div'>({ tag: 'div', classes: ['dialog'] });
+    // const mainWrapper = new BaseComponent<'div'>({ tag: 'div', classes: ['dialog-main-wrapper'] });
+    // mainWrapper.append([this.dialogMain.element]);
+
     wrapper.append([this.dialogHeader.element, this.dialogMain.element, this.inputMessageArea.element]);
 
     this.append([wrapper.element]);

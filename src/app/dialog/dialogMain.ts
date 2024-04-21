@@ -67,6 +67,7 @@ export default class DialogMain extends BaseComponent<'div'> {
         this.renderNewMessage(message, 'received');
       }
     });
+    this.element.scrollTop = this.element.scrollHeight;
   }
 
   public renderNewMessage(message: Message, type: string): void {

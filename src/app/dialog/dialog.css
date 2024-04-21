@@ -22,12 +22,7 @@
 
 .dialog-main {
   overflow: auto;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  gap: 1em;
-  justify-content: flex-end;
-
+  flex: 1;
   padding: 1em 0;
 }
 
@@ -54,6 +49,7 @@
 
   width: fit-content;
   min-width: 24em;
+  margin-top: 1em;
   padding: 0.5em;
 
   background-color: rgb(230 230 230);
@@ -75,9 +71,9 @@
 }
 
 .message-sent {
-  align-self: flex-end;
+  margin-left: auto;
 }
 
 .message-received {
-  align-self: flex-start;
+  margin-right: auto;
 }
