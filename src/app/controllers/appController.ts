@@ -59,7 +59,6 @@ export class App {
       const user = JSON.parse(userObj) as Record<string, string>;
       const { username: login, password } = user;
       UserModel.setUserData(login, password);
-      console.log(UserModel.getUserData());
       this.socket.loginUser(login, password);
     }
 

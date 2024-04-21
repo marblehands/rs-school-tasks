@@ -31,7 +31,6 @@ export default class DialogModel {
       this.setDialogData(username, isLogined);
     });
     eventEmitter.subscribe('newMessageText', (messageText) => {
-      console.log('this.username: ', this.username);
       eventEmitter.emit('newMessageLoginAndText1', [this.username, messageText]);
     });
   }

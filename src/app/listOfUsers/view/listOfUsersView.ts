@@ -27,7 +27,6 @@ export default class ListOfUsersView extends BaseComponent<'div'> {
   private addSubscribes(): void {
     eventEmitter.subscribe('getUsersActiveSuccess', (usersOnline: Record<string, string>[]) => {
       this.render(usersOnline, 'online');
-      console.log(usersOnline);
     });
     eventEmitter.subscribe('getUsersInactiveSuccess', (usersOffline: Record<string, string>[]) => {
       this.render(usersOffline, 'offline');

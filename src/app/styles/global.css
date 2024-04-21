@@ -51,3 +51,16 @@
   border: 1px solid black;
   border-radius: 6px;
 }
+
+.hide {
+  display: none;
+}
+
+.err-message {
+  font-size: 0.8em;
+  color: red;
+}
+
+.input-invalid {
+  border-color: red;
+}

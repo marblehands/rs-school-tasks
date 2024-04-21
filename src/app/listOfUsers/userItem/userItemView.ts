@@ -22,7 +22,6 @@ export default class UserItem extends BaseComponent<'div'> {
 
   private addClickHandler(): void {
     this.element.onclick = (): void => {
-      console.log('test');
       eventEmitter.emit('chooseUser', this.user);
     };
   }

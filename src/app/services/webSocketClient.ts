@@ -13,13 +13,13 @@ export function generateId(): string {
 export class WebSocketClient {
   public wsClient: WebSocket;
 
-  private isReconnect: boolean;
+  // private isReconnect: boolean;
 
   private timer: NodeJS.Timeout | undefined;
 
   constructor(url: string) {
     this.wsClient = new WebSocket(url);
-    this.isReconnect = false;
+    // this.isReconnect = false;
     this.addListener();
     this.addSubscribes();
   }
@@ -45,17 +45,17 @@ export class WebSocketClient {
     };
   }
 
-  private reconnect(): void {
-    this.isReconnect = true;
-    this.wsClient = new WebSocket(link);
+  // private reconnect(): void {
+  //   this.isReconnect = true;
+  //   this.wsClient = new WebSocket(link);
 
-    this.wsClient.onopen = (): void => {
-      this.isReconnect = false;
-      this.addListener();
-      clearInterval(this.timer);
-      this.loginUser(UserModel.username, UserModel.password);
-    };
-  }
+  //   this.wsClient.onopen = (): void => {
+  //     this.isReconnect = false;
+  //     this.addListener();
+  //     clearInterval(this.timer);
+  //     this.loginUser(UserModel.username, UserModel.password);
+  //   };
+  // }
 
   public loginUser(login: string, password: string): void {
     const requestId = generateId();
@@ -70,8 +70,6 @@ export class WebSocketClient {
       },
     };
 
-    console.log(this.wsClient.readyState);
-
     this.wsClient.onopen = (): void => {
       clearInterval(this.timer);
       this.wsClient.send(JSON.stringify(request));
@@ -79,7 +77,6 @@ export class WebSocketClient {
     };
 
     if (this.wsClient.readyState === WebSocket.OPEN) {
-      console.log('test loginUser');
       clearInterval(this.timer);
       eventEmitter.emit('wsClientConnected');
       this.wsClient.send(JSON.stringify(request));
@@ -147,12 +144,10 @@ export class WebSocketClient {
 
     eventEmitter.subscribe('logout', () => {
       const user = UserModel.getUserData();
-      console.log(user);
       this.logoutUser(user.username, user.password);
     });
 
     eventEmitter.subscribe('newMessageLoginAndText1', ([login, message]: string[]) => {
-      console.log('websocket newMessageLoginAndText1');
       this.sendMessage(login, message);
     });
 

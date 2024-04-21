@@ -17,6 +17,30 @@ export default class LoginFormController {
       event.preventDefault();
       const formData = this.view.getSubmitData();
 
+      // if (/[^\u0000-\u007F]/.test(formData.username)) {
+      //   this.view.error1.removeStyles(['hide']);
+
+      //   return;
+      // }
+
+      // if (/[^\u0000-\u007F]/.test(formData.password)) {
+      //   this.view.error3.removeStyles(['hide']);
+
+      //   return;
+      // }
+
+      // if (formData.username.length < 3) {
+      //   this.view.error2.removeStyles(['hide']);
+
+      //   return;
+      // }
+
+      // if (formData.password.length < 5) {
+      //   this.view.error4.removeStyles(['hide']);
+
+      //   return;
+      // }
+
       if (!formData.username || !formData.password) {
         console.log('here will be validation logic');
 

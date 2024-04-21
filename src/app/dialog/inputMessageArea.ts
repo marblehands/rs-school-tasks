@@ -71,8 +71,6 @@ export default class InputMessageArea extends BaseComponent<'form'> {
   private addSubmitHandler = (e: Event): void => {
     e.preventDefault();
     const messageText = this.inputElement.element.value;
-    console.log(messageText);
-    console.log('InputMessageArea test addSubmitHandler');
     eventEmitter.emit('newMessageText', messageText);
   };
 
