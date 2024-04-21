@@ -44,8 +44,10 @@ export default class InputMessageArea extends BaseComponent<'form'> {
   }
 
   private isValid(): void {
-    if (this.inputElement.element.checkValidity() && this.inputElement.element.value.trim()) {
+    if (this.inputElement.element.checkValidity() && this.inputElement.element.value) {
       this.activateSubmitButton();
+    } else {
+      this.disableSubmitButton();
     }
   }
 

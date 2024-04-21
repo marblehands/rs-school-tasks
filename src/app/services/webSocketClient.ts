@@ -13,8 +13,13 @@ export function generateId(): string {
 export class WebSocketClient {
   public wsClient: WebSocket;
 
+  private isReconnect: boolean;
+
+  private timer: NodeJS.Timeout | undefined;
+
   constructor(url: string) {
     this.wsClient = new WebSocket(url);
+    this.isReconnect = false;
     this.addListener();
     this.addSubscribes();
   }
@@ -31,25 +36,28 @@ export class WebSocketClient {
     };
 
     this.wsClient.onclose = (): void => {
-      eventEmitter.emit('error', ['Connection suddenly closed. Reconnect....']);
+      eventEmitter.emit('wsClientClosed', ['Connection suddenly closed. Reconnect....']);
+
+      this.timer = setInterval(() => {
+        // this.reconnect();
+        this.loginUser(UserModel.username, UserModel.password);
+      }, 500);
+    };
+  }
+
+  private reconnect(): void {
+    this.isReconnect = true;
+    this.wsClient = new WebSocket(link);
+
+    this.wsClient.onopen = (): void => {
+      this.isReconnect = false;
+      this.addListener();
+      clearInterval(this.timer);
+      this.loginUser(UserModel.username, UserModel.password);
     };
   }
 
   public loginUser(login: string, password: string): void {
-    // let currentLogin = null;
-    // let currentPassword = null;
-
-    // const currentUserObj = sessionStorage.getItem('user-marblehands');
-
-    // if (currentUserObj) {
-    //   const currentUser = JSON.parse(currentUserObj) as Record<string, string>;
-    //   currentLogin = currentUser.username;
-    //   currentPassword = currentUser.password;
-    // }
-
-    // const loginUser = currentLogin ?? login;
-    // const passUser = currentPassword ?? password;
-
     const requestId = generateId();
     const request = {
       id: requestId,
@@ -62,12 +70,18 @@ export class WebSocketClient {
       },
     };
 
-    if (this.wsClient.readyState === WebSocket.CLOSED) {
-      this.open();
-      this.wsClient.onopen = (): void => {
-        this.wsClient.send(JSON.stringify(request));
-      };
-    } else if (this.wsClient.readyState === WebSocket.OPEN) {
+    console.log(this.wsClient.readyState);
+
+    this.wsClient.onopen = (): void => {
+      clearInterval(this.timer);
+      this.wsClient.send(JSON.stringify(request));
+      eventEmitter.emit('wsClientConnected');
+    };
+
+    if (this.wsClient.readyState === WebSocket.OPEN) {
+      console.log('test loginUser');
+      clearInterval(this.timer);
+      eventEmitter.emit('wsClientConnected');
       this.wsClient.send(JSON.stringify(request));
     }
   }
@@ -125,18 +139,6 @@ export class WebSocketClient {
     this.wsClient.send(JSON.stringify(request));
   }
 
-  public close(): void {
-    this.wsClient.onmessage = null;
-    this.wsClient.close();
-  }
-
-  public open(): void {
-    if (this.wsClient.readyState === WebSocket.CLOSED) {
-      this.wsClient = new WebSocket(link);
-      this.addListener();
-    }
-  }
-
   private addSubscribes(): void {
     eventEmitter.subscribe('login', () => {
       this.getUsers(RequestResponseType.USER_ACTIVE);
@@ -167,7 +169,6 @@ export class WebSocketClient {
     }
 
     if (message.type === RequestResponseType.USER_LOGOUT) {
-      console.log(message.payload);
       eventEmitter.emit('logoutSuccess', [message.payload.user.login]);
     }
 
